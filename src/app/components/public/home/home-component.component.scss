@@ -24,6 +24,7 @@ header {
   position: fixed;
   right: 0;
   left: 0;
+  z-index: 1000;
   background-color: var(--bg-primary);
   box-shadow: var(--shadow-md);
   transition: all 0.3s ease;
@@ -192,3 +193,36 @@ header a:hover {
   box-shadow: 0 0 0 3px var(--focus-ring);
 } 
 
+.hero-content{
+  position: relative;
+}
+.child{
+  width: 100%;
+  position: absolute;
+  top: 13%;
+}
+
+.home-content{
+  color: var(--text-black-white);
+
+font-family: "IBM Plex Sans";
+font-size: 64px;
+font-style: normal;
+font-weight: 600;
+line-height: 88px; 
+}
+.highlight {
+    background-color: var(--accent-orange);
+    border-radius: 45px;
+    padding: 5px 12px;
+    color: white;
+}
+.img-left{
+    width: 488px;
+    height: 380px;
+    margin-top: 58px;
+}
+.right-section-home img{
+ width: 100%;
+height: 800px;
+}
