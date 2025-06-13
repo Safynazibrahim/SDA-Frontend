@@ -12,3 +12,4 @@ import { HomeComponentComponent } from './components/public/home/home-component.
 export class AppComponent {
   title = 'SDA';
 }
+ 

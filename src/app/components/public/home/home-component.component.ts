@@ -5,10 +5,12 @@ import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Theme, ThemeService } from '../../core/services/theme.service';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule , CommonModule],
   templateUrl: './home-component.component.html',
   styleUrls: ['./home-component.component.scss']
 })
@@ -89,7 +91,7 @@ switchLang(lang: string) {
     if (!this.isBrowser) return;
     if (this.manualScrolling) return;
 
-    const sections = ['home', 'about', 'contact'];
+    const sections = ['home', 'about', 'contact' , 'pricing'];
     for (let section of sections) {
       const el = document.getElementById(section);
       if (el) {
