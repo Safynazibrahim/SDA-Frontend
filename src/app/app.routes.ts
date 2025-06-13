@@ -8,20 +8,12 @@ export const routes: Routes = [
     // Public routes (for all users)
   {
     path: '',
-    loadComponent: () => import('./components/layouts/public-layout/public-layout.component').then(m => m.PublicLayoutComponent),
+    loadComponent: () => import('./components/public/home/home-component.component').then(m => m.HomeComponentComponent),
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { 
         path: 'home', 
         loadComponent: () => import('./components/public/home/home-component.component').then(m => m.HomeComponentComponent)
-      },
-      { 
-        path: 'about', 
-        loadComponent: () => import('./components/public/about/about-component.component').then(m => m.AboutComponentComponent)
-      },
-      { 
-        path: 'contact', 
-        loadComponent: () => import('./components/public/contact/contact.component').then(m => m.ContactComponent)
       },
       { 
         path: 'login', 

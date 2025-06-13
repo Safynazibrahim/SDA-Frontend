@@ -5,6 +5,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Theme, ThemeService } from '../../core/services/theme.service';
+
+
 @Component({
   selector: 'app-home-component',
   standalone: true,
@@ -89,7 +91,7 @@ switchLang(lang: string) {
     if (!this.isBrowser) return;
     if (this.manualScrolling) return;
 
-    const sections = ['home', 'about', 'contact'];
+    const sections = ['home', 'about', 'contact' , 'pricing'];
     for (let section of sections) {
       const el = document.getElementById(section);
       if (el) {
