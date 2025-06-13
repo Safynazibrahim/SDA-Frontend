@@ -1,14 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Theme, ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-home-component',
   standalone: true,
+  imports:[CommonModule],
   templateUrl: './home-component.component.html',
   styleUrls: ['./home-component.component.scss']
 })
 export class HomeComponentComponent {
-  constructor(private router: Router) {}
+  theme$: Observable<Theme>;
+  constructor(private themeService: ThemeService,private router: Router) {
+    this.theme$ = this.themeService.theme$;
+  }
+
+  ngOnInit(): void {}
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 
   activeSection: string = 'home';
   manualScrolling: boolean = false;

@@ -1,1 +1,257 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css - Dental Clinic Theme Colors */
+
+:root {
+  /* Light Mode - Based on your design */
+  --bg-primary: #faf9f7;          /* Main background - warm white */
+  --bg-secondary: #f5f3f0;        /* Card backgrounds - light beige */
+  --bg-tertiary: #edeae6;         /* Section backgrounds */
+  --bg-accent: #e8e3dd;           /* Subtle accent background */
+  
+  /* Brown gradient section backgrounds */
+  --bg-brown-light: #d4c4a8;      /* Light brown from your design */
+  --bg-brown-medium: #b19e7f;     /* Medium brown */
+  --bg-brown-dark: #9d8a6f;       /* Darker brown */
+  --bg-brown-gradient: linear-gradient(135deg, #d4c4a8 0%, #b19e7f 50%, #9d8a6f 100%);
+  
+  /* Text Colors */
+  --text-primary: #2d2a26;        /* Main text - dark brown */
+  --text-secondary: #4a453f;      /* Secondary text */
+  --text-tertiary: #6b6358;       /* Muted text */
+  --text-light: #8a7f73;          /* Light text for less important content */
+  --text-on-brown: #ffffff;       /* White text on brown backgrounds */
+  --text-on-brown-secondary: #f5f3f0; /* Light text on brown */
+  
+  /* Orange accent colors from your design */
+  --accent-orange: #e67e22;       /* Primary orange */
+  --accent-orange-light: #f39c12; /* Lighter orange */
+  --accent-orange-dark: #d35400;  /* Darker orange */
+  --accent-orange-bg: #fef7f0;    /* Very light orange background */
+  
+  /* UI Colors */
+  --border-light: #e8e3dd;        /* Light borders */
+  --border-medium: #d4c4a8;       /* Medium borders */
+  --border-dark: #b19e7f;         /* Dark borders */
+  
+  /* Interactive elements */
+  --hover-bg: #f0ede8;            /* Hover background */
+  --hover-border: #c7b59f;        /* Hover border */
+  --active-bg: #e8e3dd;           /* Active/pressed state */
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(45, 42, 38, 0.06);
+  --shadow-md: 0 4px 12px rgba(45, 42, 38, 0.1);
+  --shadow-lg: 0 8px 24px rgba(45, 42, 38, 0.12);
+  --shadow-brown: 0 4px 12px rgba(177, 158, 127, 0.2);
+  
+  /* Medical/Dental specific colors */
+  --medical-blue: #3498db;        /* Professional blue */
+  --medical-green: #27ae60;       /* Success/healthy green */
+  --medical-red: #e74c3c;         /* Alert/urgent red */
+  --medical-teal: #16a085;        /* Calming teal */
+  
+  /* Status colors */
+  --success: #27ae60;
+  --warning: #f39c12;
+  --error: #e74c3c;
+  --info: #3498db;
+  
+  /* Focus and accessibility */
+  --focus-ring: rgba(228, 126, 34, 0.4); /* Orange focus ring */
+}
+
+[data-theme="dark"] {
+  /* Dark Mode - Inverted with warm tones */
+  --bg-primary: #383D36;          /* Dark brown background */
+  --bg-secondary: #252016;        /* Slightly lighter dark brown */
+  --bg-tertiary: #2f281f;         /* Card backgrounds */
+  --bg-accent: #3a3127;           /* Accent backgrounds */
+  
+  /* Brown sections in dark mode */
+  --bg-brown-light: #4a3f32;      /* Dark brown equivalent */
+  --bg-brown-medium: #D1B894;     /* Medium dark brown */
+  --bg-brown-dark: #322a20;       /* Darkest brown */
+  --bg-brown-gradient: linear-gradient(135deg, #C9B18E 0%, #9B886D 50%, #71634F 100%);
+  
+  /* Text Colors for dark mode */
+  --text-primary: #f5f3f0;        /* Light text */
+  --text-secondary: #e8e3dd;      /* Secondary light text */
+  --text-tertiary: #d4c4a8;       /* Muted light text */
+  --text-light: #b19e7f;          /* Subtle text */
+  --text-on-brown: #f5f3f0;       /* Light text on brown */
+  --text-on-brown-secondary: #e8e3dd; /* Secondary text on brown */
+  
+  /* Orange accents remain similar but adjusted */
+  --accent-orange: #f39c12;       /* Brighter orange for dark mode */
+  --accent-orange-light: #e67e22; /* Orange light */
+  --accent-orange-dark: #e67e22;  /* Orange dark */
+  --accent-orange-bg: #2d1f0a;    /* Dark orange background */
+  
+  /* UI Colors for dark mode */
+  --border-light: #3a3127;        /* Dark borders */
+  --border-medium: #4a3f32;       /* Medium dark borders */
+  --border-dark: #5c4f3e;         /* Lighter borders */
+  
+  /* Interactive elements */
+  --hover-bg: #2f281f;            /* Dark hover */
+  --hover-border: #5c4f3e;        /* Hover border */
+  --active-bg: #3a3127;           /* Active state */
+  
+  /* Shadows for dark mode */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-brown: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  /* Medical colors adjusted for dark mode */
+  --medical-blue: #5dade2;
+  --medical-green: #58d68d;
+  --medical-red: #ec7063;
+  --medical-teal: #48c9b0;
+  
+  /* Status colors for dark mode */
+  --success: #58d68d;
+  --warning: #f7dc6f;
+  --error: #ec7063;
+  --info: #5dade2;
+  
+  /* Focus ring for dark mode */
+  --focus-ring: rgba(243, 156, 18, 0.5);
+}
+
+/* Base application styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility classes for your dental theme */
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-tertiary { background-color: var(--bg-tertiary); }
+.bg-brown { background: var(--bg-brown-gradient); }
+.bg-orange-accent { background-color: var(--accent-orange-bg); }
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-tertiary { color: var(--text-tertiary); }
+.text-orange { color: var(--accent-orange); }
+.text-on-brown { color: var(--text-on-brown); }
+
+/* Card styles matching your design */
+.dental-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.dental-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+}
+
+/* Brown section like in your design */
+.brown-section {
+  background: var(--bg-brown-gradient);
+  color: var(--text-on-brown);
+  padding: 4rem 2rem;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.brown-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+  opacity: 0.3;
+}
+
+/* Orange accent button like your design */
+.orange-button {
+  background-color: var(--accent-orange);
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+}
+
+.orange-button:hover {
+  background-color: var(--accent-orange-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(230, 126, 34, 0.3);
+}
+
+/* Choose us badge style */
+.choose-badge {
+  background-color: var(--accent-orange);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* Feature icon containers */
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  background-color: var(--bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dental-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .brown-section {
+    padding: 2rem 1rem;
+    border-radius: 16px;
+  }
+}
+
+/* Smooth transitions for theme switching */
+.theme-transition {
+  transition: 
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
