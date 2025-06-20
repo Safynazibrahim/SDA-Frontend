@@ -15,13 +15,14 @@
   
   /* Text Colors */
   --text-black-white: #131213;
+  --text-gray-home-about: #565656;
   --text-primary: #2d2a26;        /* Main text - dark brown */
   --text-secondary: #4a453f;      /* Secondary text */
   --text-tertiary: #6b6358;       /* Muted text */
   --text-light: #8a7f73;          /* Light text for less important content */
   --text-on-brown: #ffffff;       /* White text on brown backgrounds */
   --text-on-brown-secondary: #f5f3f0; /* Light text on brown */
-  
+  --svg-color:#F7F5F2;
   /* Orange accent colors from your design */
   --accent-orange: #e67e22;       /* Primary orange */
   --accent-orange-light: #f39c12; /* Lighter orange */
@@ -75,13 +76,14 @@
   
   /* Text Colors for dark mode */
    --text-black-white: #ffff;
+   --text-gray-home-about: #C4C4C4;
   --text-primary: #f5f3f0;        /* Light text */
   --text-secondary: #e8e3dd;      /* Secondary light text */
   --text-tertiary: #d4c4a8;       /* Muted light text */
   --text-light: #b19e7f;          /* Subtle text */
   --text-on-brown: #f5f3f0;       /* Light text on brown */
   --text-on-brown-secondary: #e8e3dd; /* Secondary text on brown */
-  
+  --svg-color:rgba(250, 248, 244, 0.32);
   /* Orange accents remain similar but adjusted */
   --accent-orange: #f39c12;       /* Brighter orange for dark mode */
   --accent-orange-light: #e67e22; /* Orange light */
