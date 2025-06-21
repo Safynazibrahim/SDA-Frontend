@@ -308,6 +308,91 @@
       border-radius: 60px;
       width: fit-content;
     }
+    .serviceDecriptionContent {
+      font-family: "IBM Plex Sans";
+      .serviceIcons {
+        width: 340px;
+        height: 535px;
+      }
+      .serviceFirstDesc {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 40px;
+      }
+      .serviceSecDesc {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 32px;
+      }
+    }
+    .trackToolsHeaderIconParent {
+      position: relative;
+      width: fit-content;
+      height: fit-content;
+      margin: auto;
+      font-family: "IBM Plex Sans";
+      color: var(--text-black-white);
+
+      .trackToolsHeaderIconChild {
+        position: absolute;
+        top: 12%;
+        left: 23%;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 32px;
+      }
+      .contentTrack {
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 400;
+      }
+      .shadow {
+        border-radius: 440px;
+        background: rgba(177, 158, 127, 0.32);
+        filter: blur(112px);
+        position: absolute;
+        right: 100%;
+        top: 65%;
+      }
+    }
+    .followLab {
+      overflow: hidden;
+      color: var(--text-black-white);
+      
+      .left-side-lab {
+        position: relative;
+        width: fit-content;
+        top: 70px;
+        .svg-follow-lab {
+        fill: var(--svg-color) !important;
+      }
+        .left-side-lab-child {
+          position: absolute;
+          top: -70px;
+          left: 40%;
+          .text-inside-icon {
+            position: relative;
+          }
+          .text {
+            position: absolute;
+            top: 27%;
+            left: 10%;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 32px;
+          }
+          .desc-follow-lab {
+            font-family: "IBM Plex Sans";
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 56px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -331,3 +416,23 @@
     opacity: 0.7;
   }
 }
+
+.animate {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+.animate.delay-1 { animation-delay: 0.2s; }
+.animate.delay-2 { animation-delay: 1.1s; }
+.animate.delay-3 { animation-delay: 1.8s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// clip-path: polygon(63% 0, 100% 18%, 100% 32%, 100% 80%, 60% 100%, 41% 100%, 0 80%, 0 19%, 38% 0);
+// clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+// clip-path: polygon(0 26%, 50% 0, 100% 28%, 100% 74%, 50% 100%, 0 74%);

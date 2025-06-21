@@ -22,6 +22,7 @@ export class HomeComponentComponent {
      this.isBrowser = isPlatformBrowser(this.platformId);
   this.initLanguage();
   }
+ 
 
   ngOnInit(): void {}
 
