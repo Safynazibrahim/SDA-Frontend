@@ -16,8 +16,7 @@
   // -------------------
   // Header & Navbar
   // -------------------
-  header {
-    text-align: center;
+  .bg-body-tertiary {
     position: fixed;
     right: 0;
     left: 0;
@@ -26,119 +25,185 @@
     box-shadow: var(--shadow-md);
     border-bottom: 1px solid var(--border-light);
     transition: all 0.3s ease;
+    padding: 10px 45px;
+    font-family: "IBM Plex Sans";
+    .itemsLinks {
+      padding: 0px 30px;
+    }
+    li a {
+      font-size: 24px;
+      cursor: pointer;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 48px;
+    }
+    .active {
+      font-weight: bold;
+      color: var(--bg-brown-medium);
+      border-bottom: 3px solid var(--bg-brown-medium);
+    }
+    .right-section-nav{
+      padding:0px 10px;
+    }
+    .sun-icon,
+    .moon-icon {
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+    .sun-icon {
+      animation: rotate 20s linear infinite;
+      color: var(--bg-brown-medium);
+    }
+    .moon-icon {
+      animation: pulse 2s ease-in-out infinite;
+      color: var(--bg-brown-medium);
+    }
+    .signInBtn {
+      background: var(--bg-primary);
+      padding: 0px 43px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+      position: relative;
 
-    nav {
-      .logo-background {
+      &::before {
+        content: "";
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        border-radius: 6px;
         background: var(--bg-brown-gradient);
-        clip-path: polygon(0 0, 89% 0, 97% 72%, 100% 100%, 0% 100%);
-        padding: 20px;
+        z-index: -1;
         transition: background 0.3s ease;
-
-        &.logo-ar {
-          clip-path: polygon(12% 0, 100% 0%, 100% 100%, 0% 100%);
-        }
-
-        img {
-          width: 180px;
-          height: 65px;
-        }
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 10px;
-
-        li {
-          display: inline;
-
-          a,
-          span {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-family: "IBM Plex Sans";
-            font-size: 20px;
-            font-weight: 400;
-            line-height: 48px;
-            padding: 5px 15px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            width: 130px;
-            cursor: pointer;
-            position: relative;
-          }
-
-          a.active {
-            font-weight: bold;
-            color: var(--bg-brown-medium);
-            border-bottom: 3px solid var(--bg-brown-medium);
-            background-image: url("../../../../assets/media/Rectangle 10.svg");
-            background-position: top center;
-            background-repeat: no-repeat;
-            background-size: 100% 9px;
-            border-right: 1px solid;
-            border-left: 1px solid;
-          }
-
-          a:hover {
-            color: var(--bg-brown-medium);
-            text-decoration: underline;
-          }
-
-          // Language & Theme Switchers
-          .sun-icon,
-          .moon-icon {
-            width: 24px;
-            height: 24px;
-            position: relative;
-          }
-          .sun-icon {
-            animation: rotate 20s linear infinite;
-            color: var(--bg-brown-medium);
-          }
-          .moon-icon {
-            animation: pulse 2s ease-in-out infinite;
-            color: var(--bg-brown-medium);
-          }
-        }
-      }
-
-      // Buttons
-      .signInBtn {
-        background: var(--bg-primary);
-        padding: 10px 35px;
-        border: 2px solid transparent;
-        border-radius: 4px;
-        margin: 0 25px;
-        color: var(--text-secondary);
-        transition: all 0.3s ease;
-        position: relative;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: -4px;
-          left: -4px;
-          right: -4px;
-          bottom: -4px;
-          border-radius: 6px;
-          background: var(--bg-brown-gradient);
-          z-index: -1;
-          transition: background 0.3s ease;
-        }
-      }
-
-      .JoinUsBtn {
-        padding: 13px 29px;
-        color: var(--text-on-brown);
-        border-radius: 8px;
-        background: var(--bg-brown-gradient);
-        border: 1px solid transparent;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        cursor: pointer;
       }
     }
+
+    .JoinUsBtn {
+      padding: 2px 20px;
+      color: var(--text-on-brown);
+      border-radius: 8px;
+      background: var(--bg-brown-gradient);
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    // nav {
+    //   .logo-background {
+    //     background: var(--bg-brown-gradient);
+    //     clip-path: polygon(0 0, 89% 0, 97% 72%, 100% 100%, 0% 100%);
+    //     padding: 20px;
+    //     transition: background 0.3s ease;
+
+    //     &.logo-ar {
+    //       clip-path: polygon(12% 0, 100% 0%, 100% 100%, 0% 100%);
+    //     }
+
+    //     img {
+    //       width: 180px;
+    //       height: 65px;
+    //     }
+    //   }
+
+    //   ul {
+    //     list-style: none;
+    //     padding: 0;
+    //     margin: 0 10px;
+
+    //     li {
+    //       display: inline;
+
+    //       a,
+    //       span {
+    //         text-decoration: none;
+    //         color: var(--text-secondary);
+    //         font-family: "IBM Plex Sans";
+    //         font-size: 20px;
+    //         font-weight: 400;
+    //         line-height: 48px;
+    //         padding: 5px 15px;
+    //         transition: all 0.3s ease;
+    //         display: inline-block;
+    //         width: 130px;
+    //         cursor: pointer;
+    //         position: relative;
+    //       }
+
+    //       a.active {
+    //         font-weight: bold;
+    //         color: var(--bg-brown-medium);
+    //         border-bottom: 3px solid var(--bg-brown-medium);
+    //         background-image: url("../../../../assets/media/Rectangle 10.svg");
+    //         background-position: top center;
+    //         background-repeat: no-repeat;
+    //         background-size: 100% 9px;
+    //         border-right: 1px solid;
+    //         border-left: 1px solid;
+    //       }
+
+    //       a:hover {
+    //         color: var(--bg-brown-medium);
+    //         text-decoration: underline;
+    //       }
+
+    //       // Language & Theme Switchers
+    //       .sun-icon,
+    //       .moon-icon {
+    //         width: 24px;
+    //         height: 24px;
+    //         position: relative;
+    //       }
+    //       .sun-icon {
+    //         animation: rotate 20s linear infinite;
+    //         color: var(--bg-brown-medium);
+    //       }
+    //       .moon-icon {
+    //         animation: pulse 2s ease-in-out infinite;
+    //         color: var(--bg-brown-medium);
+    //       }
+    //     }
+    //   }
+
+    //   // Buttons
+    //   .signInBtn {
+    //     background: var(--bg-primary);
+    //     padding: 10px 35px;
+    //     border: 2px solid transparent;
+    //     border-radius: 4px;
+    //     margin: 0 25px;
+    //     color: var(--text-secondary);
+    //     transition: all 0.3s ease;
+    //     position: relative;
+
+    //     &::before {
+    //       content: "";
+    //       position: absolute;
+    //       top: -4px;
+    //       left: -4px;
+    //       right: -4px;
+    //       bottom: -4px;
+    //       border-radius: 6px;
+    //       background: var(--bg-brown-gradient);
+    //       z-index: -1;
+    //       transition: background 0.3s ease;
+    //     }
+    //   }
+
+    //   .JoinUsBtn {
+    //     padding: 13px 29px;
+    //     color: var(--text-on-brown);
+    //     border-radius: 8px;
+    //     background: var(--bg-brown-gradient);
+    //     border: 1px solid transparent;
+    //     font-weight: 600;
+    //     transition: all 0.3s ease;
+    //     cursor: pointer;
+    //   }
+    // }
   }
 
   // -------------------
@@ -162,12 +227,7 @@
       line-height: 88px;
       color: var(--text-black-white);
     }
-    .highlight {
-      background-color: var(--orange-on-home);
-      border-radius: 45px;
-      padding: 5px 12px;
-      color: white;
-    }
+
     .img-left {
       width: 488px;
       height: 380px;
@@ -359,14 +419,14 @@
     .followLab {
       overflow: hidden;
       color: var(--text-black-white);
-      
+
       .left-side-lab {
         position: relative;
         width: fit-content;
         top: 70px;
         .svg-follow-lab {
-        fill: var(--svg-color) !important;
-      }
+          fill: var(--svg-color) !important;
+        }
         .left-side-lab-child {
           position: absolute;
           top: -70px;
@@ -394,6 +454,67 @@
       }
     }
   }
+  .Pricing-section {
+    width: 100%;
+    .appInfoParent {
+      position: relative;
+      width: fit-content;
+      height: fit-content;
+      .appInfoChild {
+        position: absolute;
+        top: 32%;
+        left: 50px;
+        font-family: "IBM Plex Sans";
+        .headerApp {
+          font-size: 24px;
+          font-weight: 500;
+          line-height: 24px;
+        }
+        .DescApp {
+          font-size: 32px;
+          font-weight: 500;
+          line-height: 56px;
+          .downloadLink {
+            color: #85775f;
+            font-weight: 600;
+          }
+        }
+        .footerApp {
+          color: #5b5947;
+          font-size: 24px;
+          font-weight: 400;
+          line-height: 40px;
+        }
+        .btns {
+          background: var(--bg-brown-gradient);
+          border-radius: 7px;
+          border-color: transparent;
+          border-radius: 7px;
+          padding: 0px 15px;
+          font-family: "IBM Plex Sans";
+          .download {
+            font-size: 17px;
+            margin-left: 7px;
+          }
+          .getIt {
+            font-size: 12px !important;
+          }
+        }
+      }
+    }
+  }
+  .contactUsContwnt {
+    .shared-contant {
+      color: #8e7e66;
+      font-family: "IBM Plex Sans";
+      .title-contant {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 40px;
+        color: #8f8f8f;
+      }
+    }
+  }
 }
 
 // -------------------
@@ -416,15 +537,26 @@
     opacity: 0.7;
   }
 }
-
+.highlight {
+  background-color: var(--orange-on-home);
+  border-radius: 45px;
+  padding: 5px 12px;
+  color: white;
+}
 .animate {
   opacity: 0;
   transform: translateY(40px);
-  animation: fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+  animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-.animate.delay-1 { animation-delay: 0.2s; }
-.animate.delay-2 { animation-delay: 1.1s; }
-.animate.delay-3 { animation-delay: 1.8s; }
+.animate.delay-1 {
+  animation-delay: 0.2s;
+}
+.animate.delay-2 {
+  animation-delay: 1.1s;
+}
+.animate.delay-3 {
+  animation-delay: 1.8s;
+}
 
 @keyframes fadeUp {
   to {

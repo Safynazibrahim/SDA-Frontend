@@ -1,49 +1,61 @@
 <div class="home-container">
-  <header>
-    <nav>
-      <div class="row d-flex align-items-center">
-        <div
-          class="col-md-3 logo-background"
-          [class.logo-ar]="currentLang === 'ar'"
-        >
-          <img src="../../../../assets/media/logo.svg" alt="" srcset="" />
-        </div>
-        <div
-          class="col-md-9 d-flex justify-content-between px-5 m-auto align-items-center"
-        >
-          <div class="">
-            <ul>
-              <li>
-                <a
-                  (click)="scrollToSection('home')"
-                  [class.active]="activeSection === 'home'"
-                >
-                  {{ "HOME" | translate }}</a
-                >
-              </li>
-              <li>
-                <a
-                  (click)="scrollToSection('about')"
-                  [class.active]="activeSection === 'about'"
-                  >{{ "ABOUT" | translate }}</a
-                >
-              </li>
-              <li>
-                <a
-                  (click)="scrollToSection('pricing')"
-                  [class.active]="activeSection === 'pricing'"
-                  >{{ "PRICING" | translate }}</a
-                >
-              </li>
-              <li>
-                <a
-                  (click)="scrollToSection('contact')"
-                  [class.active]="activeSection === 'contact'"
-                  >{{ "CONTACT" | translate }}</a
-                >
-              </li>
-              <li (click)="toggleLang()" style="cursor: pointer">
-                <span>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+        ><img src="../../../../assets/media/logo.svg" alt="" srcset=""
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item itemsLinks">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              (click)="scrollToSection('home')"
+              [class.active]="activeSection === 'home'"
+              >{{ "HOME" | translate }}</a
+            >
+          </li>
+          <li class="nav-item itemsLinks">
+            <a
+              class="nav-link"
+              (click)="scrollToSection('about')"
+              [class.active]="activeSection === 'about'"
+              >{{ "ABOUT" | translate }}</a
+            >
+          </li>
+          <li class="nav-item itemsLinks">
+            <a
+              class="nav-link"
+              (click)="scrollToSection('pricing')"
+              [class.active]="activeSection === 'pricing'"
+              >{{ "PRICING" | translate }}</a
+            >
+          </li>
+          <li class="nav-item itemsLinks">
+            <a
+              class="nav-link"
+              (click)="scrollToSection('contact')"
+              [class.active]="activeSection === 'contact'"
+              >{{ "CONTACT" | translate }}</a
+            >
+          </li>
+        </ul>
+        <span class="navbar-text">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item right-section-nav" >
+              <a class="nav-link" (click)="toggleLang()" style="cursor: pointer; margin-top: 2px;"
+                ><span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -58,19 +70,19 @@
                     />
                   </svg>
                   {{ currentLang === "en" ? "En" : "عربي" }}
-                </span>
-              </li>
-              <li
-                class="ms-3"
+                </span></a
+              >
+            </li>
+            <li class="nav-item right-section-nav" >
+              <a
+                class="nav-link"
                 (click)="toggleTheme()"
                 [attr.aria-label]="
                   (theme$ | async) === 'light'
                     ? 'Switch to dark mode'
                     : 'Switch to light mode'
                 "
-              >
-                <!-- Sun icon for light mode -->
-                <svg
+                ><svg
                   style="width: fit-content !important; cursor: pointer"
                   *ngIf="(theme$ | async) === 'light'"
                   class="sun-icon"
@@ -82,7 +94,6 @@
                   />
                 </svg>
 
-                <!-- Moon icon for dark mode -->
                 <svg
                   style="width: fit-content !important; cursor: pointer"
                   *ngIf="(theme$ | async) === 'dark'"
@@ -92,26 +103,24 @@
                 >
                   <path
                     d="M21.64 13a1 1 0 00-1.05-.14 8.05 8.05 0 01-3.37.73 8.15 8.15 0 01-8.14-8.1 8.59 8.59 0 01.25-2A1 1 0 008 2.36a10.14 10.14 0 1014 11.69 1 1 0 00-.36-1.05z"
-                  />
-                </svg>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-              <li>
-                <button class="signInBtn">{{ "SIGNIN" | translate }}</button>
-              </li>
-              <li>
-                <button class="JoinUsBtn">{{ "JOIN" | translate }}</button>
-              </li>
-            </ul>
-          </div>
-        </div>
+                  /></svg
+              ></a>
+            </li>
+            <li class="nav-item right-section-nav">
+              <a class="nav-link "
+                ><button class="signInBtn">{{ "SIGNIN" | translate }}</button>
+              </a>
+            </li>
+            <li class="nav-item right-section-nav">
+              <a class="nav-link "
+                > <button class="JoinUsBtn">{{ "JOIN" | translate }}</button>
+              </a>
+            </li>
+          </ul>
+        </span>
       </div>
-    </nav>
-  </header>
-
+    </div>
+  </nav>
   <!-- Home section -->
   <section id="home">
     <div class="hero-content">
@@ -186,7 +195,7 @@
               for managing <br />
               <span class="highlight">dental clinics</span>
             </h1>
-            <img 
+            <img
               src="../../../../assets/media/Vector 24.png"
               class="img-left animate delay-3"
               alt=""
@@ -629,7 +638,6 @@
         <div class="col-6">
           <div class="left-side-lab">
             <svg
-              
               xmlns="http://www.w3.org/2000/svg"
               width="345"
               height="410"
@@ -637,7 +645,7 @@
               fill="none"
             >
               <path
-              class="svg-follow-lab"
+                class="svg-follow-lab"
                 fill-rule="evenodd"
                 clip-rule="evenodd"
                 d="M123.995 1.38658C105.505 0.173334 87.2019 1.2872 69.578 4.67595C113.043 30.6882 161.219 73.5684 202.479 143.835C246.539 218.869 297.894 257.128 338.569 276.868C341.618 265.667 343.57 254.2 344.459 242.607C300.206 216.788 250.731 173.559 208.5 101.641C181.684 55.9718 152.164 23.9253 123.995 1.38658ZM342.19 194.606C332.742 138.624 299.814 84.064 246.846 46.119C231.291 34.9758 214.933 25.9293 198.169 18.9396C214.27 37.6258 230.018 59.3701 244.868 84.6619C275.787 137.317 310.299 171.862 342.19 194.606ZM324.07 313.466C274.804 289.797 215.501 244.927 166.111 160.814C119.936 82.1768 65.747 43.9311 24.2372 25.0642C22.0949 24.09 19.9831 23.1665 17.9041 22.2906C6.54991 28.0838 -4.18364 35.0396 -14.1101 43.1365C-10.7024 44.5313 -7.22201 46.0298 -3.67739 47.6405C46.6809 70.5296 108.742 115.561 160.089 203.008C206.265 281.645 260.453 319.891 301.964 338.758C303.385 339.405 304.795 340.03 306.191 340.632C308.118 338.221 309.991 335.746 311.808 333.211C316.377 326.832 320.462 320.238 324.07 313.466ZM276.318 369.998C228.155 345.687 171.334 301.07 123.721 219.987C77.5465 141.35 23.3573 103.104 -18.1524 84.2371C-27.3658 80.0484 -36.0181 76.7886 -43.8921 74.2499C-44.5626 75.1491 -45.2262 76.0569 -45.8822 76.9726C-108.778 164.771 -79.6939 293.306 19.0792 364.064C101.859 423.365 207.314 423.266 276.318 369.998Z"
@@ -677,6 +685,267 @@
     </div>
   </section>
 
-  <!-- <section id="pricing">...</section>
-  <section id="contact">...</section> -->
+  <section id="pricing" class="Pricing-section">
+    <div
+      class="PricingHeader d-flex align-items-center justify-content-center mt-5"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="81"
+        height="107"
+        viewBox="0 0 81 107"
+        fill="none"
+      >
+        <path
+          d="M80.4999 83.3339L40.5 106.667V23.334L80.4999 46.6673V83.3339Z"
+          fill="#6A5F4C"
+        />
+        <path
+          d="M40.4999 59.9999L0.5 83.3332V0L40.4999 23.3333V59.9999Z"
+          fill="#B19E7F"
+        />
+      </svg>
+      <p class="pricing-title fs-1 fw-bold mt-3 ms-2">
+        Our <span class="highlight rounded-0">Pricing</span>
+      </p>
+    </div>
+
+    <!-- page our pricing hereee -->
+
+    <div class="appInfo" style="width: 80%; margin: auto">
+      <div class="appInfoParent">
+        <img
+          src="../../../../assets/media/appInfo.svg"
+          alt="App Info"
+          srcset=""
+        />
+        <div class="appInfoChild">
+          <p class="headerApp">{{ "the_app_is_now_available" | translate }}</p>
+          <br />
+          <p class="DescApp">
+            <span class="downloadLink">Download The App</span> And start a new
+            <br />
+            journey of managing your dental clinic
+          </p>
+          <p class="footerApp">
+            with ease and professionalism — all your tools in one <br />
+            place
+          </p>
+          <button class="btns mt-3">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.smart.dental"
+              target="_blank"
+              class="text-white text-decoration-none d-flex align-items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="33"
+                viewBox="0 0 32 33"
+                fill="none"
+              >
+                <mask
+                  id="mask0_510_3776"
+                  style="mask-type: alpha"
+                  maskUnits="userSpaceOnUse"
+                  x="7"
+                  y="3"
+                  width="24"
+                  height="27"
+                >
+                  <path
+                    d="M30.0484 14.9277C31.3172 15.6259 31.3172 17.4287 30.0484 18.1269L9.75627 29.2932C8.52052 29.9732 7 29.0907 7 27.6936V5.36108C7 3.96391 8.52052 3.08149 9.75627 3.76149L30.0484 14.9277Z"
+                    fill="#C4C4C4"
+                  />
+                </mask>
+                <g mask="url(#mask0_510_3776)">
+                  <path
+                    d="M7.63473 29.0759L20.2923 16.3472L7.84319 3.82812C7.34653 4.1465 7 4.69619 7 5.36319V27.6957C7 28.2648 7.25223 28.7484 7.63473 29.0759Z"
+                    fill="url(#paint0_linear_510_3776)"
+                  />
+                  <path
+                    d="M30.048 14.9277C31.3169 15.6259 31.3169 17.4286 30.048 18.1268L24.9287 20.9439L20.292 16.3449L24.6923 11.9805L30.048 14.9277Z"
+                    fill="url(#paint1_linear_510_3776)"
+                  />
+                  <path
+                    d="M24.9292 20.9466L20.2924 16.3477L7.63477 29.0764C8.19139 29.553 9.02389 29.6989 9.75635 29.2958L24.9292 20.9466Z"
+                    fill="url(#paint2_linear_510_3776)"
+                  />
+                  <path
+                    d="M7.84277 3.82599L20.2919 16.345L24.6922 11.9806L9.75583 3.76149C9.11003 3.40612 8.38646 3.47747 7.84277 3.82599Z"
+                    fill="url(#paint3_linear_510_3776)"
+                  />
+                </g>
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_510_3776"
+                    x1="15.6769"
+                    y1="11.4033"
+                    x2="7.07106"
+                    y2="20.0799"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#00C3FF" />
+                    <stop offset="1" stop-color="#1BE2FA" />
+                  </linearGradient>
+                  <linearGradient
+                    id="paint1_linear_510_3776"
+                    x1="20.292"
+                    y1="16.345"
+                    x2="31.7381"
+                    y2="16.345"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#FFCE00" />
+                    <stop offset="1" stop-color="#FFEA00" />
+                  </linearGradient>
+                  <linearGradient
+                    id="paint2_linear_510_3776"
+                    x1="7.36932"
+                    y1="30.6302"
+                    x2="22.595"
+                    y2="18.4235"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#DE2453" />
+                    <stop offset="1" stop-color="#FE3944" />
+                  </linearGradient>
+                  <linearGradient
+                    id="paint3_linear_510_3776"
+                    x1="8.10725"
+                    y1="2.42871"
+                    x2="22.5971"
+                    y2="14.2638"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#11D574" />
+                    <stop offset="1" stop-color="#01F176" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <p class="p-0 m-0 download">
+                <span class="getIt">Get It On</span> <br />
+                Google Play
+              </p></a
+            >
+          </button>
+          <button class="btns mt-3 ms-5">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.smart.dental"
+              target="_blank"
+              class="text-white text-decoration-none d-flex align-items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="29"
+                height="33"
+                viewBox="0 0 29 33"
+                fill="none"
+              >
+                <g clip-path="url(#clip0_510_3790)">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M20.9138 5.63594C22.0803 4.28395 22.8666 2.40091 22.6515 0.527344C20.9704 0.591344 18.9367 1.60118 17.7314 2.95156C16.649 4.14995 15.7041 6.06478 15.9581 7.90156C17.8333 8.04075 19.7473 6.98951 20.9138 5.63594ZM25.1188 17.5273C25.1657 22.3705 29.5519 23.9815 29.6004 24.0023C29.5648 24.1159 28.8998 26.2979 27.29 28.5539C25.897 30.5027 24.4522 32.4436 22.1758 32.4852C19.9398 32.5252 19.2199 31.2148 16.6619 31.2148C14.1056 31.2148 13.3064 32.4434 11.1901 32.525C8.99302 32.6034 7.31848 30.4166 5.91575 28.4742C3.04557 24.5015 0.853295 17.2475 3.7979 12.3516C5.26049 9.9212 7.87342 8.37981 10.7112 8.34141C12.8679 8.30141 14.9049 9.73203 16.2235 9.73203C17.5421 9.73203 20.0175 8.01204 22.6191 8.26484C23.7079 8.30804 26.7658 8.68551 28.7283 11.4391C28.5698 11.5335 25.0799 13.4794 25.1188 17.5273Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_510_3790">
+                    <rect
+                      width="32"
+                      height="32"
+                      fill="white"
+                      transform="translate(0 0.527344)"
+                    />
+                  </clipPath>
+                </defs>
+              </svg>
+              <p class="p-0 m-0 download ms-2">
+                <span class="getIt">Download On The</span> <br />
+                Apple Store
+              </p></a
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="contact-section">
+    <div
+      class="ContanctHeader d-flex align-items-center justify-content-center mt-5"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="81"
+        height="107"
+        viewBox="0 0 81 107"
+        fill="none"
+      >
+        <path
+          d="M80.4999 83.3339L40.5 106.667V23.334L80.4999 46.6673V83.3339Z"
+          fill="#6A5F4C"
+        />
+        <path
+          d="M40.4999 59.9999L0.5 83.3332V0L40.4999 23.3333V59.9999Z"
+          fill="#B19E7F"
+        />
+      </svg>
+      <p class="pricing-title fs-1 fw-bold mt-3 ms-2">
+        Contact <span class="highlight rounded-0">Us</span>
+      </p>
+    </div>
+    <div class="contactUsContwnt" style="width: 80%; margin: auto">
+      <div class="row d-flex align-items-center">
+        <div class="col-6">
+          <h3>We are here to answer all your questions</h3>
+          <div class="d-flex align-items-center mt-3 shared-contant">
+            <div class="icon-left">
+              <img
+                src="../../../../assets/media/tooth-location.svg"
+                alt=""
+                srcset=""
+              />
+            </div>
+            <div class="right-desc-contact ms-3">
+              <p class="my-0 py-0 title-contant">Location</p>
+              <p class="my-0 py-0">Main Clinic Street, City, Country</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-3 shared-contant">
+            <div class="icon-left">
+              <img
+                src="../../../../assets/media/tooth-number.svg"
+                alt=""
+                srcset=""
+              />
+            </div>
+            <div class="right-desc-contact ms-3">
+              <p class="my-0 py-0 title-contant">Phone Number</p>
+              <p class="my-0 py-0">
+                +20 1109876520 <br />
+                +20 1109876520
+              </p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-3 shared-contant">
+            <div class="icon-left">
+              <img
+                src="../../../../assets/media/tooth-email.svg"
+                alt=""
+                srcset=""
+              />
+            </div>
+            <div class="right-desc-contact ms-3">
+              <p class="my-0 py-0 title-contant">Email</p>
+              <p class="my-0 py-0">smart&#64;gmail.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <img src="../../../../assets/media/ContactUs.svg" alt="" srcset="" />
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
