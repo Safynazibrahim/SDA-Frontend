@@ -1,0 +1,192 @@
+.pricing-parent {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  .pricing-shared {
+    position: absolute;
+    top: 22%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .pricing-child-first {
+    left: 4%;
+    .first-package-price {
+      position: absolute;
+      top: 35px;
+      left: 100px;
+      text-align: center;
+      color: white;
+      p {
+        font-size: 21px;
+      }
+    }
+    .first-package-content {
+      position: absolute;
+      top: 150px;
+      padding: 0px 10px;
+      text-align: center;
+      font-family: "IBM Plex Sans";
+      .basic-details {
+        color: #3e372c !important;
+        font-weight: 800;
+        font-size: 24px;
+      }
+      p {
+        font-size: 17px;
+        font-family: "IBM Plex Sans";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        color: #434343;
+      }
+      .subscribe-btn {
+        padding: 7px 25px;
+        background-color: white;
+        color: #b19e7f;
+        border: 2px solid #b19e7f;
+        border-radius: 7px;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+      }
+    }
+  }
+  .pricing-child-second {
+    left: 29%;
+    .second-package-price {
+      position: absolute;
+      top: 35px;
+      left: 100px;
+      text-align: center;
+      color: white;
+      p {
+        font-size: 21px;
+      }
+    }
+    .second-package-content {
+      position: absolute;
+      top: 150px;
+      padding: 0px 10px;
+      text-align: center;
+      font-family: "IBM Plex Sans";
+      .basic-details {
+        color: #3e372c !important;
+        font-weight: 800;
+        font-size: 24px;
+      }
+      p {
+        font-size: 17px;
+        font-family: "IBM Plex Sans";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        color: #434343;
+      }
+      .subscribe-btn {
+        padding: 7px 25px;
+        background-color: white;
+        color: #b19e7f;
+        border: 2px solid #b19e7f;
+        border-radius: 7px;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+      }
+    }
+  }
+  .pricing-child-third {
+    left: 54%;
+    .third-package-price {
+      position: absolute;
+      top: 35px;
+      left: 100px;
+      text-align: center;
+      color: white;
+      p {
+        font-size: 21px;
+      }
+    }
+    .third-package-content {
+      position: absolute;
+      top: 150px;
+      padding: 0px 10px;
+      text-align: center;
+      font-family: "IBM Plex Sans";
+      .basic-details {
+        color: #3e372c !important;
+        font-weight: 800;
+        font-size: 24px;
+      }
+      p {
+        font-size: 17px;
+        font-family: "IBM Plex Sans";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        color: #434343;
+      }
+      .subscribe-btn {
+        padding: 7px 25px;
+        background-color: white;
+        color: #b19e7f;
+        border: 2px solid #b19e7f;
+        border-radius: 7px;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+      }
+    }
+  }
+  .pricing-child-fourth {
+    left: 79%;
+    .fourth-package-price {
+      position: absolute;
+      top: 35px;
+      left: 100px;
+      text-align: center;
+      color: white;
+      p {
+        font-size: 21px;
+      }
+    }
+    .fourth-package-content {
+      position: absolute;
+      top: 150px;
+      padding: 0px 10px;
+      text-align: center;
+      font-family: "IBM Plex Sans";
+      .basic-details {
+        color: #3e372c !important;
+        font-weight: 800;
+        font-size: 24px;
+      }
+      p {
+        font-size: 17px;
+        font-family: "IBM Plex Sans";
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        color: #434343;
+      }
+      .subscribe-btn {
+        padding: 7px 25px;
+        background-color: white;
+        color: #b19e7f;
+        border: 2px solid #b19e7f;
+        border-radius: 7px;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+      }
+    }
+  }
+}
