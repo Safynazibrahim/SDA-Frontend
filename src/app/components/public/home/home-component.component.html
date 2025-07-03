@@ -53,8 +53,11 @@
         </ul>
         <span class="navbar-text">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item right-section-nav" >
-              <a class="nav-link" (click)="toggleLang()" style="cursor: pointer; margin-top: 2px;"
+            <li class="nav-item right-section-nav">
+              <a
+                class="nav-link"
+                (click)="toggleLang()"
+                style="cursor: pointer; margin-top: 2px"
                 ><span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +76,7 @@
                 </span></a
               >
             </li>
-            <li class="nav-item right-section-nav" >
+            <li class="nav-item right-section-nav">
               <a
                 class="nav-link"
                 (click)="toggleTheme()"
@@ -107,13 +110,13 @@
               ></a>
             </li>
             <li class="nav-item right-section-nav">
-              <a class="nav-link "
+              <a class="nav-link"
                 ><button class="signInBtn">{{ "SIGNIN" | translate }}</button>
               </a>
             </li>
             <li class="nav-item right-section-nav">
-              <a class="nav-link "
-                > <button class="JoinUsBtn">{{ "JOIN" | translate }}</button>
+              <a class="nav-link">
+                <button class="JoinUsBtn">{{ "JOIN" | translate }}</button>
               </a>
             </li>
           </ul>
@@ -141,9 +144,9 @@
       </svg>
       <div class="child">
         <div class="row m-auto" style="width: 90%">
-          <div class="col-6">
+          <div class="col-md-6">
             <div class="d-flex">
-              <div class="col-6">
+              <div class="col-md-6">
                 <img
                   src="../../../../assets/rectangle-home.gif"
                   width="80"
@@ -237,7 +240,7 @@
       </div>
 
       <div class="whychooseUsWrapper">
-        <div class="d-flex align-items-end">
+        <div class="d-flex align-items-end responsive-contact">
           <div class="col-md-2 d-flex flex-column">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +267,7 @@
               />
             </svg>
           </div>
-          <div class="whychooseUsHeader col-8">
+          <div class="whychooseUsHeader col-md-8 col-12">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="80"
@@ -369,6 +372,7 @@
   <section id="about" class="about-section">
     <div class="about-header d-flex align-items-center justify-content-center">
       <svg
+      
         xmlns="http://www.w3.org/2000/svg"
         width="80"
         height="107"
@@ -392,7 +396,7 @@
       <div class="">
         <div class="d-flex">
           <svg
-            class="me-2"
+            class="me-2 responsiveSvgAbout"
             xmlns="http://www.w3.org/2000/svg"
             width="65"
             height="65"
@@ -436,6 +440,7 @@
       </div>
       <div class="about-child">
         <svg
+        class="toothSvgResponsive"
           xmlns="http://www.w3.org/2000/svg"
           width="271"
           height="316"
@@ -464,19 +469,20 @@
     </div>
     <div style="width: 85%" class="m-auto mt-3 mb-5">
       <div class="row">
-        <div class="col-6">
+        <div class="col-md-6">
           <div class="row">
             <div
-              class="col-4 d-flex flex-column first-left-section-images-about"
+              class="col-md-4 col-6 d-flex flex-column first-left-section-images-about"
             >
               <img
                 src="../../../../assets/media/image 12.png"
                 alt="image 1"
                 srcset=""
+                class="imagesSharedResponsive"
               />
               <img
                 src="../../../../assets/media/image.png"
-                class="my-2"
+                class="my-2 imagesSharedResponsive"
                 alt="image 2"
                 srcset=""
               />
@@ -484,10 +490,11 @@
                 src="../../../../assets/media/image2.png"
                 alt="image 3"
                 srcset=""
+                class="imagesSharedResponsive"
               />
             </div>
             <div
-              class="col-4 d-flex flex-column justify-content-center align-items-center sec-left-section-images-about"
+              class="col-md-4 col-6 d-flex flex-column justify-content-center align-items-center sec-left-section-images-about"
             >
               <img
                 src="../../../../assets/media/Rectangle 6343.png"
@@ -495,10 +502,11 @@
                 height="80"
                 alt="image 1"
                 srcset=""
+                class="imgAboutResponsiveRightFirst"
               />
               <img
                 src="../../../../assets/media/Vector 24.png"
-                class="rounded-circle my-2"
+                class="rounded-circle my-2 imgAboutResponsiveRightSecond"
                 width="340"
                 height="340"
                 alt="image 2"
@@ -510,11 +518,12 @@
                 width="180"
                 height="240"
                 srcset=""
+                class="imgAboutResponsiveRightThird"
               />
             </div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
           <img
             src="../../../../assets/media/image 10.svg"
             style="width: 695.434px; height: 670px"
@@ -948,4 +957,12 @@
       </div>
     </div>
   </section>
+  <!-- <div class="footer-section">
+<svg xmlns="http://www.w3.org/2000/svg"   viewBox="0 0 1440 729" fill="none">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1500.93 978.637C1500.93 1306.65 1430.2 1723.25 1214.84 1723.25C861.904 1723.25 1024.45 1085.01 720.302 1085.01C416.151 1085.01 518.998 1726.61 228.393 1726.61C24.0788 1726.61 -57.1952 1301.99 -57.1952 978.637C-57.1952 782.697 -357.332 461.299 -134.957 177.093C137.712 -171.413 400.348 103.792 713.529 103.792C1031.48 103.792 1279.44 -165.666 1569.92 177.093C1800.19 449.154 1500.93 786.058 1500.93 978.637Z" fill="#85775F"/>
+</svg>
+    <div class="footer-content">
+      
+    </div>
+  </div> -->
 </div>

@@ -42,8 +42,8 @@
       color: var(--bg-brown-medium);
       border-bottom: 3px solid var(--bg-brown-medium);
     }
-    .right-section-nav{
-      padding:0px 10px;
+    .right-section-nav {
+      padding: 0px 10px;
     }
     .sun-icon,
     .moon-icon {
@@ -92,118 +92,6 @@
       transition: all 0.3s ease;
       cursor: pointer;
     }
-    // nav {
-    //   .logo-background {
-    //     background: var(--bg-brown-gradient);
-    //     clip-path: polygon(0 0, 89% 0, 97% 72%, 100% 100%, 0% 100%);
-    //     padding: 20px;
-    //     transition: background 0.3s ease;
-
-    //     &.logo-ar {
-    //       clip-path: polygon(12% 0, 100% 0%, 100% 100%, 0% 100%);
-    //     }
-
-    //     img {
-    //       width: 180px;
-    //       height: 65px;
-    //     }
-    //   }
-
-    //   ul {
-    //     list-style: none;
-    //     padding: 0;
-    //     margin: 0 10px;
-
-    //     li {
-    //       display: inline;
-
-    //       a,
-    //       span {
-    //         text-decoration: none;
-    //         color: var(--text-secondary);
-    //         font-family: "IBM Plex Sans";
-    //         font-size: 20px;
-    //         font-weight: 400;
-    //         line-height: 48px;
-    //         padding: 5px 15px;
-    //         transition: all 0.3s ease;
-    //         display: inline-block;
-    //         width: 130px;
-    //         cursor: pointer;
-    //         position: relative;
-    //       }
-
-    //       a.active {
-    //         font-weight: bold;
-    //         color: var(--bg-brown-medium);
-    //         border-bottom: 3px solid var(--bg-brown-medium);
-    //         background-image: url("../../../../assets/media/Rectangle 10.svg");
-    //         background-position: top center;
-    //         background-repeat: no-repeat;
-    //         background-size: 100% 9px;
-    //         border-right: 1px solid;
-    //         border-left: 1px solid;
-    //       }
-
-    //       a:hover {
-    //         color: var(--bg-brown-medium);
-    //         text-decoration: underline;
-    //       }
-
-    //       // Language & Theme Switchers
-    //       .sun-icon,
-    //       .moon-icon {
-    //         width: 24px;
-    //         height: 24px;
-    //         position: relative;
-    //       }
-    //       .sun-icon {
-    //         animation: rotate 20s linear infinite;
-    //         color: var(--bg-brown-medium);
-    //       }
-    //       .moon-icon {
-    //         animation: pulse 2s ease-in-out infinite;
-    //         color: var(--bg-brown-medium);
-    //       }
-    //     }
-    //   }
-
-    //   // Buttons
-    //   .signInBtn {
-    //     background: var(--bg-primary);
-    //     padding: 10px 35px;
-    //     border: 2px solid transparent;
-    //     border-radius: 4px;
-    //     margin: 0 25px;
-    //     color: var(--text-secondary);
-    //     transition: all 0.3s ease;
-    //     position: relative;
-
-    //     &::before {
-    //       content: "";
-    //       position: absolute;
-    //       top: -4px;
-    //       left: -4px;
-    //       right: -4px;
-    //       bottom: -4px;
-    //       border-radius: 6px;
-    //       background: var(--bg-brown-gradient);
-    //       z-index: -1;
-    //       transition: background 0.3s ease;
-    //     }
-    //   }
-
-    //   .JoinUsBtn {
-    //     padding: 13px 29px;
-    //     color: var(--text-on-brown);
-    //     border-radius: 8px;
-    //     background: var(--bg-brown-gradient);
-    //     border: 1px solid transparent;
-    //     font-weight: 600;
-    //     transition: all 0.3s ease;
-    //     cursor: pointer;
-    //   }
-    // }
   }
 
   // -------------------
@@ -515,6 +403,16 @@
       }
     }
   }
+  .footer-section {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    svg {
+      width: 100%;
+    }
+  }
 }
 
 // -------------------
@@ -565,6 +463,360 @@
   }
 }
 
-// clip-path: polygon(63% 0, 100% 18%, 100% 32%, 100% 80%, 60% 100%, 41% 100%, 0 80%, 0 19%, 38% 0);
-// clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
-// clip-path: polygon(0 26%, 50% 0, 100% 28%, 100% 74%, 50% 100%, 0 74%);
+// -------------------
+// Responsive Design
+// -------------------
+
+// Mobile First (max-width: 600px)
+@media (max-width: 600px) {
+  .home-container {
+    padding: 0 8px;
+    ul {
+      display: flex;
+      align-items: center;
+    }
+    .bg-body-tertiary {
+      padding: 8px 10px;
+      li a {
+        font-size: 16px;
+        line-height: 32px;
+      }
+      .itemsLinks {
+        padding: 0 5px;
+      }
+      .signInBtn,
+      .JoinUsBtn {
+        padding: 0 12px;
+        font-size: 14px;
+      }
+    }
+    .hero-content {
+      .home-content {
+        font-size: 32px;
+        line-height: 44px;
+      }
+      .img-left {
+        width: 90vw;
+        height: auto;
+        margin-top: 20px;
+      }
+      .right-section-home img {
+        margin: 10px 0px;
+        width: 280px;
+        height: 320px;
+      }
+    }
+    .whychooseUsWrapper {
+      .responsive-contact {
+        display: flex;
+        flex-direction: column !important;
+      }
+      .whychooseUsHeader {
+        p {
+          font-size: 21px !important;
+          margin-top: 30px !important;
+        }
+      }
+      .whychooseUsParent {
+        position: relative;
+        width: 100%;
+        display: flex;
+        height: fit-content;
+        align-items: center;
+        padding: 10px 0px;
+        flex-direction: column;
+        background: #85775F;
+        margin: auto;
+        .whychooseUsBg {
+          display: none;
+        }
+        .cantactUs-first-desc {
+          font-size: 20px;
+          line-height: 32px;
+        }
+        .cantactUs-sec-desc {
+          font-size: 14px;
+          line-height: 24px;
+        }
+        .contactIcons {
+          width: 64px;
+          height: 64px;
+        }
+        .sharedContact {
+          position: unset;
+          margin: 10px 0;
+        }
+      }
+    }
+    .about-section {
+      .about-header {
+        margin-top: 20px;
+      }
+      .responsiveSvgAbout{
+        width:30px;
+      }
+      .smart-managment-color,
+      .home-content {
+        font-size: 20px;
+      }
+      .about-highlight {
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+      .para-about {
+        font-size: 14px;
+        line-height: 24px;
+        br{
+          display:none;
+        }
+      }
+      .about-child{
+        .toothSvgResponsive{
+          width:70px
+        }
+      }
+      .first-left-section-images-about{
+        .imagesSharedResponsive{
+          width: 90px;
+        }
+      }
+      .sec-left-section-images-about{
+        .imgAboutResponsiveRightFirst{
+          width: 100px;
+          height: 60px;
+        }
+        .imgAboutResponsiveRightSecond{
+          width: 180px;
+          height: 165px;
+        }
+        .imgAboutResponsiveRightThird{
+          width: 150px;
+        }
+      }
+      .serviceDecriptionContent {
+        .serviceIcons {
+          width: 120px;
+          height: 180px;
+        }
+        .serviceFirstDesc {
+          font-size: 14px;
+          line-height: 24px;
+        }
+        .serviceSecDesc {
+          font-size: 12px;
+          line-height: 18px;
+        }
+      }
+      .trackToolsHeaderIconParent {
+        .trackToolsHeaderIconChild {
+          font-size: 18px;
+        }
+        .contentTrack {
+          font-size: 16px;
+        }
+      }
+      .followLab {
+        .left-side-lab {
+          .left-side-lab-child {
+            .text {
+              font-size: 18px;
+            }
+            .desc-follow-lab {
+              font-size: 16px;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+    .Pricing-section {
+      .appInfoParent {
+        .appInfoChild {
+          left: 0;
+          .headerApp {
+            font-size: 14px;
+          }
+          .DescApp {
+            font-size: 18px;
+            line-height: 28px;
+          }
+          .footerApp {
+            font-size: 14px;
+            line-height: 20px;
+          }
+          .btns {
+            padding: 0 8px;
+            .download {
+              font-size: 12px;
+            }
+            .getIt {
+              font-size: 10px !important;
+            }
+          }
+        }
+      }
+    }
+    .contactUsContwnt {
+      .shared-contant {
+        .title-contant {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+    }
+    .footer-section {
+      flex-direction: column;
+      svg {
+        width: 100vw;
+      }
+    }
+  }
+}
+
+// Tablet (min-width: 601px) and (max-width: 1024px)
+@media (min-width: 601px) and (max-width: 1024px) {
+  .home-container {
+    padding: 0 24px;
+    .bg-body-tertiary {
+      padding: 10px 20px;
+      li a {
+        font-size: 20px;
+        line-height: 40px;
+      }
+      .itemsLinks {
+        padding: 0 10px;
+      }
+      .signInBtn,
+      .JoinUsBtn {
+        padding: 0 20px;
+        font-size: 16px;
+      }
+    }
+    .hero-content {
+      .home-content {
+        font-size: 44px;
+        line-height: 60px;
+      }
+      .img-left {
+        width: 60vw;
+        height: auto;
+        margin-top: 30px;
+      }
+      .right-section-home img {
+        height: 400px;
+      }
+    }
+    .whychooseUsWrapper {
+      .whychooseUsHeader {
+        margin-bottom: 36px;
+      }
+      .whychooseUsParent {
+        .cantactUs-first-desc {
+          font-size: 26px;
+          line-height: 48px;
+        }
+        .cantactUs-sec-desc {
+          font-size: 16px;
+          line-height: 28px;
+        }
+        .contactIcons {
+          width: 100px;
+          height: 100px;
+        }
+        .sharedContact {
+          font-size: 16px;
+        }
+      }
+    }
+    .about-section {
+      .smart-managment-color,
+      .home-content {
+        font-size: 28px;
+        line-height: 24px;
+      }
+      .about-highlight {
+        font-size: 18px;
+        padding: 5px 10px;
+      }
+      .para-about {
+        font-size: 18px;
+        line-height: 32px;
+      }
+      .serviceDecriptionContent {
+        .serviceIcons {
+          width: 200px;
+          height: 320px;
+        }
+        .serviceFirstDesc {
+          font-size: 18px;
+          line-height: 28px;
+        }
+        .serviceSecDesc {
+          font-size: 16px;
+          line-height: 22px;
+        }
+      }
+      .trackToolsHeaderIconParent {
+        .trackToolsHeaderIconChild {
+          font-size: 24px;
+        }
+        .contentTrack {
+          font-size: 22px;
+        }
+      }
+      .followLab {
+        .left-side-lab {
+          .left-side-lab-child {
+            .text {
+              font-size: 24px;
+            }
+            .desc-follow-lab {
+              font-size: 22px;
+              line-height: 32px;
+            }
+          }
+        }
+      }
+    }
+    .Pricing-section {
+      .appInfoParent {
+        .appInfoChild {
+          left: 20px;
+          .headerApp {
+            font-size: 18px;
+          }
+          .DescApp {
+            font-size: 24px;
+            line-height: 36px;
+          }
+          .footerApp {
+            font-size: 18px;
+            line-height: 28px;
+          }
+          .btns {
+            padding: 0 12px;
+            .download {
+              font-size: 14px;
+            }
+            .getIt {
+              font-size: 12px !important;
+            }
+          }
+        }
+      }
+    }
+    .contactUsContwnt {
+      .shared-contant {
+        .title-contant {
+          font-size: 18px;
+          line-height: 28px;
+        }
+      }
+    }
+    .footer-section {
+      svg {
+        width: 100vw;
+      }
+    }
+  }
+}
