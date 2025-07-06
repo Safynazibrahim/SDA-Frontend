@@ -190,3 +190,44 @@
     }
   }
 }
+@media (max-width: 992px) {
+  // .hideFromeResponsive{
+  //   display: none;
+  // }
+  // .pricing-parent {
+  //   overflow-x: auto;              // تخلي الكروت ممكن تتحرك يمين وشمال
+  //   white-space: nowrap;           // تخليهم جمب بعض
+  //   min-height: 450px;             // علشان ميضيقوش فوق الخلفية
+  //   padding-bottom: 24px;          // مساحة تحت للسحب باللمس
+  //   // position: relative;            // لازم دي للـ scrolling
+  // }
+
+  // .pricing-shared {
+  //   // position: static !important;   
+  //   display: inline-block !important;
+  //   min-width: 85vw;               // كل كارت يشغل معظم الشاشة
+  //   max-width: 95vw;
+  //   margin-right: 20px;
+  //   margin-bottom: 16px;
+  //   left: unset !important;
+  //   top: unset !important;
+  //   transform: none !important;
+  //   vertical-align: top;
+  //   z-index: 1;
+  // }
+
+  // // لو عندك عناصر جوا الكارت محتاجة تتظبط للموبايل ممكن تظبطيها هنا
+  // // .first-package-price,
+  // // .second-package-price,
+  // // .third-package-price,
+  // // .fourth-package-price,
+  // // .first-package-content,
+  // // .second-package-content,
+  // // .third-package-content,
+  // // .fourth-package-content {
+  // //   position: static !important;  // خلي كل حاجة جوا الكارت static للموبايل
+  // //   left: unset !important;
+  // //   top: unset !important;
+  // //   margin: 0 auto;
+  // // }
+}

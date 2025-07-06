@@ -525,7 +525,7 @@
         align-items: center;
         padding: 10px 0px;
         flex-direction: column;
-        background: #85775F;
+        background: #85775f;
         margin: auto;
         .whychooseUsBg {
           display: none;
@@ -550,10 +550,11 @@
     }
     .about-section {
       .about-header {
+        font-size: 21px;
         margin-top: 20px;
       }
-      .responsiveSvgAbout{
-        width:30px;
+      .responsiveSvgAbout {
+        width: 30px;
       }
       .smart-managment-color,
       .home-content {
@@ -566,48 +567,63 @@
       .para-about {
         font-size: 14px;
         line-height: 24px;
-        br{
-          display:none;
+        br {
+          display: none;
         }
       }
-      .about-child{
-        .toothSvgResponsive{
-          width:70px
+      .about-child {
+        .toothSvgResponsive {
+          width: 70px;
         }
       }
-      .first-left-section-images-about{
-        .imagesSharedResponsive{
+      .first-left-section-images-about {
+        .imagesSharedResponsive {
           width: 90px;
         }
       }
-      .sec-left-section-images-about{
-        .imgAboutResponsiveRightFirst{
+      .sec-left-section-images-about {
+        .imgAboutResponsiveRightFirst {
           width: 100px;
           height: 60px;
         }
-        .imgAboutResponsiveRightSecond{
+        .imgAboutResponsiveRightSecond {
           width: 180px;
           height: 165px;
         }
-        .imgAboutResponsiveRightThird{
+        .imgAboutResponsiveRightThird {
           width: 150px;
+        }
+      }
+      .customWidthResponsive {
+        width: 100% !important;
+        height: fit-content !important;
+      }
+      .serviceDescHeader {
+        .about-title {
+          font-size: 21px !important;
         }
       }
       .serviceDecriptionContent {
         .serviceIcons {
-          width: 120px;
-          height: 180px;
+          width: 100%;
+          height: auto;
         }
         .serviceFirstDesc {
-          font-size: 14px;
-          line-height: 24px;
+          font-size: 22px;
         }
         .serviceSecDesc {
-          font-size: 12px;
-          line-height: 18px;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 28px;
         }
       }
       .trackToolsHeaderIconParent {
+        display:flex;
+        align-items: self-start !important;
+        justify-content: start !important;
+        img{
+          width: 100% !important;
+        }
         .trackToolsHeaderIconChild {
           font-size: 18px;
         }
@@ -617,9 +633,19 @@
       }
       .followLab {
         .left-side-lab {
+          .left-side-lab-svg{
+            width:145px !important;
+            height:200px !important;
+          }
           .left-side-lab-child {
+            left: 0;
+            .iconWithBorderResponsive{
+              width: 325px;
+            }
             .text {
               font-size: 18px;
+              top: 24%;
+              left: 16%;
             }
             .desc-follow-lab {
               font-size: 16px;
@@ -627,9 +653,18 @@
             }
           }
         }
+        .two-mobile{
+          z-index:3;
+          img{
+            width:100%
+          }
+        }
       }
     }
     .Pricing-section {
+      .pricing-title{
+        font-size: 21px !important;
+      }
       .appInfoParent {
         .appInfoChild {
           left: 0;
