@@ -491,19 +491,22 @@
       }
     }
     .hero-content {
+      .svg-hero{
+        width: 240px !important;
+        height: 500px !important;
+      }
       .home-content {
         font-size: 32px;
         line-height: 44px;
       }
       .img-left {
-        width: 90vw;
+        width: 100%;
         height: auto;
         margin-top: 20px;
       }
       .right-section-home img {
-        margin: 10px 0px;
-        width: 280px;
-        height: 320px;
+        width: 100%;
+        height: fit-content;
       }
     }
     .whychooseUsWrapper {
@@ -527,6 +530,7 @@
         flex-direction: column;
         background: #85775f;
         margin: auto;
+        border-radius: 20px;
         .whychooseUsBg {
           display: none;
         }
@@ -618,10 +622,10 @@
         }
       }
       .trackToolsHeaderIconParent {
-        display:flex;
+        display: flex;
         align-items: self-start !important;
         justify-content: start !important;
-        img{
+        img {
           width: 100% !important;
         }
         .trackToolsHeaderIconChild {
@@ -633,13 +637,13 @@
       }
       .followLab {
         .left-side-lab {
-          .left-side-lab-svg{
-            width:145px !important;
-            height:200px !important;
+          .left-side-lab-svg {
+            width: 145px !important;
+            height: 200px !important;
           }
           .left-side-lab-child {
             left: 0;
-            .iconWithBorderResponsive{
+            .iconWithBorderResponsive {
               width: 325px;
             }
             .text {
@@ -653,45 +657,71 @@
             }
           }
         }
-        .two-mobile{
-          z-index:3;
-          img{
-            width:100%
+        .two-mobile {
+          z-index: 3;
+          img {
+            width: 100%;
           }
         }
       }
     }
     .Pricing-section {
-      .pricing-title{
+      .pricing-title {
         font-size: 21px !important;
       }
-      .appInfoParent {
-        .appInfoChild {
-          left: 0;
-          .headerApp {
-            font-size: 14px;
+      .appInfo {
+        width: 100% !important;
+        .appInfoParent {
+          img {
+            width: 100%;
           }
-          .DescApp {
-            font-size: 18px;
-            line-height: 28px;
-          }
-          .footerApp {
-            font-size: 14px;
-            line-height: 20px;
-          }
-          .btns {
-            padding: 0 8px;
-            .download {
-              font-size: 12px;
+          .appInfoChild {
+            left: 0;
+            top: 28%;
+            br {
+              display: none;
             }
-            .getIt {
-              font-size: 10px !important;
+            .responsive-d-block {
+              display: block !important;
+            }
+            .headerApp {
+              font-size: 13px;
+              margin-bottom: 0px !important;
+            }
+            .DescApp {
+              font-size: 13px;
+              line-height: 18px;
+              margin-bottom: 0px !important;
+            }
+            .footerApp {
+              font-size: 13px;
+              line-height: 20px;
+            }
+            .btns {
+              padding: 0 5px;
+              margin: 7px 1px !important;
+              .download {
+                font-size: 12px;
+              }
+              .getIt {
+                font-size: 10px !important;
+              }
             }
           }
         }
       }
     }
     .contactUsContwnt {
+      width: 90% !important;
+      .weAreHere {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 32px;
+      }
+      .imgContactUs {
+        width: 100%;
+      }
       .shared-contant {
         .title-contant {
           font-size: 14px;
