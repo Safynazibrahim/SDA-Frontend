@@ -1,184 +1,1020 @@
+// -------------------
+// Variables (لو محتاجة تضيفي متغيرات ألوان هنا)
+// -------------------
+// $bg-primary: #fff;
+// $text-primary: #000;
+
+// -------------------
+// Home Container
+// -------------------
 .home-container {
   font-family: Arial, sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: all 0.3s ease;
+
+  // -------------------
+  // Header & Navbar
+  // -------------------
+  .bg-body-tertiary {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: var(--bg-primary);
+    box-shadow: var(--shadow-md);
+    border-bottom: 1px solid var(--border-light);
+    transition: all 0.3s ease;
+    padding: 10px 45px;
+    font-family: "IBM Plex Sans";
+    .itemsLinks {
+      padding: 0px 30px;
+    }
+    li a {
+      font-size: 24px;
+      cursor: pointer;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 48px;
+    }
+    .active {
+      font-weight: bold;
+      color: var(--bg-brown-medium);
+      border-bottom: 3px solid var(--bg-brown-medium);
+    }
+    .right-section-nav {
+      padding: 0px 10px;
+    }
+    .sun-icon,
+    .moon-icon {
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+    .sun-icon {
+      animation: rotate 20s linear infinite;
+      color: var(--bg-brown-medium);
+    }
+    .moon-icon {
+      animation: pulse 2s ease-in-out infinite;
+      color: var(--bg-brown-medium);
+    }
+    .signInBtn {
+      background: var(--bg-primary);
+      padding: 0px 43px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        border-radius: 6px;
+        background: var(--bg-brown-gradient);
+        z-index: -1;
+        transition: background 0.3s ease;
+      }
+    }
+
+    .JoinUsBtn {
+      padding: 2px 20px;
+      color: var(--text-on-brown);
+      border-radius: 8px;
+      background: var(--bg-brown-gradient);
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+  }
+
+  // -------------------
+  // Hero Section
+  // -------------------
+  .hero-content {
+    position: relative;
+    .svg-hero path {
+      fill: var(--svg-color);
+    }
+    .child {
+      width: 100%;
+      position: absolute;
+      top: 6%;
+    }
+
+    .home-content {
+      font-family: "IBM Plex Sans";
+      font-size: 64px;
+      font-weight: 600;
+      line-height: 88px;
+      color: var(--text-black-white);
+    }
+
+    .img-left {
+      width: 488px;
+      height: 380px;
+      margin-top: 58px;
+    }
+    .right-section-home img {
+      width: 100%;
+      height: 800px;
+    }
+  }
+
+  // -------------------
+  // Why Choose Us Section
+  // -------------------
+  .whychooseUsWrapper {
+    width: 100%;
+
+    .whychooseUsHeader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .whychooseUsParent {
+      position: relative;
+      width: 100%;
+      margin: auto;
+      .cantactUs-first-desc {
+        font-family: "IBM Plex Sans";
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 80px;
+      }
+      .cantactUs-sec-desc {
+        font-family: "IBM Plex Sans";
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 40px;
+        text-align: center;
+      }
+      .contactIcons {
+       width: 80px;
+    height: 70px;
+      }
+      .sharedContact {
+        position: absolute;
+        width: fit-content;
+        z-index: 2;
+        pointer-events: none;
+        font-family: "IBM Plex Sans";
+      }
+      .whyChooseUsFirstChild {
+        top: 20%;
+        left: 6%;
+      }
+
+      .whyChooseUsSecChild {
+        top: 20%;
+        left: 29%;
+      }
+      .whyChooseUsThirdChild {
+        top: 20%;
+        left: 53%;
+      }
+      .whyChooseUsFourthChild {
+        top: 20%;
+        left: 78%;
+      }
+      .whychooseUsBg {
+        width: 100%;
+      }
+    }
+  }
+
+  // -------------------
+  // About Section
+  // -------------------
+  .about-section {
+    .about-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-parent {
+      position: relative;
+
+      .about-child {
+        position: absolute;
+        top: 20%;
+        right: 0;
+      }
+    }
+
+    .smart-managment-color,
+    .home-content {
+      color: var(--text-black-white);
+      font-family: "IBM Plex Sans";
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 24px;
+    }
+
+    .about-highlight {
+      display: inline-block;
+      background: #605e4d;
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 15px;
+      font-weight: bold;
+      font-size: 22px;
+      position: relative;
+      font-family: Arial, sans-serif;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 24px;
+        bottom: -12px;
+        width: 0;
+        height: 0;
+        border-top: 16px solid #605e4d;
+        border-left: 5px solid transparent;
+        border-right: 26px solid transparent;
+      }
+    }
+
+    .para-about {
+      color: var(--text-gray-home-about);
+      text-align: center;
+      font-family: "IBM Plex Sans";
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 48px;
+    }
+
+    .first-left-section-images-about img {
+      border-radius: 60px;
+      width: fit-content;
+    }
+    .serviceDecriptionContent {
+      font-family: "IBM Plex Sans";
+      .serviceIcons {
+        width: 340px;
+        height: 535px;
+      }
+      .serviceFirstDesc {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 40px;
+      }
+      .serviceSecDesc {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 32px;
+      }
+    }
+    .trackToolsHeaderIconParent {
+      position: relative;
+      width: fit-content;
+      height: fit-content;
+      margin: auto;
+      font-family: "IBM Plex Sans";
+      color: var(--text-black-white);
+
+      .trackToolsHeaderIconChild {
+        position: absolute;
+        top: 12%;
+        left: 23%;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 32px;
+      }
+      .contentTrack {
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 400;
+      }
+      .shadow {
+        border-radius: 440px;
+        background: rgba(177, 158, 127, 0.32);
+        filter: blur(112px);
+        position: absolute;
+        right: 100%;
+        top: 65%;
+      }
+    }
+    .followLab {
+      overflow: hidden;
+      color: var(--text-black-white);
+
+      .left-side-lab {
+        position: relative;
+        width: fit-content;
+        top: 70px;
+        .svg-follow-lab {
+          fill: var(--svg-color) !important;
+        }
+        .left-side-lab-child {
+          position: absolute;
+          top: -70px;
+          .text-inside-icon {
+            position: relative;
+          }
+          .text {
+            position: absolute;
+            top: 27%;
+            left: 10%;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 32px;
+          }
+          .desc-follow-lab {
+            font-family: "IBM Plex Sans";
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 56px;
+          }
+        }
+      
+      }
+    }
+  }
+  .Pricing-section {
+    width: 100%;
+    .appInfoParent {
+      position: relative;
+      width: fit-content;
+      height: fit-content;
+      .appInfoChild {
+        position: absolute;
+        top: 32%;
+        left: 50px;
+        font-family: "IBM Plex Sans";
+        .headerApp {
+          font-size: 24px;
+          font-weight: 500;
+          line-height: 24px;
+        }
+        .DescApp {
+          font-size: 32px;
+          font-weight: 500;
+          line-height: 56px;
+          .downloadLink {
+            color: #85775f;
+            font-weight: 600;
+          }
+        }
+        .footerApp {
+          color: #5b5947;
+          font-size: 24px;
+          font-weight: 400;
+          line-height: 40px;
+        }
+        .btns {
+          background: var(--bg-brown-gradient);
+          border-radius: 7px;
+          border-color: transparent;
+          border-radius: 7px;
+          padding: 0px 15px;
+          font-family: "IBM Plex Sans";
+          .download {
+            font-size: 17px;
+            margin-left: 7px;
+          }
+          .getIt {
+            font-size: 12px !important;
+          }
+        }
+      }
+    }
+  }
+  .contactUsContwnt {
+    .shared-contant {
+      color: #8e7e66;
+      font-family: "IBM Plex Sans";
+      .title-contant {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 40px;
+        color: #8f8f8f;
+      }
+    }
+  }
+  .footer-section {
+    width: 100%;
+    position: relative;
+    .bg-footer {
+      width: 100%;
+    }
+    .footer-content-left {
+      position: absolute;
+      left: 7%;
+      top: 20%;
+      .footer-first-content {
+        color: white;
+        font-family: "DIN Next LT Arabic";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+      }
+      .btns {
+        border-radius: 7px;
+        border-color: transparent;
+        border-radius: 7px;
+        padding: 0px 15px;
+        font-family: "IBM Plex Sans";
+        .download {
+          font-size: 17px;
+          margin-left: 7px;
+        }
+        .getIt {
+          font-size: 12px !important;
+        }
+      }
+      .first-btn {
+        background: linear-gradient(180deg, #b19e7f 0%, #e7e1d7 100%);
+      }
+      .sec-btn {
+        background: linear-gradient(90deg, #b19e7f 0%, #4b4336 100%);
+      }
+    }
+    .footer-content-sec {
+      position: absolute;
+      color: #f7f5f2;
+      font-family: "IBM Plex Sans";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 40px;
+      left: 48%;
+      top: 20%;
+    }
+    .footer-content-third {
+      position: absolute;
+      right: 7%;
+      top: 20%;
+      color: #f7f5f2;
+      font-family: "IBM Plex Sans";
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 40px;
+    }
+    hr {
+      border: 1px solid;
+      position: absolute;
+      color: white;
+      bottom: 27%;
+      left: 7%;
+      right: 7%;
+    }
+    .socialMedia {
+      position: absolute;
+      bottom: 8%;
+      left: 8%;
+      .fa-facebook-f {
+        background: white;
+        padding: 9px 15px;
+        border-radius: 50%;
+        color: #85775f !important;
+        font-size: 25px !important;
+      }
+      .fa-linkedin-in {
+        background: #b19e7f;
+        padding: 7px 11px;
+        border-radius: 9px;
+        color: white !important;
+        font-size: 25px !important;
+      }
+      .fa-instagram {
+        background: #b19e7f;
+        padding: 7px 11px;
+        border-radius: 9px;
+        color: white !important;
+        font-size: 25px !important;
+      }
+      .copyRight {
+        color: #ebebeb;
+        font-family: "IBM Plex Sans";
+        font-size: 20px;
+        margin-top: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 40px;
+      }
+    }
+    .footer-icon-top-right {
+      position: absolute;
+      right: 0%;
+      top: 6%;
+    }
+    .footer-icon-bottom-left {
+      position: absolute;
+      left: 0%;
+      bottom: 0%;
+    }
+  }
 }
 
-.logo-background {
-  background: var(--bg-brown-gradient);
-  clip-path: polygon(0 0, 89% 0, 97% 72%, 100% 100%, 0% 100%);
-  padding: 20px;
-  transition: background 0.3s ease;
-}
-.logo-background.logo-ar {
-  clip-path: polygon(12% 0, 100% 0%, 100% 100%, 0% 100%);  
-}
-.logo-background img {
-  width: 180px;
-  height: 65px;
-}
-
-header {
-  text-align: center;
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 1000;
-  background-color: var(--bg-primary);
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s ease;
-  border-bottom: 1px solid var(--border-light);
-}
-
-header ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0 10px;
-}
-
-header li {
-  display: inline;
-}
-
-header a, header span {
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-family: "IBM Plex Sans";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 48px;
-  padding: 5px 15px;
-  transition: all 0.3s ease;
-  display: inline-block;
-  position: relative; 
-  width: 130px;
-  cursor: pointer;
-}
-
-header a.active {
-  font-weight: bold;
-  color: var(--bg-brown-medium);
-  border-bottom: 3px solid var(--bg-brown-medium);
-  background-image: url("../../../../assets/media/Rectangle 10.svg");
-  background-position: top center;
-  background-repeat: no-repeat;
-      background-size: 100% 9px;
-    padding: 5px 15px;
-  border-right: 1px solid;
-  border-left: 1px solid;
-}
-
-header a:hover {
-  color: var(--bg-brown-medium);
-  text-decoration: underline;
-}
-
-.signInBtn {
-  background: var(--bg-primary);
-  padding: 10px 35px;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  position: relative;
-  margin: 0 25px;
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
-}
-
-.signInBtn::before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border-radius: 6px;
-  background: var(--bg-brown-gradient);
-  z-index: -1;
-  transition: background 0.3s ease;
-}
-
-// .signInBtn:hover {
-//   transform: translateY(-2px);
-//   box-shadow: var(--shadow-md);
-// }
-
-.JoinUsBtn {
-  padding: 13px 29px;
-  color: var(--text-on-brown);
-  border-radius: 8px;
-  background: var(--bg-brown-gradient);
-  border: 1px solid transparent;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-// .JoinUsBtn:hover {
-//   transform: translateY(-2px);
-//   box-shadow: var(--shadow-brown);
-//   opacity: 0.9;
-// }
-
-
-.sun-icon {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  animation: rotate 20s linear infinite;
-  color: var(--bg-brown-medium);
-}
-
-.moon-icon {
-  position: relative;
-  width: 24px;
-  height: 24px;
-  animation: pulse 2s ease-in-out infinite;
-  color: var(--bg-brown-medium);
-}
-
+// -------------------
+// Keyframes
+// -------------------
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-
-.hero-content{
-  position: relative;
-}
-.child{
-  width: 100%;
-  position: absolute;
-  top: 13%;
-}
-
-.home-content{
-  color: var(--text-black-white);
-
-font-family: "IBM Plex Sans";
-font-size: 64px;
-font-style: normal;
-font-weight: 600;
-line-height: 88px; 
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 .highlight {
-    background-color: var(--accent-orange);
-    border-radius: 45px;
-    padding: 5px 12px;
-    color: white;
+  background-color: var(--gray-on-home);
+  border-radius: 45px;
+  padding: 5px 12px;
+  color: white;
 }
-.img-left{
-    width: 488px;
-    height: 380px;
-    margin-top: 58px;
+.animate {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-.right-section-home img{
- width: 100%;
-height: 800px;
+.animate.delay-1 {
+  animation-delay: 0.2s;
+}
+.animate.delay-2 {
+  animation-delay: 1.1s;
+}
+.animate.delay-3 {
+  animation-delay: 1.8s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// -------------------
+// Responsive Design
+// -------------------
+
+// Mobile First (max-width: 600px)
+@media (max-width: 600px) {
+  .home-container {
+    padding: 0 8px;
+    ul {
+      display: flex;
+      align-items: center;
+    }
+    .bg-body-tertiary {
+      padding: 8px 10px;
+      li a {
+        font-size: 16px;
+        line-height: 32px;
+      }
+      .itemsLinks {
+        padding: 0 5px;
+      }
+      .signInBtn,
+      .JoinUsBtn {
+        padding: 0 12px;
+        font-size: 14px;
+      }
+    }
+    .hero-content {
+      .svg-hero {
+        width: 240px !important;
+        height: 500px !important;
+      }
+      .home-content {
+        font-size: 32px;
+        line-height: 44px;
+      }
+      .img-left {
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+      }
+      .right-section-home img {
+        width: 100%;
+        height: fit-content;
+      }
+    }
+    .whychooseUsWrapper {
+      .responsive-contact {
+        display: flex;
+        flex-direction: column !important;
+      }
+      .whychooseUsHeader {
+        p {
+          font-size: 21px !important;
+          margin-top: 30px !important;
+        }
+      }
+      .whychooseUsParent {
+        position: relative;
+        width: 100%;
+        display: flex;
+        height: fit-content;
+        align-items: center;
+        padding: 10px 0px;
+        flex-direction: column;
+        background: #85775f;
+        margin: auto;
+        border-radius: 20px;
+        .whychooseUsBg {
+          display: none;
+        }
+        .cantactUs-first-desc {
+          font-size: 20px;
+          line-height: 32px;
+        }
+        .cantactUs-sec-desc {
+          font-size: 14px;
+          line-height: 24px;
+        }
+        .contactIcons {
+          width: 64px;
+          height: 64px;
+        }
+        .sharedContact {
+          position: unset;
+          margin: 10px 0;
+        }
+      }
+    }
+    .about-section {
+      .about-header {
+        font-size: 21px;
+        margin-top: 20px;
+      }
+      .responsiveSvgAbout {
+        width: 30px;
+      }
+      .smart-managment-color,
+      .home-content {
+        font-size: 20px;
+      }
+      .about-highlight {
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+      .para-about {
+        font-size: 14px;
+        line-height: 24px;
+        br {
+          display: none;
+        }
+      }
+      .about-child {
+        .toothSvgResponsive {
+          width: 70px;
+        }
+      }
+      .first-left-section-images-about {
+        .imagesSharedResponsive {
+          width: 90px;
+        }
+      }
+      .sec-left-section-images-about {
+        .imgAboutResponsiveRightFirst {
+          width: 100px;
+          height: 60px;
+        }
+        .imgAboutResponsiveRightSecond {
+          width: 180px;
+          height: 165px;
+        }
+        .imgAboutResponsiveRightThird {
+          width: 150px;
+        }
+      }
+      .customWidthResponsive {
+        width: 100% !important;
+        height: fit-content !important;
+      }
+      .serviceDescHeader {
+        .about-title {
+          font-size: 21px !important;
+        }
+      }
+      .serviceDecriptionContent {
+        .serviceIcons {
+          width: 100%;
+          height: auto;
+        }
+        .serviceFirstDesc {
+          font-size: 22px;
+        }
+        .serviceSecDesc {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 28px;
+        }
+      }
+      .trackToolsHeaderIconParent {
+        display: flex;
+        align-items: self-start !important;
+        justify-content: start !important;
+        img {
+          width: 100% !important;
+        }
+        .trackToolsHeaderIconChild {
+          font-size: 18px;
+        }
+        .contentTrack {
+          font-size: 16px;
+        }
+      }
+      .followLab {
+        .left-side-lab {
+          .left-side-lab-svg {
+            width: 145px !important;
+            height: 200px !important;
+          }
+          .left-side-lab-child {
+            left: 0;
+            .iconWithBorderResponsive {
+              width: 325px;
+            }
+            .text {
+              font-size: 18px;
+              top: 24%;
+              left: 16%;
+            }
+            .desc-follow-lab {
+              font-size: 16px;
+              line-height: 24px;
+            }
+          }
+        }
+        .two-mobile {
+          z-index: 3;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .Pricing-section {
+      .pricing-title {
+        font-size: 21px !important;
+      }
+      .appInfo {
+        width: 100% !important;
+        .appInfoParent {
+          img {
+            width: 100%;
+          }
+          .appInfoChild {
+            left: 0;
+            top: 28%;
+            br {
+              display: none;
+            }
+            .responsive-d-block {
+              display: block !important;
+            }
+            .headerApp {
+              font-size: 13px;
+              margin-bottom: 0px !important;
+            }
+            .DescApp {
+              font-size: 13px;
+              line-height: 18px;
+              margin-bottom: 0px !important;
+            }
+            .footerApp {
+              font-size: 13px;
+              line-height: 20px;
+            }
+            .btns {
+              padding: 0 5px;
+              margin: 7px 1px !important;
+              .download {
+                font-size: 12px;
+              }
+              .getIt {
+                font-size: 10px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+    .contactUsContwnt {
+      width: 90% !important;
+      .weAreHere {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 32px;
+      }
+      .imgContactUs {
+        width: 100%;
+      }
+      .shared-contant {
+        .title-contant {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+    }
+    .footer-section {
+      background: #85775f;
+      padding: 20px;
+      border-radius: 20px;
+      .bg-footer {
+        display: none;
+      }
+      .footer-content-left,
+      .footer-content-sec,
+      .footer-content-third,
+      hr,
+      .socialMedia {
+        position: unset;
+      }
+      .footer-content-left {
+        .logo-footer {
+          width: 250px !important;
+        }
+        .footer-first-content {
+          font-size: 13px;
+          br {
+            display: none;
+          }
+        }
+        .download {
+          font-size: 12px !important;
+        }
+        .sec-btn {
+          margin-left: 10px !important;
+        }
+        
+      }
+      .footer-content-sec , .footer-content-third{
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 24px;
+        }
+    }
+  }
+}
+
+// Tablet (min-width: 601px) and (max-width: 1024px)
+@media (min-width: 601px) and (max-width: 1024px) {
+  .home-container {
+    padding: 0 24px;
+    .bg-body-tertiary {
+      padding: 10px 20px;
+      li a {
+        font-size: 20px;
+        line-height: 40px;
+      }
+      .itemsLinks {
+        padding: 0 10px;
+      }
+      .signInBtn,
+      .JoinUsBtn {
+        padding: 0 20px;
+        font-size: 16px;
+      }
+    }
+    .hero-content {
+      .home-content {
+        font-size: 44px;
+        line-height: 60px;
+      }
+      .img-left {
+        width: 60vw;
+        height: auto;
+        margin-top: 30px;
+      }
+      .right-section-home img {
+        height: 400px;
+      }
+    }
+    .whychooseUsWrapper {
+      .whychooseUsHeader {
+        margin-bottom: 36px;
+      }
+      .whychooseUsParent {
+        .cantactUs-first-desc {
+          font-size: 26px;
+          line-height: 48px;
+        }
+        .cantactUs-sec-desc {
+          font-size: 16px;
+          line-height: 28px;
+        }
+        .contactIcons {
+          width: 100px;
+          height: 100px;
+        }
+        .sharedContact {
+          font-size: 16px;
+        }
+      }
+    }
+    .about-section {
+      .smart-managment-color,
+      .home-content {
+        font-size: 28px;
+        line-height: 24px;
+      }
+      .about-highlight {
+        font-size: 18px;
+        padding: 5px 10px;
+      }
+      .para-about {
+        font-size: 18px;
+        line-height: 32px;
+      }
+      .serviceDecriptionContent {
+        .serviceIcons {
+          width: 200px;
+          height: 320px;
+        }
+        .serviceFirstDesc {
+          font-size: 18px;
+          line-height: 28px;
+        }
+        .serviceSecDesc {
+          font-size: 16px;
+          line-height: 22px;
+        }
+      }
+      .trackToolsHeaderIconParent {
+        .trackToolsHeaderIconChild {
+          font-size: 24px;
+        }
+        .contentTrack {
+          font-size: 22px;
+        }
+      }
+      .followLab {
+        .left-side-lab {
+          .left-side-lab-child {
+            .text {
+              font-size: 24px;
+            }
+            .desc-follow-lab {
+              font-size: 22px;
+              line-height: 32px;
+            }
+          }
+        }
+      }
+    }
+    .Pricing-section {
+      .appInfoParent {
+        .appInfoChild {
+          left: 20px;
+          .headerApp {
+            font-size: 18px;
+          }
+          .DescApp {
+            font-size: 24px;
+            line-height: 36px;
+          }
+          .footerApp {
+            font-size: 18px;
+            line-height: 28px;
+          }
+          .btns {
+            padding: 0 12px;
+            .download {
+              font-size: 14px;
+            }
+            .getIt {
+              font-size: 12px !important;
+            }
+          }
+        }
+      }
+    }
+    .contactUsContwnt {
+      .shared-contant {
+        .title-contant {
+          font-size: 18px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
 }
