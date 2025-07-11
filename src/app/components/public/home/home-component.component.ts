@@ -1,17 +1,15 @@
 import { Component, HostListener, Inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Theme, ThemeService } from '../../core/services/theme.service';
 import { PricingComponent } from '../pricing/pricing.component';
-
-
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [TranslateModule, CommonModule , PricingComponent],
+  imports: [TranslateModule, CommonModule , PricingComponent , RouterLink, RouterOutlet],
   templateUrl: './home-component.component.html',
   styleUrls: ['./home-component.component.scss']
 })

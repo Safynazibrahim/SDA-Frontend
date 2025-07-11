@@ -111,13 +111,13 @@
             </li>
             <li class="nav-item right-section-nav">
               <a class="nav-link"
-                ><button class="signInBtn" (click)="navigateToLogin()" >{{ "SIGNIN" | translate }}</button>
+                ><button class="signInBtn" [routerLink]="['/login']" >{{ "SIGNIN" | translate }}</button>
               </a>
             </li>
             <li class="nav-item right-section-nav">
               <a class="nav-link">
 
-                <button class="JoinUsBtn">{{ "JOIN" | translate }}</button>
+                <button class="JoinUsBtn" [routerLink]="['/register']">{{ "JOIN" | translate }}</button>
               </a>
             </li>
           </ul>
@@ -125,6 +125,7 @@
       </div>
     </div>
   </nav>
+  <!-- <router-outlet></router-outlet> -->
   <!-- Home section -->
   <section id="home">
     <div class="hero-content">

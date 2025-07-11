@@ -6,29 +6,23 @@ import { authGuard } from './components/core/guards/auth/auth.guard';
 export const routes: Routes = [
 
     // Public routes (for all users)
-  {
+   {
     path: '',
-    loadComponent: () => import('./components/public/home/home-component.component').then(m => m.HomeComponentComponent),
-    children: [
-      { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { 
-        path: 'home', 
-        loadComponent: () => import('./components/public/home/home-component.component').then(m => m.HomeComponentComponent)
-      },
-      { 
-        path: 'login', 
-        loadComponent: () => import('./components/auth/login/login.component').then(m => m.LoginComponent),
-        canActivate: [guestGuard] // Only for non-authenticated users
-      },
-      { 
-        path: 'register', 
-        loadComponent: () => import('./components/auth/register/register.component').then(m => m.RegisterComponent),
-        canActivate: [guestGuard] // Only for non-authenticated users
-      }
-    ]
+    loadComponent: () => import('./components/public/home/home-component.component').then(m => m.HomeComponentComponent)
   },
 
-    // Protected routes (for authenticated users only)
+  // Auth routes - مفيش navbar هنا
+  {
+    path: 'login',
+    loadComponent: () => import('./components/auth/login/login.component').then(m => m.LoginComponent),
+    canActivate: [guestGuard]
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./components/auth/register/register.component').then(m => m.RegisterComponent),
+    canActivate: [guestGuard]
+  },
+
   {
     path: 'dashboard',
     loadComponent: () => import('./components/layouts/user-layout/user-layout.component').then(m => m.UserLayoutComponent),
@@ -45,8 +39,6 @@ export const routes: Routes = [
       }
     ]
   },
-
-  // Wildcard route
   { path: '**', redirectTo: '/home' }
 
 ];
