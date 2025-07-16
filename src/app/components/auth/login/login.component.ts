@@ -32,6 +32,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit{
 
   showPassword = false;
+  rememberMe = false;
   loginForm!: FormGroup;
 
   constructor(private _AuthService:AuthService, 
@@ -40,28 +41,38 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['',[
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/) // At least 1 uppercase & 1 number
-        ]
-      ],
-    })
+    email: ['', [Validators.required, Validators.email]],
+    password: ['',[Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
+    rememberMe: [false]   
+  });
   }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
-  submitForm(){
-    if (this.loginForm.invalid) return;
-    const formData = this.loginForm.value;
-    console.log('loginForm', formData)
+ submitForm() {
+  if (this.loginForm.invalid) return;
 
-    this._AuthService.login(formData).subscribe({
-      next: (response: any) => {
-      console.log('res', response);
+  // هنبعت object عادي بدل FormData
+  const loginData = {
+    email: this.loginForm.get('email')?.value,
+    password: this.loginForm.get('password')?.value
+  };
+
+  this._AuthService.login(loginData).subscribe({
+    next: (response: any) => {
+      if (response.accessToken) {
+        if (this.loginForm.get('rememberMe')?.value) {
+          localStorage.setItem('token', response.accessToken); 
+        } else {
+          sessionStorage.setItem('token', response.accessToken); 
+        }
+      }
+      this._MatSnackBar.open("Logged in successfully", 'Close', {
+        duration: 3000,
+        panelClass: ['snackbar-success']
+      });
     },
     error: (err: any) => {
       this._MatSnackBar.open(err.error.message, 'Close', {
@@ -69,8 +80,10 @@ export class LoginComponent implements OnInit{
         panelClass: ['snackbar-error']
       });
     }
-    })
-  }
+  });
+}
+
+
 
 
 }

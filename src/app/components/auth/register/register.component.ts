@@ -146,6 +146,10 @@ export class RegisterComponent implements OnInit{
   this._AuthService.signUpDoctor(formData).subscribe({
     next: (response: any) => {
       console.log('res', response);
+      this._MatSnackBar.open("Sign up successfully", 'Close', {
+        duration: 3000,
+        panelClass: ['snackbar-error']
+      });
     },
     error: (err: any) => {
       this._MatSnackBar.open(err.error.message, 'Close', {

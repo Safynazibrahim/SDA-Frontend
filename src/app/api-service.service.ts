@@ -24,7 +24,7 @@ export class ApiServiceService {
     );
   }
 
-  post<T>(endpoint: string, data: FormData): Observable<T> {
+  post<T>(endpoint: string, data: any): Observable<T> {
     this._LoaderService.show();
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data).pipe(
       finalize(() => this._LoaderService.hide())

@@ -55,12 +55,14 @@
                 </div>
                 
                 <div class="form-options">
-                    <div class="remember-me">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">{{"REMMEBERME" | translate}}</label>
-                    </div>
-                    <a [routerLink]="['/forget-password']" href="#" class="forgot-password">{{"FORGET_PASSWORD" | translate}}</a>
-                </div>
+  <div class="remember-me">
+    <input type="checkbox" formControlName="rememberMe" id="remember">
+<label for="remember">{{"REMMEBERME" | translate}}</label>
+
+  </div>
+  <a [routerLink]="['/forget-password']" href="#" class="forgot-password">{{"FORGET_PASSWORD" | translate}}</a>
+</div>
+
                 
                 <button [disabled]="loginForm.invalid" type="submit" class="signin-button">
                     {{"SIGNIN" | translate}}
