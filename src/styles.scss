@@ -20,6 +20,19 @@ $SDA-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
+// .mat-mdc-form-field {
+//   background-color: #fff !important;   
+//   border: 1px solid #000 !important;  
+//   border-radius: 4px;               
+// }
+
+
+.mat-mdc-text-field-wrapper {
+  background-color: #fff !important;
+  border: 1px solid #000 !important;  
+  border-radius: 4px;  
+}
+
 $SDA-theme: mat.define-light-theme((
   color: (
     primary: $SDA-primary,
