@@ -1,0 +1,24 @@
+.page-link {
+  color: #b19e7f;
+  border-radius: 50% !important;
+  width: 35px;
+  height: 35px;
+  margin: 0 5px;
+  display: flex;             
+  align-items: center;        
+  justify-content: center;    
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.page-item.active .page-link {
+  background: linear-gradient(180deg, #B19E7F 0%, #4B4336 100%);
+  color: #fff;
+  border: none;
+}
+
+.page-item.disabled .page-link {
+  color: #ccc;
+  cursor: default;
+}

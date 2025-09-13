@@ -16,12 +16,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item itemsLinks">
-          <a class="nav-link active" aria-current="page">{{
+        <li class="nav-item itemsLinks" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" aria-current="page" [routerLink]="['/dashboard/homeDashboard']"
+   >{{
             "HOME" | translate
           }}</a>
         </li>
-        <li class="nav-item itemsLinks">
+        <li class="nav-item itemsLinks" routerLinkActive="active">
           <a class="nav-link">{{ "Appointments" | translate }}</a>
         </li>
         <!-- <li class="nav-item itemsLinks">
@@ -30,7 +31,7 @@
               >{{ "Patients" | translate }}</a
             >
           </li> -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" routerLinkActive="active">
           <a
             class="nav-link dropdown-toggle"
             role="button"
@@ -46,13 +47,13 @@
             <li><a class="dropdown-item">Something else here</a></li>
           </ul>
         </li>
-        <li class="nav-item itemsLinks">
-          <a class="nav-link">{{ "Clinics" | translate }}</a>
+        <li class="nav-item itemsLinks" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/dashboard/clinics']">{{ "Clinics" | translate }}</a>
         </li>
-        <li class="nav-item itemsLinks">
+        <li class="nav-item itemsLinks" routerLinkActive="active">
           <a class="nav-link">{{ "Laboratory" | translate }}</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" routerLinkActive="active">
           <a
             class="nav-link dropdown-toggle"
             role="button"
@@ -126,7 +127,8 @@
               >
                 <path
                   d="M21.64 13a1 1 0 00-1.05-.14 8.05 8.05 0 01-3.37.73 8.15 8.15 0 01-8.14-8.1 8.59 8.59 0 01.25-2A1 1 0 008 2.36a10.14 10.14 0 1014 11.69 1 1 0 00-.36-1.05z"
-                /></svg
+                />
+              </svg
             ></a>
           </li>
           <li class="nav-item right-section-nav">

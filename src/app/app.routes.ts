@@ -25,7 +25,7 @@ export const routes: Routes = [
       .then(m => m.UserLayoutComponent),
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'clinics', pathMatch: 'full' },
+      { path: '', redirectTo: 'homeDashboard', pathMatch: 'full' },
       { path: 'homeDashboard', loadComponent: () => import('./components/user/dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'profile', loadComponent: () => import('./components/user/profile/profile.component').then(m => m.ProfileComponent) },
       { path: 'clinics', loadComponent: () => import('./components/user/clinics/clinics.component').then(m => m.ClinicsComponent) }

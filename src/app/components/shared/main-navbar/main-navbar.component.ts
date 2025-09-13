@@ -5,11 +5,12 @@ import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import {Theme, ThemeService } from '../../core/services/theme.service';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-main-navbar',
   standalone: true,
-  imports: [TranslateModule, CommonModule ],
+  imports: [TranslateModule, CommonModule ,RouterLink , RouterLinkActive ],
   templateUrl: './main-navbar.component.html',
   styleUrl: './main-navbar.component.scss'
 })
