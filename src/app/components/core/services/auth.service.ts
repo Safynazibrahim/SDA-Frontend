@@ -43,5 +43,28 @@ login(data: { email: string; password: string }): Observable<any> {
   // );
   //}
 
+  private tokenKey = 'token';
+
+  setToken(token: string, rememberMe: boolean) {
+    if (rememberMe) {
+      localStorage.setItem(this.tokenKey, token);
+    } else {
+      sessionStorage.setItem(this.tokenKey, token);
+    }
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey) || sessionStorage.getItem(this.tokenKey);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
+  }
+
+  logout() {
+    localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.tokenKey);
+  }
+
 
 }

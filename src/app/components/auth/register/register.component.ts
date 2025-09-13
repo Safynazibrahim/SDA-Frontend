@@ -16,7 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 declare const L: any;
 
 @Component({
@@ -51,7 +51,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _AuthService: AuthService,
     private fb: FormBuilder,
-    private _MatSnackBar: MatSnackBar
+    private _MatSnackBar: MatSnackBar,
+    private _Router:Router
   ) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -191,7 +192,8 @@ export class RegisterComponent implements OnInit {
 
     this._AuthService.signUpDoctor(formData).subscribe({
       next: (response: any) => {
-        console.log('res', response);
+        this._MatSnackBar.open("Registered successfully", 'Close', { duration: 3000, panelClass: ['snackbar-success'] });
+        this._Router.navigate(['/login']);
       },
       error: (err: any) => {
         this._MatSnackBar.open(err.error.message, 'Close', {
@@ -199,6 +201,6 @@ export class RegisterComponent implements OnInit {
           panelClass: ['snackbar-error'],
         });
       },
-    });
+    });   
   }
 }
