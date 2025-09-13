@@ -6,10 +6,11 @@ import { PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Theme, ThemeService } from '../../core/services/theme.service';
 import { PricingComponent } from '../pricing/pricing.component';
+import { LoginComponent } from '../../auth/login/login.component';
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [TranslateModule, CommonModule , PricingComponent , RouterLink, RouterOutlet],
+  imports: [TranslateModule, CommonModule , PricingComponent , RouterLink ,],
   templateUrl: './home-component.component.html',
   styleUrls: ['./home-component.component.scss']
 })

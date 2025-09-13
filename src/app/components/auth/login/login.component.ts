@@ -7,10 +7,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { log } from 'console';
 import { AuthService } from '../../core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -24,7 +25,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -37,7 +38,8 @@ export class LoginComponent implements OnInit{
 
   constructor(private _AuthService:AuthService, 
                 private fb: FormBuilder,
-                private _MatSnackBar:MatSnackBar){}
+                private _MatSnackBar:MatSnackBar,
+                private _Router:Router){}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -62,17 +64,22 @@ export class LoginComponent implements OnInit{
 
   this._AuthService.login(loginData).subscribe({
     next: (response: any) => {
+      // if (response.accessToken) {
+      //   if (this.loginForm.get('rememberMe')?.value) {
+      //     localStorage.setItem('token', response.accessToken); 
+      //   } else {
+      //     sessionStorage.setItem('token', response.accessToken); 
+      //   }
+      // }
+      // this._MatSnackBar.open("Logged in successfully", 'Close', {
+      //   duration: 3000,
+      //   panelClass: ['snackbar-success']
+      // });
       if (response.accessToken) {
-        if (this.loginForm.get('rememberMe')?.value) {
-          localStorage.setItem('token', response.accessToken); 
-        } else {
-          sessionStorage.setItem('token', response.accessToken); 
-        }
+        this._AuthService.setToken(response.accessToken, this.loginForm.get('rememberMe')?.value);
+        this._MatSnackBar.open("Logged in successfully", 'Close', { duration: 3000, panelClass: ['snackbar-success'] });
+        this._Router.navigate(['/dashboard']);
       }
-      this._MatSnackBar.open("Logged in successfully", 'Close', {
-        duration: 3000,
-        panelClass: ['snackbar-success']
-      });
     },
     error: (err: any) => {
       this._MatSnackBar.open(err.error.message, 'Close', {
