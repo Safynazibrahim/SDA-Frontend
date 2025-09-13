@@ -1,0 +1,27 @@
+.btn-search {
+  background-color: #b19e7f;
+  color: #fff;
+  border-radius: 25px;
+  &:hover { background-color: #9b8a6b; }
+}
+
+.clinic-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.btn-outline-owner,
+.btn-outline-subowner,
+.btn-outline-operator {
+  border: 1px solid #b19e7f;
+  color: #b19e7f;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 5px 12px;
+  background: #fff;
+  &:hover {
+    background: #b19e7f;
+    color: #fff;
+  }
+}

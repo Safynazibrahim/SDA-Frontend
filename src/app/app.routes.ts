@@ -28,7 +28,16 @@ export const routes: Routes = [
       { path: '', redirectTo: 'homeDashboard', pathMatch: 'full' },
       { path: 'homeDashboard', loadComponent: () => import('./components/user/dashboard/dashboard.component').then(m => m.DashboardComponent) },
       { path: 'profile', loadComponent: () => import('./components/user/profile/profile.component').then(m => m.ProfileComponent) },
-      { path: 'clinics', loadComponent: () => import('./components/user/clinics/clinics.component').then(m => m.ClinicsComponent) }
+{
+  path: 'clinics',
+  children: [
+    { path: '', loadComponent: () => import('./components/user/clinics/clinics.component').then(m => m.ClinicsComponent) },
+    { path: 'join', loadComponent: () => import('./components/user/clinics/join-clinic/join-clinic.component').then(m => m.JoinClinicComponent) },
+    { path: 'operatorPackage', loadComponent: () => import('./components/user/clinics/operator-packages/operator-packages.component').then(m => m.OperatorPackagesComponent) },
+    { path: 'clinicPackage', loadComponent: () => import('./components/user/clinics/clinic-packages/clinic-packages.component').then(m => m.ClinicPackagesComponent) },
+    { path: 'clinicHome', loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home.component').then(m => m.ClinicHomeComponent) },
+  ]
+}
     ]
   },
 
