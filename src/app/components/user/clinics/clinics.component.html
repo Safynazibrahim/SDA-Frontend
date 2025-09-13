@@ -1,1 +1,117 @@
-<p>clinics works! safy</p>
+<div class="container py-3">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>{{'Clinics' | translate}}</h2>
+        <button class="btn join-btn">{{'join_clinic' | translate}}</button>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mb-3">
+    <div class="input-group w-50">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Search clinic name" 
+        aria-label="Search clinic"
+      />
+      <button class="btn btn-search px-4">
+        {{ 'Search' | translate }}
+      </button>
+    </div>
+    
+  </div>
+
+  <!-- Table -->
+ <div class="d-flex justify-content-between align-items-center mb-3">
+     <h5 class="fw-bold">{{ 'Owner Clinics' | translate }}</h5>
+  <a  class="subscribe-link fw-bold" style="cursor: pointer;">
+      {{ 'Subscribe Package for Multiple Clinics' | translate }} →
+    </a>
+ </div>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>{{ 'Clinic Name' | translate }}</th>
+          <th>{{ 'City' | translate }}</th>
+          <th>{{ 'Created Date' | translate }}</th>
+          <th>{{ 'Seats' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clinic of [1,2,3,4]">
+          <td>Riyadh Dental Center</td>
+          <td>Riyadh</td>
+          <td>18-08-2025</td>
+          <td>32</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-pagination
+  [totalItems]="100"
+  [pageSize]="10"
+  [currentPage]="ownerCurrentPage"
+  (pageChange)="onOwnerPageChange($event)">
+</app-pagination>
+
+ <div class="d-flex justify-content-between align-items-center my-3">
+     <h5 class="fw-bold">{{ 'Operator Clinics' | translate }}</h5>
+  <a  class="subscribe-link fw-bold" style="cursor: pointer;">
+      {{ 'Operator Packages' | translate }} →
+    </a>
+ </div>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>{{ 'Clinic Name' | translate }}</th>
+          <th>{{ 'City' | translate }}</th>
+          <th>{{ 'Owner' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clinic of [1,2,3,4]">
+          <td>Riyadh Dental Center</td>
+          <td>Riyadh</td>
+          <td>Donia</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-pagination
+  [totalItems]="80"
+  [pageSize]="10"
+  [currentPage]="operatorCurrentPage"
+  (pageChange)="onOperatorPageChange($event)">
+</app-pagination>
+
+ <div class="d-flex justify-content-between align-items-center my-3">
+     <h5 class="fw-bold">{{ 'Sub-owner Clinics' | translate }}</h5>
+ </div>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>{{ 'Clinic Name' | translate }}</th>
+          <th>{{ 'Owner Name' | translate }}</th>
+          <th>{{ 'City' | translate }}</th>
+          <th>{{ 'Seats' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clinic of [1,2,3,4]">
+          <td>Riyadh Dental Center</td>
+          <td>Donia</td>
+          <td>Cairo</td>
+          <td>32</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-pagination
+  [totalItems]="50"
+  [pageSize]="11"
+  [currentPage]="subOwnerCurrentPage"
+  (pageChange)="onSubOwnerPageChange($event)">
+</app-pagination>
+
+</div>

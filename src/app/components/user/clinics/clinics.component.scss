@@ -1,0 +1,49 @@
+.join-btn {
+  background: linear-gradient(90deg, #b19e7f 0%, #4b4336 100%);
+  font-family: "IBM Plex Sans";
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+}
+.btn-search {
+  background-color: #b19e7f;
+  color: #fff;
+  border-radius: 25px;
+  &:hover {
+    background-color: #9b8a6b;
+  }
+}
+
+.subscribe-link {
+  color: #b19e7f;
+  font-weight: 500;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.table thead th {
+  font-weight: 600;
+  background: #F9F9F9;
+}
+.table tbody td {
+  background: transparent;
+}
+
+.page-link {
+  color: #b19e7f;
+  border-radius: 50% !important;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.page-item.active .page-link {
+  background-color: #b19e7f;
+  color: #fff;
+  border: none;
+}
