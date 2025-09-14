@@ -6,8 +6,9 @@
 }
 
 .sidebar {
-  margin-left: 10px;
-  width: 240px;
+  margin-left: 20px;
+  width: 270px;
+  height: 80vh;
   background: var(--bg-primary);
   border: 1px solid var(--text-gray-home-about);
   padding: 0px 20px;
@@ -52,7 +53,7 @@
 }
 
 .sidebar.closed ul li.active {
-  background: #b19e7f;           
+  background: var(--bg-brown-medium);           
   justify-content: center; 
   align-items: center;
   border-radius: 50%;
