@@ -1,0 +1,122 @@
+h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-gray-home-about);
+}
+
+.stat-card {
+  gap: 15px;
+  padding: 25px;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  border: 2px solid var(--accent-orange);
+  transition: transform 0.2s ease;
+
+  mat-icon {
+    font-size: 36px;
+    color: #7d6e59; // نفس لون البني اللي بتستعمليه
+  }
+
+  h4 {
+    margin-bottom: 10px;
+    font-size: 19px;
+    color: #565656;
+    font-weight: 500;
+    color: var(--text-gray);
+  }
+
+  p {
+    margin-bottom: 8px;
+    font-size: 20px;
+    color: var(--bg-brown-medium);
+     font-weight: 500;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.img-card {
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    &.doctors {
+        background-color: var(--accent-orange);
+    }
+    &.cases {
+        background-color: var(--brown-on-home);
+    }
+    &.revenue {
+        background-color: var(--gray-on-home);
+    }
+}
+
+.dropdown {
+    background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+}
+
+.form-field label {
+    display: block;
+    color: var(--text-gray);
+    font-weight: 400;
+    font-size: 18px;
+}
+.form-field-input {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: none !important;
+    background-color: var(--bg-white);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    color: var(--text-gray);
+    }
+.form-field-input:focus {
+            outline: none;
+            border: 3px solid var(--focus-form-field);
+            background: var(--bg-form-field);
+        }
+.date {
+    background-color: var(--bg-brown-medium);
+    border-radius: 8px;
+    padding: 4px;
+}
+.chart-card {
+    border: 1px solid var(--text-gray);
+    background-color: var(--bg-white);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 20px;
+  canvas {
+    width: 100% !important;
+    height: 350px !important; // لازم تعملي ارتفاع
+  }
+}
+::ng-deep .mat-datepicker-toggle-default-icon {
+  color: var(--bg-white); 
+  font-size: 25px;
+}
+
+::ng-deep .mat-datepicker-toggle-active .mat-datepicker-toggle-default-icon {
+  color: var(--bg-white);
+}
+
+.table thead th {
+  font-weight: 400;
+  font-size: 1.2rem;
+  background: var(--bg-white);
+  color: var(--text-black-white);
+}
+.table tbody td {
+  background: var(--bg-white-secondary);
+  color: var(--text-black-white);
+}
+
+@media (max-width: 600px) {
+  .table thead th , .table tbody td {
+  font-size: 13px;
+  }
+}
