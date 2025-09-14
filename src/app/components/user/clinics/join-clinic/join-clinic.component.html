@@ -3,7 +3,7 @@
   <div class="d-flex align-items-center mb-3">
         <h5 class="fw-bold mb-0">{{ 'Clinic' | translate }}</h5>
 
-    <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0 text-black mt-2" style="cursor:pointer;">
+    <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0 text-black mt-2 arrow-color" style="cursor:pointer;">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
     <h5 class="fw-bold mb-0">{{ 'Join Clinics' | translate }}</h5>
@@ -11,7 +11,7 @@
 
   <!-- Search -->
   <div class="d-flex justify-content-center align-items-center mb-4">
-    <div class="input-group w-50">
+    <div class="input-group w-50 search-responsive">
       <input type="text" class="form-control" placeholder="Find clinics within 20 km around you" />
       <button class="btn btn-search px-4">{{ 'Search' | translate }}</button>
     </div>

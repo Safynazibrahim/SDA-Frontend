@@ -25,3 +25,16 @@
     color: #fff;
   }
 }
+.arrow-color mat-icon{
+  fill: var(--text-black-white) !important;
+  color: var(--text-black-white) !important;
+}
+@media (max-width: 600px) {
+  .search-responsive{
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+  .btn-outline-operator{
+    margin: 5px 0px !important;
+  }
+}

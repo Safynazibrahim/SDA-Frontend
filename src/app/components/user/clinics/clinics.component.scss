@@ -32,6 +32,7 @@
 .table tbody td {
   background: transparent;
   cursor: pointer;
+  color: var(--text-black-white);
 }
 
 .page-link {
@@ -47,4 +48,28 @@
   background-color: #b19e7f;
   color: #fff;
   border: none;
+}
+@media (max-width: 600px) {
+  .search-responsive {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+  .header-responsive{
+    margin: 10px 0px;
+    padding-top: 10px;
+  }
+  .table thead th , .table tbody td {
+  font-size: 12px;
+  }
+  .subscribe-link{
+    font-size: 13px;
+    font-weight: 600 !important;
+  }
+  .title-table{
+    font-size: 13px !important;
+    font-weight: 600 !important;
+  }
+  .join-btn{
+    font-size: 18px !important;
+  }
 }

@@ -94,3 +94,7 @@
   margin-bottom: 10px;
   border-bottom: 1px solid #bfbfbf;
 }
+.arrow-color mat-icon{
+  fill: var(--text-black-white) !important;
+  color: var(--text-black-white) !important;
+}

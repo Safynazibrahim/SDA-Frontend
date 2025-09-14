@@ -4,7 +4,7 @@
 
     <a
       [routerLink]="['/dashboard/clinics']"
-      class="m-0 p-0 text-black mt-2"
+      class="m-0 p-0 text-black mt-2 arrow-color"
       style="cursor: pointer"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
@@ -15,7 +15,7 @@
   <div class="row g-4">
     <div class="col-md-4">
       <div class="card package-card premium">
-        <div class="badge"><span class="padge-pro">Pro</span></div>
+        <div class="badge"><span class="padge-pro">{{"Pro" | translate}}</span></div>
         <div class="card-header text-center">
           <h5>
             {{ "Premium" | translate }}
