@@ -185,5 +185,16 @@
   "error":"Error",
   "total_doctors":"Total Doctors",
   "total_cases":"Total Cases",
-  "total_revenue":"Total Revenue"
+  "total_revenue":"Total Revenue",
+  "current_package":"Current Package",
+  "upgrade":"Upgrade",
+  "renew":"Renew",
+  "clinic_package":"Clinic Package",
+  "package_history":"Package History",
+  "package_name":"Package Name",
+  "start_date":"Start Date",
+  "end_date":"End Date",
+  "status":"Status",
+  "cancel":"Cancel",
+  "details":"Details"
 }

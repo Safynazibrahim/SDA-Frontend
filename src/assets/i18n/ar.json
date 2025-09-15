@@ -188,5 +188,17 @@
   "error": "خطأ",
   "total_doctors": "إجمالي الأطباء",
   "total_cases": "إجمالي الحالات",
-  "total_revenue": "إجمالي الإيرادات"
+  "total_revenue": "إجمالي الإيرادات",
+  "current_package": "الباقة الحالية",
+"upgrade": "ترقية",
+"renew": "تجديد",
+"clinic_package": "باقة العيادة",
+"package_history": "سجل الباقات",
+"package_name": "اسم الباقة",
+"start_date": "تاريخ البداية",
+"end_date": "تاريخ الانتهاء",
+"status": "الحالة",
+"cancel":"الغاء",
+"details":"تفاصيل"
+
 }

@@ -1,1 +1,130 @@
-<p>clinic-packages-section works!</p>
+<section>
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <h3>{{ "Clinics" | translate }}</h3>
+  </div>
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <h2>{{ "current_package" | translate }}</h2>
+    <div class="main-package-card mx-auto">
+      <div class="type-package-card">
+        {{ "Basic Package" }}
+      </div>
+      <div class="my-3">
+        <h5>01/12/2024 - 01/12/2025</h5>
+      </div>
+      <div>
+        <h6><span class="active"></span> Active</h6>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-between row mx-auto">
+        <div class="col-lg-5 col-md-6 col-sm-12">
+          <button class="signin-button">
+            <img
+              src="../../../../../../../assets/media/upgrade-svgrepo-com 1.svg"
+              style="width: 7%"
+              alt=""
+            />
+            {{ "upgrade" | translate }}
+          </button>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+          <button class="signin-button renew">
+            <img
+              src="../../../../../../../assets/media/renew-svgrepo-com 1.svg"
+              style="width: 7%"
+              alt=""
+            />
+            {{ "renew" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex align-items-center justify-content-between mb-b mx-3">
+    <h2>{{ "clinic_package" | translate }}</h2>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+      <div class="card package-card premium">
+        <div class="badge">
+          <span class="padge-pro">{{ "Pro" | translate }}</span>
+        </div>
+        <div class="card-header text-center">
+          <h5>
+            {{ "Premium" | translate }}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="29"
+              height="26"
+              viewBox="0 0 29 26"
+              fill="none"
+            >
+              <path
+                d="M22.6181 0.428467C22.8952 0.428467 23.1524 0.562044 23.3122 0.782558L23.3745 0.88225L27.9536 9.46824L28.0026 9.58527L28.0158 9.62847L28.0353 9.71681L28.0459 9.81738L28.0435 9.93098L28.0467 9.85704C28.0467 9.97715 28.022 10.0916 27.9773 10.1954L27.9444 10.2636L27.898 10.3397L27.8378 10.418L15.018 25.2338C14.9036 25.3874 14.7469 25.4887 14.5768 25.5374L14.5105 25.5535L14.3992 25.5689L14.3322 25.5713L14.2172 25.5636L14.12 25.5452L14.0019 25.5064L13.9725 25.4925C13.8693 25.4469 13.7745 25.3789 13.6952 25.2896L0.813231 10.4014L0.742248 10.3013L0.687494 10.1949L0.647859 10.0814L0.621414 9.93155L0.621094 9.78595L0.638077 9.67315L0.649036 9.62835L0.687779 9.51852L0.719025 9.45372L5.29045 0.88225C5.4208 0.63785 5.65972 0.473724 5.92948 0.436513L6.04675 0.428467H22.6181ZM18.7964 10.7142H9.86499L14.3336 22.3256L18.7964 10.7142ZM8.02961 10.7142H3.34846L11.7747 20.449L8.02961 10.7142ZM25.313 10.7142H20.6353L16.8947 20.441L25.313 10.7142ZM9.78842 2.14161H6.55989L2.90161 8.9999H7.95875L9.78842 2.14161ZM17.1016 2.14161H11.5621L9.73246 8.9999H18.9301L17.1016 2.14161ZM22.1038 2.14161H18.8753L20.705 8.9999H25.7598L22.1038 2.14161Z"
+                fill="white"
+              />
+            </svg>
+          </h5>
+        </div>
+        <p class="price mt-2">200 USD/Month</p>
+        <hr />
+        <div class="card-body">
+          <ul class="features">
+            <li *ngFor="let i of [1, 2, 3, 4, 5]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="20"
+                viewBox="0 0 21 20"
+                fill="none"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12.0794 0.638839C11.0702 -0.212947 9.59389 -0.212946 8.58472 0.638839L7.66566 1.41457C7.23673 1.7766 6.70594 1.99648 6.14664 2.04378L4.94823 2.14512C3.63234 2.25641 2.58844 3.30031 2.47715 4.6162L2.37581 5.81461C2.32851 6.37391 2.10864 6.9047 1.74661 7.33364L0.97087 8.25269C0.119084 9.26186 0.119086 10.7382 0.97087 11.7473L1.74661 12.6664C2.10864 13.0953 2.32851 13.6261 2.37581 14.1854L2.47715 15.3839C2.58844 16.6998 3.63234 17.7437 4.94823 17.8549L6.14664 17.9562C6.70594 18.0036 7.23673 18.2234 7.66567 18.5855L8.58472 19.3612C9.59389 20.2129 11.0702 20.2129 12.0794 19.3612L12.9984 18.5855C13.4273 18.2234 13.9582 18.0036 14.5174 17.9562L15.7159 17.8549C17.0318 17.7437 18.0757 16.6998 18.1869 15.3839L18.2882 14.1854C18.3356 13.6261 18.5555 13.0953 18.9175 12.6664L19.6933 11.7473C20.545 10.7382 20.545 9.26186 19.6933 8.25269L18.9175 7.33362C18.5555 6.9047 18.3356 6.37391 18.2882 5.81461L18.1869 4.6162C18.0757 3.30031 17.0318 2.25641 15.7159 2.14512L14.5174 2.04378C13.9582 1.99648 13.4273 1.7766 12.9984 1.41457L12.0794 0.638839ZM15.2581 8.15307C15.7342 7.677 15.7342 6.90514 15.2581 6.42908C14.7821 5.953 14.0102 5.953 13.5341 6.42908L8.97812 10.9851L7.13113 9.13807C6.65506 8.66199 5.8832 8.66199 5.40714 9.13807C4.93106 9.61414 4.93106 10.386 5.40714 10.8621L8.11614 13.571C8.5922 14.0471 9.36406 14.0471 9.84013 13.571L15.2581 8.15307Z"
+                  fill="#8F8F8F"
+                />
+              </svg>
+              {{ "Features usage limit" | translate }}
+            </li>
+          </ul>
+          <button class="btn btn-upgrade w-100 mt-3">
+            {{ "Upgrade" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex align-items-center justify-content-center my-4 mx-3">
+    <h2>{{ "package_history" | translate }}</h2>
+    <div class="table-responsive my-2">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{{ "package_name" | translate }}</th>
+            <th>{{ "start_date" | translate }}</th>
+            <th>{{ "end_date" | translate }}</th>
+            <th>{{ "status" | translate }}</th>
+            <th>{{ "action" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let clinic of [1, 2, 3, 4]" stryle="cursor: pointer;">
+            <td>safy ibrahim</td>
+            <td>stock based</td>
+            <td>420gm</td>
+            <td>12%</td>
+            <td class="d-flex justify-content-center">
+              <button class="action-btn dtls">{{"details" | translate}}</button>
+              <button class="action-btn cncl">{{"cancel" | translate}}</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination
+      [totalItems]="50"
+      [pageSize]="11"
+      [currentPage]="CurrentPage"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+</section>

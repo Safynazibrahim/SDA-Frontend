@@ -60,7 +60,7 @@ export class ClinicHomeSectionComponent {
   ],
     datasets: [
       {
-        data: [1200, 1350, 1420, 1600, 1750, 1900, 2000, 2100, 1850, 1700, 1600, 1500],
+        data: [500, 50, 1420, 100, 1750, 1900, 200, 2100, 180, 1000, 10, 1500],
         label: 'Revenue',
         borderColor: this.getCssVariableValue('--bg-brown-medium'),
         backgroundColor: (context:any) => {
