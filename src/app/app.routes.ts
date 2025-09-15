@@ -35,8 +35,23 @@ export const routes: Routes = [
     { path: 'join', loadComponent: () => import('./components/user/clinics/join-clinic/join-clinic.component').then(m => m.JoinClinicComponent) },
     { path: 'operatorPackage', loadComponent: () => import('./components/user/clinics/operator-packages/operator-packages.component').then(m => m.OperatorPackagesComponent) },
     { path: 'clinicPackage', loadComponent: () => import('./components/user/clinics/clinic-packages/clinic-packages.component').then(m => m.ClinicPackagesComponent) },
-    { path: 'clinicHome', loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home.component').then(m => m.ClinicHomeComponent) },
-    { path: 'appointments', loadComponent: () => import('./components/user/appointments/appointments.component').then(m => m.AppointmentsComponent) },
+    // { 
+    //   path: ':id', 
+    //   loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home.component')
+    //     .then(m => m.ClinicHomeComponent) 
+    // }
+    {
+      path: ':id',
+      loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home.component')
+        .then(m => m.ClinicHomeComponent),
+      children: [
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
+        { path: 'home', loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home-sections/clinic-home-section/clinic-home-section.component').then(m => m.ClinicHomeSectionComponent) },
+        { path: 'appointments', loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home-sections/clinic-appiontments-section/clinic-appiontments-section.component').then(m => m.ClinicAppiontmentsSectionComponent) },
+        { path: 'packages', loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home-sections/clinic-packages-section/clinic-packages-section.component').then(m => m.ClinicPackagesSectionComponent) },
+        { path: 'inventory', loadComponent: () => import('./components/user/clinics/clinic-home/clinic-home-sections/clinic-inventory-section/clinic-inventory-section.component').then(m => m.ClinicInventorySectionComponent) }
+      ]
+    }
   ]
 }
     ]

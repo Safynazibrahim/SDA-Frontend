@@ -56,6 +56,8 @@ $SDA-theme: mat.define-light-theme((
   --bg-secondary: #f5f3f0;        /* Card backgrounds - light beige */
   --bg-form-field: #f7f5f2;         /* Section backgrounds */
   --bg-accent: #e8e3dd;           /* Subtle accent background */
+  --bg-white: #f9f9f9;
+  --bg-white-secondary: ##f9f9f9;
   
   /* Brown gradient section backgrounds */
   --bg-brown-light: #d4c4a8;      /* Light brown from your design */
@@ -79,11 +81,12 @@ $SDA-theme: mat.define-light-theme((
   --text-orange: #d5a618;
   --text-gray: #737373;
     /* Orange accent colors from your design */
-  --accent-orange: #e67e22;       /* Primary orange */
+  --accent-orange: #a67f00;       /* Primary orange */
   --accent-orange-light: #f39c12; /* Lighter orange */
   --accent-orange-dark: #d35400;  /* Darker orange */
   --accent-orange-bg: #fef7f0;    /* Very light orange background */
-  --gray-on-home: #6A5F4C;
+  --brown-on-home: #6A5F4C;
+  --gray-on-home: #C26E07;
   /* UI Colors */
   --border-light: #e8e3dd;        /* Light borders */
   --border-medium: #d4c4a8;       /* Medium borders */
@@ -122,6 +125,8 @@ $SDA-theme: mat.define-light-theme((
   --bg-secondary: #e8e3dd;        /* Slightly lighter dark brown */
   --bg-tertiary: #2f281f;         /* Card backgrounds */
   --bg-accent: #3a3127;           /* Accent backgrounds */
+  --bg-white: #2a2e29;    
+  --bg-white-secondary: #222520;       
   
   /* Brown sections in dark mode */
   --bg-brown-light: #4a3f32;      /* Dark brown equivalent */
@@ -141,10 +146,11 @@ $SDA-theme: mat.define-light-theme((
   --text-on-brown-secondary: #e8e3dd; /* Secondary text on brown */
   --svg-color:rgba(250, 248, 244, 0.32);
   /* Orange accents remain similar but adjusted */
-  --accent-orange: #f39c12;       /* Brighter orange for dark mode */
+  --accent-orange: #a67f00;       /* Brighter orange for dark mode */
   --accent-orange-light: #e67e22; /* Orange light */
   --accent-orange-dark: #e67e22;  /* Orange dark */
   --accent-orange-bg: #2d1f0a;    /* Dark orange background */
+  --brown-on-home: #6A5F4C;
   --gray-on-home: #C26E07;
   /* UI Colors for dark mode */
   --border-light: #3a3127;        /* Dark borders */

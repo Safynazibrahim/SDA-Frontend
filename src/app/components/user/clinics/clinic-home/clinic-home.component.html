@@ -1,1 +1,35 @@
-<p>clinic-home works!</p>
+<div class="clinic-home-container">
+  <!-- Sidebar -->
+  <div class="sidebar" [class.closed]="isClosed">
+    <ul>
+      <li (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </li>
+      <li routerLink="home" routerLinkActive="active">
+        <mat-icon>home</mat-icon>
+        <span *ngIf="!isClosed">{{"HOME" | translate}}</span>
+      </li>
+      <li routerLink="appointments" routerLinkActive="active">
+        <mat-icon>event</mat-icon>
+        <span *ngIf="!isClosed">{{"appointments" | translate}}</span>
+      </li>
+      <li routerLink="packages" routerLinkActive="active">
+        <mat-icon>inventory_2</mat-icon>
+        <span *ngIf="!isClosed">{{"packages" | translate}}</span>
+      </li>
+      <li routerLink="inventory" routerLinkActive="active">
+        <mat-icon>inventory</mat-icon>
+        <span *ngIf="!isClosed">{{"inventory" | translate}}</span>
+      </li>
+      <li  (click)="backToClinics()">
+        <mat-icon>logout</mat-icon>
+        <span *ngIf="!isClosed">{{"exit" | translate}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

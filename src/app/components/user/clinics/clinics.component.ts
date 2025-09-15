@@ -40,7 +40,7 @@ export class ClinicsComponent {
   goToClinicPackage() {
     this.router.navigate(['/dashboard/clinics/clinicPackage']);
   }
-  goToClinicDetails() {
-    this.router.navigate(['/dashboard/clinics/clinicHome']);
+  goToClinicDetails(id: number) {
+    this.router.navigate(['/dashboard/clinics', id]);
   }
 }
