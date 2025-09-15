@@ -1,1 +1,81 @@
-<p>clinic-appiontments-section works!</p>
+<div class="appointments-container p-3 container">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>{{ "Clinics" | translate }}</h3>
+
+    <div class="select-date d-flex align-items-center">
+      <span class="page-item" [class.disabled]="currentDate <= today">
+        <a class="page-link" (click)="changeWeek(-1)">&lt;</a>
+      </span>
+
+      <button class="date-btn me-3">
+        {{ currentDate | date : "dd MMM yyyy" }}
+      </button>
+      <span class="page-item">
+        <a class="page-link" (click)="changeWeek(1)">&gt;</a>
+      </span>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <button class="btn new-appointment-btn">
+        + {{ "New Appointment" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="d-flex justify-content-center mb-4">
+    <div class="input-group w-50">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="{{ 'Search appointment' | translate }}"
+      />
+      <button class="btn btn-search px-4">
+        {{ "Search" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Week Days -->
+  <div class="week-days d-flex mb-3">
+    <div
+      *ngFor="let day of weekDays"
+      class="day-box"
+      [class.selected]="isSelected(day.date)"
+      (click)="selectDay(day.date)"
+    >
+      <div class="day-label">{{ day.label }}</div>
+      <div class="day-date">{{ day.date | date : "dd" }}</div>
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="calendar">
+    <div class="time-column">
+      <div class="time">8 AM</div>
+      <div class="time">9 AM</div>
+      <div class="time">10 AM</div>
+      <div class="time">11 AM</div>
+      <div class="time">12 PM</div>
+      <div class="time">1 PM</div>
+      <div class="time">2 PM</div>
+      <div class="time">3 PM</div>
+      <div class="time">4 PM</div>
+      <div class="time">5 PM</div>
+    </div>
+    <div class="appointments-grid">
+      <div
+        class="appointment-card"
+        *ngFor="let appt of appointments; let i = index"
+        [style.grid-row]="appt.row"
+        [style.margin-left.px]="20 + i * 30"
+       
+      >
+        
+        <strong>{{ appt.name }}</strong>
+        <p>{{ appt.time }}</p>
+      </div>
+    </div>
+  </div>
+</div>
