@@ -1,1 +1,143 @@
-<p>clinic-inventory-section works!</p>
+<div class="section">
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <div class="col-lg-6">
+      <h3>{{ "Clinics" | translate }}</h3>
+    </div>
+    <div
+      class="col-lg-4 col-md-12 d-flex justify-content-end align-items-center"
+    >
+      <button
+        class="signin-button w-auto d-flex align-items-center justify-content-center"
+      >
+        <mat-icon>add</mat-icon>
+        {{ "add_material" | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center justify-content-ceter mb-3 mx-2">
+    <!-- Search -->
+    <div class="d-flex justify-content-center mb-4">
+      <div class="col-sm-12 col-md-6 d-flex position-relative">
+        <input
+          type="text"
+          class="search-form-control"
+          placeholder="{{ 'search_material' | translate }}"
+        />
+        <div>
+          <button class="btn-search">
+            {{ "Search" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <div class="col-lg-2 col-sm-3">
+      <div class="dropdown">
+        <button
+          class="btn dropdown-toggle w-100"
+          type="button"
+          data-bs-toggle="dropdown"
+        >
+          <ng-container *ngIf="!selectedStatus">
+            {{ "status" | translate }}
+          </ng-container>
+          <ng-container *ngIf="selectedStatus">
+            {{ selectedStatus }}
+          </ng-container>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" (click)="changeStatus('In Stock')"
+              >In Stock</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="changeStatus('Low Stock')"
+              >Low Stock</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex align-items-center justify-content-center mb-4 mx-3">
+    <div class="table-responsive my-2">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{{ "doctor_name" | translate }}</th>
+            <th>{{ "total_used" | translate }}</th>
+            <th>{{ "remaining" | translate }}</th>
+            <th>{{ "error_rate" | translate }}</th>
+            <th>{{ "status" | translate }}</th>
+            <th>{{ "action" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let clinic of [1, 2]" stryle="cursor: pointer;">
+            <td>safy ibrahim</td>
+            <td>stock based</td>
+            <td>30</td>
+            <td>420gm</td>
+            <td class="status-cell">
+              <!-- <mat-icon class="in-stock">check_circle</mat-icon> -->
+              <span class="status-text in-stock">In Stock</span>
+            </td>
+            <td>
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+          <tr *ngFor="let clinic of [1, 2]" stryle="cursor: pointer;">
+            <td>safy ibrahim</td>
+            <td>stock based</td>
+            <td>30</td>
+            <td>420gm</td>
+            <td class="status-cell">
+              <!-- <mat-icon class="low-stock">warning</mat-icon> -->
+              <span class="status-text low-stock">Low Stock</span>
+            </td>
+            <td>
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination
+      [totalItems]="50"
+      [pageSize]="11"
+      [currentPage]="CurrentPage"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+</div>

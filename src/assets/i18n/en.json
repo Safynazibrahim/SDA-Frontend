@@ -196,5 +196,10 @@
   "end_date":"End Date",
   "status":"Status",
   "cancel":"Cancel",
-  "details":"Details"
+  "details":"Details",
+  "add_material":"Add Material",
+  "search_material":"Search Material",
+  "total_used":"Total Used",
+  "remaining":"Remaining",
+  "error_rate":"Error Rate"
 }

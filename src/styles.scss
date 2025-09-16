@@ -57,7 +57,8 @@ $SDA-theme: mat.define-light-theme((
   --bg-form-field: #f7f5f2;         /* Section backgrounds */
   --bg-accent: #e8e3dd;           /* Subtle accent background */
   --bg-white: #f9f9f9;
-  --bg-white-secondary: ##f9f9f9;
+  --bg-white-secondary: #fff;
+  --bg-light-gray: #ebebeb;
   
   /* Brown gradient section backgrounds */
   --bg-brown-light: #d4c4a8;      /* Light brown from your design */
@@ -126,7 +127,8 @@ $SDA-theme: mat.define-light-theme((
   --bg-tertiary: #2f281f;         /* Card backgrounds */
   --bg-accent: #3a3127;           /* Accent backgrounds */
   --bg-white: #2a2e29;    
-  --bg-white-secondary: #222520;       
+  --bg-white-secondary: #222520;   
+  --bg-light-gray: #EBEBEB ;
   
   /* Brown sections in dark mode */
   --bg-brown-light: #4a3f32;      /* Dark brown equivalent */
@@ -497,4 +499,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
+        ///////dropdown
+        .dropdown-toggle:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.dropdown-menu {
+    .dropdown-item {
+    &:hover {
+      background-color: var(--bg-brown-light);
+      cursor: pointer;
+    }
+  }
+}
         

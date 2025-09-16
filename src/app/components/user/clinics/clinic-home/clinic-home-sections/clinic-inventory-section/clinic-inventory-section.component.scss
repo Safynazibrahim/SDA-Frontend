@@ -1,0 +1,77 @@
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-gray-home-about);
+}
+
+.search-form-control {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 25px;
+  border: 1px solid var(--text-gray) !important;
+  background-color: var(--bg-white);
+  color: var(--text-gray);
+}
+.search-form-control:focus {
+  outline: none;
+  border: 1px solid var(--text-gray) !important;
+  background: none !important;
+}
+.btn-search {
+  position: absolute;
+  top: 12%;
+  right: 10px;
+  color: var(--bg-white) !important;
+  background-color: var(--bg-brown-medium);
+  border-radius: 25px;
+  border: none !important;
+  padding: 9px 15px;
+}
+
+.dropdown {
+    background-color: var(--bg-light-gray) !important;
+}
+
+.table thead th {
+  font-weight: 400;
+  font-size: 1.2rem;
+  background: var(--bg-white);
+  color: var(--text-black-white);
+}
+.table tbody td {
+  background: var(--bg-white-secondary);
+  color: var(--text-black-white);
+}
+// .status-cell {
+//   display: flex;
+//   align-items: center;
+// //   gap: 6px;
+// }
+
+// .status-cell mat-icon {
+//   font-size: 18px;
+//   height: 18px;
+//   width: 18px;
+// }
+
+
+// .status-text {
+//   font-weight: 600;
+// }
+
+.in-stock {
+  color: green;
+}
+
+.low-stock {
+  color: #e6a400; // أصفر غامق
+}
+
+
+@media (max-width: 600px) {
+  .table thead th , .table tbody td {
+  font-size: 13px;
+  }
+}

@@ -124,8 +124,6 @@ export class ClinicHomeSectionComponent {
 
   changeRange(range: string) {
   this.selectedRange = range;
-
-  // هنا ممكن تبدلي الـ Data حسب الاختيار
   if (range === 'Daily') {
     this.totalRevenue = '3,500 SAR';
   } else if (range === 'Weekly') {

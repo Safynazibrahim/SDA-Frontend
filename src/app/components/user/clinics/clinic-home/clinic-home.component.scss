@@ -20,7 +20,7 @@
     padding: 0;
 
     li {
-      color: var(--text-gray-home-about);;
+      color: var(--text-gray-home-about);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -40,6 +40,13 @@
     }
   }
 }
+
+img {
+    width: 22px; 
+    height: 22px;
+    object-fit: contain; 
+    background: var(--text-gray-home-about);;
+  }
 
 .sidebar ul li.active {
   background: var(--bg-brown-gradient);
