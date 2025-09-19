@@ -1,31 +1,24 @@
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { filter, map, take } from 'rxjs';
 
 export const authGuard: CanActivateFn = () => {
-  return true; 
-};
-// import { Injectable } from '@angular/core';
-// import { CanActivate, Router } from '@angular/router';
-// import { Observable } from 'rxjs';
-// import { map, take } from 'rxjs/operators';
-// import { AuthService } from '../../services/auth.service';
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class authGuard implements CanActivate {
-  
-//   constructor(private authService: AuthService, private router: Router) {}
-  
-//   canActivate(): Observable<boolean> {
-//     return this.authService.isLoggedIn$.pipe(
-//       take(1),
-//       map(isLoggedIn => {
-//         if (!isLoggedIn) {
-//           this.router.navigate(['/login']);
-//           return false;
-//         }
-//         return true;
-//       })
-//     );
-//   }
-// }
+  return authService.isLoggedIn$.pipe(
+    // استنى لحد ما الـ auth status يتحدد (مش null)
+    filter((status) => status !== null),
+    take(1),
+    map((loggedIn) => {
+      if (loggedIn) {
+        return true;
+      } else {
+        // الـ navigation هيحصل هنا بس لما نتأكد إن مفيش authentication
+        router.navigate(['/login']);
+        return false;
+      }
+    })
+  );
+};

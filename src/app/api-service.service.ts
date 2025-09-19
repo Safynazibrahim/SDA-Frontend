@@ -24,7 +24,7 @@ export class ApiServiceService {
       .get<T>(`${this.baseUrl}/${endpoint}`, {
         headers,
         params: httpParams,
-        withCredentials: true, 
+        withCredentials: true,
       })
       .pipe(
         catchError((err) => {
@@ -66,6 +66,18 @@ export class ApiServiceService {
     });
   }
 
+  // دالة جديدة للـ requests اللي عايزينها تتجنب الـ interceptor
+  postDirect<T>(endpoint: string, data: any): Observable<T> {
+    let headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('X-Skip-Interceptor', 'true'); // header خاص للتمييز
+
+    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
+      headers,
+      withCredentials: true,
+    });
+  }
+
   put<T>(endpoint: string, data: any): Observable<T> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -75,7 +87,6 @@ export class ApiServiceService {
     });
   }
 
-  
   delete<T>(endpoint: string, params: any = {}): Observable<T> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 

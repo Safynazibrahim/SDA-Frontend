@@ -68,20 +68,22 @@ export class LoginComponent implements OnInit {
   };
 
   this._AuthService.login(loginData).subscribe({
-    next: () => {
-      this._MatSnackBar.open('Logged in successfully', 'Close', {
-        duration: 3000,
-        panelClass: ['snackbar-success']
-      });
-      this._Router.navigate(['/dashboard']);
-    },
-    error: (err: any) => {
-      this._MatSnackBar.open(err.error.message || 'Login failed', 'Close', {
-        duration: 3000,
-        panelClass: ['snackbar-error']
-      });
-    }
-  });
+  next: () => {
+    this._AuthService.setAuthStatus(true); 
+    this._MatSnackBar.open('Logged in successfully', 'Close', {
+      duration: 3000,
+      panelClass: ['snackbar-success']
+    });
+    this._Router.navigate(['/dashboard']);
+  },
+  error: (err: any) => {
+    this._MatSnackBar.open(err.error.message || 'Login failed', 'Close', {
+      duration: 3000,
+      panelClass: ['snackbar-error']
+    });
+  }
+});
+
 }
 
 
