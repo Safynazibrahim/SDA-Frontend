@@ -26,14 +26,32 @@ import { ModalComponent } from '../../../../../shared/modal/modal.component';
 })
 export class ClinicInventorySectionComponent {
 
-  isModalOpen = false;
+  isViewModalOpen = false;
+  isEditModalOpen = false;
+  isDeleteModalOpen = false;
 
-openModal() {
-  this.isModalOpen = true;
+openEditModal() {
+  this.isEditModalOpen = true;
 }
 
-closeModal() {
-  this.isModalOpen = false;
+openViewModal() {
+  this.isViewModalOpen = true;
+}
+
+openDeleteModal() {
+  this.isDeleteModalOpen = true;
+}
+
+closeEditModal() {
+  this.isEditModalOpen = false;
+}
+
+closeViewModal() {
+  this.isViewModalOpen = false;
+}
+
+closeDeleteModal() {
+  this.isDeleteModalOpen = false;
 }
 
   selectedStatus:any;

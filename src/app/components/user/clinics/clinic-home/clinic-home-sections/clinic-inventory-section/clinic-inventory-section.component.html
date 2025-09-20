@@ -94,11 +94,11 @@
               </button>
 
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="openViewModal()">
                   <mat-icon>visibility</mat-icon>
                   <span>{{"view_details" | translate}}</span>
                 </button>
-                <button mat-menu-item (click)="openModal()">
+                <button mat-menu-item (click)="openEditModal()">
                   <mat-icon>edit</mat-icon>
                   <span>{{"edit" | translate}}</span>
                 </button>
@@ -106,7 +106,7 @@
                   <mat-icon>refresh</mat-icon>
                   <span>{{"re_fill" | translate}}</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item (click)="openDeleteModal()">
                   <mat-icon>delete</mat-icon>
                   <span>{{"delete" | translate}}</span>
                 </button>
@@ -153,11 +153,11 @@
 </div>
 
 
-  <app-modal 
-  [isOpen]="isModalOpen" 
-  title="Edit Material" 
-  size="large" 
-  (close)="closeModal()">
+<app-modal 
+  [isOpen]="isEditModalOpen" 
+  title='{{"edit_aterial" | translate}} '
+  size="medium" 
+  (close)="closeEditModal()">
 
   <!-- Body -->
   <div modal-body>
@@ -166,7 +166,45 @@
 
   <!-- Footer -->
   <div modal-footer>
-    <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+    <button class="btn btn-secondary" (click)="closeEditModal()">Cancel</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+
+</app-modal>
+
+  <app-modal 
+  [isOpen]="isViewModalOpen" 
+  title='{{"material_details" | translate}}'
+  size="large" 
+  (close)="closeViewModal()">
+
+  <!-- Body -->
+  <div modal-body>
+    <p>Edit material form goes here...</p>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="closeViewModal()">Cancel</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+
+</app-modal>
+
+<app-modal 
+  [isOpen]="isDeleteModalOpen" 
+  title='{{"delete_material" | translate}}'
+  size="small" 
+  (close)="closeDeleteModal()">
+
+  <!-- Body -->
+  <div modal-body>
+    <p>Edit material form goes here...</p>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="closeDeleteModal()">Cancel</button>
     <button class="btn btn-primary">Save</button>
   </div>
 

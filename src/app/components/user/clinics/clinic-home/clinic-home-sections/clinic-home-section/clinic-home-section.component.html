@@ -232,20 +232,10 @@
             <td>420gm</td>
             <td>12%</td>
             <td>
-              <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item >
-                  <mat-icon>edit</mat-icon>
-                  <span>Edit</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
-                </button>
-              </mat-menu>
+              <mat-icon 
+                style="cursor: pointer;" 
+                (click)="openViewDoctorsModal()">visibility
+              </mat-icon>
             </td>
           </tr>
         </tbody>
@@ -283,20 +273,21 @@
             <td>420gm</td>
             <td>12%</td>
             <td>
-              <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon 
+                style="cursor: pointer;" 
+                (click)="openViewMaterialModal()">visibility
+              </mat-icon>
+              <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
 
               <mat-menu #menu="matMenu">
-                <button mat-menu-item >
-                  <mat-icon>edit</mat-icon>
-                  <span>Edit</span>
+                <button mat-menu-item (click)="openViewMaterialModal()">
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{"view_details" | translate}}</span>
                 </button>
-                <button mat-menu-item >
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
-                </button>
-              </mat-menu>
+              </mat-menu> -->
+            
             </td>
           </tr>
         </tbody>
@@ -311,3 +302,42 @@
     </app-pagination>
   </div>
 </div>
+
+<app-modal 
+  [isOpen]="isViewMaterialModalOpen" 
+  title='{{"material_details" | translate}}'
+  size="large" 
+  (close)="closeViewMaterialModal()">
+
+  <!-- Body -->
+  <div modal-body>
+    <p>Edit material form goes here...</p>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="closeViewMaterialModal()">Cancel</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+
+</app-modal>
+
+
+<app-modal 
+  [isOpen]="isViewDoctorsModalOpen" 
+  title='{{"Doctors_details" | translate}}'
+  size="large" 
+  (close)="closeViewDoctorsModal()">
+
+  <!-- Body -->
+  <div modal-body>
+    <p>Edit Doctors form goes here...</p>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="closeViewDoctorsModal()">Cancel</button>
+    <button class="btn btn-primary">Save</button>
+  </div>
+
+</app-modal>

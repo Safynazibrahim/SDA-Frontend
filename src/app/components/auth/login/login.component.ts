@@ -63,23 +63,9 @@ export class LoginComponent implements OnInit{
   };
 
   this._AuthService.login(loginData).subscribe({
-    next: (response: any) => {
-      // if (response.accessToken) {
-      //   if (this.loginForm.get('rememberMe')?.value) {
-      //     localStorage.setItem('token', response.accessToken); 
-      //   } else {
-      //     sessionStorage.setItem('token', response.accessToken); 
-      //   }
-      // }
-      // this._MatSnackBar.open("Logged in successfully", 'Close', {
-      //   duration: 3000,
-      //   panelClass: ['snackbar-success']
-      // });
-      if (response.accessToken) {
-        this._AuthService.setToken(response.accessToken, this.loginForm.get('rememberMe')?.value);
-        this._MatSnackBar.open("Logged in successfully", 'Close', { duration: 3000, panelClass: ['snackbar-success'] });
-        this._Router.navigate(['/dashboard']);
-      }
+    next: () => {
+      this._MatSnackBar.open("Logged in successfully", 'Close', { duration: 3000, panelClass: ['snackbar-success'] });
+      this._Router.navigate(['/dashboard']);
     },
     error: (err: any) => {
       this._MatSnackBar.open(err.error.message, 'Close', {

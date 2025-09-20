@@ -34,6 +34,22 @@ h3 {
     background-color: var(--bg-light-gray) !important;
 }
 
+
+  @keyframes cardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.80);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.table {
+  animation: cardFadeUp 0.9s ease forwards;
+}
+
 .table thead th {
   font-weight: 400;
   font-size: 1.2rem;
