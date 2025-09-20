@@ -1,29 +1,39 @@
 <div class="container py-3">
-    <div class="d-flex justify-content-between align-items-center header-responsive">
-        <h2>{{'Clinics' | translate}}</h2>
-        <button class="btn join-btn" (click)="goToJoinClinic()">{{'join_clinic' | translate}}</button>
-    </div>
-    <div class="d-flex justify-content-center align-items-center mb-3">
+  <div class="d-flex justify-content-between align-items-center header-responsive">
+    <h2>{{ 'Clinics' | translate }}</h2>
+    <button class="btn join-btn" (click)="goToJoinClinic()">
+      {{ 'join_clinic' | translate }}
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="d-flex justify-content-center align-items-center mb-3">
     <div class="input-group w-50 search-responsive">
-      <input 
-        type="text" 
-        class="form-control" 
-        placeholder="Search clinic name" 
-        aria-label="Search clinic"
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search clinic name"
+        [(ngModel)]="searchName"
+        (keyup.enter)="onSearch()"
       />
-      <button class="btn btn-search px-4">
+      <button class="btn btn-search px-4" (click)="onSearch()">
         {{ 'Search' | translate }}
       </button>
     </div>
-    
   </div>
 
- <div class="d-flex justify-content-between align-items-center mb-3">
-     <h5 class="fw-bold title-table">{{ 'Owner Clinics' | translate }}</h5>
-  <a (click)="goToClinicPackage()" class="subscribe-link fw-bold" style="cursor: pointer;">
+  <!-- Owner Clinics -->
+  @if(ownerClinicsData.length > 0){
+    <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold title-table">{{ 'Owner Clinics' | translate }}</h5>
+    <a
+      (click)="goToClinicPackage()"
+      class="subscribe-link fw-bold"
+      style="cursor: pointer;"
+    >
       {{ 'Subscribe Package for Multiple Clinics' | translate }} →
     </a>
- </div>
+  </div>
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>
@@ -35,29 +45,37 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let clinic of [1,2,3,4]" (click)="goToClinicDetails(clinic)" stryle="cursor: pointer;">
-          <td>Riyadh Dental Center</td>
-          <td>Riyadh</td>
-          <td>18-08-2025</td>
-          <td>32</td>
-        </tr>
-      </tbody>
+  <tr *ngFor="let clinic of ownerClinicsData" (click)="goToClinicDetails(clinic.id)" style="cursor: pointer;">
+    <td>{{ clinic.name }}</td>
+    <td>{{ clinic.location }}</td>
+    <td>{{ clinic.createdAt | date: 'dd-MM-yyyy' }}</td>
+    <td>-</td> <!-- seats مش موجودة -->
+  </tr>
+</tbody>
     </table>
   </div>
-
   <app-pagination
-  [totalItems]="100"
-  [pageSize]="10"
-  [currentPage]="ownerCurrentPage"
-  (pageChange)="onOwnerPageChange($event)">
-</app-pagination>
+    [totalItems]="ownerTotal"
+    [pageSize]="limit"
+    [currentPage]="ownerCurrentPage"
+    (pageChange)="onOwnerPageChange($event)"
+  >
+  </app-pagination>
+  }
 
- <div class="d-flex justify-content-between align-items-center my-3">
-     <h5 class="fw-bold title-table">{{ 'Operator Clinics' | translate }}</h5>
-  <a (click)="goToOperatorPackage()" class="subscribe-link fw-bold" style="cursor: pointer;">
+  <!-- Operator Clinics -->
+     @if(operatorClinicsData.length > 0){
+
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <h5 class="fw-bold title-table">{{ 'Operator Clinics' | translate }}</h5>
+    <a
+      (click)="goToOperatorPackage()"
+      class="subscribe-link fw-bold"
+      style="cursor: pointer;"
+    >
       {{ 'Operator Packages' | translate }} →
     </a>
- </div>
+  </div>
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>
@@ -68,24 +86,28 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let clinic of [1,2,3,4]" (click)="goToClinicDetails(clinic)" stryle="cursor: pointer;">
-          <td>Riyadh Dental Center</td>
-          <td>Riyadh</td>
-          <td>Donia</td>
-        </tr>
-      </tbody>
+  <tr *ngFor="let clinic of operatorClinicsData" (click)="goToClinicDetails(clinic.id)" style="cursor: pointer;">
+    <td>{{ clinic.name }}</td>
+    <td>{{ clinic.location }}</td>
+    <td>{{ clinic.ownerName }}</td>
+  </tr>
+</tbody>
     </table>
   </div>
   <app-pagination
-  [totalItems]="80"
-  [pageSize]="10"
-  [currentPage]="operatorCurrentPage"
-  (pageChange)="onOperatorPageChange($event)">
-</app-pagination>
+    [totalItems]="operatorTotal"
+    [pageSize]="limit"
+    [currentPage]="operatorCurrentPage"
+    (pageChange)="onOperatorPageChange($event)"
+  >
+  </app-pagination>
+     }
+  <!-- Sub-owner Clinics -->
+     @if(subOwnerClinicsData.length > 0){
 
- <div class="d-flex justify-content-between align-items-center my-3">
-     <h5 class="fw-bold title-table">{{ 'Sub-owner Clinics' | translate }}</h5>
- </div>
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <h5 class="fw-bold title-table">{{ 'Sub-owner Clinics' | translate }}</h5>
+  </div>
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>
@@ -97,20 +119,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let clinic of [1,2,3,4]" (click)="goToClinicDetails(clinic)" stryle="cursor: pointer;">
-          <td>Riyadh Dental Center</td>
-          <td>Donia</td>
-          <td>Cairo</td>
-          <td>32</td>
-        </tr>
-      </tbody>
+  <tr *ngFor="let clinic of subOwnerClinicsData" (click)="goToClinicDetails(clinic.id)" style="cursor: pointer;">
+    <td>{{ clinic.name }}</td>
+    <td>{{ clinic.ownerName }}</td>
+    <td>{{ clinic.location }}</td>
+    <td>-</td> <!-- seats مش موجودة -->
+  </tr>
+</tbody>
     </table>
   </div>
   <app-pagination
-  [totalItems]="50"
-  [pageSize]="11"
-  [currentPage]="subOwnerCurrentPage"
-  (pageChange)="onSubOwnerPageChange($event)">
-</app-pagination>
-
+    [totalItems]="subOwnerTotal"
+    [pageSize]="limit"
+    [currentPage]="subOwnerCurrentPage"
+    (pageChange)="onSubOwnerPageChange($event)"
+  >
+  </app-pagination>
+}
 </div>

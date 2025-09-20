@@ -4,11 +4,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router, RouterLink } from '@angular/router';
-import { log } from 'console';
 import { AuthService } from '../../core/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -21,7 +20,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatInputModule,
     MatButtonModule,
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
@@ -30,23 +28,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
   showPassword = false;
-  rememberMe = false;
   loginForm!: FormGroup;
 
-  constructor(private _AuthService:AuthService, 
-                private fb: FormBuilder,
-                private _MatSnackBar:MatSnackBar,
-                private _Router:Router){}
+  constructor(
+    private _AuthService: AuthService,
+    private fb: FormBuilder,
+    private _MatSnackBar: MatSnackBar,
+    private _Router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['',[Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)]],
-    rememberMe: [false]   
-  });
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)
+        ]
+      ],
+       rememberMe: [false]
+    });
   }
 
   togglePasswordVisibility() {
@@ -56,41 +62,29 @@ export class LoginComponent implements OnInit{
  submitForm() {
   if (this.loginForm.invalid) return;
 
-  // هنبعت object عادي بدل FormData
   const loginData = {
     email: this.loginForm.get('email')?.value,
-    password: this.loginForm.get('password')?.value
+    password: this.loginForm.get('password')?.value,
   };
 
   this._AuthService.login(loginData).subscribe({
-    next: (response: any) => {
-      // if (response.accessToken) {
-      //   if (this.loginForm.get('rememberMe')?.value) {
-      //     localStorage.setItem('token', response.accessToken); 
-      //   } else {
-      //     sessionStorage.setItem('token', response.accessToken); 
-      //   }
-      // }
-      // this._MatSnackBar.open("Logged in successfully", 'Close', {
-      //   duration: 3000,
-      //   panelClass: ['snackbar-success']
-      // });
-      if (response.accessToken) {
-        this._AuthService.setToken(response.accessToken, this.loginForm.get('rememberMe')?.value);
-        this._MatSnackBar.open("Logged in successfully", 'Close', { duration: 3000, panelClass: ['snackbar-success'] });
-        this._Router.navigate(['/dashboard']);
-      }
-    },
-    error: (err: any) => {
-      this._MatSnackBar.open(err.error.message, 'Close', {
-        duration: 3000,
-        panelClass: ['snackbar-error']
-      });
-    }
-  });
+  next: () => {
+    this._AuthService.setAuthStatus(true); 
+    this._MatSnackBar.open('Logged in successfully', 'Close', {
+      duration: 3000,
+      panelClass: ['snackbar-success']
+    });
+    this._Router.navigate(['/dashboard']);
+  },
+  error: (err: any) => {
+    this._MatSnackBar.open(err.error.message || 'Login failed', 'Close', {
+      duration: 3000,
+      panelClass: ['snackbar-error']
+    });
+  }
+});
+
 }
-
-
 
 
 }

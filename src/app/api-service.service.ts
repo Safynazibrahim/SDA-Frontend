@@ -1,74 +1,109 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { finalize, Observable } from 'rxjs';
-import { LoaderService } from './components/core/services/loader.service';
 import { Router } from '@angular/router';
-
-
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, last } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiServiceService {
   private baseUrl = 'http://localhost:3000/api';
-  
 
-  constructor(private http: HttpClient, 
-    private _LoaderService: LoaderService,
-    private _Router: Router ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  get<T>(endpoint: string): Observable<T> {
-    this._LoaderService.show();
-    return this.http.get<T>(`${this.baseUrl}/${endpoint}`).pipe(
-      finalize(() => this._LoaderService.hide())
-    );
+  get<T>(endpoint: string, params: any = {}): Observable<T> {
+    let headers = new HttpHeaders().set('Accept', 'application/json');
+
+    let httpParams = new HttpParams();
+    Object.keys(params).forEach((key) => {
+      if (params[key] != null) httpParams = httpParams.set(key, params[key]);
+    });
+
+    return this.http
+      .get<T>(`${this.baseUrl}/${endpoint}`, {
+        headers,
+        params: httpParams,
+        withCredentials: true,
+      })
+      .pipe(
+        catchError((err) => {
+          if (err.status === 401) {
+            this.logout();
+          }
+          return throwError(() => err);
+        })
+      );
   }
 
-  post<T>(endpoint: string, data: any): Observable<T> {
-    this._LoaderService.show();
-    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data).pipe(
-      finalize(() => this._LoaderService.hide())
-    );
+  post<T>(endpoint: string, data: any, reportProgress = false): Observable<T> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    if (reportProgress) {
+      const req = new HttpRequest('POST', `${this.baseUrl}/${endpoint}`, data, {
+        headers,
+        reportProgress: true,
+        withCredentials: true,
+      });
+
+      return this.http.request(req).pipe(
+        map((event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            const percent = Math.round((100 * event.loaded) / event.total);
+            return { percent } as any;
+          }
+          if (event.type === HttpEventType.Response) {
+            return event.body;
+          }
+        }),
+        last()
+      );
+    }
+
+    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
+      headers,
+      withCredentials: true,
+    });
+  }
+
+  // دالة جديدة للـ requests اللي عايزينها تتجنب الـ interceptor
+  postDirect<T>(endpoint: string, data: any): Observable<T> {
+    let headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('X-Skip-Interceptor', 'true'); // header خاص للتمييز
+
+    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
+      headers,
+      withCredentials: true,
+    });
   }
 
   put<T>(endpoint: string, data: any): Observable<T> {
-  this._LoaderService.show();
-  return this.http.put<T>(`${this.baseUrl}/${endpoint}`, data).pipe(
-    finalize(() => this._LoaderService.hide())
-  );
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+    return this.http.put<T>(`${this.baseUrl}/${endpoint}`, data, {
+      headers,
+      withCredentials: true,
+    });
   }
 
-//   private getHeaders(): HttpHeaders {
-//   let headers = new HttpHeaders({
-//     'Content-Type': 'application/json',
-//     'Accept': 'application/json',
-//   });
+  delete<T>(endpoint: string, params: any = {}): Observable<T> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-//   const token = localStorage.getItem('token');
-//   if (token) {
-//     headers = headers.set('Authorization', `Bearer ${token}`);
-//   }
+    let httpParams = new HttpParams();
+    Object.keys(params).forEach((key) => {
+      if (params[key] != null) httpParams = httpParams.set(key, params[key]);
+    });
 
-//   return headers;
-// }
+    return this.http.delete<T>(`${this.baseUrl}/${endpoint}`, {
+      headers,
+      params: httpParams,
+      withCredentials: true,
+    });
+  }
 
-// get<T>(endpoint: string): Observable<T> {
-//   this._LoaderService.show();
-//   return this.http.get<T>(`${this.baseUrl}/${endpoint}`, {
-//     headers: this.getHeaders(),
-//   }).pipe(finalize(() => this._LoaderService.hide()));
-// }
-
-// post<T>(endpoint: string, data: any): Observable<T> {
-//   this._LoaderService.show();
-//   return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
-//     headers: this.getHeaders(),
-//   }).pipe(finalize(() => this._LoaderService.hide()));
-// }
-
+  // 🔹 Logout
   logout() {
-    localStorage.removeItem('token'); 
-    this._Router.navigate(['/login']); 
+    this.router.navigate(['/login']);
   }
-
 }
