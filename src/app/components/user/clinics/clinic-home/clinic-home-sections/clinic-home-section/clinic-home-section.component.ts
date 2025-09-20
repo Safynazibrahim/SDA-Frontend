@@ -13,6 +13,7 @@ import { PaginationComponent } from '../../../../../shared/pagination/pagination
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { ModalComponent } from '../../../../../shared/modal/modal.component';
 @Component({
   selector: 'app-clinic-home-section',
   standalone: true,
@@ -28,7 +29,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     FormsModule,
     BaseChartDirective,
-    PaginationComponent
+    PaginationComponent,
+    ModalComponent
   ],
   templateUrl: './clinic-home-section.component.html',
   styleUrl: './clinic-home-section.component.scss'
@@ -40,6 +42,24 @@ export class ClinicHomeSectionComponent {
   fromDate!: Date | null;
   toDate!: Date | null;
   CurrentPage = 1;
+  isViewMaterialModalOpen = false;
+  isViewDoctorsModalOpen = false;
+
+  openViewMaterialModal() {
+  this.isViewMaterialModalOpen = true;
+}
+
+openViewDoctorsModal() {
+  this.isViewDoctorsModalOpen = true;
+}
+
+closeViewMaterialModal() {
+  this.isViewMaterialModalOpen = false;
+}
+
+closeViewDoctorsModal() {
+  this.isViewDoctorsModalOpen = false;
+}
   
 
   onPageChange(page: number) {

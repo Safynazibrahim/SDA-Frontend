@@ -204,6 +204,23 @@
 "search_material": "بحث عن مادة",
 "total_used": "إجمالي المستخدم",
 "remaining": "المتبقي",
-"error_rate": "معدل الخطأ"
+"error_rate": "معدل الخطأ",
+  "no_of_cases": "عدد الحالات",
+  "referrals_made": "الإحالات المُرسلة",
+  "close": "إغلاق",
+  "view_details": "عرض التفاصيل",
+  "edit": "تعديل",
+  "re_fill": "إعادة تعبئة",
+  "delete": "حذف",
+  "edit_material": "تعديل المادة",
+  "material_details": "تفاصيل المادة",
+  "scientific_name": "الاسم العلمي",
+  "trade_name": "الاسم التجاري",
+  "avg_usage_case": "متوسط الاستخدام/الحالة",
+  "add": "إضافة",
+  "material_new": "كمية المادة الجديدة",
+  "ENTER_NEW_QUANTITY": "أدخل الكمية الجديدة",
+  "delete_material": "حذف المادة",
+  "msg_delete_material": "هل أنت متأكد أنك تريد حذف هذه المادة؟"
 
 }

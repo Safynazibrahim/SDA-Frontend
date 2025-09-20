@@ -81,6 +81,7 @@ $SDA-theme: mat.define-light-theme((
 
   --text-orange: #d5a618;
   --text-gray: #737373;
+  --text-light-gray: #bfbfbf;
     /* Orange accent colors from your design */
   --accent-orange: #a67f00;       /* Primary orange */
   --accent-orange-light: #f39c12; /* Lighter orange */
@@ -129,6 +130,7 @@ $SDA-theme: mat.define-light-theme((
   --bg-white: #2a2e29;    
   --bg-white-secondary: #222520;   
   --bg-light-gray: #EBEBEB ;
+  --text-light-gray: #999999;
   
   /* Brown sections in dark mode */
   --bg-brown-light: #4a3f32;      /* Dark brown equivalent */

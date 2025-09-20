@@ -201,5 +201,22 @@
   "search_material":"Search Material",
   "total_used":"Total Used",
   "remaining":"Remaining",
-  "error_rate":"Error Rate"
+  "error_rate":"Error Rate",
+  "no_of_cases":"No. Of Cases",
+  "referrals_made":"Referrals Made",
+  "close":"Close",
+  "view_details":"View Details",
+  "edit":"Edit",
+  "re_fill":"ReFill",
+  "delete":"Delete",
+  "edit_material":"Edit Material",
+  "material_details":"Material Details",
+  "scientific_name":"Scientific Name",
+  "trade_name":"Trade Name",
+  "avg_usage_case":"Avg Usage/Case",
+  "add":"Add",
+  "material_new":"Material New Quantity",
+  "ENTER_NEW_QUANTITY":"Enter New Quantity",
+  "delete_material":"Delete Material",
+  "msg_delete_material":"Are you sure you want to delete this material ?"
 }

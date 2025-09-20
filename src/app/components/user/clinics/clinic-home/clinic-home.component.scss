@@ -4,6 +4,19 @@
 //   padding: 40px;
   position: relative;
 }
+@keyframes sidebarSlideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.sidebar {
+  animation: sidebarSlideIn 0.2s ease-out forwards;
+}
 
 .sidebar {
   margin-left: 20px;
@@ -13,7 +26,8 @@
   border: 1px solid var(--text-gray-home-about);
   padding: 0px 20px;
   border-radius: 14px;
-  transition: width 0.3s ease, transform 0.3s ease;
+  animation: sidebarSlideIn 0.5s ease-out forwards;
+  transition: width 0.8s ease, background-color 0.4s ease;
 
   ul {
     list-style: none;
@@ -31,9 +45,9 @@
   }
 
   &.closed {
-    width: 70px;
-    // padding: 0px 10px;
+    width: 70px; 
     background-color: #7d6e59;
+    margin-left: 5px;
 
     mat-icon {
       color: #fff !important;

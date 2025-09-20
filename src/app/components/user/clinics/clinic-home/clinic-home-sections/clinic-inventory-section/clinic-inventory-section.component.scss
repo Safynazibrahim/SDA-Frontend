@@ -34,6 +34,22 @@ h3 {
     background-color: var(--bg-light-gray) !important;
 }
 
+
+  @keyframes cardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.80);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.table {
+  animation: cardFadeUp 0.9s ease forwards;
+}
+
 .table thead th {
   font-weight: 400;
   font-size: 1.2rem;
@@ -67,6 +83,47 @@ h3 {
 
 .low-stock {
   color: #e6a400; // أصفر غامق
+}
+
+.signin-button {
+  &.close{
+  background: var(--text-light-gray) !important;}
+}
+.signin-button.cancel {
+  background: transparent !important;
+  border: 2px solid var(--bg-brown-medium) !important;
+  color: var(--bg-brown-medium) !important;
+}
+
+.modal-body {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: var(--bg-white-secondary);
+  h4 {
+    color: var(--text-light-gray);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  span ,p{
+    font-size: 1rem;
+    color: var(--text-gray);
+  }
+  .mini-table {
+    padding: 10px;
+  }
+  .header {
+    color: var(--bg-white);
+    background-color: var(--bg-brown-medium) !important;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  .body {
+    color: #000;
+    background-color: var(--bg-brown-light) !important;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
 }
 
 

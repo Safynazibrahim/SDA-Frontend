@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from 'express';
 import { RouterLink } from '@angular/router';
+import { ModalComponent } from '../../../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-clinic-inventory-section',
@@ -18,11 +19,40 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
-    RouterLink], 
+    RouterLink,
+    ModalComponent], 
   templateUrl: './clinic-inventory-section.component.html',
   styleUrl: './clinic-inventory-section.component.scss'
 })
 export class ClinicInventorySectionComponent {
+
+  isViewModalOpen = false;
+  isEditModalOpen = false;
+  isDeleteModalOpen = false;
+
+openEditModal() {
+  this.isEditModalOpen = true;
+}
+
+openViewModal() {
+  this.isViewModalOpen = true;
+}
+
+openDeleteModal() {
+  this.isDeleteModalOpen = true;
+}
+
+closeEditModal() {
+  this.isEditModalOpen = false;
+}
+
+closeViewModal() {
+  this.isViewModalOpen = false;
+}
+
+closeDeleteModal() {
+  this.isDeleteModalOpen = false;
+}
 
   selectedStatus:any;
   CurrentPage=1

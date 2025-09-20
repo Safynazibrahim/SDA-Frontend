@@ -94,13 +94,21 @@
               </button>
 
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="openViewModal()">
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{"view_details" | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="openEditModal()">
                   <mat-icon>edit</mat-icon>
-                  <span>Edit</span>
+                  <span>{{"edit" | translate}}</span>
                 </button>
                 <button mat-menu-item>
+                  <mat-icon>refresh</mat-icon>
+                  <span>{{"re_fill" | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="openDeleteModal()">
                   <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
+                  <span>{{"delete" | translate}}</span>
                 </button>
               </mat-menu>
             </td>
@@ -120,13 +128,21 @@
               </button>
 
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="openViewModal()">
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{"view_details" | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="openEditModal()">
                   <mat-icon>edit</mat-icon>
-                  <span>Edit</span>
+                  <span>{{"edit" | translate}}</span>
                 </button>
                 <button mat-menu-item>
+                  <mat-icon>refresh</mat-icon>
+                  <span>{{"re_fill" | translate}}</span>
+                </button>
+                <button mat-menu-item (click)="openDeleteModal()">
                   <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
+                  <span>{{"delete" | translate}}</span>
                 </button>
               </mat-menu>
             </td>
@@ -143,3 +159,100 @@
     </app-pagination>
   </div>
 </div>
+
+
+<app-modal 
+  [isOpen]="isEditModalOpen" 
+  title='{{"edit_material" | translate}} '
+  size="medium" 
+  (close)="closeEditModal()">
+
+  <!-- Body -->
+  <div modal-body>
+    <div class="form-group">
+                    <label for="new-qua">{{"material_new" | translate}}</label>
+                    <input type="number" 
+                    id="new-qua" 
+                    class="form-input"
+                    formControlName="new-qua" 
+                    placeholder="{{'ENTER_NEW_QUANTITY' | translate}}">
+                </div>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="d-flex justify-content-between w-100">
+    <div class="w-50 m-1">
+      <button class="signin-button">{{"add" | translate}}</button>
+    </div>
+    <div class="w-50 m-1">
+      <button class="signin-button cancel" (click)="closeEditModal()">
+        {{"cancel" | translate}}
+      </button>
+    </div>
+  </div>
+
+</app-modal>
+
+  <app-modal 
+  [isOpen]="isViewModalOpen" 
+  title='{{"material_details" | translate}}'
+  size="large" 
+  (close)="closeViewModal()">
+
+  <!-- Body -->
+  <div modal-body class="modal-body">
+    <h4>{{ "scientific_name" | translate }}: <span>24</span></h4>
+    <h4>{{ "trade_name" | translate }}: <span>24</span></h4>
+    <h4>{{ "status" | translate }}: <span class="low-stock">Low Stock</span></h4>
+    <hr />
+    <div class="row mx-auto">
+      <div class="mini-table header d-flex justify-content-between">
+        <div class="col-3">{{"total_used" | translate}}</div>
+        <div class="col-3">{{"remaining" | translate}}</div>
+        <div class="col-3">{{"error_rate" | translate}}</div>
+        <div class="col-3">{{"avg_usage_case" | translate}}</div>
+      </div>
+      <div class="mini-table body d-flex justify-content-between">
+        <div class="col-3">{{"total_used" | translate}}</div>
+        <div class="col-3">{{"remaining" | translate}}</div>
+        <div class="col-3">{{"error_rate" | translate}}</div>
+        <div class="col-3">{{"avg_usage_case" | translate}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="w-100 mt-2">
+    <button class="signin-button close" (click)="closeViewModal()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+
+</app-modal>
+
+<app-modal 
+  [isOpen]="isDeleteModalOpen" 
+  title='{{"delete_material" | translate}}'
+  size="small" 
+  (close)="closeDeleteModal()">
+
+  <!-- Body -->
+  <div modal-body class="modal-body">
+    <p>{{"msg_delete_material"}}</p>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="d-flex justify-content-between w-100">
+    <div class="w-50 m-1">
+      <button class="signin-button">{{"delete" | translate}}</button>
+    </div>
+    <div class="w-50 m-1">
+      <button class="signin-button cancel" (click)="closeDeleteModal()">
+        {{"cancel" | translate}}
+      </button>
+    </div>
+  </div>
+
+</app-modal>
+
+

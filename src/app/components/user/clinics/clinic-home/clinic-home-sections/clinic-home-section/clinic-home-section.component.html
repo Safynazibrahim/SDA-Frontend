@@ -24,7 +24,7 @@
           />
         </div>
         <div>
-          <h4>{{"total_doctors" | translate}}</h4>
+          <h4>{{ "total_doctors" | translate }}</h4>
           <p>25</p>
         </div>
       </div>
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div>
-          <h4>{{"total_cases" | translate}}</h4>
+          <h4>{{ "total_cases" | translate }}</h4>
           <p>120</p>
         </div>
       </div>
@@ -114,7 +114,7 @@
           </div>
         </div>
         <div>
-          <h4>{{"total_revenue" | translate}}</h4>
+          <h4>{{ "total_revenue" | translate }}</h4>
           <p>85,000 SAR</p>
         </div>
       </div>
@@ -232,20 +232,9 @@
             <td>420gm</td>
             <td>12%</td>
             <td>
-              <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item >
-                  <mat-icon>edit</mat-icon>
-                  <span>Edit</span>
-                </button>
-                <button mat-menu-item >
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
-                </button>
-              </mat-menu>
+              <mat-icon style="cursor: pointer" (click)="openViewDoctorsModal()"
+                >visibility
+              </mat-icon>
             </td>
           </tr>
         </tbody>
@@ -283,20 +272,21 @@
             <td>420gm</td>
             <td>12%</td>
             <td>
-              <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon
+                style="cursor: pointer"
+                (click)="openViewMaterialModal()"
+                >visibility
+              </mat-icon>
+              <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
 
               <mat-menu #menu="matMenu">
-                <button mat-menu-item >
-                  <mat-icon>edit</mat-icon>
-                  <span>Edit</span>
+                <button mat-menu-item (click)="openViewMaterialModal()">
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{"view_details" | translate}}</span>
                 </button>
-                <button mat-menu-item >
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
-                </button>
-              </mat-menu>
+              </mat-menu> -->
             </td>
           </tr>
         </tbody>
@@ -311,3 +301,64 @@
     </app-pagination>
   </div>
 </div>
+
+<app-modal
+  [isOpen]="isViewMaterialModalOpen"
+  title="{{ 'material_usage_per_case' | translate }}"
+  size="medium"
+  (close)="closeViewMaterialModal()"
+>
+  <!-- Body -->
+  <div modal-body class="modal-body">
+    <h4>{{ "case_name" | translate }}: <span>Stock based</span></h4>
+    <h4>{{ "doctor_name" | translate }}: <span>24</span></h4>
+    <h4>{{ "scientific_name" | translate }}: <span>24</span></h4>
+    <h4>{{ "trade_name" | translate }}: <span>24</span></h4>
+    <hr />
+    <div class="row mx-auto">
+      <div class="mini-table header d-flex justify-content-between">
+        <div class="col-3">{{"material_used" | translate}}</div>
+        <div class="col-3">{{"standard_QTY" | translate}}</div>
+        <div class="col-3">{{"actual_used" | translate}}</div>
+        <div class="col-3">{{"error" | translate}}</div>
+      </div>
+      <div class="mini-table body d-flex justify-content-between">
+        <div class="col-3">{{"material_used" | translate}}</div>
+        <div class="col-3">{{"standard_QTY" | translate}}</div>
+        <div class="col-3">{{"actual_used" | translate}}</div>
+        <div class="col-3">{{"error" | translate}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="w-100 mt-2">
+    <button class="signin-button close" (click)="closeViewMaterialModal()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</app-modal>
+
+<app-modal
+  [isOpen]="isViewDoctorsModalOpen"
+  title="{{ 'doctor_performance_report' | translate }}"
+  size="medium"
+  (close)="closeViewDoctorsModal()"
+>
+  <!-- Body -->
+  <div modal-body class="modal-body">
+    <h4>{{ "type" | translate }}: <span>Stock based</span></h4>
+    <h4>{{ "no_of_cases" | translate }}: <span>24</span></h4>
+    <h4>{{ "referrals_made" | translate }}: <span>24</span></h4>
+    <h4>{{ "material_used" | translate }}: <span>24</span></h4>
+    <h4>{{ "avg_error_rate" | translate }}: <span>24</span></h4>
+    <hr />
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="w-100 mt-2">
+    <button class="signin-button close" (click)="closeViewDoctorsModal()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</app-modal>
