@@ -1,40 +1,104 @@
-.btn-search {
-  background-color: #b19e7f;
-  color: #fff;
-  border-radius: 25px;
-  &:hover { background-color: #9b8a6b; }
+.route {
+  color: #8f8f8f;
+  font-weight: 400;
+  font-family: "IBM Plex Sans";
+  font-size: 32px;
 }
-
+.clinicActive {
+  color: var(--text-gray-head-table);
+  font-family: "IBM Plex Sans";
+  font-size: 40px;
+  font-weight: 500;
+}
 .clinic-card {
-  border: 1px solid #eee;
+  border: 1px solid var(--border-white-gray);
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-primary);
+  .clinicName {
+    font-family: "IBM Plex Sans";
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--text-gray-head-table);
+  }
+  .clinic-address{
+    color: var(--text-gray-head-table);
+  }
 }
 
 .btn-outline-owner,
 .btn-outline-subowner,
 .btn-outline-operator {
-  border: 1px solid #b19e7f;
-  color: #b19e7f;
-  border-radius: 8px;
   font-size: 14px;
-  padding: 5px 12px;
-  background: #fff;
+    border: 2px solid #b19e7f;
+    color: #b19e7f;
+    border-radius: 8px;
+    padding: 5px 12px;
+    background: var(--bg-primary);
+    font-family: "IBM Plex Sans";
+    font-weight: 600;
+    height: 45px;
+    width: 100px;
   &:hover {
     background: #b19e7f;
     color: #fff;
   }
 }
-.arrow-color mat-icon{
+.arrow-color mat-icon {
   fill: var(--text-black-white) !important;
   color: var(--text-black-white) !important;
 }
+.search-wrapper {
+  width: 100%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 5px 10px;
+  width: 50%;
+  background: var(--bg-primary);
+}
+
+.search-icon {
+  color: #565656 !important;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #565656;
+  background: var(--bg-primary);
+}
+
+.search-btn {
+  background-color: #b19e7f;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #9b8a6b;
+}
+
 @media (max-width: 600px) {
-  .search-responsive{
+  .search-box {
+    width: 100% !important;
+  }
+  .search-responsive {
     width: 100% !important;
     margin-bottom: 10px;
   }
-  .btn-outline-operator{
+  .btn-outline-operator {
     margin: 5px 0px !important;
   }
 }

@@ -1,15 +1,11 @@
-<div class="container py-4">
-  <div class="d-flex align-items-center mb-3">
-    <h5 class="fw-bold mb-0">{{ "Clinic" | translate }}</h5>
+<div class="container package-max-width py-4">
+  <div class="d-flex align-items-center mb-2">
+        <p class="mb-0 route">{{ 'Clinic' | translate }}</p>
 
-    <a
-      [routerLink]="['/dashboard/clinics']"
-      class="m-0 p-0 text-black mt-2 arrow-color"
-      style="cursor: pointer"
-    >
+    <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color" style="cursor:pointer;">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
-    <h5 class="fw-bold mb-0">{{ "Operator Packages" | translate }}</h5>
+    <p class="mb-0 clinicActive">{{ "Operator Packages" | translate }}</p>
   </div>
 
   <div class="row g-4">

@@ -27,12 +27,13 @@
 
 .table thead th {
   font-weight: 600;
-  background: #e1e0e0;
+  background: var(--background-gray-head-table);
+  color: var(--text-gray-head-table);
 }
 .table tbody td {
   background: transparent;
   cursor: pointer;
-  color: var(--text-black-white);
+  color: var(--text-gray-home-about);
 }
 
 .page-link {
@@ -49,7 +50,53 @@
   color: #fff;
   border: none;
 }
+.search-wrapper {
+  width: 100%;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 5px 10px;
+  width: 50%;
+  background: var(--bg-primary);
+}
+
+.search-icon {
+  color: #565656 !important;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #565656;
+  background: var(--bg-primary);
+}
+
+.search-btn {
+  background-color: #b19e7f;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #9b8a6b;
+}
+
+
 @media (max-width: 600px) {
+  .search-box {
+    width: 100% !important;
+  }
   .search-responsive {
     width: 100% !important;
     margin-bottom: 10px;

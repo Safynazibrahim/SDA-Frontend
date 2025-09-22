@@ -7,7 +7,7 @@
   </div>
 
   <!-- Search -->
-  <div class="d-flex justify-content-center align-items-center mb-3">
+  <!-- <div class="d-flex justify-content-center align-items-center mb-3">
     <div class="input-group w-50 search-responsive">
       <input
         type="text"
@@ -20,7 +20,22 @@
         {{ 'Search' | translate }}
       </button>
     </div>
+  </div> -->
+<div class="search-wrapper d-flex justify-content-center mb-3">
+  <div class="search-box">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search clinic name"
+      [(ngModel)]="searchName"
+      (keyup.enter)="onSearch()"
+    />
+    <button class="search-btn" (click)="onSearch()">
+      {{ 'Search' | translate }}
+    </button>
   </div>
+</div>
 
   <!-- Owner Clinics -->
   @if(ownerClinicsData.length > 0){
@@ -49,7 +64,7 @@
     <td>{{ clinic.name }}</td>
     <td>{{ clinic.location }}</td>
     <td>{{ clinic.createdAt | date: 'dd-MM-yyyy' }}</td>
-    <td>-</td> <!-- seats مش موجودة -->
+    <td>-</td>
   </tr>
 </tbody>
     </table>

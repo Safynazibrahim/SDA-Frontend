@@ -5,11 +5,12 @@ import { PaginationComponent } from '../../shared/pagination/pagination.componen
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ClinicService } from './clinic.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-clinics',
   standalone: true,
-  imports: [TranslateModule, CommonModule, PaginationComponent, RouterModule, FormsModule],
+  imports: [TranslateModule, CommonModule, PaginationComponent, RouterModule, FormsModule , MatIcon],
   templateUrl: './clinics.component.html',
   styleUrl: './clinics.component.scss'
 })

@@ -1,27 +1,36 @@
 <div class="container py-3">
   <!-- Back + Title -->
-  <div class="d-flex align-items-center mb-3">
-        <h5 class="fw-bold mb-0">{{ 'Clinic' | translate }}</h5>
+  <div class="d-flex align-items-center mb-2">
+        <p class="mb-0 route">{{ 'Clinic' | translate }}</p>
 
-    <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0 text-black mt-2 arrow-color" style="cursor:pointer;">
+    <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color" style="cursor:pointer;">
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
-    <h5 class="fw-bold mb-0">{{ 'Join Clinics' | translate }}</h5>
+    <p class="mb-0 clinicActive">{{ 'Join Clinics' | translate }}</p>
   </div>
-
-  <!-- Search -->
-  <div class="d-flex justify-content-center align-items-center mb-4">
-    <div class="input-group w-50 search-responsive">
-      <input type="text" class="form-control" placeholder="Find clinics within 20 km around you" />
-      <button class="btn btn-search px-4">{{ 'Search' | translate }}</button>
-    </div>
+  <div class="search-wrapper d-flex justify-content-center mb-3">
+  <div class="search-box">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Find clinics within 20 km around you"
+    />
+    <button class="search-btn" >
+      {{ 'Search' | translate }}
+    </button>
   </div>
+</div>
 
   <!-- Clinic List -->
   <div *ngFor="let clinic of clinics" class="clinic-card d-flex justify-content-between align-items-center p-3 mb-3 shadow-sm">
     <div>
-      <h6 class="mb-1">{{ clinic.name }}</h6>
-      <small class="text-muted">{{ clinic.address }}</small>
+      <h6 class="mb-1 clinicName">{{ clinic.name }}</h6>
+      <small class="text-muted"> <svg xmlns="http://www.w3.org/2000/svg" width="25" height="32" viewBox="0 0 32 32" fill="none">
+<path d="M25 13C25 10.6131 24.0518 8.32387 22.364 6.63604C20.6761 4.94821 18.3869 4 16 4C13.6131 4 11.3239 4.94821 9.63604 6.63604C7.94821 8.32387 7 10.6131 7 13C7 16.692 9.954 21.504 16 27.268C22.046 21.504 25 16.692 25 13ZM16 30C8.666 23.334 5 17.666 5 13C5 10.0826 6.15893 7.28473 8.22183 5.22183C10.2847 3.15893 13.0826 2 16 2C18.9174 2 21.7153 3.15893 23.7782 5.22183C25.8411 7.28473 27 10.0826 27 13C27 17.666 23.334 23.334 16 30Z" fill="#85775F"/>
+<path d="M16 16C16.7956 16 17.5587 15.6839 18.1213 15.1213C18.6839 14.5587 19 13.7956 19 13C19 12.2044 18.6839 11.4413 18.1213 10.8787C17.5587 10.3161 16.7956 10 16 10C15.2044 10 14.4413 10.3161 13.8787 10.8787C13.3161 11.4413 13 12.2044 13 13C13 13.7956 13.3161 14.5587 13.8787 15.1213C14.4413 15.6839 15.2044 16 16 16ZM16 18C14.6739 18 13.4021 17.4732 12.4645 16.5355C11.5268 15.5979 11 14.3261 11 13C11 11.6739 11.5268 10.4021 12.4645 9.46447C13.4021 8.52678 14.6739 8 16 8C17.3261 8 18.5979 8.52678 19.5355 9.46447C20.4732 10.4021 21 11.6739 21 13C21 14.3261 20.4732 15.5979 19.5355 16.5355C18.5979 17.4732 17.3261 18 16 18Z" fill="#85775F"/>
+</svg>
+ <span class="ms-1 clinic-address">{{ clinic.address }}</span></small>
     </div>
     <div>
       <button class="btn btn-outline-owner me-2">Owner</button>

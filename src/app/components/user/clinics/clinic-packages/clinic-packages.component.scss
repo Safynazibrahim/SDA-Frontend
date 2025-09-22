@@ -1,103 +1,120 @@
-.package-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.package-max-width {
+  width: 1300px !important;
+  .route {
+    color: #8f8f8f;
+    font-weight: 400;
+    font-family: "IBM Plex Sans";
+    font-size: 27px;
   }
-
-  .card-header {
-    h5 {
-      margin: 0;
-      font-weight: 600;
-    }
+  .clinicActive {
+    color: var(--text-gray-head-table);
+    font-family: "IBM Plex Sans";
+    font-size: 30px;
+    font-weight: 500;
   }
-  .price {
-    font-size: 32px;
-    font-weight: 600;
-    text-align: center;
-  }
-  .features {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      margin: 8px 0;
-      font-size: 14px;
-      color: #555;
-
-      i {
-        color: #b19e7f;
-        margin-right: 5px;
-      }
-    }
-  }
-
-  .btn-subscribe {
-    border: 1px solid #b19e7f;
-    color: #b19e7f;
-    background: #fff;
-    border-radius: 6px;
+  .package-card {
+    border: 1px solid #ddd;
+    background: var(--bg-primary) ;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
 
     &:hover {
-      background: #b19e7f;
-      color: #fff;
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-  }
 
-  &.premium {
-    background: #3e372c;
-    color: #fff;
-
-    .features li {
-      color: #ddd;
+    .card-header {
+      height: 41px;
+      h5 {
+        margin: 0;
+        font-weight: 600;
+      }
     }
     .price {
-      color: #fff;
-    }
-    .btn-upgrade {
-      background: #fff;
-      color: #4d3a2d;
-      border-radius: 6px;
+      font-size: 32px;
       font-weight: 600;
+      text-align: center;
+      color: var(--text-black-white);
+    }
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin: 8px 0;
+        font-size: 14px;
+        color: var(--text-light-gray);
+
+        i {
+          color: #b19e7f;
+          margin-right: 5px;
+        }
+      }
     }
 
-    .badge {
-      position: absolute;
-      /* top: 10px; */
-      /* left: -5px; */
-      background: #c26e07;
+    .btn-subscribe {
+      border: 1px solid #b19e7f;
+      color: #b19e7f;
+      background: #fff;
+      border-radius: 6px;
+
+      &:hover {
+        background: #b19e7f;
+        color: #fff;
+      }
+    }
+
+    &.premium {
+      background: #3e372c;
       color: #fff;
-      padding: 35px 40px;
-      font-size: 12px;
-      clip-path: polygon(100% 0, 0 100%, 0 0);
-      .padge-pro {
+
+      .features li {
+        color: #ddd;
+      }
+      .price {
+        color: #fff;
+      }
+      .btn-upgrade {
+        background: #fff;
+        color: #4d3a2d;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+
+      .badge {
         position: absolute;
-        top: 32%;
-        left: 30%;
-        transform: translate(-50%, -50%) rotate(-45deg);
-        font-size: 16px;
-        font-weight: bold;
+        /* top: 10px; */
+        /* left: -5px; */
+        background: #c26e07;
+        color: #fff;
+        padding: 35px 40px;
+        font-size: 12px;
+        clip-path: polygon(100% 0, 0 100%, 0 0);
+        .padge-pro {
+          position: absolute;
+          top: 32%;
+          left: 30%;
+          transform: translate(-50%, -50%) rotate(-45deg);
+          font-size: 16px;
+          font-weight: bold;
+        }
       }
     }
   }
+  .card-header {
+    border-bottom: none !important;
+    background: #85775f !important;
+    color: #fff;
+  }
+  .price {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #bfbfbf;
+  }
+  .arrow-color mat-icon {
+    fill: var(--text-black-white) !important;
+    color: var(--text-black-white) !important;
+  }
 }
-.card-header {
-  border-bottom: none !important;
-  background: #85775f !important;
-  color: #fff;
-}
-.price {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #bfbfbf;
-}
-.arrow-color mat-icon{
-  fill: var(--text-black-white) !important;
-  color: var(--text-black-white) !important;
-}
-
