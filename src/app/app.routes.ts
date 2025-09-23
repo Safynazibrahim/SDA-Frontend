@@ -17,17 +17,17 @@ export const routes: Routes = [
       {
         path: 'login',
         loadComponent: () => import('./components/auth/login/login.component').then(m => m.LoginComponent),
-        // canActivate: [guestGuard]   
+        canActivate: [guestGuard]   
       },
       {
         path: 'register',
         loadComponent: () => import('./components/auth/register/register.component').then(m => m.RegisterComponent),
-        // canActivate: [guestGuard]   
+        canActivate: [guestGuard]   
       },
       {
         path: 'forget-password',
         loadComponent: () => import('./components/auth/forget-pass/forget-pass.component').then(m => m.ForgetPassComponent),
-        // canActivate: [guestGuard]  
+        canActivate: [guestGuard]  
       },
     ]
   },
@@ -35,7 +35,7 @@ export const routes: Routes = [
     path: 'dashboard',
     loadComponent: () => import('./components/layouts/user-layout/user-layout.component')
       .then(m => m.UserLayoutComponent),
-    // canActivate: [authGuard],  
+    canActivate: [authGuard],  
     children: [
       { path: '', redirectTo: 'homeDashboard', pathMatch: 'full' },
       { path: 'homeDashboard', loadComponent: () => import('./components/user/dashboard/dashboard.component').then(m => m.DashboardComponent) },
