@@ -8,30 +8,43 @@ h3 {
   }
 }
 
-.search-form-control {
+.search-wrapper {
   width: 100%;
-  padding: 14px;
-  font-size: 18px;
-  font-weight: 500;
+
+  .search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
   border-radius: 25px;
-  border: 1px solid var(--text-gray) !important;
-  background-color: var(--bg-white);
-  color: var(--text-gray);
-}
-.search-form-control:focus {
+  padding: 5px 10px;
+  width: 50%;
+  background: var(--bg-primary);
+  }
+
+  .search-icon {
+    color: var(--text-gray);
+    pointer-events: none; // so it doesn’t block typing
+  }
+
+  .search-form-control {
+    flex: 1;
+  border: none;
   outline: none;
-  border: 1px solid var(--text-gray) !important;
   background: none !important;
-}
-.btn-search {
-  position: absolute;
-  top: 12%;
-  right: 10px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--text-gray) !important;
+      background: none !important;
+    }
+  }
+  .btn-search {
   color: var(--bg-white) !important;
   background-color: var(--bg-brown-medium);
   border-radius: 25px;
   border: none !important;
   padding: 9px 15px;
+  }
 }
 
 .dropdown {
@@ -83,11 +96,17 @@ h3 {
 // }
 
 .in-stock {
-  color: green;
+  mat-icon{
+    margin-right: 5px;
+  }
+  color: green !important;
 }
 
 .low-stock {
-  color: #e6a400; // أصفر غامق
+  mat-icon{
+    margin-right: 5px;
+  }
+  color: #e6a400 !important; 
 }
 
 .signin-button {
@@ -135,5 +154,11 @@ h3 {
 @media (max-width: 600px) {
   .table thead th , .table tbody td {
   font-size: 13px;
+  }
+}
+
+@media (max-width: 900px) {
+  .search-box {
+    width: 100% !important;
   }
 }

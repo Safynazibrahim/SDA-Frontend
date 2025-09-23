@@ -1,38 +1,52 @@
 h3 {
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--text-gray-home-about);
+  color: var(--text-gray);
   span mat-icon {
     cursor: pointer;
     font-size: 30px;
   }
 }
 
-.search-form-control {
+.search-wrapper {
   width: 100%;
-  padding: 14px;
-  font-size: 18px;
-  font-weight: 500;
+
+  .search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
   border-radius: 25px;
-  border: 1px solid var(--text-gray) !important;
-  background-color: var(--bg-white);
-  color: var(--text-gray);
-}
-.search-form-control:focus {
+  padding: 5px 10px;
+  width: 50%;
+  background: var(--bg-primary);
+  }
+
+  .search-icon {
+    color: var(--text-gray);
+    pointer-events: none; // so it doesn’t block typing
+  }
+
+  .search-form-control {
+    flex: 1;
+  border: none;
   outline: none;
-  border: 1px solid var(--text-gray) !important;
   background: none !important;
-}
-.btn-search {
-  position: absolute;
-  top: 12%;
-  right: 10px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--text-gray) !important;
+      background: none !important;
+    }
+  }
+  .btn-search {
   color: var(--bg-white) !important;
   background-color: var(--bg-brown-medium);
   border-radius: 25px;
   border: none !important;
   padding: 9px 15px;
+  }
 }
+
 .material-card {
   padding: 15px;
   border: 1px solid var(--text-gray);
@@ -93,5 +107,11 @@ h3 {
         color: var(--text-black-white);
       }
     }
+  }
+}
+
+@media (max-width: 900px) {
+  .search-box {
+    width: 100% !important;
   }
 }

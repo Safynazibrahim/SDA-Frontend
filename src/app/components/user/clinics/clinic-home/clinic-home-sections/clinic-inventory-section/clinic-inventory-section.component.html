@@ -24,18 +24,19 @@
 
   <div class="row d-flex align-items-center justify-content-ceter mb-3 mx-2">
     <!-- Search -->
-    <div class="d-flex justify-content-center mb-4">
-      <div class="col-sm-12 col-md-6 d-flex position-relative">
+    <div
+      class="col-sm-12 col-md-6 d-flex search-wrapper d-flex justify-content-center mb-4"
+    >
+      <div class="search-box">
+        <mat-icon class="search-icon">search</mat-icon>
         <input
           type="text"
           class="search-form-control"
           placeholder="{{ 'search_material' | translate }}"
         />
-        <div>
-          <button class="btn-search">
-            {{ "Search" | translate }}
-          </button>
-        </div>
+        <button class="btn-search">
+          {{ "Search" | translate }}
+        </button>
       </div>
     </div>
   </div>
@@ -89,9 +90,11 @@
             <td>stock based</td>
             <td>30</td>
             <td>420gm</td>
-            <td class="status-cell">
-              <!-- <mat-icon class="in-stock">check_circle</mat-icon> -->
-              <span class="status-text in-stock">In Stock</span>
+            <td class="in-stock">
+              <div class="d-flex align-items-center">
+                <mat-icon>check_circle</mat-icon>
+                In Stock
+              </div>
             </td>
             <td>
               <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -123,9 +126,11 @@
             <td>stock based</td>
             <td>30</td>
             <td>420gm</td>
-            <td class="status-cell">
-              <!-- <mat-icon class="low-stock">warning</mat-icon> -->
-              <span class="status-text low-stock">Low Stock</span>
+            <td class="low-stock">
+              <div class="d-flex align-items-center">
+                <mat-icon>warning</mat-icon>
+                Low Stock
+              </div>
             </td>
             <td>
               <button mat-icon-button [matMenuTriggerFor]="menu">

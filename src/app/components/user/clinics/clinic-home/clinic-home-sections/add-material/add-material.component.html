@@ -6,52 +6,60 @@
         <span>
           <mat-icon>keyboard_arrow_left</mat-icon>
         </span>
-        {{"inventory" | translate}}
+        {{ "inventory" | translate }}
         <span [routerLink]="['../']">
           <mat-icon>keyboard_arrow_left</mat-icon>
         </span>
-        {{ "add_material" | translate }}
+        <h3 style="color: var(--text-gray-head-table); display: inline-block">
+          {{ "add_material" | translate }}
+        </h3>
       </h3>
     </div>
   </div>
 
   <div class="row d-flex align-items-center justify-content-ceter mb-3 mx-2">
     <!-- Search -->
-    <div class="d-flex justify-content-center mb-4">
-      <div class="col-sm-12 col-md-6 d-flex position-relative">
+    <div
+      class="col-sm-12 col-md-6 d-flex search-wrapper d-flex justify-content-center mb-4"
+    >
+      <div class="search-box">
+        <mat-icon class="search-icon">search</mat-icon>
         <input
           type="text"
           class="search-form-control"
           placeholder="{{ 'search_material' | translate }}"
         />
-        <div>
-          <button class="btn-search">
-            {{ "Search" | translate }}
-          </button>
-        </div>
+        <button class="btn-search">
+          {{ "Search" | translate }}
+        </button>
       </div>
     </div>
   </div>
 
   <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
-    <div class="col-lg-3 col-md-6 col-sm-6 mb-3" *ngFor="let material of [1, 2, 3, 4,5,6,7,8]">
-    <div class="material-card">
-      
-      <div class="material-img">
-        <img src="../../../../../../../assets/media/material.jpg" alt="material" >
-      </div>
+    <div
+      class="col-lg-3 col-md-6 col-sm-6 mb-3"
+      *ngFor="let material of [1, 2, 3, 4, 5, 6, 7, 8]"
+    >
+      <div class="material-card">
+        <div class="material-img">
+          <img
+            src="../../../../../../../assets/media/material.jpg"
+            alt="material"
+          />
+        </div>
 
-      <div class="material-body my-3">
-        <h5 class="title">{{ "scientificName" }}</h5>
-        <p class="trade">{{ "tradeName" }}</p>
-        <hr>
-        <div class="d-flex align-items-center justify-content-between">
-          <button class="circle-btn">-</button>
-          <span class="count">0</span>
-          <button class="circle-btn">+</button>
+        <div class="material-body my-3">
+          <h5 class="title">{{ "scientificName" }}</h5>
+          <p class="trade">{{ "tradeName" }}</p>
+          <hr />
+          <div class="d-flex align-items-center justify-content-between">
+            <button class="circle-btn">-</button>
+            <span class="count">0</span>
+            <button class="circle-btn">+</button>
+          </div>
         </div>
       </div>
-    </div>
     </div>
     <app-pagination
       [totalItems]="50"
