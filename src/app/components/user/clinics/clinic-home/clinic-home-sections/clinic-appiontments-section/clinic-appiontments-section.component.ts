@@ -183,11 +183,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { SearchComponent } from '../../../../../shared/search/search.component';
 
 @Component({
   selector: 'app-appointments',
   standalone: true,
-  imports: [CommonModule, TranslateModule , MatIcon],
+  imports: [CommonModule, TranslateModule , SearchComponent, MatIcon],
   templateUrl: './clinic-appiontments-section.component.html',
   styleUrl: './clinic-appiontments-section.component.scss',
 })
@@ -208,6 +209,9 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
     });
   }
 
+  onSearch(){
+    console.log('safyy')
+  }
   generateWeek(baseDate: Date) {
     const startOfWeek = new Date(baseDate);
     startOfWeek.setDate(baseDate.getDate() - baseDate.getDay());

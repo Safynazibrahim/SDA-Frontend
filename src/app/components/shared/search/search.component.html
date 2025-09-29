@@ -1,0 +1,16 @@
+<div class="search-wrapper d-flex justify-content-center mb-3">
+  <div class="search-box">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      class="search-form-control"
+      [placeholder]="placeholder"
+      [ngModel]="model"
+      (ngModelChange)="onInputChange($event)"
+      (keyup.enter)="onEnter()"
+    />
+    <button class="btn-search" (click)="onClick()">
+      {{ 'Search' | translate }}
+    </button>
+  </div>
+</div>

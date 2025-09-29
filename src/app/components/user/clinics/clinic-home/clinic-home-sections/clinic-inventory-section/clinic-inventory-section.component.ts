@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from 'express';
 import { RouterLink } from '@angular/router';
 import { ModalComponent } from '../../../../../shared/modal/modal.component';
+import { SearchComponent } from '../../../../../shared/search/search.component';
 
 @Component({
   selector: 'app-clinic-inventory-section',
@@ -20,7 +21,8 @@ import { ModalComponent } from '../../../../../shared/modal/modal.component';
     MatMenuModule,
     MatButtonModule,
     RouterLink,
-    ModalComponent], 
+    ModalComponent,
+    SearchComponent], 
   templateUrl: './clinic-inventory-section.component.html',
   styleUrl: './clinic-inventory-section.component.scss'
 })
@@ -63,5 +65,9 @@ closeDeleteModal() {
   onPageChange(page: number) {
     this.CurrentPage = page;
     
+  }
+
+  onSearch(){
+    console.log('safsaf')
   }
 }

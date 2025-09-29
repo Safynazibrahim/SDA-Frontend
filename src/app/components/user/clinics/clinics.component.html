@@ -7,35 +7,11 @@
   </div>
 
   <!-- Search -->
-  <!-- <div class="d-flex justify-content-center align-items-center mb-3">
-    <div class="input-group w-50 search-responsive">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search clinic name"
-        [(ngModel)]="searchName"
-        (keyup.enter)="onSearch()"
-      />
-      <button class="btn btn-search px-4" (click)="onSearch()">
-        {{ 'Search' | translate }}
-      </button>
-    </div>
-  </div> -->
-<div class="search-wrapper d-flex justify-content-center mb-3">
-  <div class="search-box">
-    <mat-icon class="search-icon">search</mat-icon>
-    <input
-      type="text"
-      class="search-input"
-      placeholder="Search clinic name"
-      [(ngModel)]="searchName"
-      (keyup.enter)="onSearch()"
-    />
-    <button class="search-btn" (click)="onSearch()">
-      {{ 'Search' | translate }}
-    </button>
-  </div>
-</div>
+  <app-search
+  [(model)]="searchName"
+  [placeholder]="'Search clinic name' | translate"
+  (search)="onSearch()">
+  </app-search> 
 
   <!-- Owner Clinics -->
   @if(ownerClinicsData.length > 0){

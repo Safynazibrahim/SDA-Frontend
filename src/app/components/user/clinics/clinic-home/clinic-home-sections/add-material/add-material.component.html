@@ -17,23 +17,11 @@
     </div>
   </div>
 
-  <div class="row d-flex align-items-center justify-content-ceter mb-3 mx-2">
-    <!-- Search -->
-    <div
-      class="col-sm-12 col-md-6 d-flex search-wrapper d-flex justify-content-center mb-4"
-    >
-      <div class="search-box">
-        <mat-icon class="search-icon">search</mat-icon>
-        <input
-          type="text"
-          class="search-form-control"
-          placeholder="{{ 'search_material' | translate }}"
-        />
-        <button class="btn-search">
-          {{ "Search" | translate }}
-        </button>
-      </div>
-    </div>
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <app-search
+    [placeholder]="'search_material' | translate"
+    (search)="onSearch()">
+    </app-search> 
   </div>
 
   <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">

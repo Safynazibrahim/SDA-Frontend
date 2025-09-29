@@ -156,25 +156,25 @@
             left: 50%;
             transform: translateX(-50%);
         }
-// .img-container img{
-//             width: 600px;
-//             height: 1050px;
-//         }
-.img-container {
-  display: flex;
-  align-items: flex-end;
-  height: 100%;
-}
+.img-container img{
+            width: 600px;
+            height: 1050px;
+        }
+// .img-container {
+//   display: flex;
+//   align-items: flex-end;
+//   height: 100%;
+// }
 
-.img-container img {
-  // width: 100%;
-  width: 600px;
-  height: 100%;
-  object-fit: contain;
-}
-.row.g-0 {
-  align-items: stretch; // very important
-}
+// .img-container img {
+//   // width: 100%;
+//   width: 600px;
+//   height: 100%;
+//   object-fit: contain;
+// }
+// .row.g-0 {
+//   align-items: stretch; // very important
+// }
 
 @media (min-width:766px) and (max-width: 993px) {
             .img-container img{
@@ -208,7 +208,7 @@
             .login {
                 min-height: 150vh;
                 display: flex;
-                // width: 100%;
+                // width: 100%;  
                 justify-content: center;
                 align-items: center;
                 background-image: url(../../../../assets/media/login-sm.svg);

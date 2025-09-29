@@ -19,7 +19,7 @@
                             <span *ngIf="currentStep <= 1"></span>
                             <img *ngIf="currentStep > 1" src="../../../../assets/media/stepper.svg" alt="completed">
                         </div>
-                        <div class="step-name">{{"DOCTOR_DATA" | translate}}</div>
+                        <div class="step-name">{{"BASIC_DATA" | translate}}</div>
                     </div>
                     
                     <div class="stepper-divider" [class.completed]="currentStep > 1"></div>
@@ -29,7 +29,7 @@
                             <span *ngIf="currentStep <= 2"></span>
                             <img *ngIf="currentStep > 2" src="../../../../assets/media/stepper.svg" alt="completed">
                         </div>
-                        <div class="step-name">{{"CLINIC_DATA" | translate}}</div>
+                        <div class="step-name">{{"PROFESSIONAL_DATA" | translate}}</div>
                     </div>
                 </div>
             </div>
@@ -114,22 +114,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="required" for="specialization">{{"SPECIALIZATION" | translate}}</label>
-                            <input 
-                            type="text" 
-                            formControlName="specialization" 
-                            id="specialization" 
-                            class="form-input" 
-                            placeholder="{{'ENTER_YOUR_SPECIALIZATION' | translate}}">
-                            <small class="text-danger" 
-                            *ngIf="registerForm.get('doctor.specialization')?.touched 
-                            && registerForm.get('doctor.specialization')?.errors?.['required']">
-                                {{ 'FIELD_REQUIRED' | translate }}
-                            </small>
-                        </div>
-
-
                         <button type="button" 
                         class="signin-button" 
                         (click)="nextStep()"
@@ -141,40 +125,6 @@
 
                     <!-- Step 2: Professional Data -->
                     <div *ngIf="currentStep === 2" formGroupName="clinic">
-
-                        <div class="form-group">
-                            <label class="required" for="name">{{"CLINIC_NAME" | translate}}</label>
-                            <input type="text" 
-                            id="name"  
-                            class="form-input" 
-                            formControlName="name" 
-                            placeholder="{{'ENTER_YOUR_CLINIC_NAME' | translate}}" >
-                            <small class="text-danger" 
-                            *ngIf="registerForm.get('clinic.name')?.touched 
-                            && registerForm.get('clinic.name')?.errors?.['required']">
-                                {{ 'FIELD_REQUIRED' | translate }}
-                            </small>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="required" for="location">{{"LOCATION" | translate}}</label>
-                            <div class="position-relative">
-                                <input type="text" 
-                                id="location" 
-                                class="form-input"
-                                formControlName="location" 
-                                placeholder="{{'ENTER_YOUR_LOCATION' | translate}}" >
-                                <button style="position: absolute;top: 50%;right: 0%;transform: translateX(-50%);transform: translateY(-50%);" mat-icon-button matSuffix (click)="getCurrentLocation()" type="button">
-                                    <mat-icon>location_on</mat-icon>
-                                </button>
-                                <small class="text-danger" 
-                                *ngIf="registerForm.get('clinic.location')?.touched 
-                                && registerForm.get('clinic.location')?.errors?.['required']">
-                                    {{ 'FIELD_REQUIRED' | translate }}
-                                </small>
-                            </div>
-                        </div>
-                        <div id="map" *ngIf="showMap"></div>
 
                         <div class="form-group">
                             <label class="required" for="specialization">{{"SPECIALIZATION" | translate}}</label>
@@ -191,21 +141,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="required" for="branchesCount">{{"BRANCHESCOUNT" | translate}}</label>
-                            <input type="number" 
-                            id="branchesCount" 
-                            formControlName="branchesCount"
-                            class="form-input" 
-                            placeholder="{{'ENTER_YOUR_BRANCHESCOUNT' | translate}}">
-                            <small class="text-danger" 
-                            *ngIf="registerForm.get('clinic.branchesCount')?.touched 
-                            && registerForm.get('clinic.branchesCount')?.errors?.['required']">
-                                {{ 'FIELD_REQUIRED' | translate }}
-                            </small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="medical-license">{{"MEDICAL_LICENSE" | translate}}</label>
+                            <label class="required" for="medical-license">{{"MEDICAL_LICENSE" | translate}}</label>
                             <div class="file-upload-container">
                                 <input id="medical-license" hidden type="file" (change)="onFileSelected($event, 'medicalLicense')" />
                                 <div class="file-upload-display" (click)="triggerFileInput('medical-license')">
@@ -217,7 +153,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="certificate">{{"CERTIFICATE" | translate}}</label>
+                            <label class="required" for="certificate">{{"CERTIFICATE" | translate}}</label>
                             <div class="file-upload-container">
                                 <input id="certificate" multiple hidden type="file" (change)="onFileSelected($event, 'certificate')" />
                                 <div class="file-upload-display" (click)="triggerFileInput('certificate')">
