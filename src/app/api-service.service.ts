@@ -35,38 +35,42 @@ export class ApiServiceService {
         })
       );
   }
-
+  
   post<T>(endpoint: string, data: any, reportProgress = false): Observable<T> {
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  let headers = new HttpHeaders();
 
-    if (reportProgress) {
-      const req = new HttpRequest('POST', `${this.baseUrl}/${endpoint}`, data, {
-        headers,
-        reportProgress: true,
-        withCredentials: true,
-      });
-
-      return this.http.request(req).pipe(
-        map((event: any) => {
-          if (event.type === HttpEventType.UploadProgress) {
-            const percent = Math.round((100 * event.loaded) / event.total);
-            return { percent } as any;
-          }
-          if (event.type === HttpEventType.Response) {
-            return event.body;
-          }
-        }),
-        last()
-      );
-    }
-
-    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
-      headers,
-      withCredentials: true,
-    });
+  // ❌ Don't force JSON if data is FormData
+  if (!(data instanceof FormData)) {
+    headers = headers.set('Content-Type', 'application/json');
   }
 
-  // دالة جديدة للـ requests اللي عايزينها تتجنب الـ interceptor
+  if (reportProgress) {
+    const req = new HttpRequest('POST', `${this.baseUrl}/${endpoint}`, data, {
+      headers,
+      reportProgress: true,
+      withCredentials: true,
+    });
+
+    return this.http.request(req).pipe(
+      map((event: any) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const percent = Math.round((100 * event.loaded) / event.total);
+          return { percent } as any;
+        }
+        if (event.type === HttpEventType.Response) {
+          return event.body;
+        }
+      }),
+      last()
+    );
+  }
+
+  return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
+    headers,
+    withCredentials: true,
+  });
+  }
+
   postDirect<T>(endpoint: string, data: any): Observable<T> {
     let headers = new HttpHeaders()
       .set('Content-Type', 'application/json')

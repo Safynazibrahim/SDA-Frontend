@@ -6,11 +6,12 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ClinicService } from './clinic.service';
 import { MatIcon } from '@angular/material/icon';
+import { SearchComponent } from '../../shared/search/search.component';
 
 @Component({
   selector: 'app-clinics',
   standalone: true,
-  imports: [TranslateModule, CommonModule, PaginationComponent, RouterModule, FormsModule , MatIcon],
+  imports: [TranslateModule, CommonModule, PaginationComponent, RouterModule, FormsModule , SearchComponent],
   templateUrl: './clinics.component.html',
   styleUrl: './clinics.component.scss'
 })
