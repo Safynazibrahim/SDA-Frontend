@@ -1,0 +1,123 @@
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-gray);
+  span mat-icon {
+    cursor: pointer;
+    font-size: 30px;
+  }
+}
+
+.action {
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.edit {
+    background-color: var(--bg-brown-medium);
+    color: var(--bg-primary);
+    border: transparent;
+  }
+  &.delete {
+    background-color: #fce8e6;
+    color: #e83324;
+    border: transparent;
+  }
+}
+
+.patient-header {
+  background-color: var(--bg-white-secondary);
+  padding: 20px;
+  border-radius: 12px;
+  h3 {
+    color: var(--text-gray-home-about) !important;
+  }
+  p {
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-gray);
+    span , mat-icon{
+      color: var(--bg-brown-medium);
+    }
+  }
+  .line {
+    border-left: 2px solid #ddd; // خط عمودي
+    align-self: stretch;
+  }
+  .last-visited {
+    background-color: var(--bg-gray);
+    font-weight: 500;
+    padding: 5px;
+    border-radius: 8px;
+    color: var(--text-gray-home-about);
+  }
+}
+
+/* Container behind tabs (matches your Figma pill rail) */
+.tabbar {
+  --pill-radius: 35px;
+  --inactive: var(--text-gray);
+  --rail-bg: var(--svg-color,);
+  --active-text: #fff;
+  /* fallback if your gradient var isn't defined */
+  --active-bg: var(--bg-brown-gradient);
+  display: flex;
+  align-items: center;
+  background: var(--rail-bg);
+  border-radius: var(--pill-radius);
+  width: 100%;
+  font-size: 1.3rem;
+  font-weight: 500;
+
+  /* mobile: allow horizontal scroll if crowded */
+  overflow-x: auto;
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.tabbar::-webkit-scrollbar { display: none; }
+
+/* The tab “buttons” */
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-decoration: none;
+  width: 25%;
+
+  padding: 20px;
+  border-radius: var(--pill-radius);
+  color: var(--inactive);
+  background: transparent;
+  font-weight: 500;
+  line-height: 1;
+  user-select: none;
+
+  /* No hover/ink/ripple effects */
+  transition: none;
+}
+
+/* Active state (matches your filled brown pill) */
+.tab.active {
+  background: var(--active-bg);
+  color: var(--active-text);
+  padding: 20px;
+}
+
+/* Focus-visible for keyboard users (accessibility) */
+.tab:focus-visible {
+  outline: 2px solid var(--bg-brown-gradient);
+  outline-offset: 2px;
+}
+
+/* Responsive: wrap on larger screens if you prefer, or keep scrolling */
+@media (max-width: 768px) {
+  .tabbar { 
+    font-size: 0.9rem;
+    flex-wrap: wrap; 
+    overflow-x: visible; }
+}

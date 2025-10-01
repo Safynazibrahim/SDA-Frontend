@@ -67,6 +67,7 @@ $SDA-theme: mat.define-light-theme((
   --bg-white: #f9f9f9;
   --bg-white-secondary: #fff;
   --bg-light-gray: #ebebeb;
+  --bg-gray: #ebebeb; 
   /* Brown gradient section backgrounds */
   --bg-brown-light: #d4c4a8;      /* Light brown from your design */
   --bg-brown-medium: #b19e7f;     /* Medium brown */
@@ -144,6 +145,7 @@ $SDA-theme: mat.define-light-theme((
   --bg-white: #2a2e29;    
   --bg-white-secondary: #222520;   
   --bg-light-gray: #EBEBEB ;
+  --bg-gray: #383d36;
   --text-light-gray: #999999;
   --number-pagination: #999;
   /* Brown sections in dark mode */
@@ -165,7 +167,7 @@ $SDA-theme: mat.define-light-theme((
   --text-light: #b19e7f;          /* Subtle text */
   --text-on-brown: #f5f3f0;       /* Light text on brown */
   --text-on-brown-secondary: #e8e3dd; /* Secondary text on brown */
-  --svg-color:rgba(250, 248, 244, 0.32);
+  --svg-color:#F7F5F2;
   /* Orange accents remain similar but adjusted */
   --accent-orange: #a67f00;       /* Brighter orange for dark mode */
   --accent-orange-light: #e67e22; /* Orange light */
@@ -319,6 +321,16 @@ body {
   justify-content: center;
   margin: 0 auto 1rem;
   box-shadow: var(--shadow-md);
+}
+
+.main-title h3 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-gray-home-about);
+    span mat-icon {
+    cursor: pointer;
+    font-size: 30px; 
+  }
 }
 
 /* Responsive design */

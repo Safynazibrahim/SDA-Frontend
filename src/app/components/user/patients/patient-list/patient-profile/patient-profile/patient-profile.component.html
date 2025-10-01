@@ -1,0 +1,85 @@
+<div class="container py-3">
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <div class="col-lg-6">
+      <h3>
+        {{ "Patients" | translate }}
+        <span>
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        {{ "patient_profile" | translate }}
+        <span [routerLink]="['/dashboard/patient-list']">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        <h3 style="color: var(--text-gray-head-table); display: inline-block">
+          {{ currentTitle | translate }}
+        </h3>
+      </h3>
+    </div>
+    <div class="col-lg-6 d-flex justify-content-end align-items-center">
+      <button mat-icon-button class="action edit me-2">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button class="action delete ms-2">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="row patient-header d-flex align-items-center justify-content-between my-3 mx-3"
+  >
+    <!-- Left side: Patient Info -->
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-2">
+          <img src="../../../../../../../assets/media/pic-not-found.png" class="w-100" alt="" />
+        </div>
+        <div class="col-10">
+          <h3 class="mb-1">Safynaz Ibrahim</h3>
+          <p class="mb-1">Female, Age 25</p>
+          <p class="mb-1">Patient ID: <span>#4444</span></p>
+        </div>
+        <div class="col-12">
+          <div class="last-visited">
+            Last visited: <span> 12 Dec 2024 2:32 AM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: Contact Info + Actions -->
+    <div class="col-md-6 d-flex">
+      <div class="line d-md-block d-sm-none"></div>
+      <div class="ms-3">
+        <p>
+          <mat-icon class="me-2">location_on</mat-icon> {{ "patient.address" }}
+        </p>
+        <p>
+          <mat-icon class="me-2">call</mat-icon> {{ "patient.phone" }}
+        </p>
+        <p>
+          <mat-icon class="me-2">email</mat-icon> {{ "patient.email" }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabbar" role="tablist" aria-label="Patient sections">
+    <a
+      *ngFor="let t of tabs"
+      [routerLink]="t.link"
+      routerLinkActive="active"
+      #rla="routerLinkActive"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="tab"
+      role="tab"
+      [attr.aria-selected]="rla.isActive ? 'true' : 'false'"
+    >
+      {{ t.label | translate }}
+    </a>
+  </div>
+
+  <div class="mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

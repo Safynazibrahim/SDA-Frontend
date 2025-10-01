@@ -1,0 +1,97 @@
+<div class="container py-3">
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <div class="col-lg-6">
+      <h3>
+        {{ "Patients" | translate }}
+        <span [routerLink]="['/dashboard/patient-list']">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        {{ "assigned_cases" | translate }}
+      </h3>
+    </div>
+  </div>
+  <app-search
+  [placeholder]="'search_patient_name_phone' | translate"
+  (search)="onSearch()">
+  </app-search>
+
+  <div class="row d-flex align-items-center justify-content-center my-4 mx-3">
+    <h2>{{ "cases" | translate }}</h2>
+    <div class="table-responsive my-2">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{{ "patient_name" | translate }}</th>
+            <th>{{ "date" | translate }}</th>
+            <th>{{ "assigned_by" | translate }}</th>
+            <th>{{ "status" | translate }}</th>
+            <th>{{ "action" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let clinic of [1, 2,]" stryle="cursor: pointer;">
+            <td>safy ibrahim</td>
+            <td>12/12/2024</td>
+            <td>safyy</td>
+            <td class="new">New</td>
+            <td>
+              <mat-icon
+                style="cursor: pointer; margin-right: 5px;"
+                (click)="openEditModal()"
+                >edit
+              </mat-icon>
+              <mat-icon
+                style="cursor: pointer"
+                (click)="openViewModal()"
+                >visibility
+              </mat-icon>
+            </td>
+          </tr>
+          <tr *ngFor="let clinic of [1, 2,]" stryle="cursor: pointer;">
+            <td>safy ibrahim</td>
+            <td>12/12/2024</td>
+            <td>safyy</td>
+            <td class="in-progress">In Progress</td>
+            <td>
+              <mat-icon
+                style="cursor: pointer;margin-right: 5px;"
+                (click)="openEditModal()"
+                >edit
+              </mat-icon>
+              <mat-icon
+                style="cursor: pointer"
+                (click)="openViewModal()"
+                >visibility
+              </mat-icon>
+            </td>
+          </tr>
+          <tr *ngFor="let clinic of [1, 2,]" stryle="cursor: pointer;">
+            <td>safy ibrahim</td>
+            <td>12/12/2024</td>
+            <td>safyy</td>
+            <td class="completed">Completed</td>
+            <td>
+              <mat-icon
+                style="cursor: pointer;margin-right: 5px;"
+                (click)="openEditModal()"
+                >edit
+              </mat-icon>
+              <mat-icon
+                style="cursor: pointer"
+                (click)="openViewModal()"
+                >visibility
+              </mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination
+      [totalItems]="50"
+      [pageSize]="11"
+      [currentPage]="CurrentPage"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+</div>

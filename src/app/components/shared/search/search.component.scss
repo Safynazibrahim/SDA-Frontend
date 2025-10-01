@@ -27,6 +27,10 @@
       border: none !important;
       background: none !important;
     }
+    &::placeholder {
+      font-size: 18px; // 🔹 bigger placeholder font
+      color: var(--text-gray); // keep consistent color
+    }
   }
   .btn-search {
   color: var(--bg-white) !important;

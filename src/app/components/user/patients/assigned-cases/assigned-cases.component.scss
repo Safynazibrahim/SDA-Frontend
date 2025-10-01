@@ -1,0 +1,40 @@
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-gray);
+  span mat-icon {
+    cursor: pointer;
+    font-size: 30px;
+  }
+}
+h2 {
+  font-weight: 500;
+  color: var(--text-gray-head-table);
+}
+
+.table thead th {
+  font-weight: 400;
+  font-size: 1.2rem;
+  background: var(--bg-white);
+  color: var(--text-black-white);
+}
+.table tbody td {
+  background: var(--bg-white-secondary);
+  color: var(--text-black-white);
+  &.new {
+    color: #2267f3 !important;
+  }
+  &.in-progress {
+    color: #d5a618 !important;
+  }
+  &.completed {
+    color: #34a853 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .table thead th,
+  .table tbody td {
+    font-size: 13px;
+  }
+}

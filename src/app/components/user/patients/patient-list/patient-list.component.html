@@ -1,0 +1,49 @@
+<div class="container py-3">
+  <div class="row d-flex align-items-center justify-content-between mb-3">
+    <div class="col-lg-6 main-title">
+      <h3 class="main-title">{{ "Patients" | translate }}
+      </h3>
+    </div>
+    <div
+      class="col-lg-6 col-md-12 d-flex justify-content-end align-items-center"
+    >
+      <button class="signin-button w-50 w-auto d-flex align-items-center justify-content-center">
+        <mat-icon>add</mat-icon>
+        {{ "add_patient" | translate }}
+      </button>
+    </div>
+  </div>
+  <app-search
+  [placeholder]="'search_patient_name_phone' | translate"
+  (search)="onSearch()">
+  </app-search>
+  <div class="row d-flex align-items-center justify-content-between my-3">
+    <div
+      class="col-lg-4 col-md-6 col-sm-6 my-3"
+      *ngFor="let patient of [1, 2, 3, 4, 5, 6]"
+    >
+      <div class="patient-card">
+        <div class="patient-details my-3">
+          <div class="title d-flex justify-content-between align-items-center">
+            <h5>Safynaz Ibrahim</h5>
+            <h5>ID: <span>#444</span></h5>
+          </div>
+          <p class="detail">{{ "+201150093207" }}</p>
+          <p class="detail">{{ "female, 24" }}</p>
+          <hr />
+          <div (click)="goToDetails(444)" class="view-details d-flex align-items-center justify-content-end">
+            <h3>{{"view_details" | translate}}</h3>
+            <mat-icon>arrow_forward</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-pagination
+      [totalItems]="50"
+      [pageSize]="11"
+      [currentPage]="CurrentPage"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+</div>

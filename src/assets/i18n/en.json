@@ -218,5 +218,18 @@
   "material_new":"Material New Quantity",
   "ENTER_NEW_QUANTITY":"Enter New Quantity",
   "delete_material":"Delete Material",
-  "msg_delete_material":"Are you sure you want to delete this material ?"
+  "msg_delete_material":"Are you sure you want to delete this material ?",
+  "patient_list":"Patient List",
+  "assigned_cases":"Assigned Cases",
+  "add_patient":"Add Patient",
+  "search_patient_name_phone":"Search patient name / phone number",
+  "patient_profile":"Patient Profile",
+  "appointment_history":"Appointment History",
+  "dental_history":"Dental History",
+  "dental_chart":"Dental Chart",
+  "medical_history":"Medical History",
+  "cases":"Cases",
+  "patient_name":"Patient Name",
+  "date":"Date",
+  "assigned_by":"Assigned By"
 }
