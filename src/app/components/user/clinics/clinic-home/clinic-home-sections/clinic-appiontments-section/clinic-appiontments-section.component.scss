@@ -137,17 +137,17 @@
 .appointment-card {
   position: absolute;
   background: var(--appointment-card);
-  border-left: 5px solid #B19E7F;
+  border-left: 5px solid #b19e7f;
   border-radius: 6px;
   padding: 8px 12px;
   font-size: 13px;
   min-width: 160px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     transform: translateY(-1px);
   }
 }
@@ -169,4 +169,97 @@
     margin-right: 4px;
     font-size: 11px;
   }
+}
+.appointment-details-sidebar {
+  position: fixed;
+  top: 107px;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid #eee;
+  padding: 20px;
+  z-index: 200;
+  animation: slideIn 0.3s ease forwards;
+  overflow-y: auto;
+  
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sidebar-header {
+  // border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.details-body {
+  margin-top: 20px;;
+}
+
+.patientDetails{
+  padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #BFBFBF;
+  .patientName {
+  color: #434343;
+  font-size: 23px;
+  font-weight: 400;
+}
+.patientInfo{
+  color: #737373;
+font-size: 19px;
+font-weight: 400;
+}
+.patientId{
+  color:#85775F;
+}
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  // height: 250px;
+  .btn-outline {
+    border: 1px solid #b19e7f;
+    background: transparent;
+    color: #b19e7f;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .btn-filled {
+    background: #b19e7f;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover,
+  .btn-filled:hover {
+    opacity: 0.9;
+  }
+}
+
+.close-btn {
+  border: none;
+  background: #ccccc6;
+  padding: 5px 13px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.first-section-tap{
+      min-height: calc(100vh - 260px);
 }

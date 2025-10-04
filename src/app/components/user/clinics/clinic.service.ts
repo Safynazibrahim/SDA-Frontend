@@ -21,4 +21,13 @@ getAppointmentForClinic(id: string, date?: string): Observable<any> {
 
   return this.api.get<any>(`clinics/${id}/appointments`, params);
 }
+getAllAppointments(date?: string): Observable<any> {
+  const params: any = {};
+
+  if (date) {
+    params.date = date;
+  }
+
+  return this.api.get<any>(`users/me/appointments`, params);
+}
 }

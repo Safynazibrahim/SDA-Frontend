@@ -78,9 +78,13 @@ export const routes: Routes = [
        {
         path: 'appointments',
         children: [
-          // {
-          //   hena a7ot el home appointments
-          // },
+           {
+      path: '',
+      loadComponent: () =>
+        import(
+          './components/user/clinics/clinic-home/clinic-home-sections/clinic-appiontments-section/clinic-appiontments-section.component'
+        ).then((m) => m.ClinicAppiontmentsSectionComponent),
+    },
           {
             path: 'assign-case',
             loadComponent: () =>
