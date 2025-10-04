@@ -31,10 +31,23 @@ h2 {
     color: #34a853 !important;
   }
 }
-
+.table td mat-icon {
+  height: 22px;
+  width: 22px;
+  vertical-align: middle;
+  line-height: 1;
+  margin: 0 3px;
+}
 @media (max-width: 600px) {
   .table thead th,
   .table tbody td {
     font-size: 13px;
   }
+  .table td mat-icon {
+  height: 18px;
+  width: 18px;
+  vertical-align: middle;
+  line-height: 1;
+  margin: 0 3px;
+}
 }
