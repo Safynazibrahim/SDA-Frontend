@@ -761,6 +761,38 @@
       </div>
     </div>
   </div>
+  <div class="record-wrap">
+  <button class="mic-btn" [class.recording]="isRecording" (click)="toggleRecording()"
+          [disabled]="permissionDenied">
+    <span class="pulse" *ngIf="isRecording"></span>
+    <mat-icon>{{ isRecording ? 'stop' : 'mic' }}</mat-icon>
+  </button>
+
+  <div class="record-status">
+    <p class="status-text">
+      {{ permissionDenied ? 'Microphone permission denied' : (isRecording ? 'Recording...' : 'Tap to record') }}
+    </p>
+    <p class="timer" *ngIf="isRecording || audioBlob">{{ formattedTime }}</p>
+  </div>
+</div>
+
+<!-- بعد التسجيل يظهر مشغل الصوت + أزرار بسيطة -->
+<div class="record-preview" *ngIf="audioUrl">
+  <audio [src]="audioUrl" controls></audio>
+  <div class="preview-actions">
+    <button class="btn ghost" (click)="reRecord()">
+      <mat-icon>refresh</mat-icon> Re-record
+    </button>
+    <a class="btn ghost" [href]="audioUrl" [attr.download]="downloadFileName">
+      <mat-icon>download</mat-icon> Download
+    </a>
+  </div>
+</div>
+
+<!-- زر الـ Process (هنفعّله لاحقًا لما نكمّل المنطق) -->
+<div class="process-strip">
+  <button class="process-btn" [disabled]="!audioBlob">Process</button>
+</div>
   <div class="page-footer-btns">
   <button class="ai-btn">Generate AI</button>
   <button class="manual-btn">Manual Diagnosis</button>
