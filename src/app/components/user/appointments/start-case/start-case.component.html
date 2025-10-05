@@ -716,50 +716,54 @@
     </div>
 
     <div class="checkbox-grid">
-  <label>
-    <input
-      type="checkbox"
-      class="form-check-input"
-      (change)="onImageTypeChange('real', $event)"
-    />
-    Real Image
-  </label>
-  <label>
-    <input
-      type="checkbox"
-      class="form-check-input"
-      (change)="onImageTypeChange('xray', $event)"
-    />
-    X-Ray
-  </label>
-</div>
+      <label>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          (change)="onImageTypeChange('real', $event)"
+        />
+        Real Image
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          (change)="onImageTypeChange('xray', $event)"
+        />
+        X-Ray
+      </label>
+    </div>
 
-<!-- ✅ Upload Box (one for both) -->
-<div class="upload-box" *ngIf="realChecked || xrayChecked">
-  <div class="upload-header my-0">
-    <p class="upload-title">Upload {{ selectedImageLabel }}</p>
-    <label for="fileInput" class="upload-btn">
-      <mat-icon>cloud_upload</mat-icon> Choose Images
-    </label>
-  </div>
+    <!-- ✅ Upload Box (one for both) -->
+    <div class="upload-box" *ngIf="realChecked || xrayChecked">
+      <div class="upload-header my-0">
+        <p class="upload-title">Upload {{ selectedImageLabel }}</p>
+        <label for="fileInput" class="upload-btn">
+          <mat-icon>cloud_upload</mat-icon> Choose Images
+        </label>
+      </div>
 
-  <input
-    type="file"
-    id="fileInput"
-    (change)="onFilesSelected($event)"
-    accept="image/*"
-    multiple
-    hidden
-  />
+      <input
+        type="file"
+        id="fileInput"
+        (change)="onFilesSelected($event)"
+        accept="image/*"
+        multiple
+        hidden
+      />
 
-  <!-- Show uploaded images preview -->
-  <div class="preview-gallery" *ngIf="uploadedFiles.length > 0">
-    <div class="preview-item" *ngFor="let file of uploadedFiles">
-      <img [src]="file.preview" [alt]="file.name" />
-      <p class="file-label my-0">{{ file.name }}</p>
+      <!-- Show uploaded images preview -->
+      <div class="preview-gallery" *ngIf="uploadedFiles.length > 0">
+        <div class="preview-item" *ngFor="let file of uploadedFiles">
+          <img [src]="file.preview" [alt]="file.name" />
+          <p class="file-label my-0">{{ file.name }}</p>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="page-footer-btns">
+  <button class="ai-btn">Generate AI</button>
+  <button class="manual-btn">Manual Diagnosis</button>
 </div>
 
-  </div>
 </div>

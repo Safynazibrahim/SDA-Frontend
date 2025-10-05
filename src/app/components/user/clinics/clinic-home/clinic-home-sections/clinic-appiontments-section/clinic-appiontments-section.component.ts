@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchComponent } from '../../../../../shared/search/search.component';
 import { ClinicService } from '../../../clinic.service';
@@ -9,7 +9,7 @@ import { ClinicService } from '../../../clinic.service';
 @Component({
   selector: 'app-appointments',
   standalone: true,
-  imports: [CommonModule, TranslateModule, SearchComponent, MatIcon],
+  imports: [CommonModule, TranslateModule, SearchComponent, MatIcon , RouterLink],
   templateUrl: './clinic-appiontments-section.component.html',
   styleUrl: './clinic-appiontments-section.component.scss',
 })
