@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -16,6 +16,9 @@ export class StartCaseComponent implements OnDestroy{
   uploadedFiles: { name: string; preview: string }[] = [];
 isRecording = false;
 permissionDenied = false;
+downloadFileName = '';
+
+constructor(private cdRef: ChangeDetectorRef) {}
 
 private mediaStream: MediaStream | null = null;
 private mediaRecorder?: MediaRecorder;
@@ -31,9 +34,7 @@ get formattedTime(): string {
   const s = (this.seconds % 60).toString().padStart(2, '0');
   return `${m}:${s}`;
 }
-get downloadFileName() {
-  return `recording_${new Date().toISOString().replace(/[:.]/g, '-')}.webm`;
-}
+
 
 async toggleRecording() {
   if (this.isRecording) {
@@ -45,6 +46,8 @@ async toggleRecording() {
 
 private getSupportedMime(): string | undefined {
   const candidates = [
+    'audio/mp4', // الأكثر دعمًا عبر المتصفحات
+    'audio/mpeg', // mp3 fallback
     'audio/webm;codecs=opus',
     'audio/webm',
     'audio/mp4', // لبعض Safari
@@ -63,13 +66,19 @@ async startRecording() {
     this.mediaRecorder.ondataavailable = (e) => {
       if (e.data && e.data.size > 0) this.chunks.push(e.data);
     };
-    this.mediaRecorder.onstop = () => {
-      this.audioBlob = new Blob(this.chunks, { type: this.mediaRecorder?.mimeType || 'audio/webm' });
-      if (this.audioUrl) URL.revokeObjectURL(this.audioUrl);
-      this.audioUrl = URL.createObjectURL(this.audioBlob);
-      this.clearStream();
-    };
+  this.mediaRecorder.onstop = () => {
+    this.downloadFileName = `recording_${new Date()
+  .toISOString()
+  .replace(/[:.]/g, '-')}.mp4`;
 
+  const blobType = 'audio/mp4';   // بدل webm
+  this.audioBlob = new Blob(this.chunks, { type: blobType });
+  if (this.audioUrl) URL.revokeObjectURL(this.audioUrl);
+  this.audioUrl = URL.createObjectURL(this.audioBlob);
+  console.log('🎧 Blob type:', blobType, 'URL:', this.audioUrl);
+   this.cdRef.detectChanges();
+  this.clearStream();
+};
     this.mediaRecorder.start();
     this.isRecording = true;
     this.seconds = 0;
@@ -81,23 +90,31 @@ async startRecording() {
   }
 }
 
+// stopRecording() {
+//   if (this.mediaRecorder && this.isRecording) {
+//     this.mediaRecorder.stop();
+//   }
+//   this.isRecording = false;
+//   if (this.timerRef) clearInterval(this.timerRef);
+// }
 stopRecording() {
   if (this.mediaRecorder && this.isRecording) {
     this.mediaRecorder.stop();
   }
   this.isRecording = false;
   if (this.timerRef) clearInterval(this.timerRef);
+  // timer يفضل ظاهر بالرقم النهائي
 }
 
-reRecord() {
-  // مسح التسجيل الحالي وإعادة المحاولة
-  this.audioBlob = null;
-  if (this.audioUrl) {
-    URL.revokeObjectURL(this.audioUrl);
-    this.audioUrl = null;
-  }
-  this.seconds = 0;
-}
+// reRecord() {
+//   // مسح التسجيل الحالي وإعادة المحاولة
+//   this.audioBlob = null;
+//   if (this.audioUrl) {
+//     URL.revokeObjectURL(this.audioUrl);
+//     this.audioUrl = null;
+//   }
+//   this.seconds = 0;
+// }
 
 private clearStream() {
   if (this.mediaStream) {
