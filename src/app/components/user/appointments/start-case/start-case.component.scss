@@ -1,4 +1,5 @@
 .startCase {
+  max-width:1300px !important;;
   .route {
     color: #8f8f8f;
     font-weight: 400;
@@ -70,7 +71,7 @@
       .checkbox-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px 0px;;
+        gap: 20px 0px;
 
         label {
           display: flex;
@@ -91,162 +92,200 @@
     border-color: #b19e7f;
   }
   .header-with-note {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  .headerName {
-    font-size: 18px;
-    color: #8b7a5e;
-    font-weight: 500;
-  }
-
-  .note-input {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    background: transparent;
-    width: 250px;
-    outline: none;
-    font-size: 15px;
-    padding: 2px 4px;
-
-    &:focus {
-      border-color: #b19e7f;
-    }
-
-    &::placeholder {
-      color: #bbb;
-      font-style: italic;
-    }
-  }
-}
-
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px 0;
-
-  label {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: 500;
-    color: #434343;
+    margin-bottom: 10px;
 
-    input {
-      transform: scale(1.1);
+    .headerName {
+      font-size: 18px;
+      color: #8b7a5e;
+      font-weight: 500;
+    }
+
+    .note-input {
+      border: none;
+      border-bottom: 1px solid #9d8a6f;
+      background: transparent;
+      width: 250px;
+      outline: none;
+      font-size: 15px;
+      padding: 2px 4px;
+
+      &:focus {
+        border-color: #96805d;
+      }
+
+      &::placeholder {
+        color: #9d8a6f;
+        font-style: italic;
+      }
     }
   }
-}
 
-.upload-box {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px dashed #b19e7f;
-  border-radius: 10px;
-  background: #fffaf4;
-  transition: 0.3s ease;
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 0;
 
-  &:hover {
-    background: #fff3e0;
-  }
-
-  /* عنوان التحميل + الزر */
-  .upload-header {
-    display: flex;
-    justify-content: center; // يخليهم في النص
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-
-    .upload-title {
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 18px;
       font-weight: 500;
-      color: #6b5a3c;
-      margin: 0;
-    }
+      color: #434343;
 
-    .upload-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(90deg, #b19e7f, #8b7a5e);
-      color: #fff;
-      border-radius: 6px;
-      padding: 8px 16px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-      &:hover {
-        transform: scale(1.03);
-        opacity: 0.95;
-      }
-
-      mat-icon {
-        font-size: 20px;
+      input {
+        transform: scale(1.1);
       }
     }
   }
 
-  /* منطقة عرض الصور */
-  .preview-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
+  .upload-box {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px dashed #b19e7f;
+    border-radius: 10px;
+    background: #fffaf4;
+    transition: 0.3s ease;
 
-    .preview-item {
-      width: 120px;
-      text-align: center;
-      background: #fff;
-      border: 1px solid #e0d7c9;
-      border-radius: 8px;
-      padding: 10px;
-      transition: 0.3s ease;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-
-      &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      img {
-        width: 100%;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 6px;
-        margin-bottom: 8px;
-      }
-
-      .file-label {
-        font-size: 13px;
-        color: #555;
-        word-break: break-all;
-      }
+    &:hover {
+      background: #fff3e0;
     }
-  }
 
-  /* ميديا كويري للتجاوب */
-  @media (max-width: 768px) {
+    /* عنوان التحميل + الزر */
     .upload-header {
-      flex-direction: column;
-      gap: 10px;
+      display: flex;
+      justify-content: center; // يخليهم في النص
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+
+      .upload-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #6b5a3c;
+        margin: 0;
+      }
+
+      .upload-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(90deg, #b19e7f, #8b7a5e);
+        color: #fff;
+        border-radius: 6px;
+        padding: 8px 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          transform: scale(1.03);
+          opacity: 0.95;
+        }
+
+        mat-icon {
+          font-size: 20px;
+        }
+      }
     }
 
+    /* منطقة عرض الصور */
     .preview-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+
       .preview-item {
-        width: 100px;
+        width: 120px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #e0d7c9;
+        border-radius: 8px;
+        padding: 10px;
+        transition: 0.3s ease;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
         img {
-          height: 80px;
+          width: 100%;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 6px;
+          margin-bottom: 8px;
+        }
+
+        .file-label {
+          font-size: 13px;
+          color: #555;
+          word-break: break-all;
+        }
+      }
+    }
+
+    /* ميديا كويري للتجاوب */
+    @media (max-width: 768px) {
+      .upload-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .preview-gallery {
+        .preview-item {
+          width: 100px;
+          img {
+            height: 80px;
+          }
         }
       }
     }
   }
-}
+  .page-footer-btns {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 40px;
+  padding-bottom: 30px;
 
+  button {
+    border: none;
+    border-radius: 6px;
+    padding: 10px 35px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 50%;
+  }
+
+  .ai-btn {
+    background: var(--bg-brown-gradient);
+    color: #fff;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  }
+
+  .manual-btn {
+    background: #fff;
+    border: 1.5px solid #b19e7f;
+    color: #8b7a5e;
+
+    &:hover {
+      background: #fdf7f1;
+      transform: translateY(-2px);
+    }
+  }
+}
 
 }

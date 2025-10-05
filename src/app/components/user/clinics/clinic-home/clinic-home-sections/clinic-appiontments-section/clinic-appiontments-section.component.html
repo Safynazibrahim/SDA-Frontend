@@ -72,6 +72,7 @@
         [style.left.px]="20 + i * 30"
         [style.height.px]="getAppointmentHeight(appt)"
         (click)="openDetails(appt)"
+        style="min-height:50px !important"
       >
         @if (appt.name) {
         <div class="appointment-name">{{ appt.name }}</div>
@@ -198,8 +199,8 @@
 
      <div style="height: 140px;">
        <div class="actions mt-auto">
-        <button class="btn-outline">Start Case</button>
-        <button class="btn-outline">Assign Case</button>
+        <button class="btn-outline" [routerLink]="['/dashboard/appointments/start-case']">Start Case</button>
+        <button class="btn-outline" [routerLink]="['/dashboard/appointments/assign-case']">Assign Case</button>
         <button class="btn-outline">Patient Profile</button>
       </div>
      </div>
