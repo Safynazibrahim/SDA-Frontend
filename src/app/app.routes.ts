@@ -32,7 +32,7 @@ export const routes: Routes = [
           import('./components/auth/login/login.component').then(
             (m) => m.LoginComponent
           ),
-        canActivate: [guestGuard],
+        canActivate: [guestGuard]
       },
       {
         path: 'register',
@@ -40,7 +40,7 @@ export const routes: Routes = [
           import('./components/auth/register/register.component').then(
             (m) => m.RegisterComponent
           ),
-        canActivate: [guestGuard],
+        canActivate: [guestGuard]
       },
       {
         path: 'forget-password',
@@ -48,7 +48,7 @@ export const routes: Routes = [
           import('./components/auth/forget-pass/forget-pass.component').then(
             (m) => m.ForgetPassComponent
           ),
-        canActivate: [guestGuard],
+        canActivate: [guestGuard]
       },
     ],
   },
@@ -74,58 +74,6 @@ export const routes: Routes = [
           import('./components/user/profile/profile.component').then(
             (m) => m.ProfileComponent
           ),
-      },
-      {
-        path: 'patient-list',
-        loadComponent: () =>
-          import(
-            './components/user/patients/patient-list/patient-list.component'
-          ).then((m) => m.PatientListComponent),
-      },
-      {
-        path: 'patients/:id',
-        loadComponent: () =>
-          import(
-            './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile.component'
-          ).then((m) => m.PatientProfileComponent),
-        children: [
-          { path: '', redirectTo: 'appointment-history', pathMatch: 'full' },
-          {
-            path: 'appointment-history',
-            loadComponent: () =>
-              import(
-                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/appointment-history/appointment-history.component'
-              ).then((m) => m.AppointmentHistoryComponent),
-          },
-          {
-            path: 'dental-history',
-            loadComponent: () =>
-              import(
-                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/dental-history/dental-history.component'
-              ).then((m) => m.DentalHistoryComponent),
-          },
-          {
-            path: 'dental-chart',
-            loadComponent: () =>
-              import(
-                './components/user/patients/patient-list//patient-profile/patient-profile/patient-profile-sections/dental-chart/dental-chart.component'
-              ).then((m) => m.DentalChartComponent),
-          },
-          {
-            path: 'medical-history',
-            loadComponent: () =>
-              import(
-                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/medical-history/medical-history.component'
-              ).then((m) => m.MedicalHistoryComponent),
-          },
-        ],
-      },
-      {
-        path: 'assigned-cases',
-        loadComponent: () =>
-          import(
-            './components/user/patients/assigned-cases/assigned-cases.component'
-          ).then((m) => m.AssignedCasesComponent),
       },
       {
         path: 'clinics',
@@ -207,6 +155,32 @@ export const routes: Routes = [
                 ],
               },
             ],
+          },
+        ],
+      },
+      {
+        path: 'appointments',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './components/user/clinics/clinic-home/clinic-home-sections/clinic-appiontments-section/clinic-appiontments-section.component'
+              ).then((m) => m.ClinicAppiontmentsSectionComponent),
+          },
+          {
+            path: 'assign-case',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/assign-case/assign-case.component'
+              ).then((m) => m.AssignCaseComponent),
+          },
+          {
+            path: 'start-case',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/start-case/start-case.component'
+              ).then((m) => m.StartCaseComponent),
           },
         ],
       },

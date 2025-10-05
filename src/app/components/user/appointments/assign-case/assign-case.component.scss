@@ -1,0 +1,152 @@
+.assign-case {
+  .route {
+    color: #8f8f8f;
+    font-weight: 400;
+    font-family: "IBM Plex Sans";
+    font-size: 27px;
+  }
+  .clinicActive {
+    color: var(--text-gray-head-table);
+    font-family: "IBM Plex Sans";
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .first-section {
+    border-right: 2px solid #acacac;
+  }
+  .userProfile {
+    background: #f7f7f7;
+    padding: 10px;
+    border-radius: 24px;
+    .userName {
+      color: #434343;
+      font-size: 30px;
+      font-weight: 400;
+    }
+    .userdetails {
+      color: #737373;
+      font-size: 20px;
+    }
+  }
+  .date-time {
+    color: #3e372c;
+    font-size: 24px;
+  }
+  .form-control,
+  .form-select {
+    border: 1px solid #737373 !important;
+    padding: 9px !important;
+    color: #434343 !important;
+  }
+  .form-label {
+    color: #434343 !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    margin-bottom: 0px !important;
+  }
+  .custom-dropdown {
+    .btn.form-select {
+      text-align: left;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      max-height: 250px;
+      overflow-y: auto;
+      border-radius: 12px;
+    }
+
+    .search-wrapper {
+      width: 100%;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      padding: 5px 10px;
+      background: var(--bg-primary);
+    }
+
+    .search-icon {
+      color: #565656 !important;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 14px;
+      color: #565656;
+      background: var(--bg-primary);
+    }
+
+    .search-btn {
+      background-color: #b19e7f;
+      color: var(--bg-white);
+      border: none;
+      border-radius: 20px;
+      padding: 7px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .search-btn:hover {
+      background-color: #9b8a6b;
+    }
+
+    .med-list {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .form-check {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+
+      .form-check-label {
+        order: 1; 
+        font-size: 16px;
+        color: #434343;
+      }
+
+      .form-check-input {
+        order: 2; 
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: #b19e7f; 
+      }
+
+      .form-check-input:checked {
+        background-color: #b19e7f;
+        border-color: #b19e7f;
+      }
+    }
+  }
+
+  .save-btn {
+    background: var(--bg-brown-gradient);
+    font-size: 24px;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    width: 135px;
+  }
+  .cancel-btn {
+    color: #b19e7f;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    border: 1px solid #b19e7f;
+    width: 135px;
+  }
+}

@@ -1,204 +1,31 @@
-// import { CommonModule } from '@angular/common';
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { TranslateModule } from '@ngx-translate/core';
-// import { ClinicService } from '../../../clinic.service';
-
-// @Component({
-//   selector: 'app-appointments',
-//   standalone: true,
-//   imports: [CommonModule, TranslateModule],
-//   templateUrl: './clinic-appiontments-section.component.html',
-//   styleUrl: './clinic-appiontments-section.component.scss',
-// })
-// export class ClinicAppiontmentsSectionComponent implements OnInit {
-//   currentDate = new Date();
-//   today = new Date();
-//   weekDays: { label: string; date: Date }[] = [];
-//   clinicId!: string;
-//   appointments: any[] = [];
-
-//   constructor(
-//     private route: ActivatedRoute,
-//     private appointmentService: ClinicService
-//   ) {
-//     this.generateWeek(this.currentDate);
-//   }
-
-//   ngOnInit(): void {
-//     this.route.parent?.paramMap.subscribe((params) => {
-//       this.clinicId = params.get('id')!;
-//       console.log('clinicId in appointments', this.clinicId);
-
-//       this.fetchAppointments();
-//     });
-//   }
-
-//   fetchAppointments() {
-//     const dateStr = this.currentDate.toISOString().split('T')[0]; 
-//     this.appointmentService
-//       .getAppointmentForClinic(this.clinicId, dateStr)
-//       .subscribe({
-//         next: (res) => {
-//           console.log('Appointments response', res);
-//           this.appointments = res?.appointments || [];
-//         },
-//         error: (err) => {
-//           console.error('Error fetching appointments', err);
-//         },
-//       });
-//   }
-
-//   generateWeek(baseDate: Date) {
-//     const startOfWeek = new Date(baseDate);
-//     startOfWeek.setDate(baseDate.getDate() - baseDate.getDay());
-
-//     this.weekDays = Array.from({ length: 7 }).map((_, i) => {
-//       const d = new Date(startOfWeek);
-//       d.setDate(startOfWeek.getDate() + i);
-//       return {
-//         label: d.toLocaleDateString('en-US', { weekday: 'short' }),
-//         date: d,
-//       };
-//     });
-//   }
-
-//   changeWeek(direction: number) {
-//     const newDate = new Date(this.currentDate);
-//     newDate.setDate(this.currentDate.getDate() + direction * 7);
-
-//     if (direction === -1 && newDate < this.today) return;
-
-//     this.currentDate = newDate;
-//     this.generateWeek(this.currentDate);
-//     this.fetchAppointments();
-//   }
-
-//   selectDay(day: Date) {
-//     this.currentDate = day;
-//     this.generateWeek(day);
-//     this.fetchAppointments();
-//   }
-
-//   isSelected(day: Date): boolean {
-//     return (
-//       day.getDate() === this.currentDate.getDate() &&
-//       day.getMonth() === this.currentDate.getMonth() &&
-//       day.getFullYear() === this.currentDate.getFullYear()
-//     );
-//   }
-// }
-// import { CommonModule } from '@angular/common';
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { TranslateModule } from '@ngx-translate/core';
-// import { ClinicService } from '../../../clinic.service';
-
-// @Component({
-//   selector: 'app-appointments',
-//   standalone: true,
-//   imports: [CommonModule, TranslateModule],
-//   templateUrl: './clinic-appiontments-section.component.html',
-//   styleUrl: './clinic-appiontments-section.component.scss',
-// })
-// export class ClinicAppiontmentsSectionComponent implements OnInit {
-//   currentDate = new Date();
-//   today = new Date();
-//   weekDays: { label: string; date: Date }[] = [];
-//   clinicId!: string;
-//   appointments: any[] = [];
-
-//   constructor(
-//     private route: ActivatedRoute,
-//     private appointmentService: ClinicService
-//   ) {
-//     this.generateWeek(this.currentDate);
-//   }
-
-//   ngOnInit(): void {
-//     this.route.parent?.paramMap.subscribe((params) => {
-//       this.clinicId = params.get('id')!;
-//       console.log('clinicId in appointments', this.clinicId);
-
-//       this.fetchAppointments();
-//     });
-//   }
-
-//   fetchAppointments() {
-//     const dateStr = this.currentDate.toISOString().split('T')[0]; 
-//     this.appointmentService
-//       .getAppointmentForClinic(this.clinicId, dateStr)
-//       .subscribe({
-//         next: (res) => {
-//           console.log('Appointments response', res);
-//           this.appointments = res?.appointments || [];
-//         },
-//         error: (err) => {
-//           console.error('Error fetching appointments', err);
-//         },
-//       });
-//   }
-
-//   generateWeek(baseDate: Date) {
-//     const startOfWeek = new Date(baseDate);
-//     startOfWeek.setDate(baseDate.getDate() - baseDate.getDay());
-
-//     this.weekDays = Array.from({ length: 7 }).map((_, i) => {
-//       const d = new Date(startOfWeek);
-//       d.setDate(startOfWeek.getDate() + i);
-//       return {
-//         label: d.toLocaleDateString('en-US', { weekday: 'short' }),
-//         date: d,
-//       };
-//     });
-//   }
-
-//   changeWeek(direction: number) {
-//     const newDate = new Date(this.currentDate);
-//     newDate.setDate(this.currentDate.getDate() + direction * 7);
-
-//     if (direction === -1 && newDate < this.today) return;
-
-//     this.currentDate = newDate;
-//     this.generateWeek(this.currentDate);
-//     this.fetchAppointments();
-//   }
-
-//   selectDay(day: Date) {
-//     this.currentDate = day;
-//     this.generateWeek(day);
-//     this.fetchAppointments();
-//   }
-
-//   isSelected(day: Date): boolean {
-//     return (
-//       day.getDate() === this.currentDate.getDate() &&
-//       day.getMonth() === this.currentDate.getMonth() &&
-//       day.getFullYear() === this.currentDate.getFullYear()
-//     );
-//   }
-// }
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchComponent } from '../../../../../shared/search/search.component';
+import { ClinicService } from '../../../clinic.service';
 
 @Component({
   selector: 'app-appointments',
   standalone: true,
-  imports: [CommonModule, TranslateModule , SearchComponent, MatIcon],
+  imports: [CommonModule, TranslateModule, SearchComponent, MatIcon],
   templateUrl: './clinic-appiontments-section.component.html',
   styleUrl: './clinic-appiontments-section.component.scss',
 })
 export class ClinicAppiontmentsSectionComponent implements OnInit {
-  currentDate = new Date(); // يبدأ بالنهارده
-  today = new Date(); // نخزن النهارده هنا
+  currentDate = new Date();
+  today = new Date();
   weekDays: { label: string; date: Date }[] = [];
   clinicId: string | null = null;
+  appointments: any[] = [];
+  timeSlots = Array(10).fill(0);
+  selectedAppointment: any = null; // ✅ علشان نعرض الـ Sidebar لما المستخدم يضغط
 
-  constructor(private route: ActivatedRoute ) {
+  constructor(
+    private route: ActivatedRoute,
+    private clinicService: ClinicService
+  ) {
     this.generateWeek(this.currentDate);
   }
 
@@ -206,16 +33,66 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
     this.route.parent?.paramMap.subscribe((params) => {
       this.clinicId = params.get('id');
       console.log('clinicId in appointments', this.clinicId);
+      this.fetchAppointments();
     });
   }
 
-  onSearch(){
-    console.log('safyy')
+  // ✅ جلب المواعيد سواء بعيادة أو كل العيادات
+  fetchAppointments() {
+    const dateStr = this.currentDate.toISOString().split('T')[0];
+
+    if (this.clinicId) {
+      this.clinicService.getAppointmentForClinic(this.clinicId, dateStr).subscribe({
+        next: (res) => this.mapAppointments(res),
+        error: (err) => console.error('Error fetching clinic appointments', err),
+      });
+    } else {
+      this.clinicService.getAllAppointments(dateStr).subscribe({
+        next: (res) => this.mapAppointments(res),
+        error: (err) => console.error('Error fetching all appointments', err),
+      });
+    }
   }
+
+  // ✅ تحويل الداتا لشكل موحد + إضافة isAssigned
+  private mapAppointments(res: any[]) {
+    console.log('Appointments response', res);
+
+    this.appointments = res.map((a: any) => {
+      const start = this.parseTime(a.startTime);
+      const end = this.parseTime(a.endTime);
+      return {
+        id: a.id,
+        name: a?.clinicName || a?.clinic?.name,
+        time: `${a.startTime} - ${a.endTime}`,
+        patient: a?.patient,
+        clinic: a?.clinic,
+        isAssigned: a?.isAssigned || false, // ✅ هنستخدمها لتحديد الـ view
+        startMinutes: start.totalMinutes,
+        endMinutes: end.totalMinutes,
+        durationMinutes: end.totalMinutes - start.totalMinutes,
+        status: a.status,
+        date: a.date,
+        startTime: a.startTime,
+        endTime: a.endTime,
+      };
+    });
+  }
+
+  // ✅ يقبل 03:30 أو 3:30
+  parseTime(time: string) {
+    const [h, m] = time.split(':').map(Number);
+    const hour = h;
+    const minutes = m || 0;
+    return {
+      hour,
+      totalMinutes: hour * 60 + minutes,
+    };
+  }
+
   generateWeek(baseDate: Date) {
     const startOfWeek = new Date(baseDate);
     startOfWeek.setDate(baseDate.getDate() - baseDate.getDay());
-
     this.weekDays = Array.from({ length: 7 }).map((_, i) => {
       const d = new Date(startOfWeek);
       d.setDate(startOfWeek.getDate() + i);
@@ -229,17 +106,16 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
   changeWeek(direction: number) {
     const newDate = new Date(this.currentDate);
     newDate.setDate(this.currentDate.getDate() + direction * 7);
-
-    // ما نسمحش نرجع قبل النهارده
     if (direction === -1 && newDate < this.today) return;
-
     this.currentDate = newDate;
     this.generateWeek(this.currentDate);
+    this.fetchAppointments();
   }
 
   selectDay(day: Date) {
     this.currentDate = day;
     this.generateWeek(day);
+    this.fetchAppointments();
   }
 
   isSelected(day: Date): boolean {
@@ -250,41 +126,27 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
     );
   }
 
-  // Static data for appointments
-  appointments = [
-    { 
-      name: 'Clinic name', 
-      time: '9:00 AM - 10:00 AM', 
-      startHour: 9 
-    },
-    { 
-      name: 'Clinic name', 
-      time: '11:00 AM - 12:00 PM', 
-      startHour: 11 
-    },
-    { 
-      name: 'Clinic name', 
-      time: '1:00 PM - 2:00 PM', 
-      startHour: 13 
-    },
-    { 
-      name: 'Clinic name', 
-      time: '3:00 PM - 4:00 PM', 
-      startHour: 15 
-    },
-  ];
-
-  // Array for grid lines generation
-  timeSlots = Array(10).fill(0);
-
-  // Method to calculate appointment position
-  getAppointmentTop(appointment: any): number {
-    const startIndex = appointment.startHour - 8; // 8 AM is index 0
-    return startIndex * 60; // Each time slot is 60px
+  // ✅ لحساب مكان الكارت داخل الجدول
+  getAppointmentTop(appt: any): number {
+    const startOfDayMinutes = 8 * 60;
+    return appt.startMinutes - startOfDayMinutes;
   }
 
-  // Method to get appointment left position with overlap handling
-  getAppointmentLeft(index: number): number {
-    return 20 + (index * 30);
+  getAppointmentHeight(appt: any): number {
+    return appt.durationMinutes;
+  }
+
+  // ✅ لما المستخدم يضغط على كارت Appointment
+  openDetails(appt: any) {
+    this.selectedAppointment = appt;
+  }
+
+  // ✅ لإغلاق الـ Sidebar
+  closeDetails() {
+    this.selectedAppointment = null;
+  }
+
+  onSearch() {
+    console.log('Searching...');
   }
 }
