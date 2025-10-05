@@ -1,0 +1,765 @@
+<div class="container startCase pb-5">
+  <div class="d-flex align-items-center mb-2">
+    <p class="mb-0 route">{{ "appointments" | translate }}</p>
+
+    <a
+      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+      style="cursor: pointer"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <div class="d-flex align-items-center mb-2">
+      <p class="mb-0 clinicActive">{{ "start case" | translate }}</p>
+    </div>
+  </div>
+  <div class="static3dModel">
+    <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
+  </div>
+  <div class="chief-complaint-section">
+    <h4>Chief Complaint</h4>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">1.1 Chief Complaint (CC):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" /> Pain (tooth / jaw
+          / TMJ)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Swelling (facial /
+          gingival)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Bleeding</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Sensitivity (hot /
+          cold / sweet)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Esthetic concerns
+          (discoloration / malalignment)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Difficulty
+          chewing</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Broken
+          tooth</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Routine check-up /
+          No complaint</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">1.2 Nature of Complaint (HPI):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" class="form-check-input" /> Sharp</label>
+        <label
+          ><input type="checkbox" class="form-check-input" /> Dull /
+          Aching</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Throbbing /
+          Intermittent</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Burning</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Pressure
+          sensation</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">1.3 Aggravating Factors (HPI):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" class="form-check-input" /> Hot</label>
+        <label><input type="checkbox" class="form-check-input" /> Cold</label>
+        <label
+          ><input type="checkbox" class="form-check-input" /> Chewing /
+          Biting</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Lying down /
+          Nighttime</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> No specific
+          factor</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">1.4 Relevant Medical History (MH):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" /> Diabetes (Type 1 /
+          Type 2 – Controlled / Uncontrolled)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Cardiovascular
+          disease / Hypertension</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Asthma /
+          COPD</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Kidney / Liver
+          disease</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" /> Autoimmune
+          disorders (Lupus, Rheumatoid Arthritis)</label
+        >
+        <label><input type="checkbox" class="form-check-input" /> None</label>
+      </div>
+    </div>
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">1.5 Medications of Concern (MH):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" /> Anticoagulants
+          (Warfarin)</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            class="form-check-input"
+          />Bisphosphonates</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            class="form-check-input"
+          />Immunosuppressants</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Drugs causing
+          gingival overgrowth</label
+        >
+        <label><input type="checkbox" class="form-check-input" />None</label>
+      </div>
+    </div>
+  </div>
+  <div class="chief-complaint-section">
+    <h4>Extraoral Examination</h4>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">2.1 Facial Symmetry:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Symmetrical
+          (Normal)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Asymmetrical
+          (specify location & cause)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Facial
+          paralysis</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Unilateral
+          swelling</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">2.2 Facial Profile:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Straight
+          (Orthognathic – Class I)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Convex (Class
+          II)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Concave (Class
+          III)</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">2.3 Lymph Nodes:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Non-palpable
+          (Normal)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Palpable (specify:
+          soft / firm-fixed / tender / nodular)</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">2.4 TMJ Sounds:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />No sounds</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Clicking (Early /
+          Late)</label
+        >
+        <label><input type="checkbox" class="form-check-input" />Popping</label>
+        <label
+          ><input type="checkbox" class="form-check-input" />Crepitus
+          (Grinding)</label
+        >
+      </div>
+    </div>
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">2.5 TMJ Opening:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Normal opening
+          (40–50 mm)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Limited opening
+          (<35 mm)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Deviation to right
+          / left</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />S-shape or C-shape
+          movement</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="chief-complaint-section">
+    <h4>Soft Tissue & Periodontal Examination</h4>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">3.1 Tongue / Soft Tissues:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" class="form-check-input" />Normal</label>
+        <label
+          ><input type="checkbox" class="form-check-input" />Inflammation (red,
+          painful)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Lesions (aphthous
+          ulcers, herpes)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Leukoplakia</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Lichen
+          Planus</label
+        >
+        <label><input type="checkbox" class="form-check-input" />Torus</label>
+        <label
+          ><input type="checkbox" class="form-check-input" />Macroglossia</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">3.2 Gingival Color & Texture:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Coral pink,
+          stippled (Healthy)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Red, shiny (Acute
+          gingivitis)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Bluish, swollen
+          (Chronic gingivitis)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Pigmented (Melanin
+          pigmentation)</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">3.3 Gingival Enlargement:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" class="form-check-input" />None</label>
+        <label
+          ><input type="checkbox" class="form-check-input" />Localized</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Generalized</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Drug-induced
+          (specify drug)</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">3.4 Bleeding on Probing (BOP):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />None
+          (Healthy)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Present on probing
+          (Gingivitis)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Spontaneous
+          bleeding</label
+        >
+      </div>
+    </div>
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">3.5 Pocket Depth (PD):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />1–3 mm
+          (Normal)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />4–5 mm (Mild /
+          Moderate)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />≥6 mm (Deep)</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="chief-complaint-section">
+    <h4>Dental & Occlusion</h4>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">4.1 Angle’s Classification of Occlusion:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label><input type="checkbox" class="form-check-input" />Class I</label>
+        <label
+          ><input type="checkbox" class="form-check-input" />Class II (Division
+          1 / Division 2)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Class III</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">4.2 Vertical Overlap (Overbite):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Normal (2–4
+          mm)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Deep bite</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Open bite</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">4.3 Tooth Mobility (per tooth):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Grade 0 (<0.2
+          mm)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Grade I (0.2–1 mm,
+          horizontal)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Grade II (>1 mm,
+          horizontal)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Grade III (>1 mm,
+          horizontal + vertical)</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">4.4 Caries (ICDAS – per surface):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Code 0:
+          Sound</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Code 1–2: Enamel
+          change only</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Code 3–4: Enamel
+          breakdown or dentin shadow</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Code 5–6: Obvious
+          cavity with dentin exposure</label
+        >
+      </div>
+    </div>
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">4.5 Existing Restorations:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Intact /
+          Satisfactory</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Defective /
+          Failed</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Overhanging
+          margins</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Secondary
+          caries</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Fractured / Lost
+          crown</label
+        >
+      </div>
+    </div>
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">4.6 Pulp Vitality (Cold Test):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Normal, quick
+          response</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Prolonged pain
+          (Irreversible pulpitis)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />No response (Pulp
+          necrosis)</label
+        >
+        <label
+          ><input
+            type="checkbox"
+            class="form-check-input"
+          />Hypersensitivity</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="chief-complaint-section">
+    <h4>Diagnosis & Risk Assessment</h4>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">5.1 Tooth Diagnosis (per tooth):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Reversible
+          pulpitis</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Irreversible
+          pulpitis</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Pulp
+          necrosis</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Acute apical
+          periodontitis</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Acute apical
+          abscess</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">
+            5.2 Periodontal Diagnosis (2017 Classification):
+          </p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Periodontal
+          health</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Gingivitis</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Periodontitis
+          (Stage I–IV, Grade A–C)</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">5.3 Caries Risk Assessment:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Low risk</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Moderate
+          risk</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />High / Extreme
+          risk</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">5.4 Prognosis (Tooth / Case):</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Excellent /
+          Good</label
+        >
+        <label><input type="checkbox" class="form-check-input" />Fair</label>
+        <label
+          ><input type="checkbox" class="form-check-input" />Questionable</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Hopeless</label
+        >
+      </div>
+    </div>
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">5.5 Basic Treatment Plan:</p>
+        </div>
+        <input type="text" placeholder="Write note..." class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />Emergency / Pain
+          relief</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Disease control
+          phase (Fillings, Periodontal therapy)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Definitive care
+          (Crowns, Bridges, Prosthetics)</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />Maintenance /
+          Preventive phase</label
+        >
+      </div>
+    </div>
+  </div>
+  <!-- IMAGE SECTION -->
+  <div class="chief-complaint-section">
+    <div class="header-with-note">
+      <div class="col-md-5">
+        <h4 class="m-0 headerName">Image</h4>
+      </div>
+      <input type="text" placeholder="Write note..." class="note-input" />
+    </div>
+
+    <div class="checkbox-grid">
+  <label>
+    <input
+      type="checkbox"
+      class="form-check-input"
+      (change)="onImageTypeChange('real', $event)"
+    />
+    Real Image
+  </label>
+  <label>
+    <input
+      type="checkbox"
+      class="form-check-input"
+      (change)="onImageTypeChange('xray', $event)"
+    />
+    X-Ray
+  </label>
+</div>
+
+<!-- ✅ Upload Box (one for both) -->
+<div class="upload-box" *ngIf="realChecked || xrayChecked">
+  <div class="upload-header my-0">
+    <p class="upload-title">Upload {{ selectedImageLabel }}</p>
+    <label for="fileInput" class="upload-btn">
+      <mat-icon>cloud_upload</mat-icon> Choose Images
+    </label>
+  </div>
+
+  <input
+    type="file"
+    id="fileInput"
+    (change)="onFilesSelected($event)"
+    accept="image/*"
+    multiple
+    hidden
+  />
+
+  <!-- Show uploaded images preview -->
+  <div class="preview-gallery" *ngIf="uploadedFiles.length > 0">
+    <div class="preview-item" *ngFor="let file of uploadedFiles">
+      <img [src]="file.preview" [alt]="file.name" />
+      <p class="file-label my-0">{{ file.name }}</p>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
