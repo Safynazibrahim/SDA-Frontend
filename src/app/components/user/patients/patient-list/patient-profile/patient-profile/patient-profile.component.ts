@@ -62,5 +62,7 @@ export class PatientProfileComponent {
     this.isDeletePatientModalOpen = false;
   }
 
-  
-}
+  goToStartCase() {
+    this.router.navigate(['/dashboard/appointments/start-case']);
+  } 
+}     
