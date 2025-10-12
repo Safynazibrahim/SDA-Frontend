@@ -35,8 +35,8 @@
           <img src="../../../../../../../assets/media/pic-not-found.png" class="w-100" alt="" />
         </div>
         <div class="col-10">
-          <h3 class="mb-1">Safynaz Ibrahim</h3>
-          <p class="mb-1">Female, Age 25</p>
+          <h3 class="mb-1">{{patientData.user.fullName}}</h3>
+          <p class="mb-1">{{patientData.gender}}, {{patientData.age}}</p>
           <p class="mb-1">{{"patient_id" | translate}}: <span>#4444</span></p>
         </div>
         <div class="col-12">
@@ -55,10 +55,10 @@
           <mat-icon class="me-2">location_on</mat-icon> {{ "patient.address" }}
         </p>
         <p>
-          <mat-icon class="me-2">call</mat-icon> {{ "patient.phone" }}
+          <mat-icon class="me-2">call</mat-icon> {{patientData.user.phoneNumber}}
         </p>
         <p>
-          <mat-icon class="me-2">email</mat-icon> {{ "patient.email" }}
+          <mat-icon class="me-2">email</mat-icon> {{patientData.user.email}}
         </p>
       </div>
     </div>
@@ -85,7 +85,7 @@
 
   <hr>
   <div class="d-flex justify-content-between row mx-4">
-        <div class="col-lg-5 col-md-6 col-sm-12">
+        <div class="col-lg-5 col-md-6 col-sm-12" (click)="goToStartCase()">
           <button class="signin-button btn d-flex align-items-center justify-content-center">
             <mat-icon>add</mat-icon>
             <h5 class="m-0">{{ "start_case" | translate }}</h5>

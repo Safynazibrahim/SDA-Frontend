@@ -1,1 +1,25 @@
-<p>dental-history works!</p>
+<div class="container">
+  <div class="row mx-3 align-items-center justify-content-between mb-3">
+    <div class="col-lg-6 d-flex align-items-center">
+      <h3 class="main-title me-4">{{ "cases" | translate }}</h3>
+
+      <div class="date-range d-flex align-items-center">
+        <div class="date-input-group me-3">
+          <label class="date-label">{{ "From" | translate }}</label>
+          <div class="input-wrapper">
+            <mat-icon>calendar_today</mat-icon>
+            <input type="date" placeholder="DD/MM/YYYY" />
+          </div>
+        </div>
+
+        <div class="date-input-group">
+          <label class="date-label">{{ "To" | translate }}</label>
+          <div class="input-wrapper">
+            <mat-icon>calendar_today</mat-icon>
+            <input type="date" placeholder="DD/MM/YYYY" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

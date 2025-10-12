@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -6,6 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs';
 import { ModalComponent } from '../../../../../shared/modal/modal.component';
+import { PatientService } from '../../../patient.service';
 
 @Component({
   selector: 'app-patient-profile',
@@ -16,14 +17,18 @@ import { ModalComponent } from '../../../../../shared/modal/modal.component';
   templateUrl: './patient-profile.component.html',
   styleUrl: './patient-profile.component.scss'
 })
-export class PatientProfileComponent {
+export class PatientProfileComponent implements OnInit{
+  patientId!: any;
+  patientData: any;
   selectedIndex = 0;
   currentTitle: string = 'appointment_history';
   isEditPatientModalOpen:boolean = false;
   isDeletePatientModalOpen:boolean = false;
   showPassword = false;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, 
+    private route: ActivatedRoute,
+    private _PatientService:PatientService) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -36,6 +41,20 @@ export class PatientProfileComponent {
           }
         }
       });
+  }
+
+  ngOnInit(): void {
+    // 1️⃣ Get ID from route
+    this.route.paramMap.subscribe(params => {
+      this.patientId = params.get('id')!;
+      console.log('clinicId in parent', this.patientId);
+    });
+
+    // 2️⃣ Get patient data from service
+    this.patientData = this._PatientService.getSelectedPatient();
+    console.log('patient data', this.patientData)
+
+    
   }
 
   tabs = [
@@ -62,5 +81,8 @@ export class PatientProfileComponent {
     this.isDeletePatientModalOpen = false;
   }
 
-  
-}
+  goToStartCase() {
+    this.router.navigate(['/dashboard/appointments/start-case']);
+  } 
+
+}     
