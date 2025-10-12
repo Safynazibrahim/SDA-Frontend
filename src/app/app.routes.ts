@@ -83,6 +83,13 @@ export const routes: Routes = [
           ).then((m) => m.PatientListComponent),
       },
       {
+        path: 'view-dental-history-details/:caseId',
+        loadComponent: () =>
+          import(
+            './components/user/patients/view-dental-history-details/view-dental-history-details.component'
+          ).then((m) => m.ViewDentalHistoryDetailsComponent),
+      },
+      {
         path: 'patients/:id',
         loadComponent: () =>
           import(
