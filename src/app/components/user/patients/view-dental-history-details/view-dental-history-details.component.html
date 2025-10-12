@@ -1,0 +1,141 @@
+<div class="container view-details">
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <div class="col-lg-6">
+      <h3>
+        {{ "Patients" | translate }}
+        <span>
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        {{ "patient_profile" | translate }}
+        <span>
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        {{ "dental_history" | translate }}
+        <span (click)="goBack()">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        <h3
+          style="
+            color: var(--text-gray-head-table);
+            display: inline-block;
+            margin: 0px;
+          "
+        >
+          {{ "case_details" | translate }}
+        </h3>
+      </h3>
+    </div>
+  </div>
+
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <div class="col-12">
+      <div class="case-card">
+        <div class="view-details-card">
+          <div class="diagnosis-header">
+            <img src="../../../../../assets/media/last-diagnose.svg" alt="" />
+            <span class="diagnosis-label">{{
+              "last_diagnosis" | translate
+            }}</span>
+          </div>
+
+          <div class="diagnosis-info my-1">
+            <p class="diagnosis-name">
+              <b>{{ "diagnosis_name" | translate }}:</b>
+              {{ cases.diagnosis }}
+            </p>
+          </div>
+
+          <div class="progress-wrapper mb-4">
+            <div class="progress-labels d-flex justify-content-between my-1">
+              <span>{{ "complete" | translate }}: {{ cases.complete }}%</span>
+              <span class="fw-bolder"
+                >{{ "remaining" | translate }}:
+                {{ 100 - cases.complete }}%</span
+              >
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="cases.complete"></div>
+            </div>
+          </div>
+
+          <div class="diagnosis-header">
+            <img src="../../../../../assets/media/medications.svg" alt="" />
+            <span class="diagnosis-label">{{ "medications" | translate }}</span>
+          </div>
+
+          <div
+            class="row medications-details d-flex align-items-center justify-content-between my-3"
+          >
+            <div class="col-md-6 col-sm-12">
+              <div class="row d-flex align-items-center">
+                <div class="col-3">
+                  <img
+                    src="../../../../../assets/media/medi.png"
+                    class="w-100"
+                    alt=""
+                  />
+                </div>
+                <div class="col-9">
+                  <h5>Ursofalk 300</h5>
+                  <div class="d-flex justify-content-between">
+                    <h6>2 Pills</h6>
+                    <h6>02:00 pm</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 d-flex ">
+              <div class="line d-md-block d-sm-none"></div>
+              <div class="ms-3 me-3">
+                <h5>Routine Medicicne</h5>
+                <h6>No observations or note</h6>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="row medications-details d-flex align-items-center justify-content-between my-3"
+          >
+            <div class="col-md-6">
+              <div class="row d-flex align-items-center">
+                <div class="col-3">
+                  <img
+                    src="../../../../../assets/media/medi.png"
+                    class="w-100"
+                    alt=""
+                  />
+                </div>
+                <div class="col-9">
+                  <h5>Ursofalk 300</h5>
+                  <div class="d-flex justify-content-between">
+                    <h6>2 Pills</h6>
+                    <h6>02:00 pm</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-flex">
+              <div class="line d-md-block d-sm-none"></div>
+              <div class="ms-3 me-3">
+                <h5>Routine Medicicne</h5>
+                <h6>Patient observed to be having seizures. Indever given to reduce blood pressure</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-5 d-flex mx-3">
+    <div class="col-sm-10 col-lg-4 col-md-6 mb-5">
+      <button
+        class="signin-button d-flex align-items-center justify-content-center"
+      >
+        <mat-icon>download</mat-icon>
+        {{ "download" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

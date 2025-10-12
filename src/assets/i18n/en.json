@@ -252,5 +252,13 @@
   "delete_patient":"Delete Patient",
   "msg_delete_patient":"Are you sure you want to delete this patient?",
   "msg_delete_details":"All associated data (appointments, treatments, medical history) will be deleted. This process cannot be undone",
-  "add_appointment":"Add Appointment"
+  "add_appointment":"Add Appointment",
+  "case":"Case",
+  "last_diagnosis":"Last Diagnosis",
+  "diagnosis_name":"Diagnosis Name",
+  "complete":"Complete",
+  "download":"Download",
+  "case_details":"Case Details",
+  "medications":"Medications",
+  "diseases":"Diseases"
 }

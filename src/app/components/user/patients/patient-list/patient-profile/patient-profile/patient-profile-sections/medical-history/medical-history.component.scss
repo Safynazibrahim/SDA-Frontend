@@ -1,0 +1,45 @@
+/* Tabs */
+.history-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--text-light-gray);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-gray);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.tab-item.active {
+  color: var(--bg-brown-medium);
+  border-bottom: 1px solid var(--bg-brown-medium);
+}
+
+.medication-item{
+    padding: 8px;
+    border-bottom: 1px solid var(--text-light-gray);
+}
+.disease-item {
+  border: 1px solid var(--text-gray);
+  border-radius: 8px;
+  padding: 16px 16px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.med-name,
+.disease-name {
+  font-size: 1.1rem;
+  color: var(--text-gray-head-table);
+  font-weight: 500;
+  margin: 0px 14px;
+}

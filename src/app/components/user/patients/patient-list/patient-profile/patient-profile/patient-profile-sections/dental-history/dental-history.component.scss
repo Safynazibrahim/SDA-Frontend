@@ -1,0 +1,159 @@
+.date-input-group {
+  .date-label {
+    display: block;
+    margin: 8px 0px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-gray-head-table);
+  }
+
+  .custom-date-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid var(--text-gray);
+    border-radius: 8px;
+    padding: 14px;
+    background-color: var(--bg-white-secondary);
+  }
+
+  .custom-date-input {
+    margin-left: 5px;
+    border: none;
+    outline: none;
+    width: 120px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text-gray) !important;
+    background-color: transparent !important;
+  }
+
+  .calendar-icon {
+    cursor: pointer;
+    color: var(--text-gray);
+  }
+}
+
+.case-title {
+  border: 1px solid var(--text-gray);
+  border-radius: 8px;
+  padding: 7px 14px;
+  width: fit-content;
+  margin-bottom: 10px;
+  background-color: var(--text-gray);
+  h5 {
+    font-weight: 400;
+    color: var(--bg-secondary);
+    margin: 0px !important;
+  }
+}
+
+.case-card {
+  background-color: transparent !important;
+  border: 1px solid var(--text-gray);
+  border-radius: 12px;
+  padding: 30px;
+  .diagnosis-header {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 8px;
+    margin-bottom: 10px;
+    min-width: 150px;
+    background: url("../../../../../../../../../assets/media/ButtonClip.svg")
+      no-repeat center center;
+    background-size: cover;
+    color: var(--bg-brown-dark);
+    font-size: 17px;
+    font-weight: 400;
+    img{
+    width: auto;
+    }
+  }
+  .diagnosis-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 6px;
+    background-color: var(--bg-brown-medium);
+  }
+  .diagnosis-name {
+    font-size: 20px;
+    color: var(--text-gray-head-table);
+  }
+
+  .progress-wrapper {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    .progress-bar {
+      width: 100%;
+      height: 17px;
+      background: #e7e1d7;
+      border-radius: var(--Space-md-space, 40px);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: var(--Space-md-space, 40px);
+      background: linear-gradient(90deg, #d5a618 0%, #6f570d 100%);
+      transition: width 0.4s ease;
+    }
+  }
+
+  .signin-button.download-btn {
+    background: transparent !important;
+    border: 2px solid var(--bg-brown-medium) !important;
+    color: var(--bg-brown-medium) !important;
+  }
+}
+
+////////view-details//////
+.view-details{
+  h3 {
+  font-size: clamp(1.1rem, 1.2vw + 0.8rem, 1.5rem);
+  font-weight: 500;
+  color: var(--text-gray);
+  span mat-icon {
+    cursor: pointer;
+    font-size: 30px;
+    color: var(--text-gray-head-table);
+  }
+}
+.case-card .view-details-card {
+    width: 65% !important;
+}
+
+.medications-details {
+
+  h5{
+    font-size: 1.2rem;
+    color: var(--text-gray-head-table);
+    margin: 0px;
+    font-weight: 500;
+  }
+  h6{
+    font-size: 1.1rem;
+    color: var(--text-gray-head-table);
+    margin: 0px;
+    font-weight: 400;
+  }
+  .line {
+    border-left: 2px solid #ddd; // خط عمودي
+    align-self: stretch;
+  }
+
+}
+  
+@media (max-width: 1000px) {
+  .case-card .view-details-card {
+    width: 100% !important;
+}
+}
+}
+
+
