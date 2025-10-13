@@ -794,85 +794,22 @@
 </div>
 
 </div>
-
-<!-- بعد التسجيل يظهر مشغل الصوت + أزرار بسيطة -->
 <div class="record-preview" *ngIf="audioUrl">
   <audio [src]="audioUrl" controls></audio>
-  <!-- <div class="preview-actions">
-    <button class="btn ghost" (click)="reRecord()">
-      <mat-icon>refresh</mat-icon> Re-record
-    </button>
-    <a class="btn ghost" [href]="audioUrl" [attr.download]="downloadFileName">
-      <mat-icon>download</mat-icon> Download
-    </a>
-  </div> -->
 </div>
-
-
-
-<!-- 🔊 عرض النص الناتج -->
 <div class="transcription-output mt-3 d-flex align-items-center" *ngIf="isRecording || transcriptionResult">
   <h6 class="my-0">📝 Transcription Result:</h6>
   <p class="fs-5 ms-2 my-0">
-    {{ transcriptionResult || 'Listening...' }}
+    {{ transcriptionResult || 'No text fetch...' }}
   </p>
 </div>
 
 
   <div class="page-footer-btns">
   <button class="ai-btn">Generate AI</button>
-  <button class="manual-btn">Manual Diagnosis</button>
+  <button class="manual-btn" [routerLink]="['/dashboard/appointments/start-case/manual-diagnosis']">Manual Diagnosis</button>
 </div>
 
-</div>
+</div> 
 
 
-
- <!-- <div class="record-wrap">
-  <button
-    class="mic-btn"
-    [class.recording]="isRecording"
-    (click)="toggleRecording()"
-    [disabled]="permissionDenied"
-  >
-    <span class="pulse" *ngIf="isRecording"></span>
-    <mat-icon>{{ isRecording ? 'stop' : 'mic' }}</mat-icon>
-  </button>
-
-  <div class="record-status">
-    <p class="status-text" *ngIf="!isRecording && !audioUrl">
-      {{ permissionDenied ? 'Microphone permission denied' : 'Tap to record' }}
-    </p>
-
-    <p class="status-text recording-text" *ngIf="isRecording">
-      Recording...
-    </p>
-
-    <p class="status-text done-text" *ngIf="!isRecording && audioUrl">
-      Recording completed
-    </p>
-
-    <p class="timer" *ngIf="isRecording || audioUrl">{{ formattedTime }}</p>
-  </div>
-</div>
-
-<div class="record-preview" *ngIf="audioUrl">
-  <audio [src]="audioUrl" controls></audio>
-
-  <div class="transcription-section mt-3">
-    <h5>Transcribed Text:</h5>
-    <p *ngIf="transcribedText">{{ transcribedText }}</p>
-    <p *ngIf="!transcribedText && !isProcessing" class="text-muted">
-      Press "Process" to convert your voice to text
-    </p>
-    <p *ngIf="isProcessing">Processing...</p>
-    <p *ngIf="transcriptionError" class="text-danger">{{ transcriptionError }}</p>
-  </div>
-</div>
-
-<div class="process-strip">
-  <button class="process-btn" [disabled]="!audioBlob || isProcessing" (click)="processAudio()">
-    <span *ngIf="!isProcessing">Process</span>
-    <span *ngIf="isProcessing">Processing...</span>
-  </button>
-</div> -->

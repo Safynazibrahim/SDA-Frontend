@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-type Lang = 'ar' | 'en';
-
 @Injectable({ providedIn: 'root' })
 export class WebSpeechService {
   private recognition: any;
@@ -120,18 +118,15 @@ async startListening(lang: 'en' | 'ar', onResult: (text: string) => void, onEnd?
   };
 
   this.recognition.onend = () => {
-    console.log('🏁 Recognition ended.');
     if (onEnd) onEnd();
   };
 
   this.recognition.start();
-  console.log('🎤 Listening started for', lang);
 }
 
 stopListening() {
   if (this.recognition) {
     this.recognition.stop();
-    console.log('🛑 Listening stopped');
   }
 }
 
