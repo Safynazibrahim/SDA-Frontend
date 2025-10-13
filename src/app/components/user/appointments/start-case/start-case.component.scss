@@ -393,3 +393,118 @@
 }
 
 }
+/* ✅ Responsive adjustments */
+@media (max-width: 992px) {
+  .startCase {
+    .header-with-note {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .col-md-5 {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .note-input {
+        width: 100% !important;
+      }
+    }
+
+    .checkbox-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 15px;
+      label {
+        font-size: 18px;
+      }
+    }
+
+    .upload-box {
+      .upload-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .preview-gallery {
+        justify-content: center;
+        .preview-item {
+          width: 100px;
+          img {
+            height: 80px;
+          }
+        }
+      }
+    }
+
+    .record-wrap {
+      .mic-btn {
+        width: 56px;
+        height: 56px;
+      }
+      .record-status {
+        .status-text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .page-footer-btns {
+      flex-direction: column;
+      gap: 15px;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+    .route , .clinicActive {
+    font-size: 14px !important;
+  }
+  .headerName {
+    font-size: 15px !important;
+  }
+  .startCase {
+    .route {
+      font-size: 20px;
+    }
+
+    .clinicActive {
+      font-size: 22px;
+    }
+
+    .checkbox-grid {
+      grid-template-columns: 1fr !important;
+      label {
+        font-size: 16px;
+      }
+    }
+
+    .note-input {
+      font-size: 14px !important;
+    }
+
+    .upload-box {
+      padding: 15px;
+      .upload-title {
+        font-size: 16px;
+      }
+    }
+
+    .record-preview audio {
+      width: 100%;
+    }
+
+    .transcription-output {
+      flex-direction: column;
+      align-items: flex-start;
+      h6 {
+        font-size: 15px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+  
+}

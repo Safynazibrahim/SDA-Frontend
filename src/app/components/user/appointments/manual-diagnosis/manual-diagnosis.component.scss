@@ -1,5 +1,5 @@
-.manual-diagnosis-container{
-    .route {
+.manual-diagnosis-container {
+  .route {
     color: #8f8f8f;
     font-weight: 400;
     font-family: "IBM Plex Sans";
@@ -21,7 +21,7 @@
       height: 100%;
     }
   }
-    .form-control,
+  .form-control,
   .form-select {
     border: 1px solid #737373 !important;
     padding: 9px !important;
@@ -34,125 +34,125 @@
     margin-bottom: 0px !important;
   }
   .medications-dropdown {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 
-  .medication-item {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    overflow: hidden;
+    .medication-item {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
 
-    .med-header {
-      background: #fafafa;
-      padding: 12px 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      font-size: 18px;
-      color: #3e372c;
-      cursor: pointer;
+      .med-header {
+        background: #fafafa;
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        font-size: 18px;
+        color: #3e372c;
+        cursor: pointer;
+      }
+
+      .med-body {
+        padding: 15px;
+        background: #fff;
+        border-top: 1px solid #e5e5e5;
+
+        label {
+          font-size: 14px;
+          font-weight: 600;
+          color: #434343;
+        }
+
+        .form-control {
+          border: 1px solid #737373 !important;
+          padding: 9px !important;
+          color: #434343 !important;
+          font-size: 14px;
+        }
+
+        .status-indicator {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          &.safe {
+            background-color: #4caf50;
+          }
+          &.danger {
+            background-color: #f44336;
+          }
+        }
+      }
     }
 
-    .med-body {
-      padding: 15px;
-      background: #fff;
-      border-top: 1px solid #e5e5e5;
+    .add-btn-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
 
-      label {
-        font-size: 14px;
-        font-weight: 600;
-        color: #434343;
+      .add-btn {
+        background: var(--bg-brown-gradient);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 35px;
+        width: 48%;
       }
 
-      .form-control {
-        border: 1px solid #737373 !important;
-        padding: 9px !important;
-        color: #434343 !important;
-        font-size: 14px;
-      }
-
-      .status-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        &.safe {
-          background-color: #4caf50;
-        }
-        &.danger {
-          background-color: #f44336;
-        }
+      .cancel-btn {
+        background: #fff;
+        border: 1.5px solid #b19e7f;
+        color: #8b7a5e;
+        border-radius: 6px;
+        padding: 10px 35px;
+        width: 48%;
       }
     }
   }
 
-  .add-btn-wrapper {
+  .page-footer-btns {
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+    align-items: center;
+    gap: 25px;
+    margin-top: 40px;
+    padding-bottom: 30px;
 
-    .add-btn {
-      background: var(--bg-brown-gradient);
-      color: #fff;
+    button {
       border: none;
       border-radius: 6px;
       padding: 10px 35px;
-      width: 48%;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s ease;
+      width: 50%;
+    }
+
+    .send-to-patient-btn {
+      background: var(--bg-brown-gradient);
+      color: #fff;
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
     }
 
     .cancel-btn {
       background: #fff;
       border: 1.5px solid #b19e7f;
       color: #8b7a5e;
-      border-radius: 6px;
-      padding: 10px 35px;
-      width: 48%;
+
+      &:hover {
+        background: #fdf7f1;
+        transform: translateY(-2px);
+      }
     }
   }
-}
-
-   .page-footer-btns {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-  margin-top: 40px;
-  padding-bottom: 30px;
-
-  button {
-    border: none;
-    border-radius: 6px;
-    padding: 10px 35px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: 0.3s ease;
-    width: 50%;
-  }
-
-  .send-to-patient-btn {
-    background: var(--bg-brown-gradient);
-    color: #fff;
-
-    &:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-  }
-
-  .cancel-btn{
-    background: #fff;
-    border: 1.5px solid #b19e7f;
-    color: #8b7a5e;
-
-    &:hover {
-      background: #fdf7f1;
-      transform: translateY(-2px);
-    }
-  }
-}
 }
 .dropdown-wrapper {
   position: relative;
@@ -273,3 +273,12 @@
   }
 }
 
+@media (max-width: 576px) {
+  .route,
+  .clinicActive {
+    font-size: 14px !important;
+  }
+  .manual-diagnosis-container .page-footer-btns button {
+    font-size: 13px;
+  }
+}

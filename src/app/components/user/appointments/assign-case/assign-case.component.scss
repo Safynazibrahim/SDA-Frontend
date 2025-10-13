@@ -150,3 +150,23 @@
     width: 135px;
   }
 }
+@media (max-width: 576px) {
+  .route , .clinicActive {
+    font-size: 14px !important;
+  }
+  .userName{
+    font-size: 21px !important;
+  }
+  .userdetails{
+    font-size: 16px !important;
+}
+.date-time{
+    font-size: 16px !important;
+}
+.responsive-date{
+  margin-top: 7px;
+}
+.first-section {
+    border-right: none !important;
+  }
+}
