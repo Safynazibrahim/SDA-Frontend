@@ -7,7 +7,7 @@
     font-size: 27px;
   }
   .clinicActive {
-    color: var(--text-gray-head-table);
+    color: var(--text-gray-head-table) !important;
     font-family: "IBM Plex Sans";
     font-size: 30px;
     font-weight: 500;
@@ -27,7 +27,7 @@
 
     h4 {
       font-weight: 600;
-      color: #333;
+      color: var(--text-gray-head-table);
       margin-bottom: 20px;
     }
 
@@ -79,7 +79,7 @@
           gap: 10px;
           font-size: 20px;
           font-weight: 500;
-          color: #434343;
+          color: var(--text-gray-head-table);
           input {
             transform: scale(1.1);
           }
@@ -133,7 +133,7 @@
       gap: 10px;
       font-size: 18px;
       font-weight: 500;
-      color: #434343;
+      color: var(--text-gray-head-table);
 
       input {
         transform: scale(1.1);
@@ -267,7 +267,7 @@
   }
 
   .ai-btn {
-    background: var(--bg-brown-gradient);
+    background: var(--bg-sec-brown-gradient);
     color: #fff;
 
     &:hover {
@@ -277,12 +277,11 @@
   }
 
   .manual-btn {
-    background: #fff;
-    border: 1.5px solid #b19e7f;
-    color: #8b7a5e;
+    background: var(--bg-primary);
+    border: 1.5px solid var(--bg-brown-medium);
+    color: var(--bg-brown-medium);
 
     &:hover {
-      background: #fdf7f1;
       transform: translateY(-2px);
     }
   }
