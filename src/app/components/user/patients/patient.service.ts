@@ -41,6 +41,14 @@ export class PatientService {
     return this._ApiServiceService.get<any>(`patients/${patientId}/appointments/history`, params);
   }
 
+  getPatientDentalHistory(patientId:any,params?:any): Observable<any> {
+    return this._ApiServiceService.get<any>(`patients/${patientId}/cases`, params);
+  }
+
+  getAssignedCases(clinicId:any,params:any): Observable<any>{
+    return this._ApiServiceService.get<any>(`clinics/${clinicId}/assigned-cases`, params);
+  }
+
 
 
 }

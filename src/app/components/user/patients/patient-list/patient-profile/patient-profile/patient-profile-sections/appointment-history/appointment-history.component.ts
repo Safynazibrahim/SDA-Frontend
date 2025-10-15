@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './appointment-history.component.scss',
 })
 export class AppointmentHistoryComponent implements OnInit {
+  CurrentPage =1;
+  limit = 50;
   patientId!: any;
   patientAppointmentHistory: any[]=[];
 
@@ -29,10 +31,14 @@ export class AppointmentHistoryComponent implements OnInit {
   }
 
   getPatientAppointmentHistory(){
-    this._PatientService.getPatientAppointmentHistory(this.patientId).subscribe({
+    const params: any = {
+    page: this.CurrentPage,
+    limit: this.limit,
+    };
+    this._PatientService.getPatientAppointmentHistory(this.patientId,params).subscribe({
       next: (response) => {
       this.patientAppointmentHistory = response || [];
-      console.log('Patients response', this.patientAppointmentHistory);
+      console.log('Patients in Appointment response', this.patientAppointmentHistory);
       // this.totalData = response.total || 0;
     },
     error: (err) => {
