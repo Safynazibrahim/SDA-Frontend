@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-manual-diagnosis',
   standalone: true,
@@ -26,23 +26,49 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './manual-diagnosis.component.html',
   styleUrl: './manual-diagnosis.component.scss',
 })
-export class ManualDiagnosisComponent {
+export class ManualDiagnosisComponent implements OnInit {
   diagnosisName = '';
   treatmentPlan = '';
   instructionBetweenVisits = '';
-
-  // dropdown control
+  treatmentProgress = 50;
+  progressOffset: string = '';
   isDropdownOpen = false;
   openIndex: number | null = null;
   selectedMedication = '';
 
   medications = [
-    { name: 'Medicine Name', dosage: '', frequency: '', duration: '', safe: true },
-    { name: 'Medicine Name', dosage: '', frequency: '', duration: '', safe: true },
-    { name: 'Medicine Name', dosage: '', frequency: '', duration: '', safe: true },
-    { name: 'Medicine Name', dosage: '', frequency: '', duration: '', safe: true },
+    {
+      name: 'Medicine Name',
+      dosage: '',
+      frequency: '',
+      duration: '',
+      safe: true,
+    },
+    {
+      name: 'Medicine Name',
+      dosage: '',
+      frequency: '',
+      duration: '',
+      safe: true,
+    },
+    {
+      name: 'Medicine Name',
+      dosage: '',
+      frequency: '',
+      duration: '',
+      safe: true,
+    },
+    {
+      name: 'Medicine Name',
+      dosage: '',
+      frequency: '',
+      duration: '',
+      safe: true,
+    },
   ];
-
+  ngOnInit() {
+    this.calculateProgress();
+  }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
     this.openIndex = null; // reset any open section when closing
@@ -50,5 +76,12 @@ export class ManualDiagnosisComponent {
 
   toggleMed(index: number) {
     this.openIndex = this.openIndex === index ? null : index;
+  }
+
+  calculateProgress() {
+    const circumference = 2 * Math.PI * 54;
+    const offset =
+      circumference - (this.treatmentProgress / 100) * circumference;
+    this.progressOffset = offset.toString();
   }
 }

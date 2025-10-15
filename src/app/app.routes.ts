@@ -250,6 +250,13 @@ export const routes: Routes = [
                   import(
                     './components/user/appointments/manual-diagnosis/manual-diagnosis.component'
                   ).then((m) => m.ManualDiagnosisComponent),
+              },
+              {
+                path: 'generate-ai',
+                loadComponent: () =>
+                  import(
+                    './components/user/appointments/generate-ai/generate-ai.component'
+                  ).then((m) => m.GenerateAIComponent),
               }
             ]
           },

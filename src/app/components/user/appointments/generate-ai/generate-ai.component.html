@@ -1,0 +1,98 @@
+<div class="container generatedAi-container">
+  <div class="d-flex align-items-center mb-2">
+    <p class="mb-0 route">{{ "appointments" | translate }}</p>
+    <a
+      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+      style="cursor: pointer"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <div class="d-flex align-items-center mb-2">
+      <p class="mb-0 route">{{ "start case" | translate }}</p>
+    </div>
+    <a
+      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+      style="cursor: pointer"
+      [routerLink]="['/dashboard/appointments/start-case']"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <div class="d-flex align-items-center mb-2">
+      <p class="mb-0 clinicActive">{{ "generate ai" | translate }}</p>
+    </div>
+  </div>
+
+  <div class="static3dModel">
+    <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
+  </div>
+  <div class="progress-section">
+    <div class="progress-circle">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="54" class="progress-bg"></circle>
+        <circle
+          cx="60"
+          cy="60"
+          r="54"
+          class="progress-bar"
+          [style.stroke-dashoffset]="progressOffset"
+        ></circle>
+      </svg>
+      <div class="progress-text">{{ treatmentProgress }}%</div>
+    </div>
+    <p class="progress-label">{{ "Treatment Progress" | translate }}</p>
+  </div>
+  <div class="section">
+    <label class="form-label">{{ "Generated Diagnoses" | translate }}</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter Diagnosis Name"
+      name="diagnosisName"
+    />
+  </div>
+
+  <div class="section">
+    <label class="section-label">{{ "Medications" | translate }}</label>
+
+    <div class="medication-item" *ngFor="let med of medications">
+      <div class="w-50 d-flex align-items-center justify-content-between">
+        <div class="med-name">{{ med.name }}</div>
+      <div class="med-dosage">{{ med.dosage }}</div>
+      </div>
+      <div class="w-50 d-flex align-items-center ml-auto justify-content-end">
+        <div class="med-duration">{{ med.duration }}</div>
+        <div class="med-frequency ms-3">{{ med.frequency }}</div>
+        <div class="med-status ms-3" [ngClass]="med.statusClass">
+          <span class="status-dot"></span>
+            <span style="min-width:50px">{{ med.status | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <label class="section-label">{{ "Treatment Plan" | translate }}</label>
+    <ul class="treatment-list">
+      <li *ngFor="let item of treatmentPlan">
+        <span class="session-label">{{ item.session }}:</span>
+        <span class="session-value ms-2">{{ item.treatment | translate }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <label class="section-label">{{
+      "Instruction between visits" | translate
+    }}</label>
+    <ul class="instruction-list">
+      <li *ngFor="let instruction of instructions">
+        {{ instruction | translate }}
+      </li>
+    </ul>
+  </div>
+  <div class="page-footer-btns">
+  <button class="send-to-patient-btn">{{"Send to patient" | translate}}</button>
+  <button class="cancel-btn">{{ "set the next appointment" | translate }}</button>
+  <button class="cancel-btn">{{ "Cancel" | translate }}</button>
+</div>
+</div>

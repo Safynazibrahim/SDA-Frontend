@@ -1,0 +1,287 @@
+.generatedAi-container {
+  .route {
+    color: #8f8f8f;
+    font-weight: 400;
+    font-family: "IBM Plex Sans";
+    font-size: 27px;
+  }
+
+  .clinicActive {
+    color: var(--text-gray-head-table) !important;
+    font-family: "IBM Plex Sans";
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .static3dModel {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    margin-top: 20px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .progress-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+  }
+
+  .progress-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+
+    svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .progress-bg {
+      fill: none;
+      stroke: #e8e8e8;
+      stroke-width: 8;
+    }
+
+    .progress-bar {
+      fill: none;
+      stroke: #4caf50;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 339.292;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+  }
+
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: 600;
+    color: #4caf50;
+  }
+
+  .progress-label {
+    margin-top: 10px;
+    color: var(--text-gray-head-table);
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .section-label {
+    display: block;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text-gray-head-table);
+    margin-bottom: 12px;
+  }
+  .form-control {
+    border: 1px solid #737373 !important;
+    padding: 9px !important;
+    color: var(--text-light-gray-placeholder) !important;
+    background: var(--bg-primary) !important;
+  }
+  .form-control::placeholder {
+    color: var(--text-light-gray-placeholder) !important;
+  }
+
+ .medication-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-white);
+  border: 1px solid #f0efef;
+  border-radius: 16px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+
+  .med-name {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-gray-head-table);
+  }
+
+  .med-dosage {
+    text-align: right;
+    color: var(--text-gray-head-table);
+  }
+
+  .med-duration {
+    
+    text-align: right;
+    color: var(--text-gray-head-table);
+  }
+
+  .med-frequency {
+   
+    text-align: right;
+    color: var(--text-gray-head-table);
+  }
+
+  .med-status {
+    
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-gray-head-table);
+    min-width: 65px;
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 7px;}
+
+    &.status-safe .status-dot {
+      background: #4caf50;
+    }
+
+    &.status-conflict .status-dot {
+      background: #d5a618;
+    }
+  }
+}
+
+
+  .treatment-list,
+  .instruction-list {
+    list-style: none;
+    padding: 7px 20px;
+    margin: 0;
+    background: var(--sections-bg);
+    border-radius: 8px;
+
+    li {
+      padding: 8px 0;
+      color: var(--text-gray-home-about);
+      font-size: 19px;
+
+      &:before {
+        content: "• ";
+        color: var(--text-gray-home-about);
+        font-weight: bold;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .session-label {
+    font-weight: 500;
+  }
+
+  .session-value {
+    font-weight: 600;
+  }
+.page-footer-btns {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 40px;
+    padding-bottom: 30px;
+
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 35px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s ease;
+      width: 50%;
+    }
+
+    .send-to-patient-btn {
+      background: var(--bg-sec-brown-gradient);
+      color: #fff;
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
+
+    .cancel-btn {
+      background: var(--bg-primary);
+      border: 1.5px solid #b19e7f;
+      color: #8b7a5e;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+@media (max-width: 992px) {
+  .generatedAi-container {
+    .section-label {
+      font-size: 24px;
+    }
+
+    .medication-item .w-50 {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .generatedAi-container {
+    .route,
+    .clinicActive {
+      font-size: 18px !important;
+    }
+
+    .section-label {
+      font-size: 22px;
+    }
+
+    .page-footer-btns {
+      flex-direction: column;
+      align-items: stretch;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .generatedAi-container {
+    .route,
+    .clinicActive {
+      font-size: 14px !important;
+    }
+
+    .section-label {
+      font-size: 20px;
+    }
+
+    .medication-item {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+
+      .w-50 {
+        width: 100% !important;
+        justify-content: start !important;
+      }
+
+      .med-status {
+        justify-content: flex-start;
+      }
+    }
+
+    .treatment-list li,
+    .instruction-list li {
+      font-size: 16px;
+    }
+  }
+}

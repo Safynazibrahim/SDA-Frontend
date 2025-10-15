@@ -25,6 +25,22 @@
   <div class="static3dModel">
     <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
   </div>
+  <div class="progress-section">
+    <div class="progress-circle">
+      <svg viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="54" class="progress-bg"></circle>
+        <circle
+          cx="60"
+          cy="60"
+          r="54"
+          class="progress-bar"
+          [style.stroke-dashoffset]="progressOffset"
+        ></circle>
+      </svg>
+      <div class="progress-text">{{ treatmentProgress }}%</div>
+    </div>
+    <p class="progress-label">{{ "Treatment Progress" | translate }}</p>
+  </div>
   <div class="row mt-2">
     <div class="col-md-6 mb-3">
       <label class="form-label">{{ "Diagnosis Name" | translate }}</label>

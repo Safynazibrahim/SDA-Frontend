@@ -137,22 +137,43 @@
     }
   }
 
-  .save-btn {
-    background: var(--bg-sec-brown-gradient);
-    font-size: 24px;
-    font-weight: 500;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    width: 135px;
-  }
-  .cancel-btn {
-    color: #b19e7f;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 400;
-    border: 1px solid #b19e7f;
-    width: 135px;
+  .page-footer-btns {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 40px;
+    padding-bottom: 30px;
+
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 35px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s ease;
+      width: 50%;
+    }
+
+    .send-to-patient-btn {
+      background: var(--bg-sec-brown-gradient);
+      color: #fff;
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
+
+    .cancel-btn {
+      background: var(--bg-primary);
+      border: 1.5px solid #b19e7f;
+      color: #8b7a5e;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
   }
 }
 @media (max-width: 576px) {
