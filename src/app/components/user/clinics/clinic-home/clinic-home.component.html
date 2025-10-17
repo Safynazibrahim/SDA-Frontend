@@ -21,6 +21,10 @@
         <mat-icon>inventory</mat-icon>
         <span *ngIf="!isClosed">{{"inventory" | translate}}</span>
       </li>
+      <li routerLink="assigned-cases" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        <span *ngIf="!isClosed">{{"assigned_cases" | translate}}</span>
+      </li>
       <li  (click)="backToClinics()">
         <mat-icon>logout</mat-icon>
         <span *ngIf="!isClosed">{{"exit" | translate}}</span>

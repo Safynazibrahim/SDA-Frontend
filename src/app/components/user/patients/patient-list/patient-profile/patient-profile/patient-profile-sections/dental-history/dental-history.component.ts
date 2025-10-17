@@ -87,7 +87,7 @@ export class DentalHistoryComponent implements OnInit {
       .getPatientDentalHistory(this.patientId, params)
       .subscribe({
         next: (response) => {
-          this.patientDentalHistory = response || [];
+          this.patientDentalHistory = response.data || [];
           console.log('Patients in Dental response', this.patientDentalHistory);
           // this.totalData = response.total || 0;
         },
@@ -104,13 +104,6 @@ export class DentalHistoryComponent implements OnInit {
       });
   }
 
-  cases = [
-    { id: 1, diagnosis: 'Start root canal treatment', complete: 70 },
-    { id: 2, diagnosis: 'Crown preparation', complete: 50 },
-    { id: 3, diagnosis: 'Start root canal treatment', complete: 25 },
-    { id: 4, diagnosis: 'Start root canal treatment', complete: 10 },
-    { id: 5, diagnosis: 'Crown preparation', complete: 95 },
-  ];
 
   goToDetails(caseId: number) {
     this._Router.navigate(

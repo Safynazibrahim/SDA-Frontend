@@ -213,6 +213,13 @@ export const routes: Routes = [
                   },
                 ],
               },
+              {
+                path: 'assigned-cases',
+                loadComponent: () =>
+                  import(
+                    './components/user/patients/assigned-cases/assigned-cases.component'
+                  ).then((m) => m.AssignedCasesComponent),
+              },
             ],
           },
         ],

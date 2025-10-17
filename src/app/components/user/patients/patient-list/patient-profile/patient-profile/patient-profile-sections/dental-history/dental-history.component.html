@@ -44,7 +44,7 @@
   </div>
 
   <div class="row d-flex justify-content-between mx-3">
-    <div class="col-lg-6 my-3" *ngFor="let case of cases; let i = index">
+    <div class="col-lg-6 my-3" *ngFor="let case of patientDentalHistory; let i = index">
       <div class="case-title">
         <h5 >{{"case" | translate}}: {{ i + 1 }}</h5>
       </div>
@@ -64,13 +64,14 @@
           </p>
         </div>
 
+        <!-- static -->
         <div class="progress-wrapper">
           <div class="progress-labels d-flex justify-content-between my-1">
-            <span>{{"complete" | translate}}: {{ case.complete }}%</span>
-            <span class="fw-bolder">{{"remaining" | translate}}: {{ 100 - case.complete }}%</span>
+            <span>{{"complete" | translate}}: {{ 50 }}%</span>
+            <span class="fw-bolder">{{"remaining" | translate}}: {{ 100 - 50 }}%</span>
           </div>
           <div class="progress-bar">
-            <div class="progress-fill" [style.width.%]="case.complete"></div>
+            <div class="progress-fill" [style.width.%]="50"></div>
           </div>
         </div>
 

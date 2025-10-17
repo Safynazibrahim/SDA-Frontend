@@ -1,9 +1,16 @@
 <div class="container py-3">
   <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
     <div class="col-lg-6">
-      <h3>
+      <h3 *ngIf="!clinicId">
         {{ "Patients" | translate }}
         <span [routerLink]="['/dashboard/patient-list']">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        {{ "assigned_cases" | translate }}
+      </h3>
+      <h3 *ngIf="clinicId">
+        {{ "Clinics" | translate }}
+        <span>
           <mat-icon>keyboard_arrow_left</mat-icon>
         </span>
         {{ "assigned_cases" | translate }}
@@ -29,51 +36,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let clinic of [1, 2,]" stryle="cursor: pointer;">
-            <td>safy ibrahim</td>
-            <td>12/12/2024</td>
-            <td>safyy</td>
-            <td class="new">New</td>
-            <td>
-              <mat-icon
-                svgIcon="custom_edit"
-                style="cursor: pointer;"
-                (click)="openEditModal()"
-                >
-              </mat-icon>
-              <mat-icon
-                svgIcon="custom_view"
-                style="cursor: pointer"
-                (click)="openViewModal()"
-                >
-              </mat-icon>
+          <tr *ngFor="let case of assignedCasesData" stryle="cursor: pointer;">
+            <td>{{case.appointments[0]?.patient?.user?.fullName}}</td>
+            <td>{{case.createdAt | date}}</td>
+            <td>Assign by</td>
+            <td [ngClass]="getStatusClass(case.status)">
+                {{ case.status | titlecase }}
             </td>
-          </tr>
-          <tr *ngFor="let clinic of [1, 2,]" stryle="cursor: pointer;">
-            <td>safy ibrahim</td>
-            <td>12/12/2024</td>
-            <td>safyy</td>
-            <td class="in-progress">In Progress</td>
-            <td>
-              <mat-icon
-                svgIcon="custom_edit"
-                style="cursor: pointer;"
-                (click)="openEditModal()"
-                >
-              </mat-icon>
-              <mat-icon
-                svgIcon="custom_view"
-                style="cursor: pointer"
-                (click)="openViewModal()"
-                >
-              </mat-icon>
-            </td>
-          </tr>
-          <tr *ngFor="let clinic of [1, 2,]" stryle="cursor: pointer;">
-            <td>safy ibrahim</td>
-            <td>12/12/2024</td>
-            <td>safyy</td>
-            <td class="completed">Completed</td>
             <td>
               <mat-icon
                 svgIcon="custom_edit"
@@ -93,8 +62,8 @@
       </table>
     </div>
     <app-pagination
-      [totalItems]="50"
-      [pageSize]="11"
+      [totalItems]="totalData"
+      [pageSize]="limit"
       [currentPage]="CurrentPage"
       (pageChange)="onPageChange($event)"
     >
