@@ -6,9 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { OnInit } from '@angular/core';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-manual-diagnosis',
   standalone: true,
@@ -35,7 +36,7 @@ export class ManualDiagnosisComponent implements OnInit {
   isDropdownOpen = false;
   openIndex: number | null = null;
   selectedMedication = '';
-
+  constructor(private route : ActivatedRoute , private router : Router) {}
   medications = [
     {
       name: 'Medicine Name',
@@ -66,8 +67,12 @@ export class ManualDiagnosisComponent implements OnInit {
       safe: true,
     },
   ];
+  appointmentId: string | null = null;
+  fromPage: any;
   ngOnInit() {
     this.calculateProgress();
+    this.appointmentId= this.route.snapshot.paramMap.get('id');
+    this.fromPage = this.route.snapshot.queryParamMap.get('from')
   }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -83,5 +88,10 @@ export class ManualDiagnosisComponent implements OnInit {
     const offset =
       circumference - (this.treatmentProgress / 100) * circumference;
     this.progressOffset = offset.toString();
+  }
+  cancelHandler() {
+    if(this.fromPage === 'appointments'){
+      this.router.navigate(['/dashboard/appointments']);
+    }
   }
 }

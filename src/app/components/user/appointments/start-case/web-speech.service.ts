@@ -13,7 +13,7 @@ export class WebSpeechService {
     if (SpeechRecognition) {
       this.recognition = new SpeechRecognition();
       this.isSupported = true;
-      this.recognition.continuous = true;
+      this.recognition.continuous = false;
       this.recognition.interimResults = true;
       this.recognition.maxAlternatives = 1;
     }
@@ -89,13 +89,17 @@ export class WebSpeechService {
   //     console.log('🎤 Recognition started for language:', lang);
   //   });
   // }
-async startListening(lang: 'en' | 'ar', onResult: (text: string) => void, onEnd?: () => void) {
+async startListening(
+  lang: 'en' | 'ar',
+  onResult: (text: string) => void,
+  onEnd?: () => void
+) {
   if (!this.isSupported) {
     throw new Error('❌ Web Speech API not supported. Use Chrome, Edge, or Safari.');
   }
 
   this.recognition.lang = lang === 'ar' ? 'ar-SA' : 'en-US';
-  this.recognition.continuous = false;
+  this.recognition.continuous = true; // ✅ خليه مستمر
   this.recognition.interimResults = true;
 
   let finalTranscript = '';
@@ -115,14 +119,33 @@ async startListening(lang: 'en' | 'ar', onResult: (text: string) => void, onEnd?
 
   this.recognition.onerror = (event: any) => {
     console.error('❌ Recognition error:', event.error);
+    // لو فيه خطأ "no-speech" بعد صمت، نعيد التشغيل بدل ما نقف
+    if (event.error === 'no-speech') {
+      try {
+        console.log('🔁 Restarting recognition after silence...');
+        this.recognition.stop();
+        setTimeout(() => this.recognition.start(), 300);
+      } catch (err) {
+        console.error('Restart error:', err);
+      }
+    }
   };
 
   this.recognition.onend = () => {
-    if (onEnd) onEnd();
+    console.log('🎤 Recognition ended unexpectedly (silence or pause)');
+    // نعيد التشغيل لو المستخدم لسه بيسجل
+    try {
+      console.log('🔁 Restarting continuous recognition...');
+      this.recognition.start();
+    } catch (err) {
+      console.error('Restart error:', err);
+    }
   };
 
   this.recognition.start();
+  console.log('🎙️ Speech recognition started continuously...');
 }
+
 
 stopListening() {
   if (this.recognition) {

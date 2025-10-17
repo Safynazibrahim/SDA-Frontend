@@ -27,13 +27,11 @@ export class ApiServiceService {
         withCredentials: true,
       })
       .pipe(
-        catchError((err) => {
-          if (err.status === 401) {
-            this.logout();
-          }
-          return throwError(() => err);
-        })
-      );
+      catchError((err) => {
+        // ✅ مهم جدًا علشان الـ interceptor يشوف الـ error
+        return throwError(() => err);
+      })
+    );
   }
   
   post<T>(endpoint: string, data: any, reportProgress = false): Observable<T> {

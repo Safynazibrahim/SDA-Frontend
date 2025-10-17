@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { WebSpeechService } from './web-speech.service';
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 @Component({
   selector: 'app-start-case',
   standalone: true,
-  imports: [MatIcon, CommonModule, TranslateModule, FormsModule, RouterLink],
+  imports: [MatIcon, CommonModule, TranslateModule, FormsModule, RouterLink ],
   templateUrl: './start-case.component.html',
   styleUrl: './start-case.component.scss',
 })
-export class StartCaseComponent implements OnDestroy {
+export class StartCaseComponent implements OnInit,OnDestroy {
   realChecked = false;
   xrayChecked = false;
   uploadedFiles: { name: string; preview: string }[] = [];
@@ -21,11 +21,17 @@ export class StartCaseComponent implements OnDestroy {
   downloadFileName = '';
   selectedLang: 'ar' | 'en' = 'en';
   transcriptionResult = '';
+  appointmentId: string | null = null;
+  fromPage: any;
   constructor(
     private cdRef: ChangeDetectorRef,
-    private speechService: WebSpeechService
+    private speechService: WebSpeechService,
+    private route : ActivatedRoute,
   ) {}
-
+  ngOnInit(): void {
+    this.appointmentId = this.route.snapshot.paramMap.get('id');
+     this.fromPage = this.route.snapshot.queryParamMap.get('from')
+  }
   private mediaStream: MediaStream | null = null;
   private mediaRecorder?: MediaRecorder;
   private chunks: Blob[] = [];
@@ -44,25 +50,34 @@ export class StartCaseComponent implements OnDestroy {
   }
 
   async toggleRecording() {
-    if (this.isRecording) {
-      this.stopListening();
-      this.isRecording = false;
-    } else {
-      this.isRecording = true;
-      this.transcriptionResult = 'Listening...';
-      this.speechService.startListening(
-        this.selectedLang,
-        (text) => {
-          this.transcriptionResult = text;
-          this.cdRef.detectChanges();
-        },
-        () => {
-          this.isRecording = false;
-          this.cdRef.detectChanges();
-        }
-      );
-    }
+  if (this.isRecording) {
+    // المستخدم ضغط على Stop
+    this.stopRecording();
+    this.stopListening();
+    this.isRecording = false;
+  } else {
+    // المستخدم ضغط على Record
+    this.isRecording = true;
+    this.transcriptionResult = 'Listening...';
+    this.seconds = 0;
+
+    // تشغيل التسجيل الفعلي
+    await this.startRecording();
+
+    // تشغيل التعرف على الكلام بالتوازي
+    this.speechService.startListening(
+      this.selectedLang,
+      (text) => {
+        this.transcriptionResult = text;
+        this.cdRef.detectChanges();
+      },
+      () => {
+        console.log('🎤 Listening ended (manual stop expected)');
+      }
+    );
   }
+}
+
 
   private getSupportedMime(): string | undefined {
     const candidates = [
@@ -107,7 +122,11 @@ export class StartCaseComponent implements OnDestroy {
       this.mediaRecorder.start();
       this.isRecording = true;
       this.seconds = 0;
-      this.timerRef = setInterval(() => this.seconds++, 1000);
+      this.timerRef = setInterval(() => {
+  this.seconds++;
+  this.cdRef.detectChanges(); // عشان يحدّث القيمة في الـ HTML
+}, 1000);
+
     } catch {
       this.permissionDenied = true;
       this.isRecording = false;
@@ -194,4 +213,5 @@ export class StartCaseComponent implements OnDestroy {
       });
     }
   }
+
 }

@@ -1,10 +1,11 @@
 <div class="container startCase pb-5">
+  @if(fromPage == 'appointments'){
   <div class="d-flex align-items-center mb-2">
-    <p class="mb-0 route">{{ "appointments" | translate }}</p>
+    <p class="mb-0 route" [routerLink]="['/dashboard/appointments']">{{ "appointments" | translate }}</p>
 
     <a
       class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
-      style="cursor: pointer"
+      style="cursor: pointer" [routerLink]="['/dashboard/appointments']"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
@@ -12,6 +13,7 @@
       <p class="mb-0 clinicActive">{{ "start case" | translate }}</p>
     </div>
   </div>
+}
   <div class="static3dModel">
     <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
   </div>
@@ -806,8 +808,8 @@
 
 
   <div class="page-footer-btns">
-  <button class="ai-btn" [routerLink]="['/dashboard/appointments/start-case/generate-ai']">Generate AI</button>
-  <button class="manual-btn" [routerLink]="['/dashboard/appointments/start-case/manual-diagnosis']">Manual Diagnosis</button>
+  <button class="ai-btn" [routerLink]="['/dashboard/appointments/start-case/generate-ai' , appointmentId]" [queryParams]="{from : fromPage}">Generate AI</button>
+  <button class="manual-btn" [routerLink]="['/dashboard/appointments/start-case/manual-diagnosis' , appointmentId]" [queryParams]="{ from: fromPage }">Manual Diagnosis</button>
 </div>
 
 </div> 

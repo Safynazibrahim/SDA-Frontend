@@ -1,19 +1,22 @@
 <div class="container generatedAi-container">
+@if(fromPage === 'appointments'){
   <div class="d-flex align-items-center mb-2">
-    <p class="mb-0 route">{{ "appointments" | translate }}</p>
+    <p class="mb-0 route" [routerLink]="['/dashboard/appointments']">{{ "appointments" | translate }}</p>
+
     <a
       class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
-      style="cursor: pointer"
+      style="cursor: pointer" [routerLink]="['/dashboard/appointments']"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
     <div class="d-flex align-items-center mb-2">
-      <p class="mb-0 route">{{ "start case" | translate }}</p>
+      <p [routerLink]="['/dashboard/appointments/start-case' , appointmentId]" [queryParams]=" {from : fromPage}" class="mb-0 route">{{ "start case" | translate }}</p>
     </div>
     <a
       class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
       style="cursor: pointer"
-      [routerLink]="['/dashboard/appointments/start-case']"
+      [routerLink]="['/dashboard/appointments/start-case' , appointmentId]"
+      [queryParams]=" {from : fromPage}"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
@@ -21,7 +24,7 @@
       <p class="mb-0 clinicActive">{{ "generate ai" | translate }}</p>
     </div>
   </div>
-
+}
   <div class="static3dModel">
     <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
   </div>
@@ -93,6 +96,6 @@
   <div class="page-footer-btns">
   <button class="send-to-patient-btn">{{"Send to patient" | translate}}</button>
   <button class="cancel-btn">{{ "set the next appointment" | translate }}</button>
-  <button class="cancel-btn">{{ "Cancel" | translate }}</button>
+  <button class="cancel-btn" (click)="cancelHandler()">{{ "Cancel" | translate }}</button>
 </div>
 </div>

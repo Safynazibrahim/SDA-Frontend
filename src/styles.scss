@@ -68,6 +68,7 @@ $SDA-theme: mat.define-light-theme((
   --bg-white-secondary: #fff;
   --bg-light-gray: #ebebeb;
   --bg-gray: #ebebeb; 
+  --brown-dark:#85775F;
   /* Brown gradient section backgrounds */
   --bg-brown-light: #d4c4a8;      /* Light brown from your design */
   --bg-brown-medium: #b19e7f;     /* Medium brown */
@@ -96,6 +97,7 @@ $SDA-theme: mat.define-light-theme((
 
   --text-orange: #d5a618;
   --text-gray: #737373;
+  --text-gray-sidebar: #737373;
   --text-light-gray: #bfbfbf;
   --text-light-gray-placeholder: #737373;
     /* Orange accent colors from your design */
@@ -155,7 +157,9 @@ $SDA-theme: mat.define-light-theme((
   --text-light-gray: #999999;
   --text-light-gray-placeholder: #999999;
   --number-pagination: #999;
+  --text-gray-sidebar:#BFBFBF;
   /* Brown sections in dark mode */
+  --brown-dark:#9D8A6F;
   --bg-brown-light: #4a3f32;      /* Dark brown equivalent */
   --bg-brown-medium: #D1B894;     /* Medium dark brown */
   --bg-brown-dark: #8E7E66;       /* Darkest brown */

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchComponent } from '../../../../../shared/search/search.component';
 import { ClinicService } from '../../../clinic.service';
@@ -21,15 +21,25 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
   appointments: any[] = [];
   timeSlots = Array(10).fill(0);
   selectedAppointment: any = null; // ✅ علشان نعرض الـ Sidebar لما المستخدم يضغط
+  fromPage: 'navbar' | 'clinic' = 'navbar';
+
 
   constructor(
     private route: ActivatedRoute,
-    private clinicService: ClinicService
+    private clinicService: ClinicService,
+    private router : Router
   ) {
     this.generateWeek(this.currentDate);
   }
 
   ngOnInit(): void {
+   this.route.parent?.paramMap.subscribe((params) => {
+    this.clinicId = params.get('id');
+    this.fromPage = this.clinicId ? 'clinic' : 'navbar';
+    console.log('🦷 clinicId in appointments:', this.clinicId);
+    console.log('📍 fromPage detected as:', this.fromPage);
+    this.fetchAppointments();
+  });
     this.route.parent?.paramMap.subscribe((params) => {
       this.clinicId = params.get('id');
       console.log('clinicId in appointments', this.clinicId);
@@ -67,7 +77,7 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
         time: `${a.startTime} - ${a.endTime}`,
         patient: a?.patient,
         clinic: a?.clinic,
-        isAssigned: a?.isAssigned || false, // ✅ هنستخدمها لتحديد الـ view
+        isAssigned: a?.caseId!=null,
         startMinutes: start.totalMinutes,
         endMinutes: end.totalMinutes,
         durationMinutes: end.totalMinutes - start.totalMinutes,
@@ -79,7 +89,6 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
     });
   }
 
-  // ✅ يقبل 03:30 أو 3:30
   parseTime(time: string) {
     const [h, m] = time.split(':').map(Number);
     const hour = h;
@@ -149,4 +158,12 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
   onSearch() {
     console.log('Searching...');
   }
+  maskPatientId(id: string | number | null): string {
+  if (!id) return '-';
+  const idStr = String(id);
+  const last3 = idStr.slice(-3); 
+  const masked = '*'.repeat(Math.max(idStr.length - 3, 0)) + last3;
+  return masked;
+}
+
 }

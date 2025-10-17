@@ -1,46 +1,71 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
-
+import { AppointmentsService } from '../appointments.service';
+import { ActivatedRoute, RouterLink ,Router } from '@angular/router';
 @Component({
   selector: 'app-assign-case',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule , TranslateModule , FormsModule, CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    TranslateModule,
+    FormsModule,
+    CommonModule,
+    RouterLink
+  ],
   templateUrl: './assign-case.component.html',
-  styleUrl: './assign-case.component.scss'
+  styleUrl: './assign-case.component.scss',
 })
-export class AssignCaseComponent {
- chiefComplaint = '';
-  clinicalInvestigation = '';
-  medication = '';
-  disease = '';
-  diseases: string[] = ['Diabetes', 'Hypertension', 'Asthma'];
-  clinicalInvestigations: string[] = ['Diabetes', 'Hypertension', 'Asthma'];
-  dropdownOpen = false;
-  searchTerm = '';
-  selectedMedications: string[] = [];
+export class AssignCaseComponent implements OnInit , OnDestroy{
+  chiefComplaint = '';
 
+  // dropdown lists
+  clinicalInvestigations: string[] = ['X-Ray', 'Blood Test', 'MRI'];
   medications: string[] = [
     'Panadol',
     'Brufen',
     'Cataflam',
     'Voltaren',
     'Amoxicillin',
-    'Paracetamol'
+    'Paracetamol',
   ];
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
+  diseases: string[] = ['Diabetes', 'Hypertension', 'Asthma'];
+
+  // selected values
+  selectedInvestigations: string[] = [];
+  selectedMedications: string[] = [];
+  selectedDiseases: string[] = [];
+
+  // dropdown control
+  openDropdown: string | null = null;
+  searchTerm = '';
+appointmentId: string | null = null;
+  constructor(private _AppointmentsService: AppointmentsService , private route: ActivatedRoute , private router: Router) {}
+  ngOnInit(): void {
+    this.appointmentId = this.route.snapshot.paramMap.get('id');
+    document.addEventListener('click', this.handleClickOutside.bind(this));
+  }
+  toggleDropdown(type: string) {
+    this.openDropdown = this.openDropdown === type ? null : type;
+  }
+
+  toggleSelection(value: string, type: string, event: any) {
+    let targetArray: string[];
+
+    if (type === 'investigation') targetArray = this.selectedInvestigations;
+    else if (type === 'medication') targetArray = this.selectedMedications;
+    else targetArray = this.selectedDiseases;
+
+    if (event.target.checked) {
+      targetArray.push(value);
+    } else {
+      const index = targetArray.indexOf(value);
+      if (index > -1) targetArray.splice(index, 1);
+    }
   }
 
   filteredMedications() {
@@ -48,12 +73,58 @@ export class AssignCaseComponent {
       m.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
+  toggleLabelSelection(value: string, type: string) {
+  let targetArray: string[];
 
-  toggleSelection(med: string, event: any) {
-    if (event.target.checked) {
-      this.selectedMedications.push(med);
-    } else {
-      this.selectedMedications = this.selectedMedications.filter(m => m !== med);
-    }
+  if (type === 'investigation') targetArray = this.selectedInvestigations;
+  else if (type === 'medication') targetArray = this.selectedMedications;
+  else targetArray = this.selectedDiseases;
+
+  const index = targetArray.indexOf(value);
+
+  if (index > -1) {
+    targetArray.splice(index, 1); // لو متعلم يتشال
+  } else {
+    targetArray.push(value); // لو مش متعلم يتضاف
   }
+}
+
+  saveCase() {
+    const caseData = {
+      appointmentId : this.appointmentId,
+      chiefComplaint: this.chiefComplaint,
+      clinicalInvestigation: this.selectedInvestigations,
+      medications: this.selectedMedications,
+      diseases: this.selectedDiseases
+    };
+    this._AppointmentsService.assignCase(caseData).subscribe({
+      next: (res) => {
+        console.log('Case assigned successfully', res);
+        this.router.navigate(['/dashboard/appointments']);
+      },
+      error: (err) => {
+        console.error('Error assigning case', err);
+      }
+    });
+  }
+  handleClickOutside(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  const dropdowns = document.querySelectorAll('.custom-dropdown');
+
+  let clickedInside = false;
+
+  dropdowns.forEach((dropdown) => {
+    if (dropdown.contains(target)) {
+      clickedInside = true;
+    }
+  });
+
+  if (!clickedInside) {
+    this.openDropdown = null;
+  }
+}
+ngOnDestroy() {
+  document.removeEventListener('click', this.handleClickOutside.bind(this));
+}
+
 }

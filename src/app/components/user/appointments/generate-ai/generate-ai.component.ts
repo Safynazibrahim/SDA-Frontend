@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -52,14 +52,23 @@ export class GenerateAIComponent implements OnInit {
     'Avoid chewing on the left side',
     'Avoid chewing on the left side'
   ];
-
+  appointmentId: string | null = null;
+  fromPage: any;
+  constructor(private route : ActivatedRoute , private router : Router) {}
   ngOnInit() {
     this.calculateProgress();
+    this.appointmentId = this.route.snapshot.paramMap.get('id');
+    this.fromPage = this.route.snapshot.queryParamMap.get('from')
   }
 
   calculateProgress() {
     const circumference = 2 * Math.PI * 54;
     const offset = circumference - (this.treatmentProgress / 100) * circumference;
     this.progressOffset = offset.toString();
+  }
+  cancelHandler() {
+    if(this.fromPage === 'appointments'){
+      this.router.navigate(['/dashboard/appointments']);
+    }
   }
 }
