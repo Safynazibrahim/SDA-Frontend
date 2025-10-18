@@ -10,7 +10,7 @@
     </a>
     <div class="d-flex align-items-center mb-2">
      
-      <p class="mb-0 clinicActive">{{ "assign case" | translate }}</p>
+      <p class="mb-0 clinicActive">{{ "Assign Case" | translate }}</p>
     </div>
   </div>
 
@@ -25,7 +25,7 @@
             src="../../../../../assets/media/pic-not-found.png"
             alt="profile picture"
           />
-          <div class="d-flex flex-column justify-content-center ms-2">
+          <div class="d-flex flex-column justify-content-center mx-2">
             <p class="my-0 userName">Donia Ali</p>
             <p class="my-0 userdetails">Female , Age 22</p>
           </div>
@@ -65,7 +65,7 @@
                 </clipPath>
               </defs>
             </svg>
-            <p class="ms-2 my-0 date-time">10 May 2025</p>
+            <p class="mx-2 my-0 date-time">10 May 2025</p>
           </div>
           <div class="d-flex align-items-center mb-2">
             <svg
@@ -80,7 +80,7 @@
                 fill="#8E7E66"
               />
             </svg>
-            <p class="ms-2 my-0 date-time">12:30 PM - 1:30 px</p>
+            <p class="mx-2 my-0 date-time">12:30 PM - 1:30 px</p>
           </div>
         </div>
       </div>
@@ -90,18 +90,18 @@
     <div class="row">
 
         <div class="col-md-6 mb-3">
-        <label class="form-label">Chief Complaint</label>
+        <label class="form-label">{{"Chief Complaint" | translate}}</label>
         <input
           type="text"
-          class="form-control"
-          placeholder="Enter Chief Complaint"
+          class="form-control" 
+          [placeholder]="'Enter Chief Complaint' | translate"
           [(ngModel)]="chiefComplaint"
           name="chiefComplaint"
         />
       </div>
 
       <div class="dropdown custom-dropdown col-md-6 mb-3">
-  <label class="form-label">Clinical Investigation</label>
+  <label class="form-label">{{"Clinical Investigation" | translate}}</label>
   <button
     class="btn form-select d-flex justify-content-between align-items-center"
     type="button"
@@ -110,7 +110,7 @@
     {{
       selectedInvestigations.length > 0
         ? selectedInvestigations.join(', ')
-        : 'Select Investigation'
+        :  ('Select Investigation' | translate)
     }}
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
@@ -133,7 +133,7 @@
   </div>
 </div>
       <div class="dropdown custom-dropdown col-md-6 mb-3">
-        <label class="form-label">Medication</label>
+        <label class="form-label">{{"Medication" | translate}}</label>
         <button
           class="btn form-select d-flex justify-content-between align-items-center"
           type="button"
@@ -142,18 +142,18 @@
           {{
             selectedMedications.length > 0
               ? selectedMedications.join(", ")
-              : "Select Medication"
+              : ('Select Medication' | translate)
           }}
           <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
 
         <div class="dropdown-menu p-3 shadow" [class.show]="openDropdown === 'medication'">
           <div class="search-box mb-2">
-            <mat-icon class="search-icon">search</mat-icon>
+            <mat-icon class="search-icon">{{"search" | translate}}</mat-icon>
             <input
               type="text"
               class="search-input"
-              placeholder="Search medicine name"
+              [placeholder]=" 'Search medicine name' | translate"
               [(ngModel)]="searchTerm"
             />
             <button class="search-btn">
@@ -178,7 +178,7 @@
       </div>
 
       <div class="dropdown custom-dropdown col-md-6 mb-3">
-  <label class="form-label">Diseases</label>
+  <label class="form-label">{{"Diseases" | translate}}</label>
   <button
     class="btn form-select d-flex justify-content-between align-items-center"
     type="button"
@@ -187,7 +187,7 @@
     {{
       selectedDiseases.length > 0
         ? selectedDiseases.join(', ')
-        : 'Select Disease'
+        : ('Select Disease' | translate)
     }}
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>

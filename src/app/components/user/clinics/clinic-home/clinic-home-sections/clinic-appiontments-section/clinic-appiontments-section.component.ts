@@ -22,7 +22,7 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
   timeSlots = Array(10).fill(0);
   selectedAppointment: any = null; // ✅ علشان نعرض الـ Sidebar لما المستخدم يضغط
   fromPage: 'navbar' | 'clinic' = 'navbar';
-
+  startOfDayHour: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,21 +48,60 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
   }
 
   // ✅ جلب المواعيد سواء بعيادة أو كل العيادات
-  fetchAppointments() {
-    const dateStr = this.currentDate.toISOString().split('T')[0];
+ // ✅ تحديث fetchAppointments
+fetchAppointments() {
+  const dateStr = this.currentDate.toISOString().split('T')[0];
 
-    if (this.clinicId) {
-      this.clinicService.getAppointmentForClinic(this.clinicId, dateStr).subscribe({
-        next: (res) => this.mapAppointments(res),
-        error: (err) => console.error('Error fetching clinic appointments', err),
-      });
-    } else {
-      this.clinicService.getAllAppointments(dateStr).subscribe({
-        next: (res) => this.mapAppointments(res),
-        error: (err) => console.error('Error fetching all appointments', err),
-      });
-    }
+  const handleResponse = (res: any[]) => {
+    this.mapAppointments(res);
+    this.generateDynamicTimeSlots(); // 🆕 توليد الوقت بعد تحميل المواعيد
+  };
+
+  if (this.clinicId) {
+    this.clinicService.getAppointmentForClinic(this.clinicId, dateStr).subscribe({
+      next: handleResponse,
+      error: (err) => console.error('Error fetching clinic appointments', err),
+    });
+  } else {
+    this.clinicService.getAllAppointments(dateStr).subscribe({
+      next: handleResponse,
+      error: (err) => console.error('Error fetching all appointments', err),
+    });
   }
+}
+
+// 🆕 دالة لتوليد الوقت الديناميكي
+generateDynamicTimeSlots() {
+  if (!this.appointments.length) {
+    this.timeSlots = [];
+    return;
+  }
+
+  // الحصول على أقل startTime وأعلى endTime
+  const startTimes = this.appointments.map(a => this.parseTime(a.startTime).hour);
+  const endTimes = this.appointments.map(a => this.parseTime(a.endTime).hour);
+
+  let minHour = Math.min(...startTimes);
+  let maxHour = Math.max(...endTimes);
+  this.startOfDayHour = minHour;
+
+  const slots: string[] = [];
+  for (let h = minHour; h <= maxHour; h++) {
+    const label = this.formatHour(h);
+    slots.push(label);
+  }
+
+  this.timeSlots = slots;
+  console.log('🕒 Generated time slots:', this.timeSlots);
+}
+
+// 🧠 تحويل الساعة إلى صيغة AM / PM
+formatHour(hour: number): string {
+  const suffix = hour >= 12 ? 'PM' : 'AM';
+  const display = hour % 12 === 0 ? 12 : hour % 12;
+  return `${display} ${suffix}`;
+}
+
 
   // ✅ تحويل الداتا لشكل موحد + إضافة isAssigned
   private mapAppointments(res: any[]) {
@@ -137,9 +176,11 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
 
   // ✅ لحساب مكان الكارت داخل الجدول
   getAppointmentTop(appt: any): number {
-    const startOfDayMinutes = 8 * 60;
-    return appt.startMinutes - startOfDayMinutes;
-  }
+  // بدل ما تكون ثابتة على 8 ساعات، استخدم أول ساعة ديناميكية
+  const startOfDayMinutes = this.startOfDayHour * 60;
+  return appt.startMinutes - startOfDayMinutes;
+}
+
 
   getAppointmentHeight(appt: any): number {
     return appt.durationMinutes;
