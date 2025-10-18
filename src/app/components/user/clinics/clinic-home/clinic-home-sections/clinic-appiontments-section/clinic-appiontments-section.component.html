@@ -65,17 +65,9 @@
 
   <div class="calendar">
     <div class="time-column">
-      <div class="time-slot">8 AM</div>
-      <div class="time-slot">9 AM</div>
-      <div class="time-slot">10 AM</div>
-      <div class="time-slot">11 AM</div>
-      <div class="time-slot">12 PM</div>
-      <div class="time-slot">1 PM</div>
-      <div class="time-slot">2 PM</div>
-      <div class="time-slot">3 PM</div>
-      <div class="time-slot">4 PM</div>
-      <div class="time-slot">5 PM</div>
-    </div>
+  <div class="time-slot" *ngFor="let time of timeSlots">{{ time }}</div>
+</div>
+
 
     <div class="appointments-area">
       <!-- Grid lines for visual structure -->
@@ -118,7 +110,7 @@
     <div
       class="sidebar-header d-flex justify-content-between align-items-center"
     >
-      <h4>Appointment details</h4>
+      <h4>{{"Appointment details" | translate}}</h4>
       <button class="close-btn" (click)="closeDetails()">✕</button>
     </div>
 
@@ -136,17 +128,17 @@
             src="../../../../../../../assets/media/pic-not-found.png"
             alt=""
           />
-          <div class="ms-3">
+          <div class="mx-3">
             <p class="my-0 patientName">
               {{ selectedAppointment.patient?.user?.fullName }}
             </p>
             <p class="my-0 patientInfo">
-              {{ selectedAppointment.patient?.gender || "-" }} Age
+              {{ selectedAppointment.patient?.gender || "-" }} {{"Age" | translate }}
               {{ selectedAppointment.patient?.age || "-" }}
             </p>
 
             <p class="my-0 patientInfo">
-              Patient ID:
+              {{"Patient ID" | translate }}: 
               <span class="patientId"
                 > {{ maskPatientId(selectedAppointment.patient?.id) }}</span
               >
@@ -186,7 +178,7 @@
               </clipPath>
             </defs>
           </svg>
-          <span class="ms-3">{{ selectedAppointment.date }}</span>
+          <span class="mx-3">{{ selectedAppointment.date }}</span>
         </div>
         <div class="d-flex align-items-center mb-3">
           <svg
@@ -208,14 +200,14 @@
               </clipPath>
             </defs>
           </svg>
-          <span class="ms-3"
+          <span class="mx-3"
             >{{ selectedAppointment.startTime }} -
             {{ selectedAppointment.endTime }}</span
           >
         </div>
         @if(selectedAppointment.clinic?.name){
         <p>
-          Clinic Name:<strong> {{ selectedAppointment.clinic?.name }}</strong>
+          {{"Clinic Name" | translate}}:<strong> {{ selectedAppointment.clinic?.name }}</strong>
         </p>
         }
       </div>
@@ -227,15 +219,15 @@
             [routerLink]="['/dashboard/appointments/start-case', selectedAppointment?.id]"
             [queryParams]="{ from: 'appointments' }"
           >
-            Start Case
+            {{"Start Case" | translate}}
           </button>
           <button
             class="btn-outline"
             [routerLink]="['/dashboard/appointments/assign-case', selectedAppointment?.id]"
           >
-            Assign Case
+            {{"Assign Case" | translate}}
           </button>
-          <button class="btn-outline">Patient Profile</button>
+          <button class="btn-outline">{{"Patient Profile" | translate}}</button>
         </div>
       </div>
     </div>
@@ -251,7 +243,7 @@
             src="../../../../../../../assets/media/pic-not-found.png"
             alt=""
           />
-          <div class="ms-3">
+          <div class="mx-3">
             <p class="my-0 patientName">
               {{ selectedAppointment.patient?.user?.fullName }}
             </p>
@@ -261,7 +253,7 @@
             </p>
 
             <p class="my-0 patientInfo">
-              Patient ID:
+              {{"Patient ID" | translate }}:
               <span class="patientId"
                 > {{ maskPatientId(selectedAppointment.patient?.id) }}</span
               >
@@ -301,7 +293,7 @@
               </clipPath>
             </defs>
           </svg>
-          <span class="ms-3">{{ selectedAppointment.date }}</span>
+          <span class="mx-3">{{ selectedAppointment.date }}</span>
         </div>
         <div class="d-flex align-items-center mb-3">
           <svg
@@ -323,14 +315,14 @@
               </clipPath>
             </defs>
           </svg>
-          <span class="ms-3"
+          <span class="mx-3"
             >{{ selectedAppointment.startTime }} -
             {{ selectedAppointment.endTime }}</span
           >
         </div>
         @if(selectedAppointment.clinic?.name){
         <p>
-          Clinic Name:<strong> {{ selectedAppointment.clinic?.name }}</strong>
+          {{"Clinic Name" | translate}}:<strong> {{ selectedAppointment.clinic?.name }}</strong>
         </p>
         }
       </div>
@@ -339,9 +331,9 @@
           <button
             class="btn-filled"
           >
-            Assignd Cases
+            {{"Assignd Cases" | translate}}
           </button>
-          <button class="btn-outline">Patient Profile</button>
+          <button class="btn-outline">{{"Patient Profile" | translate}}</button>
         </div>
       </div>
     </ng-template>

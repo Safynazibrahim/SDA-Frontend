@@ -10,7 +10,7 @@
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
     <div class="d-flex align-items-center mb-2">
-      <p class="mb-0 clinicActive">{{ "start case" | translate }}</p>
+      <p class="mb-0 clinicActive">{{ "Start Case" | translate }}</p>
     </div>
   </div>
 }
@@ -18,46 +18,39 @@
     <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
   </div>
   <div class="chief-complaint-section">
-    <h4>Chief Complaint</h4>
+    <h4>{{"Chief Complaint" | translate}}</h4>
 
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">1.1 Chief Complaint (CC):</p>
+          <p class="m-0 headerName">1.1 {{"Chief Complaint (CC)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" /> Pain (tooth / jaw
-          / TMJ)</label
+          ><input type="checkbox" class="form-check-input" /> {{"Pain (tooth / jaw / TMJ)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Swelling (facial /
-          gingival)</label
+          ><input type="checkbox" class="form-check-input" /> {{"Swelling (facial / gingival)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Bleeding</label
+          ><input type="checkbox" class="form-check-input" /> {{"Bleeding" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Sensitivity (hot /
-          cold / sweet)</label
+          ><input type="checkbox" class="form-check-input" /> {{"Sensitivity (hot / cold / sweet)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Esthetic concerns
-          (discoloration / malalignment)</label
+          ><input type="checkbox" class="form-check-input" /> {{"Esthetic concerns (discoloration / malalignment)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Difficulty
-          chewing</label
+          ><input type="checkbox" class="form-check-input" /> {{"Difficulty chewing" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Broken
-          tooth</label
+          ><input type="checkbox" class="form-check-input" /> {{"Broken tooth" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Routine check-up /
-          No complaint</label
+          ><input type="checkbox" class="form-check-input" /> {{"Routine check-up / No complaint" | translate}}</label
         >
       </div>
     </div>
@@ -65,26 +58,23 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">1.2 Nature of Complaint (HPI):</p>
+          <p class="m-0 headerName">1.2 {{"Nature of Complaint (HPI)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
-        <label><input type="checkbox" class="form-check-input" /> Sharp</label>
+        <label><input type="checkbox" class="form-check-input" /> {{"Sharp" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" /> Dull /
-          Aching</label
+          ><input type="checkbox" class="form-check-input" /> {{"Dull / Aching" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Throbbing /
-          Intermittent</label
+          ><input type="checkbox" class="form-check-input" /> {{"Throbbing / Intermittent" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Burning</label
+          ><input type="checkbox" class="form-check-input" /> {{"Burning" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Pressure
-          sensation</label
+          ><input type="checkbox" class="form-check-input" /> {{"Pressure sensation" | translate}}</label
         >
       </div>
     </div>
@@ -92,24 +82,21 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">1.3 Aggravating Factors (HPI):</p>
+          <p class="m-0 headerName">1.3 {{"Aggravating Factors (HPI)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
-        <label><input type="checkbox" class="form-check-input" /> Hot</label>
-        <label><input type="checkbox" class="form-check-input" /> Cold</label>
+        <label><input type="checkbox" class="form-check-input" /> {{"Hot" | translate}}</label>
+        <label><input type="checkbox" class="form-check-input" /> {{"Cold" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" /> Chewing /
-          Biting</label
+          ><input type="checkbox" class="form-check-input" /> {{"Chewing / Biting" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Lying down /
-          Nighttime</label
+          ><input type="checkbox" class="form-check-input" /> {{"Lying down / Nighttime" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> No specific
-          factor</label
+          ><input type="checkbox" class="form-check-input" /> {{"No specific factor" | translate}}</label
         >
       </div>
     </div>
@@ -117,92 +104,81 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">1.4 Relevant Medical History (MH):</p>
+          <p class="m-0 headerName">1.4 {{"Relevant Medical History (MH)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" /> Diabetes (Type 1 /
-          Type 2 – Controlled / Uncontrolled)</label
+          ><input type="checkbox" class="form-check-input" /> {{"Diabetes (Type 1 / Type 2 – Controlled / Uncontrolled)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Cardiovascular
-          disease / Hypertension</label
+          ><input type="checkbox" class="form-check-input" /> {{"Cardiovascular disease / Hypertension" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Asthma /
-          COPD</label
+          ><input type="checkbox" class="form-check-input" />{{"Asthma / COPD" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Kidney / Liver
-          disease</label
+          ><input type="checkbox" class="form-check-input" /> {{"Kidney / Liver disease" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" /> Autoimmune
-          disorders (Lupus, Rheumatoid Arthritis)</label
+          ><input type="checkbox" class="form-check-input" /> {{"Autoimmune disorders (Lupus, Rheumatoid Arthritis)" | translate}}</label
         >
-        <label><input type="checkbox" class="form-check-input" /> None</label>
+        <label><input type="checkbox" class="form-check-input" /> {{"None"  | translate}}</label>
       </div>
     </div>
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">1.5 Medications of Concern (MH):</p>
+          <p class="m-0 headerName">1.5 {{"Medications of Concern (MH)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" /> Anticoagulants
-          (Warfarin)</label
+          ><input type="checkbox" class="form-check-input" /> {{"Anticoagulants (Warfarin)" | translate}}</label
         >
         <label
           ><input
             type="checkbox"
             class="form-check-input"
-          />Bisphosphonates</label
+          />{{"Bisphosphonates" | translate}}</label
         >
         <label
           ><input
             type="checkbox"
             class="form-check-input"
-          />Immunosuppressants</label
+          />{{"Immunosuppressants" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Drugs causing
-          gingival overgrowth</label
+          ><input type="checkbox" class="form-check-input" />{{"Drugs causing gingival overgrowth" | translate}}</label
         >
-        <label><input type="checkbox" class="form-check-input" />None</label>
+        <label><input type="checkbox" class="form-check-input" />{{"None" | translate}}</label>
       </div>
     </div>
   </div>
   <div class="chief-complaint-section">
-    <h4>Extraoral Examination</h4>
+    <h4>{{"Extraoral Examination" | translate}}</h4>
 
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">2.1 Facial Symmetry:</p>
+          <p class="m-0 headerName">2.1 {{"Facial Symmetry" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Symmetrical
-          (Normal)</label
+          ><input type="checkbox" class="form-check-input" />{{"Symmetrical (Normal)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Asymmetrical
-          (specify location & cause)</label
+          ><input type="checkbox" class="form-check-input" />{{"Asymmetrical (specify location & cause)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Facial
-          paralysis</label
+          ><input type="checkbox" class="form-check-input" />{{"Facial paralysis" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Unilateral
-          swelling</label
+          ><input type="checkbox" class="form-check-input" />{{"Unilateral swelling" | translate}}</label
         >
       </div>
     </div>
@@ -210,22 +186,19 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">2.2 Facial Profile:</p>
+          <p class="m-0 headerName">2.2 {{"Facial Profile" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Straight
-          (Orthognathic – Class I)</label
+          ><input type="checkbox" class="form-check-input" />{{"Straight (Orthognathic – Class I)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Convex (Class
-          II)</label
+          ><input type="checkbox" class="form-check-input" />{{"Convex (Class II)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Concave (Class
-          III)</label
+          ><input type="checkbox" class="form-check-input" />{{"Concave (Class III)" | translate}}</label
         >
       </div>
     </div>
@@ -233,18 +206,16 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">2.3 Lymph Nodes:</p>
+          <p class="m-0 headerName">2.3 {{"Lymph Nodes" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Non-palpable
-          (Normal)</label
+          ><input type="checkbox" class="form-check-input" />{{"Non-palpable (Normal)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Palpable (specify:
-          soft / firm-fixed / tender / nodular)</label
+          ><input type="checkbox" class="form-check-input" />{{"Palpable (specify: soft / firm-fixed / tender / nodular)" | translate}}</label
         >
       </div>
     </div>
@@ -252,82 +223,73 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">2.4 TMJ Sounds:</p>
+          <p class="m-0 headerName">2.4 {{"TMJ Sounds" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />No sounds</label
+          ><input type="checkbox" class="form-check-input" />{{"No sounds" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Clicking (Early /
-          Late)</label
+          ><input type="checkbox" class="form-check-input" />{{"Clicking (Early / Late)" | translate}}</label
         >
-        <label><input type="checkbox" class="form-check-input" />Popping</label>
+        <label><input type="checkbox" class="form-check-input" />{{"Popping" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" />Crepitus
-          (Grinding)</label
+          ><input type="checkbox" class="form-check-input" />{{"Crepitus (Grinding)" | translate}}</label
         >
       </div>
     </div>
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">2.5 TMJ Opening:</p>
+          <p class="m-0 headerName">2.5 {{"TMJ Opening" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Normal opening
-          (40–50 mm)</label
+          ><input type="checkbox" class="form-check-input" />{{"Normal opening (40–50 mm)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Limited opening
-          (<35 mm)</label
+          ><input type="checkbox" class="form-check-input" />{{"Limited opening (<35 mm)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Deviation to right
-          / left</label
+          ><input type="checkbox" class="form-check-input" />{{"Deviation to right / left" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />S-shape or C-shape
-          movement</label
+          ><input type="checkbox" class="form-check-input" />{{"S-shape or C-shape movement" | translate}}</label
         >
       </div>
     </div>
   </div>
   <div class="chief-complaint-section">
-    <h4>Soft Tissue & Periodontal Examination</h4>
+    <h4>{{"Soft Tissue & Periodontal Examination" | translate}}</h4>
 
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">3.1 Tongue / Soft Tissues:</p>
+          <p class="m-0 headerName">3.1 {{"Tongue / Soft Tissues" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
-        <label><input type="checkbox" class="form-check-input" />Normal</label>
+        <label><input type="checkbox" class="form-check-input" />{{"Normal" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" />Inflammation (red,
-          painful)</label
+          ><input type="checkbox" class="form-check-input" />{{"Inflammation (red, painful)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Lesions (aphthous
-          ulcers, herpes)</label
+          ><input type="checkbox" class="form-check-input" />{{"Lesions (aphthous ulcers, herpes)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Leukoplakia</label
+          ><input type="checkbox" class="form-check-input" />{{"Leukoplakia" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Lichen
-          Planus</label
+          ><input type="checkbox" class="form-check-input" />{{"Lichen Planus" | translate}}</label
         >
-        <label><input type="checkbox" class="form-check-input" />Torus</label>
+        <label><input type="checkbox" class="form-check-input" />{{"Torus" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" />Macroglossia</label
+          ><input type="checkbox" class="form-check-input" />{{"Macroglossia" | translate}}</label
         >
       </div>
     </div>
@@ -335,26 +297,22 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">3.2 Gingival Color & Texture:</p>
+          <p class="m-0 headerName">3.2 {{"Gingival Color & Texture" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Coral pink,
-          stippled (Healthy)</label
+          ><input type="checkbox" class="form-check-input" />{{"Coral pink, stippled (Healthy)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Red, shiny (Acute
-          gingivitis)</label
+          ><input type="checkbox" class="form-check-input" />{{"Red, shiny (Acute gingivitis)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Bluish, swollen
-          (Chronic gingivitis)</label
+          ><input type="checkbox" class="form-check-input" />{{"Bluish, swollen (Chronic gingivitis)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Pigmented (Melanin
-          pigmentation)</label
+          ><input type="checkbox" class="form-check-input" />{{"Pigmented (Melanin pigmentation)" | translate}}</label
         >
       </div>
     </div>
@@ -362,21 +320,20 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">3.3 Gingival Enlargement:</p>
+          <p class="m-0 headerName">3.3 {{"Gingival Enlargement" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
-        <label><input type="checkbox" class="form-check-input" />None</label>
+        <label><input type="checkbox" class="form-check-input" />{{"None" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" />Localized</label
+          ><input type="checkbox" class="form-check-input" />{{"Localized" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Generalized</label
+          ><input type="checkbox" class="form-check-input" />{{"Generalized" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Drug-induced
-          (specify drug)</label
+          ><input type="checkbox" class="form-check-input" />{{"Drug-induced (specify drug)" | translate}}</label
         >
       </div>
     </div>
@@ -384,86 +341,59 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">3.4 Bleeding on Probing (BOP):</p>
+          <p class="m-0 headerName">3.4 {{"Bleeding on Probing (BOP)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />None
-          (Healthy)</label
+          ><input type="checkbox" class="form-check-input" />{{"None (Healthy)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Present on probing
-          (Gingivitis)</label
+          ><input type="checkbox" class="form-check-input" />{{"Present on probing (Gingivitis)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Spontaneous
-          bleeding</label
+          ><input type="checkbox" class="form-check-input" />{{"Spontaneous bleeding" | translate}}</label
         >
       </div>
     </div>
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">3.5 Pocket Depth (PD):</p>
+          <p class="m-0 headerName">3.5 {{"Pocket Depth (PD)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />1–3 mm
-          (Normal)</label
+          ><input type="checkbox" class="form-check-input" />{{"1–3 mm (Normal)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />4–5 mm (Mild /
-          Moderate)</label
+          ><input type="checkbox" class="form-check-input" />{{"4–5 mm (Mild / Moderate)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />≥6 mm (Deep)</label
+          ><input type="checkbox" class="form-check-input" />{{"≥6 mm (Deep)" | translate}}</label
         >
       </div>
     </div>
   </div>
   <div class="chief-complaint-section">
-    <h4>Dental & Occlusion</h4>
+    <h4>{{"Dental & Occlusion" | translate}}</h4>
 
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">4.1 Angle’s Classification of Occlusion:</p>
+          <p class="m-0 headerName">4.1 {{"Angle’s Classification of Occlusion" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
-        <label><input type="checkbox" class="form-check-input" />Class I</label>
+        <label><input type="checkbox" class="form-check-input" />{{"Class I" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" />Class II (Division
-          1 / Division 2)</label
+          ><input type="checkbox" class="form-check-input" />{{"Class II (Division 1 / Division 2)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Class III</label
-        >
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="header-with-note">
-        <div class="col-md-5">
-          <p class="m-0 headerName">4.2 Vertical Overlap (Overbite):</p>
-        </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
-      </div>
-      <div class="checkbox-grid">
-        <label
-          ><input type="checkbox" class="form-check-input" />Normal (2–4
-          mm)</label
-        >
-        <label
-          ><input type="checkbox" class="form-check-input" />Deep bite</label
-        >
-        <label
-          ><input type="checkbox" class="form-check-input" />Open bite</label
+          ><input type="checkbox" class="form-check-input" />{{"Class III" | translate}}</label
         >
       </div>
     </div>
@@ -471,26 +401,19 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">4.3 Tooth Mobility (per tooth):</p>
+          <p class="m-0 headerName">4.2 {{"Vertical Overlap (Overbite)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Grade 0 (<0.2
-          mm)</label
+          ><input type="checkbox" class="form-check-input" />{{"Normal (2–4 mm)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Grade I (0.2–1 mm,
-          horizontal)</label
+          ><input type="checkbox" class="form-check-input" />{{"Deep bite" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Grade II (>1 mm,
-          horizontal)</label
-        >
-        <label
-          ><input type="checkbox" class="form-check-input" />Grade III (>1 mm,
-          horizontal + vertical)</label
+          ><input type="checkbox" class="form-check-input" />{{"Open bite" | translate}}</label
         >
       </div>
     </div>
@@ -498,118 +421,124 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">4.4 Caries (ICDAS – per surface):</p>
+          <p class="m-0 headerName">4.3 {{"Tooth Mobility (per tooth)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Code 0:
-          Sound</label
+          ><input type="checkbox" class="form-check-input" />{{"Grade 0 (<0.2 mm)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Code 1–2: Enamel
-          change only</label
+          ><input type="checkbox" class="form-check-input" />{{"Grade I (0.2–1 mm, horizontal)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Code 3–4: Enamel
-          breakdown or dentin shadow</label
+          ><input type="checkbox" class="form-check-input" />{{"Grade II (>1 mm, horizontal)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Code 5–6: Obvious
-          cavity with dentin exposure</label
+          ><input type="checkbox" class="form-check-input" />{{"Grade III (>1 mm, horizontal + vertical)" | translate}}</label
+        >
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="header-with-note">
+        <div class="col-md-5">
+          <p class="m-0 headerName">4.4 {{"Caries (ICDAS – per surface)" | translate}}:</p>
+        </div>
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
+      </div>
+      <div class="checkbox-grid">
+        <label
+          ><input type="checkbox" class="form-check-input" />{{"Code 0: Sound" | translate}}</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />{{"Code 1–2: Enamel change only" | translate}}</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />{{"Code 3–4: Enamel breakdown or dentin shadow" | translate}}</label
+        >
+        <label
+          ><input type="checkbox" class="form-check-input" />{{"Code 5–6: Obvious cavity with dentin exposure" | translate}}</label
         >
       </div>
     </div>
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">4.5 Existing Restorations:</p>
+          <p class="m-0 headerName">4.5 {{"Existing Restorations" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Intact /
-          Satisfactory</label
+          ><input type="checkbox" class="form-check-input" />{{"Intact / Satisfactory" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Defective /
-          Failed</label
+          ><input type="checkbox" class="form-check-input" />{{"Defective / Failed" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Overhanging
-          margins</label
+          ><input type="checkbox" class="form-check-input" />{{"Overhanging margins" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Secondary
-          caries</label
+          ><input type="checkbox" class="form-check-input" />{{"Secondary caries" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Fractured / Lost
-          crown</label
+          ><input type="checkbox" class="form-check-input" />{{"Fractured / Lost crown" | translate}}</label
         >
       </div>
     </div>
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">4.6 Pulp Vitality (Cold Test):</p>
+          <p class="m-0 headerName">4.6 {{"Pulp Vitality (Cold Test)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Normal, quick
-          response</label
+          ><input type="checkbox" class="form-check-input" />{{"Normal, quick response" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Prolonged pain
-          (Irreversible pulpitis)</label
+          ><input type="checkbox" class="form-check-input" />{{"Prolonged pain (Irreversible pulpitis)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />No response (Pulp
-          necrosis)</label
+          ><input type="checkbox" class="form-check-input" />{{"No response (Pulp necrosis)" | translate}}</label
         >
         <label
           ><input
             type="checkbox"
             class="form-check-input"
-          />Hypersensitivity</label
+          />{{"Hypersensitivity" | translate}}</label
         >
       </div>
     </div>
   </div>
   <div class="chief-complaint-section">
-    <h4>Diagnosis & Risk Assessment</h4>
+    <h4>{{"Diagnosis & Risk Assessment" | translate}}</h4>
 
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">5.1 Tooth Diagnosis (per tooth):</p>
+          <p class="m-0 headerName">5.1 {{"Tooth Diagnosis (per tooth)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Reversible
-          pulpitis</label
+          ><input type="checkbox" class="form-check-input" />{{"Reversible pulpitis" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Irreversible
-          pulpitis</label
+          ><input type="checkbox" class="form-check-input" />{{"Irreversible pulpitis" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Pulp
-          necrosis</label
+          ><input type="checkbox" class="form-check-input" />{{"Pulp necrosis" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Acute apical
-          periodontitis</label
+          ><input type="checkbox" class="form-check-input" />{{"Acute apical periodontitis" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Acute apical
-          abscess</label
+          ><input type="checkbox" class="form-check-input" />{{"Acute apical abscess" | translate}}</label
         >
       </div>
     </div>
@@ -618,22 +547,20 @@
       <div class="header-with-note">
         <div class="col-md-5">
           <p class="m-0 headerName">
-            5.2 Periodontal Diagnosis (2017 Classification):
+            5.2 {{"Periodontal Diagnosis (2017 Classification)" | translate}}:
           </p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Periodontal
-          health</label
+          ><input type="checkbox" class="form-check-input" />{{"Periodontal health" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Gingivitis</label
+          ><input type="checkbox" class="form-check-input" />{{"Gingivitis" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Periodontitis
-          (Stage I–IV, Grade A–C)</label
+          ><input type="checkbox" class="form-check-input" />{{"Periodontitis (Stage I–IV, Grade A–C)" | translate}}</label
         >
       </div>
     </div>
@@ -641,21 +568,19 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">5.3 Caries Risk Assessment:</p>
+          <p class="m-0 headerName">5.3 {{"Caries Risk Assessment" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Low risk</label
+          ><input type="checkbox" class="form-check-input" />{{"Low risk" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Moderate
-          risk</label
+          ><input type="checkbox" class="form-check-input" />{{"Moderate risk" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />High / Extreme
-          risk</label
+          ><input type="checkbox" class="form-check-input" />{{"High / Extreme risk" | translate}}</label
         >
       </div>
     </div>
@@ -663,47 +588,42 @@
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">5.4 Prognosis (Tooth / Case):</p>
+          <p class="m-0 headerName">5.4 {{"Prognosis (Tooth / Case)" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Excellent /
-          Good</label
+          ><input type="checkbox" class="form-check-input" />{{"Excellent / Good" | translate}}</label
         >
-        <label><input type="checkbox" class="form-check-input" />Fair</label>
+        <label><input type="checkbox" class="form-check-input" />{{"Fair" | translate}}</label>
         <label
-          ><input type="checkbox" class="form-check-input" />Questionable</label
+          ><input type="checkbox" class="form-check-input" />{{"Questionable" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Hopeless</label
+          ><input type="checkbox" class="form-check-input" />{{"Hopeless" | translate}}</label
         >
       </div>
     </div>
     <div class="section">
       <div class="header-with-note">
         <div class="col-md-5">
-          <p class="m-0 headerName">5.5 Basic Treatment Plan:</p>
+          <p class="m-0 headerName">5.5 {{"Basic Treatment Plan" | translate}}:</p>
         </div>
-        <input type="text" placeholder="Write note..." class="note-input" />
+        <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
       </div>
       <div class="checkbox-grid">
         <label
-          ><input type="checkbox" class="form-check-input" />Emergency / Pain
-          relief</label
+          ><input type="checkbox" class="form-check-input" />{{"Emergency / Pain relief" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Disease control
-          phase (Fillings, Periodontal therapy)</label
+          ><input type="checkbox" class="form-check-input" />{{"Disease control phase (Fillings, Periodontal therapy)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Definitive care
-          (Crowns, Bridges, Prosthetics)</label
+          ><input type="checkbox" class="form-check-input" />{{"Definitive care (Crowns, Bridges, Prosthetics)" | translate}}</label
         >
         <label
-          ><input type="checkbox" class="form-check-input" />Maintenance /
-          Preventive phase</label
+          ><input type="checkbox" class="form-check-input" />{{' Maintenance / Preventive phase' | translate}} </label
         >
       </div>
     </div>
@@ -712,9 +632,9 @@
   <div class="chief-complaint-section">
     <div class="header-with-note">
       <div class="col-md-5">
-        <h4 class="m-0 headerName">Image</h4>
+        <h4 class="m-0 headerName">{{"Image" | translate}}</h4>
       </div>
-      <input type="text" placeholder="Write note..." class="note-input" />
+      <input type="text" [placeholder]="'Write note...' | translate" class="note-input" />
     </div>
 
     <div class="checkbox-grid">
@@ -724,7 +644,7 @@
           class="form-check-input"
           (change)="onImageTypeChange('real', $event)"
         />
-        Real Image
+        {{"Real Image" | translate}}
       </label>
       <label>
         <input
@@ -732,7 +652,7 @@
           class="form-check-input"
           (change)="onImageTypeChange('xray', $event)"
         />
-        X-Ray
+        {{"X-Ray" | translate}}
       </label>
     </div>
 
@@ -741,7 +661,7 @@
       <div class="upload-header my-0">
         <p class="upload-title">Upload {{ selectedImageLabel }}</p>
         <label for="fileInput" class="upload-btn">
-          <mat-icon>cloud_upload</mat-icon> Choose Images
+          <mat-icon>cloud_upload</mat-icon> {{"Choose Images" | translate}}
         </label>
       </div>
 
@@ -765,10 +685,10 @@
   </div>
   <div class="process-strip">
   <div class="lang-selector d-flex align-items-center gap-2">
-    <label class="me-2">Record Language</label>
+    <label class="me-2">{{"Record Language" | translate}}</label>
     <select [(ngModel)]="selectedLang" class="form-select" style="width:auto">
-      <option value="en">English</option>
-      <option value="ar">Arabic</option>
+      <option value="en">{{"English" | translate}}</option>
+      <option value="ar">{{"Arabic" | translate}}</option>
     </select>
   </div>
 
@@ -781,15 +701,15 @@
   </button>
   <div class="record-status">
   <p class="status-text" *ngIf="!isRecording && !audioUrl">
-    {{ permissionDenied ? 'Microphone permission denied' : 'Tap to record' }}
+    {{ permissionDenied ? ('Microphone permission denied' | translate) : ('Tap to record' | translate)}}
   </p>
 
   <p class="status-text recording-text" *ngIf="isRecording">
-    Recording...
+    {{"Recording" | translate}}...
   </p>
 
   <p class="status-text done-text" *ngIf="!isRecording && audioUrl">
-    Recording completed
+    {{"Recording completed" | translate}}
   </p>
 
   <p class="timer" *ngIf="isRecording || audioUrl">{{ formattedTime }}</p>
@@ -800,7 +720,7 @@
   <audio [src]="audioUrl" controls></audio>
 </div>
 <div class="transcription-output mt-3 d-flex align-items-center" *ngIf="isRecording || transcriptionResult">
-  <h6 class="my-0">📝 Transcription Result:</h6>
+  <h6 class="my-0">📝 {{"Transcription Result" | translate}}:</h6>
   <p class="fs-5 ms-2 my-0">
     {{ transcriptionResult || 'No text fetch...' }}
   </p>
@@ -808,8 +728,8 @@
 
 
   <div class="page-footer-btns">
-  <button class="ai-btn" [routerLink]="['/dashboard/appointments/start-case/generate-ai' , appointmentId]" [queryParams]="{from : fromPage}">Generate AI</button>
-  <button class="manual-btn" [routerLink]="['/dashboard/appointments/start-case/manual-diagnosis' , appointmentId]" [queryParams]="{ from: fromPage }">Manual Diagnosis</button>
+  <button class="ai-btn" [routerLink]="['/dashboard/appointments/start-case/generate-ai' , appointmentId]" [queryParams]="{from : fromPage}">{{"Generate AI" | translate}}</button>
+  <button class="manual-btn" [routerLink]="['/dashboard/appointments/start-case/manual-diagnosis' , appointmentId]" [queryParams]="{ from: fromPage }">{{"Manual Diagnosis" | translate}}</button>
 </div>
 
 </div> 
