@@ -25,6 +25,32 @@
     </div>
   </div>
 }
+  @if(fromPage === 'patient-profile'){
+  <div class="d-flex align-items-center mb-2">
+    <p class="mb-0 route" (click)="goBackToPatoentProfile()" >{{ "patient_profile" | translate }}</p>
+
+    <a
+      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+      style="cursor: pointer" (click)="goBackToPatoentProfile()" 
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <div class="d-flex align-items-center mb-2">
+      <p [routerLink]="['/dashboard/patients/start-case' , patientId]" [queryParams]=" {from : fromPage}" class="mb-0 route">{{ "Start Case" | translate }}</p>
+    </div>
+    <a
+      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+      style="cursor: pointer"
+      [routerLink]="['/dashboard/patients/start-case' , patientId]"
+      [queryParams]=" {from : fromPage}"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <div class="d-flex align-items-center mb-2">
+      <p class="mb-0 clinicActive">{{ "Manual Diagnosis" | translate }}</p>
+    </div>
+  </div>
+}
   <div class="static3dModel">
     <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
   </div>

@@ -53,12 +53,23 @@ export class GenerateAIComponent implements OnInit {
     'Avoid chewing on the left side'
   ];
   appointmentId: string | null = null;
+  patientId: string | null = null;
   fromPage: any;
   constructor(private route : ActivatedRoute , private router : Router) {}
   ngOnInit() {
     this.calculateProgress();
-    this.appointmentId = this.route.snapshot.paramMap.get('id');
-    this.fromPage = this.route.snapshot.queryParamMap.get('from')
+        this.fromPage = this.route.snapshot.queryParamMap.get('from');
+    if (this.fromPage === 'appointments') {
+      this.appointmentId = this.route.snapshot.paramMap.get('id');
+    console.log('🩺 Coming from Appointments');
+    console.log('Appointment ID:', this.appointmentId);
+  } else if (this.fromPage === 'patient-profile') {
+    this.patientId = this.route.snapshot.paramMap.get('id');
+    console.log('👤 Coming from Patient Profile');
+    console.log('Patient ID:', this.patientId);
+  } else {
+    console.log('⚠️ Unknown source, default to appointments');
+  }
   }
 
   calculateProgress() {
@@ -70,5 +81,12 @@ export class GenerateAIComponent implements OnInit {
     if(this.fromPage === 'appointments'){
       this.router.navigate(['/dashboard/appointments']);
     }
+    if(this.fromPage === 'patient-profile'){
+      this.router.navigate([`dashboard/patients/${this.patientId}/appointment-history`]);
+    }
+  }
+
+  goBackToPatoentProfile(){
+  this.router.navigate([`dashboard/patients/${this.patientId}/appointment-history`])
   }
 }

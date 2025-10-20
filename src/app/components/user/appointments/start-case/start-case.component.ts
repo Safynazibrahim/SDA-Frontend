@@ -22,16 +22,29 @@ export class StartCaseComponent implements OnInit,OnDestroy {
   selectedLang: 'ar' | 'en' = 'en';
   transcriptionResult = '';
   appointmentId: string | null = null;
+  patientId: string | null = null;
   fromPage: any;
   constructor(
     private cdRef: ChangeDetectorRef,
     private speechService: WebSpeechService,
     private route : ActivatedRoute,
+    private _Router:Router
   ) {}
   ngOnInit(): void {
-    this.appointmentId = this.route.snapshot.paramMap.get('id');
-     this.fromPage = this.route.snapshot.queryParamMap.get('from')
+    this.fromPage = this.route.snapshot.queryParamMap.get('from');
+    if (this.fromPage === 'appointments') {
+      this.appointmentId = this.route.snapshot.paramMap.get('id');
+    console.log('🩺 Coming from Appointments');
+    console.log('Appointment ID:', this.appointmentId);
+  } else if (this.fromPage === 'patient-profile') {
+    this.patientId = this.route.snapshot.paramMap.get('id');
+    console.log('👤 Coming from Patient Profile');
+    console.log('Patient ID:', this.patientId);
+  } else {
+    console.log('⚠️ Unknown source, default to appointments');
   }
+  }
+
   private mediaStream: MediaStream | null = null;
   private mediaRecorder?: MediaRecorder;
   private chunks: Blob[] = [];
@@ -213,5 +226,24 @@ export class StartCaseComponent implements OnInit,OnDestroy {
       });
     }
   }
+
+  goBackToPatoentProfile(){
+  this._Router.navigate([`dashboard/patients/${this.patientId}/appointment-history`])
+  }
+  
+  aiLink(): any[] {
+  if (this.fromPage === 'patient-profile') {
+    return ['/dashboard/patients/start-case/generate-ai', this.patientId];
+  }
+  return ['/dashboard/appointments/start-case/generate-ai', this.appointmentId];
+}
+
+  manualLink(): any[] {
+  if (this.fromPage === 'patient-profile') {
+    return ['/dashboard/patients/start-case/manual-diagnosis', this.patientId];
+  }
+  return ['/dashboard/appointments/start-case/manual-diagnosis', this.appointmentId];
+}
+
 
 }

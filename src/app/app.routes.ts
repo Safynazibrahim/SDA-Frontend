@@ -76,63 +76,100 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'patient-list',
-        loadComponent: () =>
-          import(
-            './components/user/patients/patient-list/patient-list.component'
-          ).then((m) => m.PatientListComponent),
-      },
-      {
-        path: 'view-dental-history-details/:caseId',
-        loadComponent: () =>
-          import(
-            './components/user/patients/view-dental-history-details/view-dental-history-details.component'
-          ).then((m) => m.ViewDentalHistoryDetailsComponent),
-      },
-      {
-        path: 'patients/:id',
-        loadComponent: () =>
-          import(
-            './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile.component'
-          ).then((m) => m.PatientProfileComponent),
+        path: 'patients',
         children: [
-          { path: '', redirectTo: 'appointment-history', pathMatch: 'full' },
           {
-            path: 'appointment-history',
-            loadComponent: () =>
-              import(
-                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/appointment-history/appointment-history.component'
-              ).then((m) => m.AppointmentHistoryComponent),
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full',
           },
           {
-            path: 'dental-history',
+            path: 'list',
             loadComponent: () =>
               import(
-                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/dental-history/dental-history.component'
-              ).then((m) => m.DentalHistoryComponent),
+                './components/user/patients/patient-list/patient-list.component'
+              ).then((m) => m.PatientListComponent),
           },
           {
-            path: 'dental-chart',
+            path: 'assigned-cases',
             loadComponent: () =>
               import(
-                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/dental-chart/dental-chart.component'
-              ).then((m) => m.DentalChartComponent),
+                './components/user/patients/assigned-cases/assigned-cases.component'
+              ).then((m) => m.AssignedCasesComponent),
           },
+
+          // ✅ Start Case full page (patient context)
           {
-            path: 'medical-history',
+            path: 'start-case',
+            children: [
+              {
+                path: ':id',
+                loadComponent: () =>
+                  import(
+                    './components/user/appointments/start-case/start-case.component'
+                  ).then((m) => m.StartCaseComponent),
+              },
+              {
+                path: 'manual-diagnosis/:id',
+                loadComponent: () =>
+                  import(
+                    './components/user/appointments/manual-diagnosis/manual-diagnosis.component'
+                  ).then((m) => m.ManualDiagnosisComponent),
+              },
+              {
+                path: 'generate-ai/:id',
+                loadComponent: () =>
+                  import(
+                    './components/user/appointments/generate-ai/generate-ai.component'
+                  ).then((m) => m.GenerateAIComponent),
+              },
+            ],
+          },
+
+          // ✅ Patient Profile and its sections
+          {
+            path: ':id',
             loadComponent: () =>
               import(
-                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/medical-history/medical-history.component'
-              ).then((m) => m.MedicalHistoryComponent),
+                './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile.component'
+              ).then((m) => m.PatientProfileComponent),
+            children: [
+              {
+                path: '',
+                redirectTo: 'appointment-history',
+                pathMatch: 'full',
+              },
+              {
+                path: 'appointment-history',
+                loadComponent: () =>
+                  import(
+                    './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/appointment-history/appointment-history.component'
+                  ).then((m) => m.AppointmentHistoryComponent),
+              },
+              {
+                path: 'dental-history',
+                loadComponent: () =>
+                  import(
+                    './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/dental-history/dental-history.component'
+                  ).then((m) => m.DentalHistoryComponent),
+              },
+              {
+                path: 'dental-chart',
+                loadComponent: () =>
+                  import(
+                    './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/dental-chart/dental-chart.component'
+                  ).then((m) => m.DentalChartComponent),
+              },
+              {
+                path: 'medical-history',
+                loadComponent: () =>
+                  import(
+                    './components/user/patients/patient-list/patient-profile/patient-profile/patient-profile-sections/medical-history/medical-history.component'
+                  ).then((m) => m.MedicalHistoryComponent),
+              },
+            ],
           },
         ],
-      },
-      {
-        path: 'assigned-cases',
-        loadComponent: () =>
-          import(
-            './components/user/patients/assigned-cases/assigned-cases.component'
-          ).then((m) => m.AssignedCasesComponent),
       },
       {
         path: 'clinics',
@@ -225,51 +262,50 @@ export const routes: Routes = [
         ],
       },
       {
-  path: 'appointments',
-  children: [
-    {
-      path: '',
-      loadComponent: () =>
-        import(
-          './components/user/clinics/clinic-home/clinic-home-sections/clinic-appiontments-section/clinic-appiontments-section.component'
-        ).then((m) => m.ClinicAppiontmentsSectionComponent),
-    },
-    {
-      path: 'assign-case/:id',
-      loadComponent: () =>
-        import(
-          './components/user/appointments/assign-case/assign-case.component'
-        ).then((m) => m.AssignCaseComponent),
-    },
-    {
-      path: 'start-case',
-      children: [
-        {
-          path: ':id',
-          loadComponent: () =>
-            import(
-              './components/user/appointments/start-case/start-case.component'
-            ).then((m) => m.StartCaseComponent),
-        },
-        {
-          path: 'manual-diagnosis/:id',
-          loadComponent: () =>
-            import(
-              './components/user/appointments/manual-diagnosis/manual-diagnosis.component'
-            ).then((m) => m.ManualDiagnosisComponent),
-        },
-        {
-          path: 'generate-ai/:id',
-          loadComponent: () =>
-            import(
-              './components/user/appointments/generate-ai/generate-ai.component'
-            ).then((m) => m.GenerateAIComponent),
-        },
-      ],
-    },
-  ],
-},
-
+        path: 'appointments',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './components/user/clinics/clinic-home/clinic-home-sections/clinic-appiontments-section/clinic-appiontments-section.component'
+              ).then((m) => m.ClinicAppiontmentsSectionComponent),
+          },
+          {
+            path: 'assign-case/:id',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/assign-case/assign-case.component'
+              ).then((m) => m.AssignCaseComponent),
+          },
+          {
+            path: 'start-case',
+            children: [
+              {
+                path: ':id',
+                loadComponent: () =>
+                  import(
+                    './components/user/appointments/start-case/start-case.component'
+                  ).then((m) => m.StartCaseComponent),
+              },
+              {
+                path: 'manual-diagnosis/:id',
+                loadComponent: () =>
+                  import(
+                    './components/user/appointments/manual-diagnosis/manual-diagnosis.component'
+                  ).then((m) => m.ManualDiagnosisComponent),
+              },
+              {
+                path: 'generate-ai/:id',
+                loadComponent: () =>
+                  import(
+                    './components/user/appointments/generate-ai/generate-ai.component'
+                  ).then((m) => m.GenerateAIComponent),
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 

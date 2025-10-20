@@ -25,28 +25,33 @@
         <li class="nav-item itemsLinks" routerLinkActive="active" [routerLink]="['/dashboard/appointments']">
           <a class="nav-link">{{ "Appointments" | translate }}</a>
         </li>
-        <li class="nav-item dropdown" routerLinkActive="active">
-          <a
-            class="nav-link dropdown-toggle"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            {{ "Patients" | translate }}
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" [routerLink]="['/dashboard/patient-list']">
-                {{"patient_list" | translate}}
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/dashboard/assigned-cases']">
-                {{"assigned_cases" | translate}} 
-              </a>
-            </li>
-          </ul>
-        </li>
+        <li
+  class="nav-item dropdown"
+  [class.active]="isPatientsActive"
+>
+  <a
+    class="nav-link dropdown-toggle"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    {{ "Patients" | translate }}
+  </a>
+  <ul class="dropdown-menu">
+    <li>
+      <a class="dropdown-item" [routerLink]="['/dashboard/patients/list']">
+        {{ "patient_list" | translate }}
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" [routerLink]="['/dashboard/patients/assigned-cases']">
+        {{ "assigned_cases" | translate }}
+      </a>
+    </li>
+  </ul>
+</li>
+
+        
         <li class="nav-item itemsLinks" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/dashboard/clinics']">{{ "Clinics" | translate }}</a>
         </li>

@@ -82,7 +82,9 @@ export class PatientProfileComponent implements OnInit{
   }
 
   goToStartCase() {
-    this.router.navigate(['/dashboard/appointments/start-case']);
-  } 
+    this.router.navigate(['/dashboard/patients/start-case', this.patientId], {
+      queryParams: { from: 'patient-profile' },
+    });
+  }
 
-}     
+}   

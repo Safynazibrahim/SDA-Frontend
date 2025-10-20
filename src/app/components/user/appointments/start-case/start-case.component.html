@@ -14,6 +14,21 @@
     </div>
   </div>
 }
+  @if(fromPage == 'patient-profile'){
+  <div class="d-flex align-items-center mb-2">
+    <p class="mb-0 route" (click)="goBackToPatoentProfile()" >{{ "patient_profile" | translate }}</p>
+
+    <a
+      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+      style="cursor: pointer" (click)="goBackToPatoentProfile()"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <div class="d-flex align-items-center mb-2">
+      <p class="mb-0 clinicActive">{{ "Start Case" | translate }}</p>
+    </div>
+  </div>
+}
   <div class="static3dModel">
     <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
   </div>
@@ -727,10 +742,24 @@
 </div>
 
 
-  <div class="page-footer-btns">
-  <button class="ai-btn" [routerLink]="['/dashboard/appointments/start-case/generate-ai' , appointmentId]" [queryParams]="{from : fromPage}">{{"Generate AI" | translate}}</button>
-  <button class="manual-btn" [routerLink]="['/dashboard/appointments/start-case/manual-diagnosis' , appointmentId]" [queryParams]="{ from: fromPage }">{{"Manual Diagnosis" | translate}}</button>
+<div class="page-footer-btns">
+  <button
+    class="ai-btn"
+    [routerLink]="aiLink()"
+    [queryParams]="{ from: fromPage }"
+  >
+    {{ 'Generate AI' | translate }}
+  </button>
+
+  <button
+    class="manual-btn"
+    [routerLink]="manualLink()"
+    [queryParams]="{ from: fromPage }"
+  >
+    {{ 'Manual Diagnosis' | translate }}
+  </button>
 </div>
+
 
 </div> 
 
