@@ -107,7 +107,7 @@ export class DentalHistoryComponent implements OnInit {
 
   goToDetails(caseId: number) {
     this._Router.navigate(
-      [`/dashboard/view-dental-history-details/${caseId}`],
+      [`/dashboard/patients/view-dental-history-details/${caseId}`],
       {
         queryParams: { patientId: this.patientId },
       }

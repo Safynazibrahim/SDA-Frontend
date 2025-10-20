@@ -1,3 +1,4 @@
+import { ViewDentalHistoryDetailsComponent } from './components/user/patients/view-dental-history-details/view-dental-history-details.component';
 import { Routes } from '@angular/router';
 import { guestGuard } from './components/core/guards/guest/guest.guard';
 import { authGuard } from './components/core/guards/auth/auth.guard';
@@ -124,6 +125,14 @@ export const routes: Routes = [
                   ).then((m) => m.GenerateAIComponent),
               },
             ],
+          },
+
+          {
+            path: 'view-dental-history-details/:caseId',
+            loadComponent: () =>
+              import(
+                './components/user/patients/view-dental-history-details/view-dental-history-details.component'
+              ).then((m) => m.ViewDentalHistoryDetailsComponent),
           },
 
           // ✅ Patient Profile and its sections
