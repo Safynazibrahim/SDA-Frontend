@@ -1,1 +1,97 @@
-<p>dental-history works!</p>
+<div class="container">
+  <div class="row mx-3 align-items-center justify-content-between mb-3">
+    <div class="col-lg-12 main-title">
+      <h3 class="main-title my-2">{{ "cases" | translate }}</h3>
+    </div>
+    <div class="col-lg-12 d-flex align-items-center my-2" [formGroup]="filterForm">
+      <div class="date-input-group me-4">
+        <label class="date-label">{{ "from" | translate }}</label>
+
+        <div class="custom-date-wrapper">
+          <mat-icon class="calendar-icon" (click)="fromPicker.open()"
+            >calendar_today</mat-icon
+          >
+          <mat-datepicker #fromPicker></mat-datepicker>
+          <input
+            matInput
+            [matDatepicker]="fromPicker"
+            placeholder="DD/MM/YYYY"
+            class="custom-date-input"
+            formControlName="fromDate"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="date-input-group me-4">
+        <label class="date-label">{{ "to" | translate }}</label>
+        <div class="custom-date-wrapper">
+          <mat-icon class="calendar-icon" (click)="toPicker.open()"
+            >calendar_today</mat-icon
+          >
+          <mat-datepicker #toPicker></mat-datepicker>
+          <input
+            matInput
+            [matDatepicker]="toPicker"
+            placeholder="DD/MM/YYYY"
+            class="custom-date-input"
+            formControlName="toDate"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-between mx-3">
+    <div class="col-lg-6 my-3" *ngFor="let case of patientDentalHistory; let i = index">
+      <div class="case-title">
+        <h5 >{{"case" | translate}}: {{ i + 1 }}</h5>
+      </div>
+
+      <div class="case-card">
+        <div class="diagnosis-header">
+          <img src="../../../../../../../../../assets/media/last-diagnose.svg"  alt="">
+          <span class="diagnosis-label">{{
+            "last_diagnosis" | translate
+          }}</span>
+        </div>
+
+        <div class="diagnosis-info mt-2">
+          <p class="diagnosis-name">
+            <b>{{ "diagnosis_name" | translate }}:</b>
+            {{ case.diagnosis }}
+          </p>
+        </div>
+
+        <!-- static -->
+        <div class="progress-wrapper">
+          <div class="progress-labels d-flex justify-content-between my-1">
+            <span>{{"complete" | translate}}: {{ 50 }}%</span>
+            <span class="fw-bolder">{{"remaining" | translate}}: {{ 100 - 50 }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="50"></div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row my-3 d-flex justify-content-between">
+          <div class="col-6" (click)="goToDetails(case.id)" >
+            <button class="signin-button d-flex align-items-center justify-content-center">
+            {{ "view_details" | translate }}
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+          </div>
+          <div class="col-6">
+            <button class="signin-button download-btn d-flex align-items-center justify-content-center">
+            <mat-icon>download</mat-icon>
+            {{ "download" | translate }}
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

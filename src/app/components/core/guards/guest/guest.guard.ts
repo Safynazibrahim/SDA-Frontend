@@ -8,16 +8,13 @@ export const guestGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   return authService.isLoggedIn$.pipe(
-    filter((status) => status !== null),
     take(1),
     map((loggedIn) => {
       if (loggedIn) {
-        // لو logged in → redirect للـ dashboard
         router.navigate(['/dashboard']);
         return false;
-      } else {
-        return true; // يخش على login عادي
       }
+      return true; // allow login/register
     })
   );
 };

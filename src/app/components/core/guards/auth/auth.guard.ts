@@ -8,17 +8,15 @@ export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   return authService.isLoggedIn$.pipe(
-    // استنى لحد ما الـ auth status يتحدد (مش null)
-    filter((status) => status !== null),
     take(1),
     map((loggedIn) => {
-      if (loggedIn) {
-        return true;
-      } else {
-        // الـ navigation هيحصل هنا بس لما نتأكد إن مفيش authentication
+      if (loggedIn === false) {
         router.navigate(['/login']);
         return false;
       }
+      // loggedIn === true OR null (unknown) → allow
+      // any invalid session will 401 on the first API call and the interceptor will refresh or logout
+      return true;
     })
   );
 };

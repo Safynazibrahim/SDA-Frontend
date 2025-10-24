@@ -4,9 +4,10 @@
     font-weight: 400;
     font-family: "IBM Plex Sans";
     font-size: 27px;
+    cursor: pointer;
   }
   .clinicActive {
-    color: var(--text-gray-head-table);
+    color: var(--text-gray-head-table) !important;
     font-family: "IBM Plex Sans";
     font-size: 30px;
     font-weight: 500;
@@ -15,31 +16,36 @@
     border-right: 2px solid #acacac;
   }
   .userProfile {
-    background: #f7f7f7;
+    background: var(--background-gray-head-table);
     padding: 10px;
     border-radius: 24px;
     .userName {
-      color: #434343;
+      color: var(--user-name);
       font-size: 30px;
       font-weight: 400;
     }
     .userdetails {
-      color: #737373;
+      color: var(--text-light-gray-placeholder);
       font-size: 20px;
     }
   }
   .date-time {
-    color: #3e372c;
+    color: var(--text-black-light-gray);
     font-size: 24px;
   }
   .form-control,
   .form-select {
     border: 1px solid #737373 !important;
     padding: 9px !important;
-    color: #434343 !important;
+    color: var(--text-light-gray-placeholder) !important;
+    background: var(--bg-primary) !important;
+  }
+  .form-control::placeholder,
+  .form-select::placeholder {
+    color: var(--text-light-gray-placeholder) !important;
   }
   .form-label {
-    color: #434343 !important;
+    color: var(--text-gray-head-table) !important;
     font-size: 20px !important;
     font-weight: 600 !important;
     margin-bottom: 0px !important;
@@ -112,17 +118,17 @@
       border-bottom: 1px solid #eee;
 
       .form-check-label {
-        order: 1; 
+        order: 1;
         font-size: 16px;
-        color: #434343;
+        color: var(--text-gray-head-table);
       }
 
       .form-check-input {
-        order: 2; 
+        order: 2;
         width: 20px;
         height: 20px;
         cursor: pointer;
-        accent-color: #b19e7f; 
+        accent-color: #b19e7f;
       }
 
       .form-check-input:checked {
@@ -132,21 +138,63 @@
     }
   }
 
-  .save-btn {
-    background: var(--bg-brown-gradient);
-    font-size: 24px;
-    font-weight: 500;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    width: 135px;
+  .page-footer-btns {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 40px;
+    padding-bottom: 30px;
+
+    button {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 35px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s ease;
+      width: 50%;
+    }
+
+    .send-to-patient-btn {
+      background: var(--bg-sec-brown-gradient);
+      color: #fff;
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+    }
+
+    .cancel-btn {
+      background: var(--bg-primary);
+      border: 1.5px solid #b19e7f;
+      color: #8b7a5e;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
   }
-  .cancel-btn {
-    color: #b19e7f;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 400;
-    border: 1px solid #b19e7f;
-    width: 135px;
+}
+@media (max-width: 576px) {
+  .route,
+  .clinicActive {
+    font-size: 14px !important;
+  }
+  .userName {
+    font-size: 21px !important;
+  }
+  .userdetails {
+    font-size: 16px !important;
+  }
+  .date-time {
+    font-size: 16px !important;
+  }
+  .responsive-date {
+    margin-top: 7px;
+  }
+  .first-section {
+    border-right: none !important;
   }
 }

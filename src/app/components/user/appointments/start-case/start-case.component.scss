@@ -1,12 +1,14 @@
 .startCase {
+  max-width:1300px !important;;
   .route {
     color: #8f8f8f;
     font-weight: 400;
     font-family: "IBM Plex Sans";
     font-size: 27px;
+    cursor: pointer;
   }
   .clinicActive {
-    color: var(--text-gray-head-table);
+    color: var(--text-gray-head-table) !important;
     font-family: "IBM Plex Sans";
     font-size: 30px;
     font-weight: 500;
@@ -26,7 +28,7 @@
 
     h4 {
       font-weight: 600;
-      color: #333;
+      color: var(--text-gray-head-table);
       margin-bottom: 20px;
     }
 
@@ -70,7 +72,7 @@
       .checkbox-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px 0px;;
+        gap: 20px 0px;
 
         label {
           display: flex;
@@ -78,7 +80,7 @@
           gap: 10px;
           font-size: 20px;
           font-weight: 500;
-          color: #434343;
+          color: var(--text-gray-head-table);
           input {
             transform: scale(1.1);
           }
@@ -91,162 +93,418 @@
     border-color: #b19e7f;
   }
   .header-with-note {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  .headerName {
-    font-size: 18px;
-    color: #8b7a5e;
-    font-weight: 500;
-  }
-
-  .note-input {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    background: transparent;
-    width: 250px;
-    outline: none;
-    font-size: 15px;
-    padding: 2px 4px;
-
-    &:focus {
-      border-color: #b19e7f;
-    }
-
-    &::placeholder {
-      color: #bbb;
-      font-style: italic;
-    }
-  }
-}
-
-.checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px 0;
-
-  label {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    font-weight: 500;
-    color: #434343;
+    margin-bottom: 10px;
 
-    input {
-      transform: scale(1.1);
+    .headerName {
+      font-size: 18px;
+      color: #8b7a5e;
+      font-weight: 500;
+    }
+
+    .note-input {
+      border: none;
+      border-bottom: 1px solid #9d8a6f;
+      background: transparent;
+      width: 250px;
+      outline: none;
+      font-size: 15px;
+      padding: 2px 4px;
+
+      &:focus {
+        border-color: #96805d;
+      }
+
+      &::placeholder {
+        color: #9d8a6f;
+        font-style: italic;
+      }
     }
   }
-}
 
-.upload-box {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px dashed #b19e7f;
-  border-radius: 10px;
-  background: #fffaf4;
-  transition: 0.3s ease;
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 0;
 
-  &:hover {
-    background: #fff3e0;
-  }
-
-  /* عنوان التحميل + الزر */
-  .upload-header {
-    display: flex;
-    justify-content: center; // يخليهم في النص
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-
-    .upload-title {
+    label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 18px;
       font-weight: 500;
-      color: #6b5a3c;
-      margin: 0;
-    }
+      color: var(--text-gray-head-table);
 
-    .upload-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(90deg, #b19e7f, #8b7a5e);
-      color: #fff;
-      border-radius: 6px;
-      padding: 8px 16px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
-      &:hover {
-        transform: scale(1.03);
-        opacity: 0.95;
-      }
-
-      mat-icon {
-        font-size: 20px;
+      input {
+        transform: scale(1.1);
       }
     }
   }
 
-  /* منطقة عرض الصور */
-  .preview-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
+  .upload-box {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px dashed #b19e7f;
+    border-radius: 10px;
+    background: #fffaf4;
+    transition: 0.3s ease;
 
-    .preview-item {
-      width: 120px;
-      text-align: center;
-      background: #fff;
-      border: 1px solid #e0d7c9;
-      border-radius: 8px;
-      padding: 10px;
-      transition: 0.3s ease;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-
-      &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      img {
-        width: 100%;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 6px;
-        margin-bottom: 8px;
-      }
-
-      .file-label {
-        font-size: 13px;
-        color: #555;
-        word-break: break-all;
-      }
+    &:hover {
+      background: #fff3e0;
     }
-  }
 
-  /* ميديا كويري للتجاوب */
-  @media (max-width: 768px) {
+    /* عنوان التحميل + الزر */
     .upload-header {
-      flex-direction: column;
-      gap: 10px;
+      display: flex;
+      justify-content: center; // يخليهم في النص
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+
+      .upload-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #6b5a3c;
+        margin: 0;
+      }
+
+      .upload-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(90deg, #b19e7f, #8b7a5e);
+        color: #fff;
+        border-radius: 6px;
+        padding: 8px 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          transform: scale(1.03);
+          opacity: 0.95;
+        }
+
+        mat-icon {
+          font-size: 20px;
+        }
+      }
     }
 
+    /* منطقة عرض الصور */
     .preview-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+
       .preview-item {
-        width: 100px;
+        width: 120px;
+        text-align: center;
+        background: #fff;
+        border: 1px solid #e0d7c9;
+        border-radius: 8px;
+        padding: 10px;
+        transition: 0.3s ease;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
         img {
-          height: 80px;
+          width: 100%;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 6px;
+          margin-bottom: 8px;
+        }
+
+        .file-label {
+          font-size: 13px;
+          color: #555;
+          word-break: break-all;
+        }
+      }
+    }
+
+    /* ميديا كويري للتجاوب */
+    @media (max-width: 768px) {
+      .upload-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .preview-gallery {
+        .preview-item {
+          width: 100px;
+          img {
+            height: 80px;
+          }
         }
       }
     }
   }
+  .page-footer-btns {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-top: 40px;
+  padding-bottom: 30px;
+
+  button {
+    border: none;
+    border-radius: 6px;
+    padding: 10px 35px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 50%;
+  }
+
+  .ai-btn {
+    background: var(--bg-sec-brown-gradient);
+    color: #fff;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  }
+
+  .manual-btn {
+    background: var(--bg-primary);
+    border: 1.5px solid var(--bg-brown-medium);
+    color: var(--bg-brown-medium);
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+/* Record UI */
+.record-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0 20px;
+
+  .mic-btn {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 50% 35%, #cbb08c, #8b7a5e);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,.15);
+    transition: transform .15s ease;
+
+    &:hover { transform: translateY(-1px); }
+    &:disabled { opacity: .5; cursor: not-allowed; }
+
+    mat-icon { font-size: 24px; line-height: 1; }
+
+    &.recording {
+      background: radial-gradient(circle at 50% 35%, #b36b6b, #8b2f2f);
+    }
+
+    .pulse {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(179, 107, 107, .5);
+      animation: pulse 1.5s infinite;
+    }
+  }
+
+  .record-status {
+    margin-top: 10px;
+    text-align: center;
+
+    .status-text {
+      margin: 0;
+      color: #6b6b6b;
+      font-weight: 500;
+    }
+    .timer {
+      margin: 2px 0 0;
+      font-weight: 600;
+      color: #333;
+    }
+  }
 }
 
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(179, 107, 107, .5); }
+  70%  { box-shadow: 0 0 0 12px rgba(179, 107, 107, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(179, 107, 107, 0); }
+}
 
+.record-preview {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+
+  audio {
+    width: min(520px, 95%);
+    border-radius: 8px;
+  }
+  .preview-actions {
+    display: flex;
+    gap: 10px;
+
+    .btn.ghost {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid #b19e7f; color: #8b7a5e; background: #fff;
+      padding: 6px 12px; border-radius: 6px; cursor: pointer;
+      transition: .2s;
+      &:hover { background: #fdf7f1; }
+      mat-icon { font-size: 18px; }
+    }
+  }
+}
+
+/* Process placeholder button like the mock */
+.process-strip {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 24px;
+
+  .process-btn {
+    min-width: 180px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: none;
+    background: #c7c7c7;
+    color: #fff;
+    font-weight: 600;
+    cursor: not-allowed; /* لحد ما نفعّله لاحقًا */
+  }
+}
+
+}
+/* ✅ Responsive adjustments */
+@media (max-width: 992px) {
+  .startCase {
+    .header-with-note {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .col-md-5 {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .note-input {
+        width: 100% !important;
+      }
+    }
+
+    .checkbox-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 15px;
+      label {
+        font-size: 18px;
+      }
+    }
+
+    .upload-box {
+      .upload-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .preview-gallery {
+        justify-content: center;
+        .preview-item {
+          width: 100px;
+          img {
+            height: 80px;
+          }
+        }
+      }
+    }
+
+    .record-wrap {
+      .mic-btn {
+        width: 56px;
+        height: 56px;
+      }
+      .record-status {
+        .status-text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .page-footer-btns {
+      flex-direction: column;
+      gap: 15px;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+    .route , .clinicActive {
+    font-size: 14px !important;
+  }
+  .headerName {
+    font-size: 15px !important;
+  }
+  .startCase {
+    .route {
+      font-size: 20px;
+    }
+
+    .clinicActive {
+      font-size: 22px;
+    }
+
+    .checkbox-grid {
+      grid-template-columns: 1fr !important;
+      label {
+        font-size: 16px;
+      }
+    }
+
+    .note-input {
+      font-size: 14px !important;
+    }
+
+    .upload-box {
+      padding: 15px;
+      .upload-title {
+        font-size: 16px;
+      }
+    }
+
+    .record-preview audio {
+      width: 100%;
+    }
+
+    .transcription-output {
+      flex-direction: column;
+      align-items: flex-start;
+      h6 {
+        font-size: 15px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+  
 }

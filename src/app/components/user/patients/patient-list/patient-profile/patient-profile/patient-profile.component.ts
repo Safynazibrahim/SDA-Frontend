@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { QueryClient } from '@tanstack/angular-query-experimental';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -6,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs';
 import { ModalComponent } from '../../../../../shared/modal/modal.component';
+import { PatientService } from '../../../patient.service';
 
 @Component({
   selector: 'app-patient-profile',
@@ -16,14 +18,19 @@ import { ModalComponent } from '../../../../../shared/modal/modal.component';
   templateUrl: './patient-profile.component.html',
   styleUrl: './patient-profile.component.scss'
 })
-export class PatientProfileComponent {
+export class PatientProfileComponent implements OnInit{
+  patientId!: any;
+  patientData: any;
   selectedIndex = 0;
   currentTitle: string = 'appointment_history';
   isEditPatientModalOpen:boolean = false;
   isDeletePatientModalOpen:boolean = false;
   showPassword = false;
+  private queryClient = inject(QueryClient);
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, 
+    private route: ActivatedRoute,
+    private _PatientService:PatientService) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -36,6 +43,19 @@ export class PatientProfileComponent {
           }
         }
       });
+  }
+
+  ngOnInit(): void {
+    this.patientId = this.route.snapshot.paramMap.get('id')!;
+    const cached = this.queryClient.getQueryData<any>(['patients']);
+    console.log('🧩 Cached:', cached);
+
+    if (cached?.data) {
+      this.patientData = cached.data.find((p: any) => p.id === this.patientId);
+      console.log('✅ Loaded from cache:', this.patientData);
+    } else {
+      console.warn('⚠️ No cache found');
+    }
   }
 
   tabs = [
@@ -62,5 +82,10 @@ export class PatientProfileComponent {
     this.isDeletePatientModalOpen = false;
   }
 
-  
-}
+  goToStartCase() {
+    this.router.navigate(['/dashboard/patients/start-case', this.patientId], {
+      queryParams: { from: 'patient-profile' },
+    });
+  }
+
+}   

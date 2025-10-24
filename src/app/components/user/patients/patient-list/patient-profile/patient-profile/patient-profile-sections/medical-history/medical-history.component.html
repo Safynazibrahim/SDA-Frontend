@@ -1,1 +1,51 @@
-<p>medical-history works!</p>
+<div class="container">
+
+  <!-- Tabs Section -->
+  <div class="row mx-3">
+    <div class="col-12">
+      <div class="history-tabs d-flex align-items-center">
+        <div
+          class="tab-item"
+          [class.active]="selectedTab === 'medications'"
+          (click)="selectedTab = 'medications'"
+        >
+          <mat-icon>medication</mat-icon>
+          {{ "medications" | translate }}
+        </div>
+        <div
+          class="tab-item"
+          [class.active]="selectedTab === 'diseases'"
+          (click)="selectedTab = 'diseases'"
+        >
+          <mat-icon>coronavirus</mat-icon>
+          {{ "diseases" | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medications List -->
+  <div class="row m-3" *ngIf="selectedTab === 'medications'">
+    <div
+      class="col-12 medication-item d-flex align-items-center justify-content-start"
+      *ngFor="let med of medications"
+    >
+      <img src="../../../../../../../../../assets/media/medi.png" alt="Medication Icon"/>
+      <span class="med-name">{{ med.name }}</span>
+    </div>
+    
+  </div>
+
+  <!-- Diseases List -->
+  <div class="row m-3" *ngIf="selectedTab === 'diseases'">
+    <div
+      class="col-12 disease-item d-flex align-items-center justify-content-start"
+      *ngFor="let dis of diseases"
+    >
+      <!-- <mat-icon class="disease-icon me-3">healing</mat-icon> -->
+      <span class="disease-name">{{ dis.name }}</span>
+    </div>
+  </div>
+
+
+</div>

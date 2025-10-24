@@ -34,7 +34,6 @@ $SDA-warn: mat.define-palette(mat.$red-palette);
   border: 1px solid #000 !important;  
   border-radius: 4px;  
 }
-
 $SDA-theme: mat.define-light-theme((
   color: (
     primary: $SDA-primary,
@@ -55,7 +54,8 @@ $SDA-theme: mat.define-light-theme((
 :root {
   /* Light Mode - Based on your design */
 
-  --bg-primary: #faf9f7;          /* Main background - warm white */
+  --bg-primary: #faf9f7;         
+  --bg-custom-dropdown: #faf9f7;          
   --appointment-calendar: #fafafa;  
   --border-appointment: #f0f0f0;    
   --border-appointment-two: #e5e5e5;
@@ -68,20 +68,25 @@ $SDA-theme: mat.define-light-theme((
   --bg-white-secondary: #fff;
   --bg-light-gray: #ebebeb;
   --bg-gray: #ebebeb; 
+  --brown-dark:#85775F;
   /* Brown gradient section backgrounds */
   --bg-brown-light: #d4c4a8;      /* Light brown from your design */
   --bg-brown-medium: #b19e7f;     /* Medium brown */
-  --bg-brown-dark: #9d8a6f;       /* Darker brown */
+  --bg-brown-dark: #8E7E66;       /* Darker brown */
   --bg-brown-gradient: linear-gradient(90deg, #4B4336 0%, #B19E7F 100%);
+  --bg-sec-brown-gradient: linear-gradient(90deg, #B19E7F 0%, #4B4336 100%);
   --focus-form-field: #d3c8b7;
   --border-form-field: #b0b0b0;
   /* Text Colors */
   --text-black-biege:#3E372C;
+  --text-black-light-gray:#3E372C;
+  --sections-bg:#F3F0EC;
   --text-black-white: #131213;
   --text-gray-home-about: #565656;
   --text-gray-head-table: #434343;
   --background-gray-head-table: #F9F9F9;
   --border-white-gray: #eee;
+  --user-name: #434343;
   --text-primary: #2d2a26;        /* Main text - dark brown */
   --text-secondary: #4a453f;      /* Secondary text */
   --text-tertiary: #6b6358;       /* Muted text */
@@ -92,7 +97,9 @@ $SDA-theme: mat.define-light-theme((
 
   --text-orange: #d5a618;
   --text-gray: #737373;
+  --text-gray-sidebar: #737373;
   --text-light-gray: #bfbfbf;
+  --text-light-gray-placeholder: #737373;
     /* Orange accent colors from your design */
   --accent-orange: #a67f00;       /* Primary orange */
   --accent-orange-light: #f39c12; /* Lighter orange */
@@ -134,7 +141,8 @@ $SDA-theme: mat.define-light-theme((
 
 [data-theme="dark"] {
   /* Dark Mode - Inverted with warm tones */
-  --bg-primary: #383D36;          
+  --bg-primary: #383D36;         
+  --bg-custom-dropdown: gray;         
   --appointment-calendar: #383D36;          
   --border-appointment: gray;          
   --border-appointment-two: gray;          
@@ -147,20 +155,26 @@ $SDA-theme: mat.define-light-theme((
   --bg-light-gray: #EBEBEB ;
   --bg-gray: #383d36;
   --text-light-gray: #999999;
+  --text-light-gray-placeholder: #999999;
   --number-pagination: #999;
+  --text-gray-sidebar:#BFBFBF;
   /* Brown sections in dark mode */
+  --brown-dark:#9D8A6F;
   --bg-brown-light: #4a3f32;      /* Dark brown equivalent */
   --bg-brown-medium: #D1B894;     /* Medium dark brown */
-  --bg-brown-dark: #322a20;       /* Darkest brown */
+  --bg-brown-dark: #8E7E66;       /* Darkest brown */
   --bg-brown-gradient:  linear-gradient(180deg, #D1B894 0%, #6B5E4C 100%);
-  
+  --bg-sec-brown-gradient: linear-gradient(90deg, #D1B894 0%, #6B5E4C 100%);
   /* Text Colors for dark mode */
     --text-black-biege:#D1B894;
+    --text-black-light-gray:#F3F0EC;
+    --sections-bg:#222520;
    --text-black-white: #ffff;
    --background-gray-head-table: #2D312B;
    --text-gray-home-about: #C4C4C4;
    --text-gray-head-table: #F9F9F9;
    --border-white-gray: #434343;
+    --user-name: #fff;
   --text-primary: #f5f3f0;        /* Light text */
   --text-secondary: #e8e3dd;      /* Secondary light text */
   --text-tertiary: #d4c4a8;       /* Muted light text */
@@ -537,6 +551,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     box-shadow: none !important;
 }
 .dropdown-menu {
+  background-color: var(--bg-primary) !important;
     .dropdown-item {
     &:hover {
       background-color: var(--bg-brown-light);
@@ -544,4 +559,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
   }
 }
-        

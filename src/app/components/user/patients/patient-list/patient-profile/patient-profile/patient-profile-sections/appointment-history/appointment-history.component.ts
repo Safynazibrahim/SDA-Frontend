@@ -1,14 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { PatientService } from '../../../../../patient.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-appointment-history',
   standalone: true,
-  imports: [TranslateModule,MatIconModule],
+  imports: [TranslateModule, MatIconModule, CommonModule],
   templateUrl: './appointment-history.component.html',
-  styleUrl: './appointment-history.component.scss'
+  styleUrl: './appointment-history.component.scss',
 })
-export class AppointmentHistoryComponent {
+export class AppointmentHistoryComponent implements OnInit {
+  CurrentPage =1;
+  limit = 50;
+  patientId!: any;
+  patientAppointmentHistory: any[]=[];
 
+  constructor(private _ActivatedRoute: ActivatedRoute,
+    private _PatientService:PatientService,
+    private _MatSnackBar:MatSnackBar
+  ) {}
+
+  ngOnInit(): void {
+    this.patientId = this._ActivatedRoute.parent?.snapshot.paramMap.get('id');
+    console.log('Child Clinic ID from parent:', this.patientId);
+    this.getPatientAppointmentHistory();
+  }
+
+  getPatientAppointmentHistory(){
+    const params: any = {
+    page: this.CurrentPage,
+    limit: this.limit,
+    };
+    this._PatientService.getPatientAppointmentHistory(this.patientId,params).subscribe({
+      next: (response) => {
+      this.patientAppointmentHistory = response || [];
+      console.log('Patients in Appointment response', this.patientAppointmentHistory);
+      // this.totalData = response.total || 0;
+    },
+    error: (err) => {
+      this._MatSnackBar.open(err.error.message || 'Failed to fetch', 'Close', {
+      duration: 3000,
+      panelClass: ['snackbar-error']
+    });
+    }
+    })
+  }
 }

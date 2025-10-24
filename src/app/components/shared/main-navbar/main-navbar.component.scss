@@ -80,3 +80,9 @@
       cursor: pointer;
     }
   }
+  @media (max-width: 576px) {
+    .bg-body-tertiary {
+      height: fit-content !important;
+      padding: 0px !important;
+    }
+  }

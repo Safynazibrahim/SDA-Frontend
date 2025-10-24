@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, Inject } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import {Theme, ThemeService } from '../../core/services/theme.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-main-navbar',
@@ -14,17 +14,20 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './main-navbar.component.html',
   styleUrl: './main-navbar.component.scss'
 })
-export class MainNavbarComponent {
+export class MainNavbarComponent implements OnInit{
     theme$: Observable<Theme>;
   
-constructor(public translate: TranslateService ,private themeService: ThemeService,   @Inject(PLATFORM_ID) private platformId: Object) {
+constructor(public translate: TranslateService ,
+  private themeService: ThemeService, 
+  private router: Router , 
+  @Inject(PLATFORM_ID) private platformId: Object) {
   this.theme$ = this.themeService.theme$;
   this.isBrowser = isPlatformBrowser(this.platformId);
     this.initLanguage();
  }
-  isBrowser: boolean;
-showLangDropdown = false;
 
+  isBrowser: boolean;
+  showLangDropdown = false;
   currentLang: string = 'en';
 initLanguage() {
   let lang = 'en';
@@ -63,4 +66,21 @@ switchLang(lang: string) {
   }
 }
 
+  currentRoute = '';
+  isPatientsActive = false;
+  ngOnInit(): void {
+       // Listen to route changes
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.currentRoute = event.urlAfterRedirects;
+
+        // ✅ detect if route is inside /dashboard/patients
+        this.isPatientsActive = this.currentRoute.includes('/dashboard/patients');
+
+      });
+  }
+
+  
 }
+

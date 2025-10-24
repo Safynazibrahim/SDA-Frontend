@@ -20,14 +20,14 @@
     </div>
   </div>
   <div class="row mb-3 mx-3">
-    <div class="card col-12">
+    <div class="card col-12 mb-3" *ngFor="let patientHistory of patientAppointmentHistory">
         <div class="d-flex align-items-center justify-content-start my-1">
             <mat-icon>calendar_today</mat-icon>
-            <span>10 May 2024</span>
+            <span>{{patientHistory.date}}</span>
         </div>
-        <div class="d-flex align-items-center justify-content-start my1">
+        <div class="d-flex align-items-center justify-content-start my-1">
             <mat-icon>schedule</mat-icon>
-            <span>10 May 2024</span>
+            <span>{{patientHistory.startTime}} {{"To"}} {{patientHistory.endTime}}</span>
         </div>
         <div class="my-1">
             <p>{{"diagnoses" | translate}}: <span class="fw-bold">Start root</span></p>
