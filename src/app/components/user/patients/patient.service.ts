@@ -8,27 +8,27 @@ import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 export class PatientService {
 
   ///////save patient data from patient list to view in patient profile
-  private selectedPatientSource = new BehaviorSubject<any>(this.loadPatientFromStorage());
-  selectedPatient$ = this.selectedPatientSource.asObservable();
+  // private selectedPatientSource = new BehaviorSubject<any>(this.loadPatientFromStorage());
+  // selectedPatient$ = this.selectedPatientSource.asObservable();
 
-  private loadPatientFromStorage(): any {
-    const data = localStorage.getItem('selectedPatient');
-    return data ? JSON.parse(data) : null;
-  }
+  // private loadPatientFromStorage(): any {
+  //   const data = localStorage.getItem('selectedPatient');
+  //   return data ? JSON.parse(data) : null;
+  // }
 
-  setSelectedPatient(patient: any) {
-    this.selectedPatientSource.next(patient);
-    localStorage.setItem('selectedPatient', JSON.stringify(patient));
-  }
+  // setSelectedPatient(patient: any) {
+  //   this.selectedPatientSource.next(patient);
+  //   localStorage.setItem('selectedPatient', JSON.stringify(patient));
+  // }
 
-  getSelectedPatient() {
-    return this.selectedPatientSource.value;
-  }
+  // getSelectedPatient() {
+  //   return this.selectedPatientSource.value;
+  // }
 
-  clearSelectedPatient() {
-    this.selectedPatientSource.next(null);
-    localStorage.removeItem('selectedPatient');
-  }
+  // clearSelectedPatient() {
+  //   this.selectedPatientSource.next(null);
+  //   localStorage.removeItem('selectedPatient');
+  // }
   //////////////////////////////////
 
   constructor(private _ApiServiceService:ApiServiceService) { }
