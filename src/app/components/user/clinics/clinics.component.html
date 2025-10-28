@@ -1,48 +1,60 @@
 <div class="container py-3">
-  <div class="d-flex justify-content-between align-items-center header-responsive">
-    <h2>{{ 'Clinics' | translate }}</h2>
-    <button class="btn join-btn" (click)="goToJoinClinic()">
-      {{ 'join_clinic' | translate }}
-    </button>
+  <div
+    class="d-flex justify-content-between align-items-center header-responsive mb-4"
+  >
+    <h2>{{ "Clinics" | translate }}</h2>
+    <div>
+      <button class="btn join-btn mx-2" (click)="goToJoinClinic()">
+        {{ "join_clinic" | translate }}
+      </button>
+      <button class="btn join-btn" (click)="openCreateModal()">
+        {{ "create_clinic" | translate }}
+      </button>
+    </div>
   </div>
 
   <!-- Search -->
   <app-search
-  [(model)]="searchNameValue"
-  [placeholder]="'Search clinic name' | translate"
-  (search)="onSearch()">
-  </app-search> 
+    [(model)]="searchNameValue"
+    [placeholder]="'Search clinic name' | translate"
+    (search)="onSearch()"
+  >
+  </app-search>
 
   <!-- Owner Clinics -->
   @if(ownerClinics.length > 0){
-    <div class="d-flex justify-content-between align-items-center mb-3">
-    <h5 class="fw-bold title-table">{{ 'Owner Clinics' | translate }}</h5>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold title-table">{{ "Owner Clinics" | translate }}</h5>
     <a
       (click)="goToClinicPackage()"
       class="subscribe-link fw-bold"
-      style="cursor: pointer;"
+      style="cursor: pointer"
     >
-      {{ 'Subscribe Package for Multiple Clinics' | translate }} →
+      {{ "Subscribe Package for Multiple Clinics" | translate }} →
     </a>
   </div>
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>
         <tr>
-          <th>{{ 'Clinic Name' | translate }}</th>
-          <th>{{ 'City' | translate }}</th>
-          <th>{{ 'Created Date' | translate }}</th>
-          <th>{{ 'Seats' | translate }}</th>
+          <th>{{ "Clinic Name" | translate }}</th>
+          <th>{{ "City" | translate }}</th>
+          <th>{{ "Created Date" | translate }}</th>
+          <th>{{ "Seats" | translate }}</th>
         </tr>
       </thead>
       <tbody>
-  <tr *ngFor="let clinic of ownerClinics" (click)="goToClinicDetails(clinic)" style="cursor: pointer;">
-    <td>{{ clinic.name }}</td>
-    <td>{{ clinic.location }}</td>
-    <td>{{ clinic.createdAt | date: 'dd-MM-yyyy' }}</td>
-    <td>-</td>
-  </tr>
-</tbody>
+        <tr
+          *ngFor="let clinic of ownerClinics"
+          (click)="goToClinicDetails(clinic)"
+          style="cursor: pointer"
+        >
+          <td>{{ clinic.name }}</td>
+          <td>{{ clinic.location }}</td>
+          <td>{{ clinic.createdAt | date : "dd-MM-yyyy" }}</td>
+          <td>-</td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <app-pagination
@@ -55,34 +67,38 @@
   }
 
   <!-- Operator Clinics -->
-     @if(operatorClinics.length > 0){
+  @if(operatorClinics.length > 0){
 
   <div class="d-flex justify-content-between align-items-center my-3">
-    <h5 class="fw-bold title-table">{{ 'Operator Clinics' | translate }}</h5>
+    <h5 class="fw-bold title-table">{{ "Operator Clinics" | translate }}</h5>
     <a
       (click)="goToOperatorPackage()"
       class="subscribe-link fw-bold"
-      style="cursor: pointer;"
+      style="cursor: pointer"
     >
-      {{ 'Operator Packages' | translate }} →
+      {{ "Operator Packages" | translate }} →
     </a>
   </div>
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>
         <tr>
-          <th>{{ 'Clinic Name' | translate }}</th>
-          <th>{{ 'City' | translate }}</th>
-          <th>{{ 'Owner' | translate }}</th>
+          <th>{{ "Clinic Name" | translate }}</th>
+          <th>{{ "City" | translate }}</th>
+          <th>{{ "Owner" | translate }}</th>
         </tr>
       </thead>
       <tbody>
-  <tr *ngFor="let clinic of operatorClinics" (click)="goToClinicDetails(clinic)" style="cursor: pointer;">
-    <td>{{ clinic.name }}</td>
-    <td>{{ clinic.location }}</td>
-    <td>{{ clinic.ownerName }}</td>
-  </tr>
-</tbody>
+        <tr
+          *ngFor="let clinic of operatorClinics"
+          (click)="goToClinicDetails(clinic)"
+          style="cursor: pointer"
+        >
+          <td>{{ clinic.name }}</td>
+          <td>{{ clinic.location }}</td>
+          <td>{{ clinic.ownerName }}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <app-pagination
@@ -92,31 +108,36 @@
     (pageChange)="onOperatorPageChange($event)"
   >
   </app-pagination>
-     }
+  }
   <!-- Sub-owner Clinics -->
-     @if(subOwnerClinics.length > 0){
+  @if(subOwnerClinics.length > 0){
 
   <div class="d-flex justify-content-between align-items-center my-3">
-    <h5 class="fw-bold title-table">{{ 'Sub-owner Clinics' | translate }}</h5>
+    <h5 class="fw-bold title-table">{{ "Sub-owner Clinics" | translate }}</h5>
   </div>
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>
         <tr>
-          <th>{{ 'Clinic Name' | translate }}</th>
-          <th>{{ 'Owner Name' | translate }}</th>
-          <th>{{ 'City' | translate }}</th>
-          <th>{{ 'Seats' | translate }}</th>
+          <th>{{ "Clinic Name" | translate }}</th>
+          <th>{{ "Owner Name" | translate }}</th>
+          <th>{{ "City" | translate }}</th>
+          <th>{{ "Seats" | translate }}</th>
         </tr>
       </thead>
       <tbody>
-  <tr *ngFor="let clinic of subOwnerClinics" (click)="goToClinicDetails(clinic)" style="cursor: pointer;">
-    <td>{{ clinic.name }}</td>
-    <td>{{ clinic.ownerName }}</td>
-    <td>{{ clinic.location }}</td>
-    <td>-</td> <!-- seats مش موجودة -->
-  </tr>
-</tbody>
+        <tr
+          *ngFor="let clinic of subOwnerClinics"
+          (click)="goToClinicDetails(clinic)"
+          style="cursor: pointer"
+        >
+          <td>{{ clinic.name }}</td>
+          <td>{{ clinic.ownerName }}</td>
+          <td>{{ clinic.location }}</td>
+          <td>-</td>
+          <!-- seats مش موجودة -->
+        </tr>
+      </tbody>
     </table>
   </div>
   <app-pagination
@@ -126,5 +147,132 @@
     (pageChange)="onSubOwnerPageChange($event)"
   >
   </app-pagination>
-}
+  }
 </div>
+
+<app-modal
+  [isOpen]="isCreateClinicModalOpen"
+  title="{{ 'create_clinic' | translate }}"
+  size="medium"
+  (close)="closeCreateClinic()"
+>
+  <div modal-body class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="name">{{ "CLINIC_NAME" | translate }}</label>
+        <input
+          type="text"
+          id="name"
+          class="form-input"
+          formControlName="name"
+          placeholder="{{ 'ENTER_YOUR_CLINIC_NAME' | translate }}"
+        />
+      </div>
+
+      <div class="form-group position-relative">
+        <label for="location">{{ "LOCATION" | translate }}</label>
+        <input
+          type="text"
+          id="location"
+          class="form-input pe-5"
+          formControlName="location"
+          placeholder="{{ 'ENTER_YOUR_LOCATION' | translate }}"
+        />
+        <mat-icon
+          class="toggle-location"
+          (click)="getCurrentLocation()"
+          style="cursor: pointer; position: absolute; right: 10px; top: 50%; color: black;"
+          >location_on</mat-icon
+        >
+      </div>
+      <div id="map" *ngIf="showMap"></div>
+      <div class="form-group">
+        <label for="specialization">{{ "SPECIALIZATION" | translate }}</label>
+        <input
+          type="text"
+          id="specialization"
+          class="form-input"
+          formControlName="specialization"
+          placeholder="{{ 'ENTER_YOUR_SPECIALIZATION' | translate }}"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="branchesCount">{{ "BRANCHESCOUNT" | translate }}</label>
+        <input
+          type="number"
+          id="branchesCount"
+          class="form-input"
+          formControlName="branchesCount"
+          placeholder="{{ 'ENTER_YOUR_BRANCHESCOUNT' | translate }}"
+        />
+      </div>
+
+      <!-- EXISTS IN SYSTEM SECTION -->
+      <div class="form-group mb-3">
+        <label class="fw-bold d-block">{{
+          "EXISTS_IN_SYSTEM" | translate
+        }}</label>
+
+        <div class="d-flex gap-4 mt-2">
+          <label class="d-flex align-items-center gap-1">
+            <input
+              type="radio"
+              formControlName="existsInSystem"
+              [value]="true"
+            />
+            <span>{{ "YES" | translate }}</span>
+          </label>
+
+          <label class="d-flex align-items-center gap-1">
+            <input
+              type="radio"
+              formControlName="existsInSystem"
+              [value]="false"
+            />
+            <span>{{ "NO" | translate }}</span>
+          </label>
+        </div>
+
+        <mat-error
+          *ngIf="
+            form.get('existsInSystem')?.touched &&
+            form.get('existsInSystem')?.hasError('required')
+          "
+        >
+          {{ "FIELD_REQUIRED" | translate }}
+        </mat-error>
+      </div>
+
+      <!-- OWNER NAME (appears only if existsInSystem = true) -->
+      <div
+        class="form-group"
+        *ngIf="form.get('existsInSystem')?.value === true"
+      >
+        <label for="ownerName">{{ "OWNER_NAME" | translate }}</label>
+        <input
+          type="text"
+          id="ownerName"
+          class="form-input"
+          formControlName="ownerName"
+          placeholder="{{ 'NAME' | translate }}"
+        />
+        <mat-error
+          *ngIf="
+            form.get('ownerName')?.hasError('required') &&
+            form.get('ownerName')?.touched
+          "
+        >
+          {{ "FIELD_REQUIRED" | translate }}
+        </mat-error>
+      </div>
+
+      <!-- footer -->
+      <div class="d-flex justify-content-end gap-2 mt-3">
+        <button type="submit" [disabled]="form.invalid" class="signin-button">
+          {{ "CREATE" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</app-modal>

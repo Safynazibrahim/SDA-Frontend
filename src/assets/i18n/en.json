@@ -474,5 +474,9 @@
   "Status": "Status",
   "Treatment Plan": "Treatment Plan",
   "Send to patient": "Send to patient",
-  "set the next appointment": "Set the next appointment"
+  "set the next appointment": "Set the next appointment",
+  "create_clinic":"Create Clinic",
+  "OWNER_NAME":"Owner Name",
+  "CREATE":"Create",
+  "EXISTS_IN_SYSTEM":"Exist in system?"
 }

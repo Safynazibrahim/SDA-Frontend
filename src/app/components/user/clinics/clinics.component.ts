@@ -1,16 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { Router, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClinicService } from './clinic.service';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchComponent } from '../../shared/search/search.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { ClinicFeaturesService } from '../../core/services/clinic-features.service';
-import { features } from 'process';
+import { ModalComponent } from '../../shared/modal/modal.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { map } from 'rxjs';
+declare const L: any;
 
 @Component({
   selector: 'app-clinics',
@@ -22,17 +26,23 @@ import { features } from 'process';
     RouterModule,
     FormsModule,
     MatIconModule,
-    SearchComponent
+    SearchComponent,
+    ModalComponent,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './clinics.component.html',
   styleUrl: './clinics.component.scss'
 })
-export class ClinicsComponent {
+export class ClinicsComponent implements OnInit{
+
   constructor(
     private router: Router,
     private clinicsService: ClinicService,
     private _MatSnackBar: MatSnackBar,
-    private _ClinicFeaturesService:ClinicFeaturesService
+    private _ClinicFeaturesService:ClinicFeaturesService,
+    private _FormBuilder:FormBuilder
   ) {}
 
   // 🔹 Reactive signals for state
@@ -42,6 +52,141 @@ export class ClinicsComponent {
   limit = signal(10);
   searchName = signal('');
   searchNameValue = ''; 
+  isCreateClinicModalOpen = false;
+  form!: FormGroup;
+  lat: number | null = null;
+  lng: number | null = null;
+  showMap: boolean = false;
+
+    ngOnInit(): void {
+    this.form = this._FormBuilder.group({
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      location: ['', [Validators.required, Validators.maxLength(200)]],
+      specialization: ['', [Validators.required, Validators.maxLength(100)]],
+      branchesCount: [1, [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]+$/)]],
+      ownerName: [''],
+      existsInSystem: [null, Validators.required]
+    });
+
+    // ✅ Owner name validator toggling
+    this.form.get('existsInSystem')?.valueChanges.subscribe((val) => {
+      const ownerControl = this.form.get('ownerName');
+      if (val === true) {
+        ownerControl?.setValidators([Validators.required, Validators.maxLength(100)]);
+      } else {
+        ownerControl?.clearValidators();
+        ownerControl?.setValue('');
+      }
+      ownerControl?.updateValueAndValidity();
+    });
+
+    // ✅ Watch manual location typing → auto-geocode
+    this.form.get('location')?.valueChanges.subscribe((value) => {
+      if (value && !this.showMap) {
+        this.forwardGeocode(value);
+      }
+    });
+  }
+
+  // 🔹 Forward geocoding (address → lat/lng)
+  forwardGeocode(address: string) {
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+      .then(res => res.json())
+      .then(results => {
+        if (results.length > 0) {
+          this.lat = parseFloat(results[0].lat);
+          this.lng = parseFloat(results[0].lon);
+        }
+      })
+      .catch(err => console.error('Geocode error:', err));
+  }
+
+  // 🔹 Reverse geocoding (lat/lng → address)
+  reverseGeocode(lat: number | null, lng: number | null) {
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.display_name) {
+          this.form.get('location')?.setValue(data.display_name);
+        }
+      })
+      .catch(err => console.error('Reverse geocode error:', err));
+  }
+
+  // 🔹 Get current location and auto-fill map + address
+  getCurrentLocation() {
+    if (!navigator.geolocation) {
+      this._MatSnackBar.open('Location is not supported', 'Close', {
+        duration: 3000,
+        panelClass: ['snackbar-error'],
+      });
+      return;
+    }
+
+    this.showMap = true;
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+
+        // 🔹 Reverse geocode to readable address
+        this.reverseGeocode(this.lat, this.lng);
+
+        // 🔹 Initialize map
+        setTimeout(() => {
+          const map = L.map('map').setView([this.lat!, this.lng!], 13);
+          L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+          }).addTo(map);
+
+          const marker = L.marker([this.lat!, this.lng!], { draggable: true }).addTo(map);
+
+          // 🔹 Update address when marker moved
+          marker.on('dragend', (event: any) => {
+            const pos = event.target.getLatLng();
+            this.lat = pos.lat;
+            this.lng = pos.lng;
+            this.reverseGeocode(this.lat, this.lng);
+          });
+
+          setTimeout(() => map.invalidateSize(), 300);
+        }, 200);
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+        this._MatSnackBar.open('Error getting location', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
+      }
+    );
+  }
+
+  
+  watchPosistion() {
+    let desLat = 0;
+    let id = navigator.geolocation.watchPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        console.log('lat', this.lat);
+        console.log('lng', this.lng);
+        if (lat === desLat) {
+          navigator.geolocation.clearWatch(id);
+        }
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
+    );
+  }
 
   // ⚙️ Computed params that trigger auto re-fetch
   params = computed(() => ({
@@ -154,6 +299,14 @@ export class ClinicsComponent {
     this.clinicsQuery.refetch();
   }
 
+  openCreateModal(){
+    this.isCreateClinicModalOpen = true;
+  }
+
+  closeCreateClinic(){
+    this.isCreateClinicModalOpen = false;
+  }
+
   // 🔹 Navigation
   goToJoinClinic() {
     this.router.navigate(['/dashboard/clinics/join']);
@@ -172,4 +325,50 @@ export class ClinicsComponent {
     console.log(clinic)
     this.router.navigate(['/dashboard/clinics', clinic.id]);
   }
+
+
+  submit(){
+    if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    this._MatSnackBar.open('Please fill all required fields', 'Close', {
+      duration: 2000,
+      panelClass: ['snackbar-error']
+    });
+    return;
+  }
+
+  const payload = {
+    name: this.form.value.name,
+    location: this.form.value.location,
+    specialization: this.form.value.specialization,
+    branchesCount: this.form.value.branchesCount,
+    ownerName: this.form.value.ownerName || null,
+    existsInSystem: this.form.value.existsInSystem,
+    locationPoint: {
+      lat: this.lat ?? 0,
+      lng: this.lng ?? 0
+    }
+  };
+    this.clinicsService.createClinic(payload).subscribe({
+      next: (res) => {
+        this._MatSnackBar.open( 'Clinc created successfully', 'Close', {
+        duration: 3000,
+        panelClass: ['snackbar-error'],
+        });
+        this.closeCreateClinic();
+        this.form.reset();
+        this.showMap = false;
+        this.lat = null;
+        this.lng = null;
+        this.clinicsQuery.refetch();
+      },
+      error: (err) => {
+        this._MatSnackBar.open( err.error.message, 'Close', {
+        duration: 3000,
+        panelClass: ['snackbar-error'],
+      });
+      }
+    });
+  }
+
 }
