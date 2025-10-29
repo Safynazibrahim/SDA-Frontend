@@ -1,42 +1,166 @@
 <div class="container py-3">
   <!-- Back + Title -->
   <div class="d-flex align-items-center mb-2">
-        <p class="mb-0 route">{{ 'Clinic' | translate }}</p>
+    <p class="mb-0 route">{{ "Clinic" | translate }}</p>
 
-    <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color" style="cursor:pointer;">
+    <a
+      [routerLink]="['/dashboard/clinics']"
+      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+      style="cursor: pointer"
+    >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
-    <p class="mb-0 clinicActive">{{ 'Join Clinics' | translate }}</p>
+    <p class="mb-0 clinicActive">{{ "Join Clinics" | translate }}</p>
   </div>
- <div class="search-wrapper d-flex justify-content-center mb-3">
-  <div class="search-box">
-    <mat-icon class="search-icon">search</mat-icon>
-    <input
-      type="text"
-      [(ngModel)]="searchText"
-      class="search-input"
-      placeholder="Find clinics within 20 km around you"
-    />
-    <button class="search-btn" (click)="searchClinics()">
-      {{ 'Search' | translate }}
-    </button>
+  <div class="search-wrapper d-flex justify-content-center mb-3">
+    <div class="search-box">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        class="search-input"
+        (keyup.enter)="searchClinics()"
+        placeholder="Find clinics within 20 km around you"
+      />
+      <button class="search-btn" (click)="searchClinics()">
+        {{ "Search" | translate }}
+      </button>
+    </div>
   </div>
-</div>
 
-<!-- Clinic List -->
-<div *ngFor="let clinic of clinics" class="clinic-card d-flex justify-content-between align-items-center p-3 mb-3 shadow-sm">
-  <div>
-    <h6 class="mb-1 clinicName">{{ clinic.name }}</h6>
-    <small class="text-muted">
-      <mat-icon inline>location_on</mat-icon>
-      <span class="ms-1 clinic-address">{{ clinic.address || 'No address available' }}</span>
-    </small>
-  </div>
-  <div>
-    <button class="btn btn-outline-owner me-2">Owner</button>
-    <button class="btn btn-outline-subowner me-2">Sub-Owner</button>
-    <button class="btn btn-outline-operator">Operator</button>
+  <!-- Clinic List -->
+  <div
+    *ngFor="let clinic of clinics"
+    class="clinic-card d-flex justify-content-between align-items-center p-3 mb-3 shadow-sm"
+  >
+    <div>
+      <h6 class="mb-1 clinicName">{{ clinic.name }}</h6>
+      <small class="text-muted">
+        <mat-icon inline>location_on</mat-icon>
+        <span class="ms-1 clinic-address">{{ clinic.location }}</span>
+      </small>
+    </div>
+    <div>
+      <button class="btn btn-outline-owner me-2" (click)="joinClinic(clinic.id, 'owner')">Owner</button>
+      <button class="btn btn-outline-subowner me-2" (click)="joinClinic(clinic.id, 'sub_owner')">Sub-Owner</button>
+      <button
+        class="btn btn-outline-operator"
+        (click)="joinClinic(clinic.id, 'operator')"
+      >
+        Operator
+      </button>
+    </div>
   </div>
 </div>
+<app-modal
+  [isOpen]="isJoinClinicAsOperatorModalOpen"
+  [title]="'Join as a owner'"
+  size="medium"
+  (close)="closeJoinClinic()"
+>
+  <div modal-body class="owner-modal-body">
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <!-- Type of doctor -->
+      <div class="row g-3">
+        <div class="col-12">
+          <label class="section-label">Type of doctor</label>
+        </div>
 
-</div>
+        <div class="col-md-6">
+          <label class="radio-tile w-100">
+            <input
+              type="radio"
+              class="visually-hidden"
+              formControlName="isStockBased"
+              [value]="true"
+            />
+            <span class="radio-visual"></span>
+            <span class="radio-text">stock-based</span>
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label class="radio-tile w-100">
+            <input
+              type="radio"
+              class="visually-hidden"
+              formControlName="isStockBased"
+              [value]="false"
+            />
+            <span class="radio-visual"></span>
+            <span class="radio-text non-stock">Non stock based</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Percentages -->
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">
+          <label class="field-label">Doctor’s Percentage (%)</label>
+          <input
+            type="number"
+            class="form-control owner-input"
+            formControlName="doctorPercentage"
+            placeholder="e.g. 50"
+            (input)="syncClinicPercentage()"
+            min="0"
+            max="100"
+            step="0.1"
+          />
+          <div class="text-danger mt-1" *ngIf="showDoctorPctError">
+            Enter a value between 0 and 100
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="field-label">Clinic’s Percentage (%)</label>
+          <input
+            type="number"
+            class="form-control owner-input"
+            formControlName="clinicPercentage"
+            placeholder="e.g. 50"
+            (input)="syncDoctorPercentage()"
+            min="0"
+            max="100"
+            step="0.1"
+          />
+          <div class="text-danger mt-1" *ngIf="showClinicPctError">
+            Enter a value between 0 and 100
+          </div>
+        </div>
+
+        
+      </div>
+
+      <!-- Check-up price -->
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">
+          <label class="field-label">Check-up Price</label>
+          <input
+            type="number"
+            class="form-control owner-input"
+            formControlName="checkupPrice"
+            placeholder="Enter Check-up Price"
+            min="0"
+            step="0.5"
+          />
+          <div class="text-danger mt-1" *ngIf="showPriceError">
+            Enter a valid check-up price
+          </div>
+        </div>
+      </div>
+      <div class="page-footer-btns">
+        <button
+          class="ai-btn btn-save"
+          type="submit"
+          [disabled]="disableSave"
+        >
+          {{ "Save" | translate }}
+        </button>
+        <button class="manual-btn " (click)="closeJoinClinic()">
+          {{ "Cancel" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</app-modal>

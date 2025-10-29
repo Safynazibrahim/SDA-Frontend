@@ -41,5 +41,7 @@ getAllAppointments(date?: string): Observable<any> {
   getAvailableClinics(params: any): Observable<any> {
   return this.api.get<any>('clinics/available-clinics', params);
 }
-
+ joinClinic(id: string, payload: any): Observable<any> {
+    return this.api.post<any>(`clinics/${id}/join-request`, payload);
+  }
 }
