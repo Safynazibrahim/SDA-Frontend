@@ -245,6 +245,60 @@ export class ClinicsComponent implements OnInit{
       return clinic;
     });
   }
+  if (response?.subOwnerClinics?.data?.length) {
+    response.subOwnerClinics.data = response.subOwnerClinics.data.map((clinic:any, index:any) => {
+      if (index === 0) {
+        // 🟢 Premium package — everything unlimited
+        clinic.features = {
+          add_material: { type: 'unlimited' },
+          assigned_cases: { type: 'unlimited' },
+          inventory: { type: 'unlimited' },
+        };
+      } else if (index === 1) {
+        // 🔴 Basic package — assigned_cases locked (pro)
+        clinic.features = {
+          add_material: { type: 'none' },
+          assigned_cases: { type: 'none' }, // PRO feature
+          inventory: { type: 'unlimited' },
+        };
+      } else {
+        // 🟠 Standard package — add_material limited
+        clinic.features = {
+          add_material: { type: 'limited', limit: 10, remaining: 3 },
+          assigned_cases: { type: 'unlimited' },
+          inventory: { type: 'unlimited' },
+        };
+      }
+      return clinic;
+    });
+  }
+  if (response?.operatorClinics?.data?.length) {
+    response.operatorClinics.data = response.operatorClinics.data.map((clinic:any, index:any) => {
+      if (index === 0) {
+        // 🟢 Premium package — everything unlimited
+        clinic.features = {
+          add_material: { type: 'unlimited' },
+          assigned_cases: { type: 'unlimited' },
+          inventory: { type: 'unlimited' },
+        };
+      } else if (index === 1) {
+        // 🔴 Basic package — assigned_cases locked (pro)
+        clinic.features = {
+          add_material: { type: 'none' },
+          assigned_cases: { type: 'none' }, // PRO feature
+          inventory: { type: 'unlimited' },
+        };
+      } else {
+        // 🟠 Standard package — add_material limited
+        clinic.features = {
+          add_material: { type: 'limited', limit: 10, remaining: 3 },
+          assigned_cases: { type: 'unlimited' },
+          inventory: { type: 'unlimited' },
+        };
+      }
+      return clinic;
+    });
+  }
 
   return response;
 }

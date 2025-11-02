@@ -8,6 +8,7 @@ export class ClinicFeaturesService {
 
   setClinicFeatures(features: Record<string, any>) {
     this.clinicFeatures = features;
+    console.log(this.clinicFeatures)
   }
 
   getFeature(key: string) {
