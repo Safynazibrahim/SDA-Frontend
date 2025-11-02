@@ -478,5 +478,15 @@
   "create_clinic":"Create Clinic",
   "OWNER_NAME":"Owner Name",
   "CREATE":"Create",
-  "EXISTS_IN_SYSTEM":"Exist in system?"
+  "EXISTS_IN_SYSTEM":"Exist in system?",
+   "Type of doctor": "Type of doctor",
+  "stock-based": "Stock-based",
+  "Non stock based": "Non stock-based",
+  "Doctor’s Percentage": "Doctor’s Percentage",
+  "Clinic’s Percentage": "Clinic’s Percentage",
+  "Enter a value between 0 and 100": "Enter a value between 0 and 100",
+  "Check-up Price": "Check-up Price",
+  "Enter Check-up Price": "Enter Check-up Price",
+  "Enter a valid check-up price": "Enter a valid check-up price",
+  "Join as a owner": "Join as a owner"
 }

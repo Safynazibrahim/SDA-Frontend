@@ -477,5 +477,15 @@
   "Instruction between visits": "تعليمات بين الزيارات",
   "Send to patient": "إرسال إلى المريض",
   "set the next appointment": "تحديد الموعد القادم",
-  "diseases":"الأمراض"
+  "diseases":"الأمراض" ,
+  "Type of doctor": "نوع الطبيب",
+  "stock-based": "يعتمد على المخزون",
+  "Non stock based": "غير معتمد على المخزون",
+  "Doctor’s Percentage": "نسبة الطبيب",
+  "Clinic’s Percentage": "نسبة العيادة",
+  "Enter a value between 0 and 100": "أدخل قيمة بين 0 و 100",
+  "Check-up Price": "سعر الكشف",
+  "Enter Check-up Price": "أدخل سعر الكشف",
+  "Enter a valid check-up price": "أدخل سعر كشف صحيح",
+  "Join as a owner": "انضم كمالك"
 }

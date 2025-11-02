@@ -41,13 +41,13 @@
       </small>
     </div>
     <div>
-      <button class="btn btn-outline-owner me-2" (click)="joinClinic(clinic.id, 'owner')">Owner</button>
-      <button class="btn btn-outline-subowner me-2" (click)="joinClinic(clinic.id, 'sub_owner')">Sub-Owner</button>
+      <button class="btn btn-outline-owner me-2" (click)="joinClinic(clinic.id, 'owner')">{{"Owner" | translate}}</button>
+      <button class="btn btn-outline-subowner me-2" (click)="joinClinic(clinic.id, 'sub_owner')">{{"Sub-Owner"| translate}}</button>
       <button
         class="btn btn-outline-operator"
         (click)="joinClinic(clinic.id, 'operator')"
       >
-        Operator
+        {{"Operator" | translate}}
       </button>
     </div>
   </div>
@@ -63,7 +63,7 @@
       <!-- Type of doctor -->
       <div class="row g-3">
         <div class="col-12">
-          <label class="section-label">Type of doctor</label>
+          <label class="section-label">{{"Type of doctor" | translate}}</label>
         </div>
 
         <div class="col-md-6">
@@ -75,7 +75,7 @@
               [value]="true"
             />
             <span class="radio-visual"></span>
-            <span class="radio-text">stock-based</span>
+            <span class="radio-text">{{"stock-based" | translate}}</span>
           </label>
         </div>
 
@@ -88,7 +88,7 @@
               [value]="false"
             />
             <span class="radio-visual"></span>
-            <span class="radio-text non-stock">Non stock based</span>
+            <span class="radio-text non-stock">{{"Non stock based" | translate}}</span>
           </label>
         </div>
       </div>
@@ -96,7 +96,7 @@
       <!-- Percentages -->
       <div class="row g-3 mt-2">
         <div class="col-md-6">
-          <label class="field-label">Doctor’s Percentage (%)</label>
+          <label class="field-label">{{"Doctor’s Percentage" | translate}} (%)</label>
           <input
             type="number"
             class="form-control owner-input"
@@ -108,12 +108,12 @@
             step="0.1"
           />
           <div class="text-danger mt-1" *ngIf="showDoctorPctError">
-            Enter a value between 0 and 100
+            {{"Enter a value between 0 and 100" | translate}}
           </div>
         </div>
 
         <div class="col-md-6">
-          <label class="field-label">Clinic’s Percentage (%)</label>
+          <label class="field-label">{{"Clinic’s Percentage" | translate}} (%)</label>
           <input
             type="number"
             class="form-control owner-input"
@@ -125,7 +125,7 @@
             step="0.1"
           />
           <div class="text-danger mt-1" *ngIf="showClinicPctError">
-            Enter a value between 0 and 100
+            {{"Enter a value between 0 and 100" | translate}}
           </div>
         </div>
 
@@ -135,7 +135,7 @@
       <!-- Check-up price -->
       <div class="row g-3 mt-2">
         <div class="col-md-6">
-          <label class="field-label">Check-up Price</label>
+          <label class="field-label">{{"Check-up Price" | translate}}</label>
           <input
             type="number"
             class="form-control owner-input"
@@ -145,7 +145,7 @@
             step="0.5"
           />
           <div class="text-danger mt-1" *ngIf="showPriceError">
-            Enter a valid check-up price
+            {{"Enter a valid check-up price" | translate}}
           </div>
         </div>
       </div>

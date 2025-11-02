@@ -192,31 +192,35 @@ export class JoinClinicComponent implements OnInit {
   }
 
   async submit() {
-    if (this.disableSave || !this.selectedClinicId) return;
+  if (this.disableSave || !this.selectedClinicId) return;
 
-    const isStock = !!this.form.value.isStockBased;
-    const base = { type: 'operator' };
+  const isStock = !!this.form.value.isStockBased;
+  const base = { type: 'operator' };
 
-    const payload = isStock
-      ? {
-          ...base,
-          stockType: 'self',
-          doctorShare: Number(this.form.value.doctorPercentage),
-        }
-      : {
-          ...base,
-          stockType: 'clinic',
-          consultationFee: Number(this.form.value.checkupPrice),
-        };
-    this.clinicService.joinClinic(this.selectedClinicId, payload).subscribe(
-      (res) => {
-        this.SnackBar.open(res.message, 'Close', { duration: 3000 });
-        this.closeJoinClinic();
-      },
-      (error) => {
-        console.log(error);
-        this.SnackBar.open(error.error.message, 'Close', { duration: 3000 });
+  const payload = isStock
+    ? {
+        ...base,
+        stockType: 'clinic', 
+        consultationFee: Number(this.form.value.checkupPrice), 
+        doctorShare: Number(this.form.value.doctorPercentage), 
       }
-    );
-  }
+    : {
+        ...base,
+        stockType: 'self', 
+        consultationFee: Number(this.form.value.checkupPrice),
+        doctorShare: Number(this.form.value.doctorPercentage), 
+      };
+
+  this.clinicService.joinClinic(this.selectedClinicId, payload).subscribe(
+    (res) => {
+      this.SnackBar.open(res.message, 'Close', { duration: 3000 });
+      this.closeJoinClinic();
+    },
+    (error) => {
+      this.SnackBar.open(error.error.message, 'Close', { duration: 3000 });
+      this.closeJoinClinic();
+    }
+  );
+}
+
 }

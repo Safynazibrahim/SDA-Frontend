@@ -106,12 +106,12 @@
 
 .section-label {
   font-weight: 600;
-  color: #6b7280;
+  color: var(--text-black-white);
 }
 
 .field-label {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: var(--text-black-white);
   margin-bottom: 6px;
   display: block;
 }
@@ -119,6 +119,11 @@
 .owner-input {
   height: 44px;
   border-radius: 10px;
+  background-color: transparent;
+  color: var(--text-black-white);
+  &::placeholder {
+    color: var(--text-black-white); 
+  }
 }
 
 /* Custom radios like the screenshot */
@@ -139,7 +144,7 @@
   border-radius: 50%;
   display: inline-block;
   position: relative;
-  background: #fff;
+  background: transparent;
 }
 
 .radio-tile input:checked + .radio-visual::after {
@@ -152,7 +157,7 @@
 
 .radio-text {
   font-weight: 600;
-  color: #111827;
+  color: var(--text-black-white);
 }
 
 // .radio-text.non-stock {
@@ -160,7 +165,6 @@
 // }
 
 
-.btn-save:disabled { opacity: .6; cursor: not-allowed; }
 
 
 
