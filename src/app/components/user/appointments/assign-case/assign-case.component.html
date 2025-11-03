@@ -10,7 +10,8 @@
     </a>
     <div class="d-flex align-items-center mb-2">
      
-      <p class="mb-0 clinicActive">{{ "Assign Case" | translate }}</p>
+      <p class="mb-0 clinicActive">{{ pageTitle | translate }}</p>
+
     </div>
   </div>
 
@@ -100,7 +101,7 @@
         />
       </div>
 
-      <div class="dropdown custom-dropdown col-md-6 mb-3">
+      <!-- <div class="dropdown custom-dropdown col-md-6 mb-3">
   <label class="form-label">{{"Clinical Investigation" | translate}}</label>
   <button
     class="btn form-select d-flex justify-content-between align-items-center"
@@ -131,7 +132,58 @@
       </div>
     </div>
   </div>
+</div> -->
+<div class="dropdown custom-dropdown col-md-6 mb-3">
+  <label class="form-label">{{ "Diseases" | translate }}</label>
+  <button
+    class="btn form-select d-flex justify-content-between align-items-center"
+    type="button"
+    (click)="toggleDropdown('disease')"
+  >
+    {{
+      selectedDiseases.length > 0
+        ? selectedDiseases.join(', ')
+        : ('Select Disease' | translate)
+    }}
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+
+  <div class="dropdown-menu p-3 shadow" [class.show]="openDropdown === 'disease'">
+    <!-- ✅ Search Box -->
+    <div class="search-box mb-2">
+      <mat-icon class="search-icon">{{ "search" | translate }}</mat-icon>
+      <input
+        type="text"
+        class="search-input"
+        [placeholder]="'Search disease name' | translate"
+        [(ngModel)]="searchDiseaseTerm"
+      />
+      <button class="search-btn">{{ "Search" | translate }}</button>
+    </div>
+
+    <!-- ✅ Filtered Diseases -->
+    <div class="med-list">
+      <div class="form-check" *ngFor="let dis of filteredDiseases()">
+        <label
+          class="form-check-label"
+          [class.checked]="selectedDiseases.includes(dis)"
+          (click)="toggleLabelSelection(dis, 'disease')"
+        >
+          {{ dis }}
+        </label>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [id]="dis"
+          [value]="dis"
+          (change)="toggleSelection(dis, 'disease', $event)"
+          [checked]="selectedDiseases.includes(dis)"
+        />
+      </div>
+    </div>
+  </div>
 </div>
+
       <div class="dropdown custom-dropdown col-md-6 mb-3">
         <label class="form-label">{{"Medication" | translate}}</label>
         <button
@@ -177,38 +229,7 @@
         </div>
       </div>
 
-      <div class="dropdown custom-dropdown col-md-6 mb-3">
-  <label class="form-label">{{"Diseases" | translate}}</label>
-  <button
-    class="btn form-select d-flex justify-content-between align-items-center"
-    type="button"
-    (click)="toggleDropdown('disease')"
-  >
-    {{
-      selectedDiseases.length > 0
-        ? selectedDiseases.join(', ')
-        : ('Select Disease' | translate)
-    }}
-    <mat-icon>keyboard_arrow_down</mat-icon>
-  </button>
-
-  <div class="dropdown-menu p-3 shadow" [class.show]="openDropdown === 'disease'">
-    <div class="med-list">
-      <div class="form-check" *ngFor="let dis of diseases">
-        <label class="form-check-label" [class.checked]="selectedInvestigations.includes(dis)"
-    (click)="toggleLabelSelection(dis, 'disease')">{{ dis }}</label>
-        <input
-          class="form-check-input"
-          type="checkbox"
-          [id]="dis"
-          [value]="dis"
-          (change)="toggleSelection(dis, 'disease', $event)"
-          [checked]="selectedDiseases.includes(dis)"
-        />
-      </div>
-    </div>
-  </div>
-</div>
+      
     </div>
 
     <!-- <div class="d-flex justify-content-end mt-4 pb-3">
@@ -216,7 +237,10 @@
       <button class="btn cancel-btn">Cancel</button>
     </div> -->
     <div class="page-footer-btns">
-  <button class="send-to-patient-btn" (click)="saveCase()">{{"Save" | translate}}</button>
+      @if(pageTitle === 'Assign Case'){
+  <button class="send-to-patient-btn" (click)="saveCase()">{{"Save" | translate}}</button>}
+  @else{
+  <button class="send-to-patient-btn" (click)="saveCase()">{{"Start Case" | translate}}</button>}
   <button class="cancel-btn" [routerLink]="['/dashboard/appointments']">{{"cancel" | translate}}</button>
 </div>
   </div>

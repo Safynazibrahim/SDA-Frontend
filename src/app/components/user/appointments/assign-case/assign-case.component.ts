@@ -26,29 +26,47 @@ export class AssignCaseComponent implements OnInit , OnDestroy{
   // dropdown lists
   clinicalInvestigations: string[] = ['X-Ray', 'Blood Test', 'MRI'];
   medications: string[] = [
-    'Panadol',
-    'Brufen',
-    'Cataflam',
-    'Voltaren',
-    'Amoxicillin',
-    'Paracetamol',
-  ];
-  diseases: string[] = ['Diabetes', 'Hypertension', 'Asthma'];
+  "Paracetamol",
+  "Ibuprofen",
+  "Amoxicillin",
+  "Metformin",
+  "Amlodipine",
+  "Omeprazole",
+  "Atorvastatin",
+  "Losartan",
+  "Azithromycin",
+  "Cetirizine",
+];;
+  diseases: string[] = ["Diabetes", "Hypertension", "Asthma"];
 
   // selected values
   selectedInvestigations: string[] = [];
   selectedMedications: string[] = [];
   selectedDiseases: string[] = [];
+searchDiseaseTerm = ''; // للسيرش في الأمراض
 
   // dropdown control
+  pageTitle = '';
+
   openDropdown: string | null = null;
   searchTerm = '';
 appointmentId: string | null = null;
   constructor(private _AppointmentsService: AppointmentsService , private route: ActivatedRoute , private router: Router) {}
-  ngOnInit(): void {
-    this.appointmentId = this.route.snapshot.paramMap.get('id');
+ ngOnInit(): void {
+  this.appointmentId = this.route.snapshot.paramMap.get('id');
+  const from = this.route.snapshot.queryParamMap.get('from');
+
+  if (from === 'appointmentsStartCase') {
+    this.pageTitle = 'Start Case';
+  } else if (from === 'appointmentsAssignCase') {
+    this.pageTitle = 'Assign Case';
+  }
+  if (typeof document !== 'undefined') {
     document.addEventListener('click', this.handleClickOutside.bind(this));
   }
+}
+
+
   toggleDropdown(type: string) {
     this.openDropdown = this.openDropdown === type ? null : type;
   }
@@ -73,6 +91,12 @@ appointmentId: string | null = null;
       m.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
+  filteredDiseases() {
+  if (!this.searchDiseaseTerm.trim()) return this.diseases;
+  const term = this.searchDiseaseTerm.toLowerCase();
+  return this.diseases.filter(d => d.toLowerCase().includes(term));
+}
+
   toggleLabelSelection(value: string, type: string) {
   let targetArray: string[];
 
@@ -93,14 +117,19 @@ appointmentId: string | null = null;
     const caseData = {
       appointmentId : this.appointmentId,
       chiefComplaint: this.chiefComplaint,
-      clinicalInvestigation: this.selectedInvestigations,
       medications: this.selectedMedications,
       diseases: this.selectedDiseases
     };
+    // this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId]);
     this._AppointmentsService.assignCase(caseData).subscribe({
       next: (res) => {
         console.log('Case assigned successfully', res);
-        this.router.navigate(['/dashboard/appointments']);
+        if(this.pageTitle === 'Assign Case'){
+          this.router.navigate(['/dashboard/appointments']);
+        }
+        else{
+          this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId]);
+        }
       },
       error: (err) => {
         console.error('Error assigning case', err);
@@ -124,7 +153,8 @@ appointmentId: string | null = null;
   }
 }
 ngOnDestroy() {
-  document.removeEventListener('click', this.handleClickOutside.bind(this));
-}
+if (typeof document !== 'undefined') {
+    document.removeEventListener('click', this.handleClickOutside.bind(this));
+  }}
 
 }

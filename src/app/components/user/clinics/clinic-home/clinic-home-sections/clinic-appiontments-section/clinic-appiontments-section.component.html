@@ -22,7 +22,7 @@
     </div>
 
     <div class="select-date d-flex align-items-center">
-      <span class="page-item" [class.disabled]="currentDate <= today">
+      <span class="page-item">
         <a class="page-link" (click)="changeWeek(-1)">&lt;</a>
       </span>
 
@@ -65,9 +65,8 @@
 
   <div class="calendar">
     <div class="time-column">
-  <div class="time-slot" *ngFor="let time of timeSlots">{{ time }}</div>
-</div>
-
+      <div class="time-slot" *ngFor="let time of timeSlots">{{ time }}</div>
+    </div>
 
     <div class="appointments-area">
       <!-- Grid lines for visual structure -->
@@ -110,7 +109,7 @@
     <div
       class="sidebar-header d-flex justify-content-between align-items-center"
     >
-      <h4>{{"Appointment details" | translate}}</h4>
+      <h4>{{ "Appointment details" | translate }}</h4>
       <button class="close-btn" (click)="closeDetails()">✕</button>
     </div>
 
@@ -133,14 +132,15 @@
               {{ selectedAppointment.patient?.user?.fullName }}
             </p>
             <p class="my-0 patientInfo">
-              {{ selectedAppointment.patient?.gender || "-" }} {{"Age" | translate }}
+              {{ selectedAppointment.patient?.gender || "-" }}
+              {{ "Age" | translate }}
               {{ selectedAppointment.patient?.age || "-" }}
             </p>
 
             <p class="my-0 patientInfo">
-              {{"Patient ID" | translate }}: 
-              <span class="patientId"
-                > {{ maskPatientId(selectedAppointment.patient?.id) }}</span
+              {{ "Patient ID" | translate }}:
+              <span class="patientId">
+                {{ maskPatientId(selectedAppointment.patient?.id) }}</span
               >
             </p>
           </div>
@@ -207,7 +207,9 @@
         </div>
         @if(selectedAppointment.clinic?.name){
         <p>
-          {{"Clinic Name" | translate}}:<strong> {{ selectedAppointment.clinic?.name }}</strong>
+          {{ "Clinic Name" | translate }}:<strong>
+            {{ selectedAppointment.clinic?.name }}</strong
+          >
         </p>
         }
       </div>
@@ -216,25 +218,37 @@
         <div class="actions mt-auto">
           <button
             class="btn-outline"
-            [routerLink]="['/dashboard/appointments/start-case', selectedAppointment?.id]"
-            [queryParams]="{ from: 'appointments' }"
+            [routerLink]="[
+              '/dashboard/appointments/assign-case',
+              selectedAppointment?.id
+            ]"
+            [queryParams]="{ from: 'appointmentsStartCase' }"
           >
-            {{"Start Case" | translate}}
+            {{ "Start Case" | translate }}
           </button>
           <button
             class="btn-outline"
-            [routerLink]="['/dashboard/appointments/assign-case', selectedAppointment?.id]"
+            [routerLink]="[
+              '/dashboard/appointments/assign-case',
+              selectedAppointment?.id
+            ]"
+            [queryParams]="{ from: 'appointmentsAssignCase' }"
           >
-            {{"Assign Case" | translate}}
+            {{ "Assign Case" | translate }}
           </button>
-          <button class="btn-outline">{{"Patient Profile" | translate}}</button>
+          <button class="btn-outline" [routerLink]="[
+              '/dashboard/patients',
+              selectedAppointment?.patient?.id
+            ]">
+            {{ "Patient Profile" | translate }}
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Assigned Appointment -->
     <ng-template #assignedView>
-       <div class="first-section-tap">
+      <div class="first-section-tap">
         <div class="d-flex align-items-center patientDetails">
           <img
             width="60"
@@ -253,9 +267,9 @@
             </p>
 
             <p class="my-0 patientInfo">
-              {{"Patient ID" | translate }}:
-              <span class="patientId"
-                > {{ maskPatientId(selectedAppointment.patient?.id) }}</span
+              {{ "Patient ID" | translate }}:
+              <span class="patientId">
+                {{ maskPatientId(selectedAppointment.patient?.id) }}</span
               >
             </p>
           </div>
@@ -322,7 +336,9 @@
         </div>
         @if(selectedAppointment.clinic?.name){
         <p>
-          {{"Clinic Name" | translate}}:<strong> {{ selectedAppointment.clinic?.name }}</strong>
+          {{ "Clinic Name" | translate }}:<strong>
+            {{ selectedAppointment.clinic?.name }}</strong
+          >
         </p>
         }
       </div>
@@ -330,10 +346,20 @@
         <div class="assigned-actions">
           <button
             class="btn-filled"
+            [routerLink]="['/dashboard/appointments/assigned-cases']"
           >
-            {{"Assignd Cases" | translate}}
+            {{ "Assignd Cases" | translate }}
           </button>
-          <button class="btn-outline">{{"Patient Profile" | translate}}</button>
+
+          <button
+            class="btn-outline"
+            [routerLink]="[
+              '/dashboard/patients',
+              selectedAppointment?.patient?.id
+            ]"
+          >
+            {{ "Patient Profile" | translate }}
+          </button>
         </div>
       </div>
     </ng-template>

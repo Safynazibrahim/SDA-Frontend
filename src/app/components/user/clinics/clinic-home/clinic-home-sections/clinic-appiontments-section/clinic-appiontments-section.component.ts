@@ -154,7 +154,7 @@ formatHour(hour: number): string {
   changeWeek(direction: number) {
     const newDate = new Date(this.currentDate);
     newDate.setDate(this.currentDate.getDate() + direction * 7);
-    if (direction === -1 && newDate < this.today) return;
+    // if (direction === -1 && newDate < this.today) return;
     this.currentDate = newDate;
     this.generateWeek(this.currentDate);
     this.fetchAppointments();

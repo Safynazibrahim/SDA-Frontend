@@ -24,6 +24,92 @@ export class StartCaseComponent implements OnInit,OnDestroy {
   appointmentId: string | null = null;
   patientId: string | null = null;
   fromPage: any;
+  chiefComplaintOptions = [
+  { key: 'pain', label: 'Pain (tooth / jaw / TMJ)', selected: false },
+  { key: 'swelling', label: 'Swelling (facial / gingival)', selected: false },
+  { key: 'bleeding', label: 'Bleeding', selected: false },
+  { key: 'sensitivity', label: 'Sensitivity (hot / cold / sweet)', selected: false },
+  { key: 'esthetic', label: 'Esthetic concerns (discoloration / malalignment)', selected: false },
+  { key: 'chewing', label: 'Difficulty chewing', selected: false },
+  { key: 'broken', label: 'Broken tooth', selected: false },
+  { key: 'routine', label: 'Routine check-up / No complaint', selected: false },
+];
+natureOfComplaintOptions = [
+  { key: 'sharp', label: 'Sharp', selected: false },
+  { key: 'dull', label: 'Dull / Aching', selected: false },
+  { key: 'throbbing', label: 'Throbbing / Intermittent', selected: false },
+  { key: 'burning', label: 'Burning', selected: false },
+  { key: 'pressure', label: 'Pressure sensation', selected: false },
+];
+
+aggravatingFactorsOptions = [
+  { key: 'hot', label: 'Hot', selected: false },
+  { key: 'cold', label: 'Cold', selected: false },
+  { key: 'chewing', label: 'Chewing / Biting', selected: false },
+  { key: 'lying', label: 'Lying down / Nighttime', selected: false },
+  { key: 'none', label: 'No specific factor', selected: false },
+];
+
+medicalHistoryOptions = [
+  { key: 'diabetes', label: 'Diabetes (Type 1 / Type 2 – Controlled / Uncontrolled)', selected: false },
+  { key: 'cardio', label: 'Cardiovascular disease / Hypertension', selected: false },
+  { key: 'asthma', label: 'Asthma / COPD', selected: false },
+  { key: 'kidney', label: 'Kidney / Liver disease', selected: false },
+  { key: 'autoimmune', label: 'Autoimmune disorders (Lupus, Rheumatoid Arthritis)', selected: false },
+  { key: 'none', label: 'None', selected: false },
+];
+medicationsOfConcernOptions = [
+  { key: 'anticoagulants', label: 'Anticoagulants (Warfarin)', selected: false },
+  { key: 'bisphosphonates', label: 'Bisphosphonates', selected: false },
+  { key: 'immunosuppressants', label: 'Immunosuppressants', selected: false },
+  { key: 'gingival', label: 'Drugs causing gingival overgrowth', selected: false },
+  { key: 'none', label: 'None', selected: false },
+];
+
+facialSymmetryOptions = [
+  { key: 'symmetrical', label: 'Symmetrical (Normal)', selected: false },
+  { key: 'asymmetrical', label: 'Asymmetrical (specify location & cause)', selected: false },
+  { key: 'paralysis', label: 'Facial paralysis', selected: false },
+  { key: 'swelling', label: 'Unilateral swelling', selected: false },
+];
+
+facialProfileOptions = [
+  { key: 'straight', label: 'Straight (Orthognathic – Class I)', selected: false },
+  { key: 'convex', label: 'Convex (Class II)', selected: false },
+  { key: 'concave', label: 'Concave (Class III)', selected: false },
+];
+
+lymphNodesOptions = [
+  { key: 'nonpalpable', label: 'Non-palpable (Normal)', selected: false },
+  { key: 'palpable', label: 'Palpable (specify: soft / firm-fixed / tender / nodular)', selected: false },
+];
+
+tmjSoundsOptions = [
+  { key: 'none', label: 'No sounds', selected: false },
+  { key: 'clicking', label: 'Clicking (Early / Late)', selected: false },
+  { key: 'popping', label: 'Popping', selected: false },
+  { key: 'crepitus', label: 'Crepitus (Grinding)', selected: false },
+];
+
+tmjOpeningOptions = [
+  { key: 'normal', label: 'Normal opening (40–50 mm)', selected: false },
+  { key: 'limited', label: 'Limited opening (<35 mm)', selected: false },
+  { key: 'deviation', label: 'Deviation to right / left', selected: false },
+  { key: 'shape', label: 'S-shape or C-shape movement', selected: false },
+];
+private sectionMap = [
+  { keywords: ['chief complaint', 'complaint'], handler: 'analyzeSpeechForChiefComplaint' },
+  { keywords: ['nature of complaint', 'nature'], handler: 'analyzeSpeechForNatureOfComplaint' },
+  { keywords: ['aggravating factors', 'factor'], handler: 'analyzeSpeechForAggravatingFactors' },
+  { keywords: ['medical history', 'history'], handler: 'analyzeSpeechForMedicalHistory' },
+  { keywords: ['medication history', 'medication'], handler: 'analyzeSpeechForMedicationsOfConcern' },
+  { keywords: ['facial symmetry', 'symmetry'], handler: 'analyzeSpeechForFacialSymmetry' },
+  { keywords: ['facial profile', 'profile'], handler: 'analyzeSpeechForFacialProfile' },
+  { keywords: ['lymph nodes', 'lymph'], handler: 'analyzeSpeechForLymphNodes' },
+  { keywords: ['tmj sounds', 'sound'], handler: 'analyzeSpeechForTMJSounds' },
+  { keywords: ['tmj opening', 'opening'], handler: 'analyzeSpeechForTMJOpening' },
+];
+
   constructor(
     private cdRef: ChangeDetectorRef,
     private speechService: WebSpeechService,
@@ -82,6 +168,9 @@ export class StartCaseComponent implements OnInit,OnDestroy {
       this.selectedLang,
       (text) => {
         this.transcriptionResult = text;
+        this.analyzeSpeechWithContext(text);
+
+
         this.cdRef.detectChanges();
       },
       () => {
@@ -163,19 +252,227 @@ export class StartCaseComponent implements OnInit,OnDestroy {
   //   }
   //   this.seconds = 0;
   // }
-  startListening() {
-    this.transcriptionResult = 'Listening...';
-    this.speechService.startListening(
-      this.selectedLang,
-      (text) => {
-        this.transcriptionResult = text;
-        this.cdRef.detectChanges();
-      },
-      () => {
-        console.log('Recognition finished');
+ startListening() {
+  this.transcriptionResult = 'Listening...';
+
+  this.speechService.startListening(
+    this.selectedLang,
+    (text) => {
+      this.transcriptionResult = text;
+
+      this.analyzeSpeechWithContext(text);
+
+
+      this.cdRef.detectChanges();
+    },
+    () => {
+      console.log('Recognition finished');
+    }
+  );
+}
+
+analyzeSpeechForChiefComplaint(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const keywordMap: { [key: string]: string[] } = {
+    pain: ['pain', 'toothache', 'ache', 'jaw pain', 'tmj'],
+    swelling: ['swelling', 'puffy', 'inflamed'],
+    bleeding: ['bleeding', 'blood'],
+    sensitivity: ['sensitive', 'hot', 'cold', 'sweet'],
+    esthetic: ['color', 'discoloration', 'alignment', 'look', 'esthetic'],
+    chewing: ['chew', 'chewing', 'bite'],
+    broken: ['broken', 'fracture', 'crack'],
+    routine: ['checkup', 'routine', 'no complaint', 'normal'],
+  };
+
+  this.chiefComplaintOptions.forEach(opt => {
+    opt.selected = false; // reset
+    for (const kw of keywordMap[opt.key]) {
+      if (lowerText.includes(kw)) {
+        opt.selected = true;
+        break;
       }
+    }
+  });
+}
+analyzeSpeechForNatureOfComplaint(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    sharp: ['sharp', 'sting', 'knife'],
+    dull: ['dull', 'aching', 'ache'],
+    throbbing: ['throbbing', 'pulse', 'pulsing', 'intermittent'],
+    burning: ['burning', 'hot pain', 'burns'],
+    pressure: ['pressure', 'heavy', 'tight'],
+  };
+
+  this.natureOfComplaintOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+
+
+analyzeSpeechForAggravatingFactors(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    hot: ['hot', 'heat', 'warm'],
+    cold: ['cold', 'ice', 'chilly'],
+    chewing: ['chewing', 'biting', 'eat'],
+    lying: ['lying', 'sleeping', 'night'],
+    none: ['none', 'no factor', 'nothing'],
+  };
+
+  this.aggravatingFactorsOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+
+
+analyzeSpeechForMedicalHistory(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    diabetes: ['diabetes', 'sugar', 'insulin'],
+    cardio: ['heart', 'hypertension', 'blood pressure', 'cardio'],
+    asthma: ['asthma', 'copd', 'breathing'],
+    kidney: ['kidney', 'liver'],
+    autoimmune: ['lupus', 'rheumatoid', 'arthritis', 'immune'],
+    none: ['none', 'no history', 'healthy'],
+  };
+
+  this.medicalHistoryOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+analyzeSpeechForMedicationsOfConcern(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    anticoagulants: ['warfarin', 'anticoagulant', 'blood thinner'],
+    bisphosphonates: ['bisphosphonate', 'bone drug', 'osteoporosis medicine'],
+    immunosuppressants: ['immunosuppressant', 'steroids', 'prednisone', 'cyclosporine'],
+    gingival: ['gingival', 'gum overgrowth', 'phenytoin', 'nifedipine'],
+    none: ['none', 'no medication', 'nothing'],
+  };
+
+  this.medicationsOfConcernOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+analyzeSpeechForFacialSymmetry(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    symmetrical: ['normal face', 'symmetrical', 'balanced'],
+    asymmetrical: ['asymmetrical', 'uneven', 'not equal', 'deformity'],
+    paralysis: ['paralysis', 'paralyzed', 'facial palsy'],
+    swelling: ['unilateral swelling', 'swelling on one side', 'puffed side'],
+  };
+
+  this.facialSymmetryOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+analyzeSpeechForFacialProfile(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    straight: ['straight profile', 'normal profile', 'class one'],
+    convex: ['convex', 'class two', 'protruded'],
+    concave: ['concave', 'class three', 'receded'],
+  };
+
+  this.facialProfileOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+analyzeSpeechForLymphNodes(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    nonpalpable: ['normal lymph', 'non palpable', 'not felt'],
+    palpable: ['palpable', 'tender node', 'swollen node', 'enlarged gland'],
+  };
+
+  this.lymphNodesOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+analyzeSpeechForTMJSounds(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    none: ['no sound', 'quiet joint', 'silent'],
+    clicking: ['click', 'clicking', 'pop sound'],
+    popping: ['popping', 'pop', 'snap'],
+    crepitus: ['crepitus', 'grinding', 'rough sound'],
+  };
+
+  this.tmjSoundsOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+analyzeSpeechForTMJOpening(transcript: string) {
+  const lowerText = transcript.toLowerCase();
+
+  const map: Record<string, string[]> = {
+    normal: ['normal opening', 'opens fine', 'good movement'],
+    limited: ['limited', 'cannot open', 'restricted'],
+    deviation: ['deviation', 'shift right', 'shift left'],
+    shape: ['s shape', 'c shape', 'curve', 'crooked movement'],
+  };
+
+  this.tmjOpeningOptions.forEach(opt => {
+    const keywords = map[opt.key] ?? [];
+    opt.selected = keywords.some(k => lowerText.includes(k));
+  });
+}
+
+private currentSection: string | null = null;
+
+private analyzeSpeechWithContext(transcript: string) {
+  const lower = transcript.toLowerCase();
+
+  // 🧠 نحلل كل قسم بناءً على الكلمات المفتاحية
+  const words = lower.split(/\s+/);
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    // ⛳ لو الكلمة بتنتمي لقسم جديد
+    const matchedSection = this.sectionMap.find(section =>
+      section.keywords.some(k => word.includes(k))
     );
+
+    if (matchedSection) {
+      // 🔄 بدّل للسياق الجديد
+      this.currentSection = matchedSection.handler;
+      console.log('📍 Switched to:', this.currentSection);
+      continue;
+    }
+
+    // 🧩 لو إحنا في قسم حالي، حلّل الكلمة عليه
+    if (this.currentSection) {
+      const fn = (this as any)[this.currentSection];
+      if (typeof fn === 'function') fn.call(this, word);
+    } else {
+      // fallback أول مرة بس
+      this.analyzeSpeechForChiefComplaint(word);
+      this.analyzeSpeechForMedicalHistory(word);
+      this.analyzeSpeechForMedicationsOfConcern(word);
+    }
   }
+}
+
+
+
 
   stopListening() {
     this.speechService.stopListening();
@@ -235,14 +532,14 @@ export class StartCaseComponent implements OnInit,OnDestroy {
   if (this.fromPage === 'patient-profile') {
     return ['/dashboard/patients/start-case/generate-ai', this.patientId];
   }
-  return ['/dashboard/appointments/start-case/generate-ai', this.appointmentId];
+  return ['/dashboard/appointments/generate-ai', this.appointmentId];
 }
 
   manualLink(): any[] {
   if (this.fromPage === 'patient-profile') {
     return ['/dashboard/patients/start-case/manual-diagnosis', this.patientId];
   }
-  return ['/dashboard/appointments/start-case/manual-diagnosis', this.appointmentId];
+  return ['/dashboard/appointments/manual-diagnosis', this.appointmentId];
 }
 
 
