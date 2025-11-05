@@ -190,8 +190,50 @@
     </div>
   </div>
  <div class="page-footer-btns">
-  <button class="send-to-patient-btn">{{"Send to patient" | translate}}</button>
+  <button class="send-to-patient-btn" (click)="sendManualDiagnosis()">{{"Send to patient" | translate}}</button>
   <button class="cancel-btn" (click)="cancelHandler()">{{"cancel" | translate}}</button>
 </div>
 
 </div>
+<app-modal
+  [isOpen]="isNextVisitModalOpen"
+  title="Set Next Visit"
+  size="medium"
+  (close)="closeNextVisitModal()"
+>
+  <div modal-body class="modal-body next-visit-modal">
+    <h4 class="fw-bold mb-3 text-center text-brown">Select Date Range</h4>
+    <p class="text-muted text-center small mb-4">
+      Please choose the date range you want to search for, then click "Show Available Slots".
+    </p>
+
+    <!-- Angular Material Date Range Picker -->
+    <mat-form-field class="date-range-field w-100 mb-4">
+      <mat-label>Select date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" [(ngModel)]="startDate" />
+        <input matEndDate placeholder="End date" [(ngModel)]="endDate" />
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker>
+        <mat-date-range-picker-actions>
+          <button mat-button matDateRangePickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+        </mat-date-range-picker-actions>
+      </mat-date-range-picker>
+    </mat-form-field>
+
+    <!-- Buttons -->
+    <div class="d-flex flex-column gap-2 mt-3">
+      <button class="btn main-btn" (click)="showAvailableSlots()">
+        Show Available Slots
+      </button>
+      <button class="btn brown-btn" (click)="completeNextVisit()">
+        Complete
+      </button>
+      <button class="btn cancel-btn" (click)="closeNextVisitModal()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</app-modal>

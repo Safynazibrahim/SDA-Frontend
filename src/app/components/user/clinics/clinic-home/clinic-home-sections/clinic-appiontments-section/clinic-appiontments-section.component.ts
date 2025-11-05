@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchComponent } from '../../../../../shared/search/search.component';
 import { ClinicService } from '../../../clinic.service';
+import { StartCaseStateService } from '../../../../appointments/start-case/start-case-state.service';
 
 @Component({
   selector: 'app-appointments',
@@ -27,7 +28,8 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private clinicService: ClinicService,
-    private router : Router
+    private router : Router,
+    private startCaseState: StartCaseStateService 
   ) {
     this.generateWeek(this.currentDate);
   }
@@ -205,6 +207,16 @@ formatHour(hour: number): string {
   const last3 = idStr.slice(-3); 
   const masked = '*'.repeat(Math.max(idStr.length - 3, 0)) + last3;
   return masked;
+}
+openStartCase(appt: any) {
+  if (!appt) return;
+
+  this.startCaseState.setClinicId(appt.clinic?.id);
+  console.log('🏥 Saved clinicId:', appt.clinic?.id);
+  this.router.navigate(
+    ['/dashboard/appointments/assign-case', appt.id],
+    { queryParams: { from: 'appointments' } }
+  );
 }
 
 }

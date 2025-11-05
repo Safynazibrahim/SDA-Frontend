@@ -10,6 +10,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { OnInit } from '@angular/core';
 import { from } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { StartCaseStateService } from '../start-case/start-case-state.service';
+import { AppointmentsService } from '../appointments.service';
+import { ModalComponent } from '../../../shared/modal/modal.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-manual-diagnosis',
   standalone: true,
@@ -23,6 +29,9 @@ import { from } from 'rxjs';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    ModalComponent,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './manual-diagnosis.component.html',
   styleUrl: './manual-diagnosis.component.scss',
@@ -36,7 +45,13 @@ export class ManualDiagnosisComponent implements OnInit {
   isDropdownOpen = false;
   openIndex: number | null = null;
   selectedMedication = '';
-  constructor(private route : ActivatedRoute , private router : Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private startCaseState: StartCaseStateService,
+    private _AppointmentsService: AppointmentsService,
+    private snackBar: MatSnackBar
+  ) {}
   medications = [
     {
       name: 'Medicine Name',
@@ -67,24 +82,124 @@ export class ManualDiagnosisComponent implements OnInit {
       safe: true,
     },
   ];
+  isNextVisitModalOpen = false; // 🔹 الحالة اللي بتتحكم في إظهار المودال
+
+  openNextVisitModal() {
+    this.isNextVisitModalOpen = true;
+  }
+
+  closeNextVisitModal() {
+    this.isNextVisitModalOpen = false;
+  }
+
   appointmentId: string | null = null;
   patientId: string | null = null;
   fromPage: any;
+  fromDays: number | null = null;
+  toDays: number | null = null;
+  startDate: Date | null = null;
+  endDate: Date | null = null;
+  clinicId: string | null = null;
+
   ngOnInit() {
     this.calculateProgress();
     this.fromPage = this.route.snapshot.queryParamMap.get('from');
-    if (this.fromPage === 'appointments') {
-      this.appointmentId = this.route.snapshot.paramMap.get('id');
-    console.log('🩺 Coming from Appointments');
-    console.log('Appointment ID:', this.appointmentId);
-  } else if (this.fromPage === 'patient-profile') {
-    this.patientId = this.route.snapshot.paramMap.get('id');
-    console.log('👤 Coming from Patient Profile');
-    console.log('Patient ID:', this.patientId);
-  } else {
-    console.log('⚠️ Unknown source, default to appointments');
+
+    const id = this.route.snapshot.paramMap.get('id');
+    if (this.fromPage === 'appointments') this.appointmentId = id;
+    else if (this.fromPage === 'patient-profile') this.patientId = id;
+
+    console.log(
+      '🩺 fromPage:',
+      this.fromPage,
+      'appointmentId:',
+      this.appointmentId
+    );
+    this.clinicId = this.startCaseState.getClinicId();
+    console.log('🏥 Retrieved clinicId in Manual Diagnosis:', this.clinicId);
+    const savedStartCase = this.startCaseState.getStartCaseData();
   }
+  // sendManualDiagnosis() {
+  //   const startCaseData = this.startCaseState.getStartCaseData();
+  //   if (!startCaseData) {
+  //     this.snackBar.open('⚠️ Missing start case data', 'Close', { duration: 3000 });
+  //     return;
+  //   }
+
+  //   // 🧩 نجمع كل الداتا النهائية
+  //   const payload = {
+  //     appointmentId: startCaseData.appointmentId,
+  //     chiefComplaint: startCaseData.chiefComplaint,
+  //     clinicalInvestigation: startCaseData.clinicalInvestigation,
+  //     diagnosis: this.diagnosisName,
+  //     treatmentPlan: this.treatmentPlan,
+  //     instructionsBetweenVisits: this.instructionBetweenVisits,
+  //     medications: this.medications.filter(m => m.dosage || m.frequency || m.duration),
+  //   };
+
+  //   console.log('📤 Sending Manual Diagnosis payload:', payload);
+
+  //   this._AppointmentsService.startCase(payload).subscribe({
+  //     next: (res) => {
+  //       console.log('✅ Manual Diagnosis saved successfully', res);
+  //       this.snackBar.open('Diagnosis sent successfully ✅', 'Close', { duration: 3000 });
+
+  //       // بعد الإرسال ترجعي لصفحة المواعيد أو البروفايل
+  //       if (this.fromPage === 'appointments') {
+  //         this.router.navigate(['/dashboard/appointments']);
+  //       } else {
+  //         this.router.navigate([`/dashboard/patients/${this.patientId}/appointment-history`]);
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error('❌ Error sending manual diagnosis', err);
+  //       this.snackBar.open('Failed to send diagnosis ❌', 'Close', { duration: 3000 });
+  //     },
+  //   });
+  // }
+  sendManualDiagnosis() {
+    const startCaseData = this.startCaseState.getStartCaseData();
+    if (!startCaseData) {
+      this.snackBar.open('⚠️ Missing start case data', 'Close', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    const payload = {
+      appointmentId: startCaseData.appointmentId,
+      chiefComplaint: startCaseData.chiefComplaint,
+      clinicalInvestigation: startCaseData.clinicalInvestigation,
+      diagnosis: this.diagnosisName,
+      treatmentPlan: this.treatmentPlan,
+      instructionsBetweenVisits: this.instructionBetweenVisits,
+      medications: this.medications.filter(
+        (m) => m.dosage || m.frequency || m.duration
+      ),
+    };
+
+    console.log('📤 Sending Manual Diagnosis payload:', payload);
+
+    this._AppointmentsService.startCase(payload).subscribe({
+      next: (res) => {
+        console.log('✅ Manual Diagnosis saved successfully', res);
+        this.snackBar.open('Diagnosis sent successfully ✅', 'Close', {
+          duration: 3000,
+        });
+
+        // 🔹 بدل ما نرجع فورًا، نفتح المودال
+        this.openNextVisitModal();
+      },
+      error: (err) => {
+        console.error('❌ Error sending manual diagnosis', err);
+        this.openNextVisitModal();
+        this.snackBar.open('Failed to send diagnosis ❌', 'Close', {
+          duration: 3000,
+        });
+      },
+    });
   }
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
     this.openIndex = null; // reset any open section when closing
@@ -101,15 +216,38 @@ export class ManualDiagnosisComponent implements OnInit {
     this.progressOffset = offset.toString();
   }
   cancelHandler() {
-    if(this.fromPage === 'appointments'){
+    if (this.fromPage === 'appointments') {
       this.router.navigate(['/dashboard/appointments']);
     }
-    if(this.fromPage === 'patient-profile'){
-      this.router.navigate([`dashboard/patients/${this.patientId}/appointment-history`]);
+    if (this.fromPage === 'patient-profile') {
+      this.router.navigate([
+        `dashboard/patients/${this.patientId}/appointment-history`,
+      ]);
     }
   }
 
-    goBackToPatoentProfile(){
-  this.router.navigate([`dashboard/patients/${this.patientId}/appointment-history`])
+  goBackToPatoentProfile() {
+    this.router.navigate([
+      `dashboard/patients/${this.patientId}/appointment-history`,
+    ]);
+  }
+
+  showAvailableSlots() {
+    console.log('📅 Searching slots from', this.fromDays, 'to', this.toDays);
+    // هنا هتضيفي بعدين استدعاء API لجلب الـ slots
+  }
+
+  completeNextVisit() {
+    console.log('✅ Complete next visit');
+    this.closeNextVisitModal();
+
+    // بعدين هنا ممكن تضيفي navigation أو أي logic إضافي
+    if (this.fromPage === 'appointments') {
+      this.router.navigate(['/dashboard/appointments']);
+    } else {
+      this.router.navigate([
+        `/dashboard/patients/${this.patientId}/appointment-history`,
+      ]);
+    }
   }
 }

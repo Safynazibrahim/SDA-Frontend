@@ -12,5 +12,10 @@ export class AppointmentsService {
   assignCase(params: any): Observable<any> {
     return this.api.post<any>('cases/start', params);
   }
-
+  startCase(params: any): Observable<any> {
+    return this.api.post<any>('cases/start', params);
+  }
+  showAvailableTimeSlots(clinicId: string, date: string): Observable<any> {
+    return this.api.get<any>(`appointments/available-slots?clinicId=${clinicId}&date=${date}`);
+  }
 }

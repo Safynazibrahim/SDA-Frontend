@@ -218,11 +218,7 @@
         <div class="actions mt-auto">
           <button
             class="btn-outline"
-            [routerLink]="[
-              '/dashboard/appointments/assign-case',
-              selectedAppointment?.id
-            ]"
-            [queryParams]="{ from: 'appointmentsStartCase' }"
+            (click)="openStartCase(selectedAppointment)"
           >
             {{ "Start Case" | translate }}
           </button>
