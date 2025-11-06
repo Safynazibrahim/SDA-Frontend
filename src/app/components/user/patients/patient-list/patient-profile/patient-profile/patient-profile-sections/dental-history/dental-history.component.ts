@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal, untracked } from '@angular/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,7 +34,7 @@ export class DentalHistoryComponent {
   CurrentPage = signal(1);
   limit = signal(50);
 
-  // ⏱ signals for date filters
+  //signals for date filters
   fromDate = signal<Date | null>(null);
   toDate = signal<Date | null>(null);
   private refetchTrigger$ = new Subject<void>();
@@ -49,19 +49,21 @@ export class DentalHistoryComponent {
     this.refetchTrigger$
     .pipe(debounceTime(300))
     .subscribe(() => {
-      if (this.fromDate() && this.toDate()) {
+      
         this.dentalHistoryQuery.refetch();
-      }
+      
     });
 
-  // 👇 Watch signals
-  effect(() => {
-    // Every time from/to changes → emit into debounce stream
-    this.fromDate();
-    this.toDate();
-    this.refetchTrigger$.next();
-  });
-  }
+effect(() => {
+  const from = this.fromDate();
+  const to = this.toDate();
+  if (from && to) this.refetchTrigger$.next();
+});
+
+this.refetchTrigger$.pipe(debounceTime(300)).subscribe(() => {
+  this.dentalHistoryQuery.refetch();
+});
+ }
 
   ngOnInit(): void {
     this.patientId = this._ActivatedRoute.parent?.snapshot.paramMap.get('id')!;
@@ -93,8 +95,8 @@ export class DentalHistoryComponent {
     'dental-history',
     this.patientId,
     this.CurrentPage(),
-    this.fromDate(),
-    this.toDate(),
+    // this.fromDate(),
+    // this.toDate(),
   ],
 
     queryFn: () => this._PatientService.getPatientDentalHistory(this.patientId, this.params()),
