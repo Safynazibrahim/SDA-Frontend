@@ -16,6 +16,7 @@ import { AppointmentsService } from '../appointments.service';
 import { ModalComponent } from '../../../shared/modal/modal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CaseStateService } from '../assign-case/case-state.service';
 @Component({
   selector: 'app-manual-diagnosis',
   standalone: true,
@@ -45,10 +46,12 @@ export class ManualDiagnosisComponent implements OnInit {
   isDropdownOpen = false;
   openIndex: number | null = null;
   selectedMedication = '';
+  clinicId: string | null = null;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private startCaseState: StartCaseStateService,
+    private assignCaseState: CaseStateService,
     private _AppointmentsService: AppointmentsService,
     private snackBar: MatSnackBar
   ) {}
@@ -99,7 +102,7 @@ export class ManualDiagnosisComponent implements OnInit {
   toDays: number | null = null;
   startDate: Date | null = null;
   endDate: Date | null = null;
-  clinicId: string | null = null;
+  caseId: number | null = null;
 
   ngOnInit() {
     this.calculateProgress();
@@ -116,8 +119,8 @@ export class ManualDiagnosisComponent implements OnInit {
       this.appointmentId
     );
     this.clinicId = this.startCaseState.getClinicId();
+    this.caseId = this.assignCaseState.getCaseData()?.caseId || null;
     console.log('🏥 Retrieved clinicId in Manual Diagnosis:', this.clinicId);
-    const savedStartCase = this.startCaseState.getStartCaseData();
   }
   // sendManualDiagnosis() {
   //   const startCaseData = this.startCaseState.getStartCaseData();
@@ -180,7 +183,7 @@ export class ManualDiagnosisComponent implements OnInit {
 
     console.log('📤 Sending Manual Diagnosis payload:', payload);
 
-    this._AppointmentsService.startCase(payload).subscribe({
+    this._AppointmentsService.startCase(payload,this.caseId).subscribe({
       next: (res) => {
         console.log('✅ Manual Diagnosis saved successfully', res);
         this.snackBar.open('Diagnosis sent successfully ✅', 'Close', {
@@ -192,7 +195,7 @@ export class ManualDiagnosisComponent implements OnInit {
       },
       error: (err) => {
         console.error('❌ Error sending manual diagnosis', err);
-        this.openNextVisitModal();
+        // this.openNextVisitModal();
         this.snackBar.open('Failed to send diagnosis ❌', 'Close', {
           duration: 3000,
         });
@@ -232,10 +235,35 @@ export class ManualDiagnosisComponent implements OnInit {
     ]);
   }
 
-  showAvailableSlots() {
-    console.log('📅 Searching slots from', this.fromDays, 'to', this.toDays);
-    // هنا هتضيفي بعدين استدعاء API لجلب الـ slots
-  }
+ showAvailableSlots() {
+  // if (!this.clinicId || !this.fromDays || !this.toDays) {
+  //   this.snackBar.open('⚠️ Please select date range first', 'Close', { duration: 3000 });
+  //   return;
+  // }
+
+  const recoveryPeriodInDays = this.fromDays;
+  const searchWindowInDays = this.toDays;
+
+  console.log('📅 Fetching available slots...', {
+    clinicId: this.clinicId,
+    recoveryPeriodInDays,
+    searchWindowInDays
+  });
+
+  this._AppointmentsService
+    .showAvailableTimeSlots(this.clinicId, recoveryPeriodInDays, searchWindowInDays)
+    .subscribe({
+      next: (res) => {
+        console.log('✅ Available slots:', res);
+        this.snackBar.open('Available slots loaded ✅', 'Close', { duration: 3000 });
+      },
+      error: (err) => {
+        console.error('❌ Error fetching slots', err);
+        this.snackBar.open('Failed to load available slots ❌', 'Close', { duration: 3000 });
+      },
+    });
+}
+
 
   completeNextVisit() {
     console.log('✅ Complete next visit');

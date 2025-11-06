@@ -10,12 +10,23 @@ export class AppointmentsService {
   constructor(private api : ApiServiceService) { }
 
   assignCase(params: any): Observable<any> {
-    return this.api.post<any>('cases/start', params);
+    return this.api.post<any>('cases/assign', params);
   }
-  startCase(params: any): Observable<any> {
-    return this.api.post<any>('cases/start', params);
+  startCase(params: any , caseId : any): Observable<any> {
+    return this.api.post<any>(`cases/${caseId}/start`, params);
   }
-  showAvailableTimeSlots(clinicId: string, date: string): Observable<any> {
-    return this.api.get<any>(`appointments/available-slots?clinicId=${clinicId}&date=${date}`);
-  }
+showAvailableTimeSlots(
+  clinicId: any,
+  recoveryPeriodInDays: any,
+  searchWindowInDays: any
+): Observable<any> {
+  const params = {
+    clinicId,
+    recoveryPeriodInDays,
+    searchWindowInDays
+  };
+
+  return this.api.get<any>('doctors/available-slots', params);
+}
+
 }
