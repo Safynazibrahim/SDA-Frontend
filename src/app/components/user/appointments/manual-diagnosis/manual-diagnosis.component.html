@@ -1,22 +1,31 @@
 <div class="container manual-diagnosis-container">
   @if(fromPage === 'appointments'){
   <div class="d-flex align-items-center mb-2">
-    <p class="mb-0 route" [routerLink]="['/dashboard/appointments']">{{ "appointments" | translate }}</p>
+    <p class="mb-0 route" [routerLink]="['/dashboard/appointments']">
+      {{ "appointments" | translate }}
+    </p>
 
     <a
       class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
-      style="cursor: pointer" [routerLink]="['/dashboard/appointments']"
+      style="cursor: pointer"
+      [routerLink]="['/dashboard/appointments']"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
     <div class="d-flex align-items-center mb-2">
-      <p [routerLink]="['/dashboard/appointments/start-case' , appointmentId]" [queryParams]=" {from : fromPage}" class="mb-0 route">{{ "Start Case" | translate }}</p>
+      <p
+        [routerLink]="['/dashboard/appointments/start-case', appointmentId]"
+        [queryParams]="{ from: fromPage }"
+        class="mb-0 route"
+      >
+        {{ "Start Case" | translate }}
+      </p>
     </div>
     <a
       class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
       style="cursor: pointer"
-      [routerLink]="['/dashboard/appointments/start-case' , appointmentId]"
-      [queryParams]=" {from : fromPage}"
+      [routerLink]="['/dashboard/appointments/start-case', appointmentId]"
+      [queryParams]="{ from: fromPage }"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
@@ -24,25 +33,33 @@
       <p class="mb-0 clinicActive">{{ "Manual Diagnosis" | translate }}</p>
     </div>
   </div>
-}
-  @if(fromPage === 'patient-profile'){
+  } @if(fromPage === 'patient-profile'){
   <div class="d-flex align-items-center mb-2">
-    <p class="mb-0 route" (click)="goBackToPatoentProfile()" >{{ "patient_profile" | translate }}</p>
+    <p class="mb-0 route" (click)="goBackToPatoentProfile()">
+      {{ "patient_profile" | translate }}
+    </p>
 
     <a
       class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
-      style="cursor: pointer" (click)="goBackToPatoentProfile()" 
+      style="cursor: pointer"
+      (click)="goBackToPatoentProfile()"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
     <div class="d-flex align-items-center mb-2">
-      <p [routerLink]="['/dashboard/patients/start-case' , patientId]" [queryParams]=" {from : fromPage}" class="mb-0 route">{{ "Start Case" | translate }}</p>
+      <p
+        [routerLink]="['/dashboard/patients/start-case', patientId]"
+        [queryParams]="{ from: fromPage }"
+        class="mb-0 route"
+      >
+        {{ "Start Case" | translate }}
+      </p>
     </div>
     <a
       class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
       style="cursor: pointer"
-      [routerLink]="['/dashboard/patients/start-case' , patientId]"
-      [queryParams]=" {from : fromPage}"
+      [routerLink]="['/dashboard/patients/start-case', patientId]"
+      [queryParams]="{ from: fromPage }"
     >
       <mat-icon>keyboard_arrow_left</mat-icon>
     </a>
@@ -50,7 +67,7 @@
       <p class="mb-0 clinicActive">{{ "Manual Diagnosis" | translate }}</p>
     </div>
   </div>
-}
+  }
   <div class="static3dModel">
     <img src="../../../../../assets/media/static-3dModel.png" alt="3d-model" />
   </div>
@@ -82,93 +99,101 @@
       />
     </div>
     <div class="col-md-6 mb-3">
-  <label class="form-label">{{"Medications" | translate}}</label>
+      <label class="form-label">{{ "Medications" | translate }}</label>
 
-  <div class="dropdown-wrapper">
-    <!-- Dropdown Button -->
-    <button
-      class="form-select d-flex justify-content-between align-items-center"
-      (click)="toggleDropdown()"
-    >
-      {{ selectedMedication || ("Select Medications" | translate) }}
-      <mat-icon>
-        {{ isDropdownOpen ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
-      </mat-icon>
-    </button>
-
-    <!-- Dropdown Content -->
-    <div class="dropdown-content shadow" *ngIf="isDropdownOpen">
-      <div class="medications-dropdown">
-        <!-- Repeat each medicine -->
-        <div
-          class="medication-item"
-          *ngFor="let med of medications; let i = index"
+      <div class="dropdown-wrapper">
+        <!-- Dropdown Button -->
+        <button
+          class="form-select d-flex justify-content-between align-items-center"
+          (click)="toggleDropdown()"
         >
-          <div class="med-header" (click)="toggleMed(i)">
-            <span>{{ med.name }}</span>
-            <mat-icon>
-              {{ openIndex === i ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
-            </mat-icon>
-          </div>
+          {{ selectedMedication || ("Select Medications" | translate) }}
+          <mat-icon>
+            {{ isDropdownOpen ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
+          </mat-icon>
+        </button>
 
-          <div class="med-body" *ngIf="openIndex === i">
-            <div class="row">
-              <div class="col-md-6 mb-2">
-                <label>{{"Dosage" | translate}}</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [placeholder]="'Enter dosage' | translate"
-                  [(ngModel)]="med.dosage"
-                />
+        <!-- Dropdown Content -->
+        <div class="dropdown-content shadow" *ngIf="isDropdownOpen">
+          <div class="medications-dropdown">
+            <!-- Repeat each medicine -->
+            <div
+              class="medication-item"
+              *ngFor="let med of medications; let i = index"
+            >
+              <div class="med-header" (click)="toggleMed(i)">
+                <span>{{ med.name }}</span>
+                <mat-icon>
+                  {{
+                    openIndex === i
+                      ? "keyboard_arrow_up"
+                      : "keyboard_arrow_down"
+                  }}
+                </mat-icon>
               </div>
 
-              <div class="col-md-6 mb-2">
-                <label>{{"Frequency (times per day)" | translate}}</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [placeholder]="'Enter frequency' | translate"
-                  [(ngModel)]="med.frequency"
-                />
-              </div>
+              <div class="med-body" *ngIf="openIndex === i">
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <label>{{ "Dosage" | translate }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [placeholder]="'Enter dosage' | translate"
+                      [(ngModel)]="med.dosage"
+                    />
+                  </div>
 
-              <div class="col-md-12 mb-2">
-                <label>{{"Duration (days)" | translate}}</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [placeholder]="'Enter duration' | translate"
-                  [(ngModel)]="med.duration"
-                />
-              </div>
+                  <div class="col-md-6 mb-2">
+                    <label>{{ "Frequency (times per day)" | translate }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [placeholder]="'Enter frequency' | translate"
+                      [(ngModel)]="med.frequency"
+                    />
+                  </div>
 
-              <div class="col-md-12 d-flex align-items-center mt-2">
-                <label class="me-2">{{"Drug Interaction?" | translate}}</label>
-                <div
-                  class="status-indicator"
-                  [ngClass]="{ safe: med.safe, danger: !med.safe }"
-                ></div>
-                <span class="ms-2">{{ med.safe ? ('Safe' | translate) : ('Unsafe' | translate) }}</span>
+                  <div class="col-md-12 mb-2">
+                    <label>{{ "Duration (days)" | translate }}</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [placeholder]="'Enter duration' | translate"
+                      [(ngModel)]="med.duration"
+                    />
+                  </div>
+
+                  <div class="col-md-12 d-flex align-items-center mt-2">
+                    <label class="me-2">{{
+                      "Drug Interaction?" | translate
+                    }}</label>
+                    <div
+                      class="status-indicator"
+                      [ngClass]="{ safe: med.safe, danger: !med.safe }"
+                    ></div>
+                    <span class="ms-2">{{
+                      med.safe ? ("Safe" | translate) : ("Unsafe" | translate)
+                    }}</span>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="add-btn-wrapper">
+              <button class="add-btn">{{ "Add" | translate }}</button>
+              <button class="cancel-btn" (click)="toggleDropdown()">
+                {{ "Cancel" | translate }}
+              </button>
             </div>
           </div>
         </div>
-
-        <!-- Buttons -->
-        <div class="add-btn-wrapper">
-          <button class="add-btn">{{"Add" | translate}}</button>
-          <button class="cancel-btn" (click)="toggleDropdown()">{{"Cancel" | translate}}</button>
-        </div>
       </div>
     </div>
-  </div>
-</div>
 
-
-
-       <div class="col-md-6 mb-3">
-      <label class="form-label">{{"Treatment plan" | translate}}</label>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">{{ "Treatment plan" | translate }}</label>
       <textarea
         class="form-control"
         rows="6"
@@ -179,7 +204,9 @@
     </div>
 
     <div class="col-md-6 mb-3">
-      <label class="form-label">{{"Instruction between visits" | translate}}</label>
+      <label class="form-label">{{
+        "Instruction between visits" | translate
+      }}</label>
       <textarea
         class="form-control"
         rows="6"
@@ -189,9 +216,98 @@
       ></textarea>
     </div>
   </div>
- <div class="page-footer-btns">
-  <button class="send-to-patient-btn">{{"Send to patient" | translate}}</button>
-  <button class="cancel-btn" (click)="cancelHandler()">{{"cancel" | translate}}</button>
+  <div class="page-footer-btns">
+    <button class="send-to-patient-btn" (click)="sendManualDiagnosis()">
+      {{ "Send to patient" | translate }}
+    </button>
+    <button class="cancel-btn" (click)="cancelHandler()">
+      {{ "cancel" | translate }}
+    </button>
+  </div>
+</div>
+<app-modal
+  [isOpen]="isNextVisitModalOpen"
+  title="Set Next Visit"
+  size="large"
+  (close)="closeNextVisitModal()"
+>
+  <div modal-body class="modal-body next-visit-modal">
+    <h4 class="fw-bold mb-3 text-center text-brown">Set Days Range</h4>
+    <p class="text-muted text-center small mb-4">
+      Please enter the number of days for recovery and search window.
+    </p>
+
+    <!-- Inputs -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label class="form-label fw-bold">From (Recovery Period in Days)</label>
+        <input
+          type="number"
+          min="0"
+          class="form-control"
+          placeholder="Enter recovery days"
+          [(ngModel)]="fromDays"
+          name="fromDays"
+        />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-bold">To (Search Window in Days)</label>
+        <input
+          type="number"
+          min="0"
+          class="form-control"
+          placeholder="Enter search window days"
+          [(ngModel)]="toDays"
+          name="toDays"
+        />
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="next-visit-btns mt-3 mb-3">
+  <button class="btn cancel-btn" (click)="closeNextVisitModal()">Cancel</button>
+  <button class="btn brown-btn" (click)="completeNextVisit()">Complete</button>
+  <button class="btn main-btn" (click)="showAvailableSlots()">Show Slots</button>
 </div>
 
+
+    <!-- Available Slots -->
+    <div *ngIf="hasSlots" class="available-slots-container mt-4">
+      <h5 class="fw-bold text-center text-brown mb-3">Available Time Slots</h5>
+
+      <div
+        *ngFor="let date of availableSlots | keyvalue"
+        class="slot-day-card shadow-sm mb-3 p-3 rounded"
+      >
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h6 class="fw-bold mb-0 text-brown">
+            {{ castToDate(date.key) | date : "EEEE, MMM d, y" }}
+          </h6>
+
+          <span class="badge bg-secondary">
+            {{ castToArray(date.value).length }} slots
+          </span>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+  <span
+    *ngFor="let slot of castToArray(date.value)"
+    class="slot-pill"
+    [class.selected-slot]="isSelectedSlot(slot, date.key)"
+    (click)="selectSlot(slot, date.key)"
+  >
+    {{ slot.startTime }} - {{ slot.endTime }}
+  </span>
 </div>
+
+      </div>
+    </div>
+
+    <div
+      *ngIf="hasSlots && (availableSlots | keyvalue).length === 0"
+      class="text-center text-muted"
+    >
+      No available slots found.
+    </div>
+  </div>
+</app-modal>

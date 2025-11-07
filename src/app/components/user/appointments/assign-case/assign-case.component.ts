@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppointmentsService } from '../appointments.service';
 import { ActivatedRoute, RouterLink ,Router } from '@angular/router';
+import { CaseStateService } from './case-state.service';
 @Component({
   selector: 'app-assign-case',
   standalone: true,
@@ -51,7 +52,7 @@ searchDiseaseTerm = ''; // للسيرش في الأمراض
   openDropdown: string | null = null;
   searchTerm = '';
 appointmentId: string | null = null;
-  constructor(private _AppointmentsService: AppointmentsService , private route: ActivatedRoute , private router: Router) {}
+  constructor(private _AppointmentsService: AppointmentsService , private route: ActivatedRoute , private router: Router , private caseState: CaseStateService) {}
  ngOnInit(): void {
   this.appointmentId = this.route.snapshot.paramMap.get('id');
   const from = this.route.snapshot.queryParamMap.get('from');
@@ -107,9 +108,9 @@ appointmentId: string | null = null;
   const index = targetArray.indexOf(value);
 
   if (index > -1) {
-    targetArray.splice(index, 1); // لو متعلم يتشال
+    targetArray.splice(index, 1);
   } else {
-    targetArray.push(value); // لو مش متعلم يتضاف
+    targetArray.push(value); 
   }
 }
 
@@ -117,13 +118,18 @@ appointmentId: string | null = null;
     const caseData = {
       appointmentId : this.appointmentId,
       chiefComplaint: this.chiefComplaint,
-      medications: this.selectedMedications,
-      diseases: this.selectedDiseases
+      // medications: this.selectedMedications,
+      // diseases: this.selectedDiseases
     };
-    // this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId]);
     this._AppointmentsService.assignCase(caseData).subscribe({
       next: (res) => {
         console.log('Case assigned successfully', res);
+        this.caseState.setCaseId(res.caseId);
+      this.caseState.setCaseData({
+        caseId: res.caseId,
+        appointmentId: this.appointmentId!,
+        chiefComplaint: this.chiefComplaint
+      });
         if(this.pageTitle === 'Assign Case'){
           this.router.navigate(['/dashboard/appointments']);
         }

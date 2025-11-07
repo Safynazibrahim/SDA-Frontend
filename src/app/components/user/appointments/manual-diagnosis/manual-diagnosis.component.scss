@@ -345,3 +345,170 @@
     font-size: 13px;
   }
 }
+.next-visit-modal {
+  h4 {
+    color: #3e372c;
+    font-family: "IBM Plex Sans";
+  }
+
+  .date-range-field {
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      border-radius: 8px !important;
+      background-color: #fafafa !important;
+    }
+
+    ::ng-deep .mat-mdc-form-field-outline {
+      color: #bca37f !important;
+    }
+
+    ::ng-deep .mat-mdc-form-field-label {
+      color: #8b7a5e !important;
+    }
+
+    input {
+      color: #3e372c !important;
+      font-weight: 500;
+    }
+
+    mat-icon {
+      color: #8b7a5e !important;
+    }
+  }
+
+  .btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 10px 15px;
+    font-size: 15px;
+    transition: 0.3s;
+  }
+
+  .main-btn {
+    background: linear-gradient(to right, #c1a378, #a88b64);
+    color: #fff;
+    border: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .brown-btn {
+    background-color: #bca37f;
+    color: #fff;
+    border: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .cancel-btn {
+    background: #fff;
+    color: #8b7a5e;
+    border: 1.5px solid #bca37f;
+
+    &:hover {
+      background: #bca37f;
+      color: #fff;
+    }
+  }
+}
+.next-visit-modal {
+  .slot-day-card {
+    background: #fafafa;
+    border-left: 4px solid #a1743b;
+    transition: all 0.3s ease;
+    &:hover {
+      background: #fff8f1;
+      transform: translateY(-2px);
+    }
+  }
+
+  .slot-pill {
+    background: transparent;
+    color: #89612e;
+    cursor: pointer;
+    border: 1px solid;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    padding: 5px 12px;
+    display: inline-block;
+    &:hover {
+      background: var(--bg-brown-gradient);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+  }
+
+  .btn {
+    border-radius: 8px;
+    font-weight: 500;
+  }
+
+  .main-btn {
+    background: var(--bg-brown-gradient);
+    color: white;
+  }
+
+  .brown-btn {
+    background-color: #a1743b;
+    color: white;
+  }
+
+  .cancel-btn {
+    background-color: #f0f0f0;
+    color: #444;
+  }
+
+  .text-brown {
+    color: #a1743b;
+  }
+}
+.next-visit-modal {
+  .next-visit-btns {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+
+    button {
+      flex: 1; /* كل زر ياخد نفس العرض */
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 500;
+      padding: 12px 0;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .cancel-btn {
+      background: transparent;
+      border: 1.5px solid #bca37f;
+      color: #8b7a5e;
+      &:hover {
+        background: #bca37f;
+        color: #fff;
+      }
+    }
+
+    .brown-btn {
+      background: var(--bg-brown-gradient);
+      color: #fff;
+      border: none;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .main-btn {
+      background: var(--bg-brown-gradient);
+      color: #fff;
+      border: none;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}

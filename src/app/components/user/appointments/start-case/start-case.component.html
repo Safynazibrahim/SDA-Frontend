@@ -778,8 +778,7 @@
 
     <button
       class="manual-btn"
-      [routerLink]="manualLink()"
-      [queryParams]="{ from: fromPage }"
+      (click)="onManualDiagnosisClick()"
     >
       {{ "Manual Diagnosis" | translate }}
     </button>
