@@ -1,6 +1,6 @@
 <div class="section">
   <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
-    <div class="col-lg-6">
+    <div class="col-12 col-sm-12 col-md-6">
       <h3>{{ "Clinics" | translate }}
         <span>
           <mat-icon>keyboard_arrow_left</mat-icon>
@@ -9,9 +9,9 @@
       </h3>
     </div>
     <div
-      class="col-lg-4 col-md-12 d-flex justify-content-end align-items-center"
+      class="col-12 col-sm-12 col-md-6 col-lg-3  d-flex justify-content-end align-items-center"
     >
-      <button class="signin-button w-50 w-auto">
+      <button class="signin-button d-flex align-items-center justify-content-center">
         <mat-icon>download</mat-icon>
         {{ "download_report" | translate }}
       </button>
@@ -19,7 +19,7 @@
   </div>
   <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
     <!-- Total Doctors -->
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
       <div class="stat-card">
         <div class="img-card doctors">
           <img
@@ -36,7 +36,7 @@
     </div>
 
     <!-- Total Cases -->
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
       <div class="stat-card">
         <div class="d-flex justify-content-between align-items-center">
           <div class="img-card cases">
@@ -81,7 +81,7 @@
     </div>
 
     <!-- Total Revenue -->
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
       <div class="stat-card">
         <div class="d-flex justify-content-between align-items-center">
           <div class="img-card revenue">
@@ -182,11 +182,11 @@
   >
     <div class="chart-card">
       <div class="d-flex row justify-content-between">
-        <div class="col-lg-6">
+        <div class="col-12 col-md-6 col-sm-12">
           <h3>{{ "clinic_revenue" | translate }}</h3>
           <h3 style="color: var(--bg-brown-medium)">1600 <span style="color: var(--text-gray);">EGP</span></h3>
         </div>
-        <div class="form-field col-md-3 col-sm-12 text-end">
+        <div class="form-field shadow col-12 col-md-6 col-sm-12 text-end">
           <div class="d-flex align-items-center">
             <input
               type="text"
@@ -208,13 +208,15 @@
         </div>
       </div>
 
-      <canvas
-        baseChart
-        [data]="lineChartData"
-        [options]="lineChartOptions"
-        [type]="lineChartType"
-      >
-      </canvas>
+      
+  <canvas
+    baseChart
+    [data]="lineChartData"
+    [options]="lineChartOptions"
+    [type]="lineChartType"
+  >
+  </canvas>
+
     </div>
   </div>
   <div class="row d-flex align-items-center justify-content-center mb-4 mx-3">

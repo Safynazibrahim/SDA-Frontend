@@ -1,24 +1,24 @@
 <div class="clinic-home-container">
   <!-- Sidebar -->
-  <div class="sidebar" [class.closed]="isClosed">
+  <div class="sidebar" cdkScrollable [class.closed]="isClosed">
     <ul>
       <li (click)="toggleSidebar()">
         <mat-icon>menu</mat-icon>
       </li>
       <li routerLink="home" routerLinkActive="active">
-        <mat-icon>home</mat-icon>
+        <mat-icon matTooltip="{{ 'HOME' | translate }}" >home</mat-icon>
         <span *ngIf="!isClosed">{{ "HOME" | translate }}</span>
       </li>
       <li routerLink="appointments" routerLinkActive="active">
-        <mat-icon>event</mat-icon>
+        <mat-icon matTooltip="{{ 'appointments' | translate }}">event</mat-icon>
         <span *ngIf="!isClosed">{{ "appointments" | translate }}</span>
       </li>
       <li routerLink="packages" routerLinkActive="active">
-        <mat-icon>category</mat-icon>
+        <mat-icon matTooltip="{{ 'packages' | translate }}">category</mat-icon>
         <span *ngIf="!isClosed">{{ "packages" | translate }}</span>
       </li>
       <li routerLink="inventory" routerLinkActive="active">
-        <mat-icon>inventory</mat-icon>
+        <mat-icon matTooltip="{{ 'inventory' | translate }}">inventory</mat-icon>
         <span *ngIf="!isClosed">{{ "inventory" | translate }}</span>
       </li>
 
@@ -27,7 +27,7 @@
   routerLinkActive="active"
   [class.disabled-feature]="!featureService.hasFeature('assigned_cases')"
 >
-  <mat-icon>person</mat-icon>
+  <mat-icon matTooltip="{{ 'assigned_cases' | translate }}">person</mat-icon>
   <span *ngIf="!isClosed">{{ "assigned_cases" | translate }}</span>
 
   <!-- ✅ Badge PRO في الزاوية -->

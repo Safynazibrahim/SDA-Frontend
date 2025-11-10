@@ -5,11 +5,13 @@ import { RegisterComponent } from "./components/auth/register/register.component
 import { ForgetPassComponent } from "./components/auth/forget-pass/forget-pass.component";
 import { LoaderService } from './components/core/services/loader.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../environments/environment';
+console.log('Environment:', environment);
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet,CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

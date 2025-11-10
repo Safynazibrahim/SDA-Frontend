@@ -49,13 +49,29 @@ export class PatientProfileComponent implements OnInit{
     this.patientId = this.route.snapshot.paramMap.get('id')!;
     const cached = this.queryClient.getQueryData<any>(['patients']);
     console.log('🧩 Cached:', cached);
+    // ✅ Try to get from selectedPatient BehaviorSubject
+    const selected = this._PatientService.getSelectedPatient();
 
+     if (selected && selected.id === this.patientId) {
+    this.patientData = selected;
+    console.log('✅ Loaded from service/localStorage:', this.patientData);
+  } else {
+    // fallback to cached data from TanStack
+    const cached = this.queryClient.getQueryData<any>(['patients']);
     if (cached?.data) {
       this.patientData = cached.data.find((p: any) => p.id === this.patientId);
       console.log('✅ Loaded from cache:', this.patientData);
     } else {
-      console.warn('⚠️ No cache found');
+      console.warn('⚠️ No patient data found in service or cache');
     }
+  }
+
+    // if (cached?.data) {
+    //   this.patientData = cached.data.find((p: any) => p.id === this.patientId);
+    //   console.log('✅ Loaded from cache:', this.patientData);
+    // } else {
+    //   console.warn('⚠️ No cache found');
+    // }
   }
 
   tabs = [

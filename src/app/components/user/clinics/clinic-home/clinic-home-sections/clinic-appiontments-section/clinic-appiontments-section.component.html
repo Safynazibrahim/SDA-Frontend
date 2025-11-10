@@ -243,10 +243,8 @@
           
             {{ "Assign Case" | translate }}
           </button>
-          <button class="btn-outline" [routerLink]="[
-              '/dashboard/patients',
-              selectedAppointment?.patient?.id
-            ]">
+          <button class="btn-outline" 
+            (click)="goToPatientProfile(selectedAppointment)">
             {{ "Patient Profile" | translate }}
           </button>
         </div>
@@ -374,10 +372,7 @@
 
           <button
             class="btn-outline"
-            [routerLink]="[
-              '/dashboard/patients',
-              selectedAppointment?.patient?.id
-            ]"
+            (click)="goToPatientProfile(selectedAppointment)"
           >
             {{ "Patient Profile" | translate }}
           </button>

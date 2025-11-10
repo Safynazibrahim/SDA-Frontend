@@ -8,8 +8,6 @@ h3 {
   }
 }
 
-
-
 @keyframes cardFadeUp {
   from {
     opacity: 0;
@@ -80,6 +78,9 @@ h3 {
 .dropdown {
     background-color: #fff;
     box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    .btn {
+      color: var(--text-gray) !important;
+    }
 }
 
 .form-field label {
@@ -112,7 +113,7 @@ h3 {
     border: 1px solid var(--text-gray);
     background-color: var(--bg-white);
     border-radius: 8px;
-    padding: 8px;
+    // padding: 8px;
     margin-bottom: 20px;
     animation: cardFadeUp 0.9s ease forwards;
   canvas {
@@ -176,9 +177,12 @@ h3 {
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .table thead th , .table tbody td {
   font-size: 13px;
   }
+  .row {
+  margin: 15px 0px !important;
+}
 }
 

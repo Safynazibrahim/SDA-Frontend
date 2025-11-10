@@ -1,47 +1,100 @@
 .search-wrapper {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 
   .search-box {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  padding: 5px 10px;
-  width: 50%;
-  background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* keeps button inside flex flow */
+    flex-wrap: nowrap;
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    padding: 5px 10px;
+    width: 100%;
+    max-width: 550px;
+    background: var(--bg-primary);
+    box-sizing: border-box;
   }
 
   .search-icon {
     color: var(--text-gray);
-    pointer-events: none; // so it doesn’t block typing
+    font-size: 22px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    pointer-events: none;
   }
 
   .search-form-control {
-  flex: 1;
-  border: none;
-  outline: none;
-  background: none !important;
+    flex: 1 1 auto; /* ✅ expands naturally but never overflows */
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-gray);
+    font-size: 16px;
+    min-width: 0; /* ✅ prevents button pushing input outside */
 
-    &:focus {
-      outline: none;
-      border: none !important;
-      background: none !important;
-    }
     &::placeholder {
-      font-size: 18px; // 🔹 bigger placeholder font
-      color: var(--text-gray); // keep consistent color
+      color: var(--text-gray);
+      font-size: 16px;
     }
   }
+
   .btn-search {
-  color: var(--bg-white) !important;
-  background-color: var(--bg-brown-medium);
-  border-radius: 25px;
-  border: none !important;
-  padding: 9px 15px;
+    flex-shrink: 0;
+    background: var(--bg-brown-medium);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: var(--bg-brown-gradient);
+    }
   }
 }
-@media (max-width: 900px) {
+
+/* 📱 Small Screens */
+@media (max-width: 767px) {
   .search-box {
-    width: 100% !important;
+    width: 90%;
+    padding: 4px 8px;
+    border-radius: 25px;
+  }
+
+  .search-icon {
+    font-size: 15px;
+    margin-right: 6px;
+  }
+
+  .search-form-control {
+    font-size: 11px;
+
+    &::placeholder {
+      font-size: 11px;
+    }
+  }
+
+  .btn-search {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}
+
+/* 💻 Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .search-box {
+    width: 80%;
+    max-width: 480px;
+  }
+
+  .btn-search {
+    padding: 7px 12px;
+    font-size: 14px;
   }
 }

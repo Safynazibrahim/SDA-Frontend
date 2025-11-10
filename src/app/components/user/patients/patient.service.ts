@@ -49,6 +49,10 @@ export class PatientService {
     return firstValueFrom(this._ApiServiceService.get<any>(`patients/assigned-cases`, params));
   }
 
+  getCasesDetails(caseId:any){
+    return firstValueFrom(this._ApiServiceService.get<any>(`cases/${caseId}`));
+  }
+
 
 
 }
