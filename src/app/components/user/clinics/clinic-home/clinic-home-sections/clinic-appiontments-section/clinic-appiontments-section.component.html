@@ -230,8 +230,17 @@
               '/dashboard/appointments/assign-case',
               selectedAppointment?.id
             ]"
-            [queryParams]="{ from: 'appointmentsAssignCase' }"
-          >
+            [queryParams]="{
+    from: 'appointmentsAssignCase',
+    date: currentDate.toISOString(),
+    patientName: selectedAppointment?.patient?.user?.fullName,
+    gender: selectedAppointment?.patient?.gender || '-',
+    age: selectedAppointment?.patient?.age || '-',
+    appointmentDate: selectedAppointment?.date,
+    startTime: selectedAppointment?.startTime,
+    endTime: selectedAppointment?.endTime
+  }">
+          
             {{ "Assign Case" | translate }}
           </button>
           <button class="btn-outline" [routerLink]="[
@@ -342,12 +351,26 @@
       </div>
       <div style="height: 140px">
         <div class="assigned-actions">
-          <button
-            class="btn-filled"
-            [routerLink]="['/dashboard/appointments/assigned-cases']"
-          >
-            {{ "Assignd Cases" | translate }}
-          </button>
+         <button
+  class="btn-filled"
+  [routerLink]="[
+    '/dashboard/appointments/assign-case',
+    selectedAppointment?.case?.id || selectedAppointment?.caseId
+  ]"
+  [queryParams]="{
+    from: 'appointmentsEditAssignCase',
+    date: currentDate.toISOString(),
+    patientName: selectedAppointment?.patient?.user?.fullName,
+    gender: selectedAppointment?.patient?.gender || '-',
+    age: selectedAppointment?.patient?.age || '-',
+    appointmentDate: selectedAppointment?.date,
+    startTime: selectedAppointment?.startTime,
+    endTime: selectedAppointment?.endTime
+  }"
+>
+  {{ 'View Case' | translate }}
+</button>
+
 
           <button
             class="btn-outline"

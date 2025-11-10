@@ -320,7 +320,71 @@
   display: contents;
 }
 /* 📱 Responsive styles for mobile view */
-@media (max-width: 768px) {
+
+@media (max-width: 992px) {
+  .appointment-details-sidebar {
+    width: 100%;
+    top: 120px;
+    height: 100vh;
+    border-left: none;
+    
+  }
+  .week-days{
+    justify-content: space-between;
+  }
+      .d-flex.justify-content-between.align-items-center.mb-3{
+        align-items: center !important;
+      }
+      
+      .calendar {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .time-column {
+    display: block;
+    width: 80px;
+    border-right: 1px solid var(--border-appointment-two);
+    background: var(--appointment-calendar);
+  }
+
+  .time-slot {
+    display: block;
+    height: 60px;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border-appointment);
+  }
+
+  /* ✅ خلى الكروت تظهر كـ list مش absolute */
+  .appointments-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+  }
+
+  .appointment-card {
+    position: relative !important; /* عشان ما تبقاش فوق بعض */
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    min-width: unset !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  .grid-lines {
+    display: none; /* شيل خطوط الشبكة عشان متبوظ الشكل */
+  }
+}
+@media (max-width: 575px) {
   .appointments-container {
     padding: 12px !important;
   }
@@ -331,7 +395,7 @@
   }
   .d-flex.justify-content-between.align-items-center.mb-3 {
     flex-direction: column;
-    align-items: flex-start !important;
+    align-items: center !important;
     gap: 10px;
   }
   .date-btn {
@@ -426,7 +490,6 @@
 
   /* ✅ لو الأيام كتيرة تبقى scroll أفقي */
   .week-days {
-    justify-content: flex-start;
     overflow-x: auto;
   }
 
@@ -448,8 +511,8 @@
 
   .appointment-details-sidebar {
     width: 100%;
-    top: 70px;
-    height: calc(100vh - 80px);
+    top: 60px;
+    height: 100vh;
     border-left: none;
     
   }
@@ -459,4 +522,47 @@
         padding: 7px;
       }
     }
+        .calendar {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .time-column {
+    display: block;
+    width: 80px;
+    border-right: 1px solid var(--border-appointment-two);
+    background: var(--appointment-calendar);
+  }
+
+  .time-slot {
+    display: block;
+    height: 60px;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 12px;
+    border-bottom: 1px solid var(--border-appointment);
+  }
+
+  /* ✅ خلى الكروت تظهر كـ list مش absolute */
+  .appointments-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+  }
+
+  .appointment-card {
+    position: relative !important; /* عشان ما تبقاش فوق بعض */
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    min-width: unset !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
 }

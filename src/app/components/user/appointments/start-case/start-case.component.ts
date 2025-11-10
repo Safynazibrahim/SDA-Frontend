@@ -28,6 +28,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   patientId: string | null = null;
   fromPage: any;
   chiefComplaint = '';
+  appointmentDate:any;
   chiefComplaintOptions = [
     { key: 'pain', label: 'Pain (tooth / jaw / TMJ)', selected: false },
     { key: 'swelling', label: 'Swelling (facial / gingival)', selected: false },
@@ -583,6 +584,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fromPage = this.route.snapshot.queryParamMap.get('from');
+    this.appointmentDate = this.route.snapshot.queryParamMap.get('date');
     const id = this.route.snapshot.paramMap.get('id');
 
     if (this.fromPage === 'patient-profile') {
@@ -630,11 +632,23 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       this.speechService.startListening(
         this.selectedLang,
         (text) => {
-          this.transcriptionResult = text;
-          this.analyzeSpeechWithContext(text);
+          if (text && text.trim().length > 0) {
+            this.transcriptionResult = text;
+            this.analyzeSpeechWithContext(text);
+          } else {
+            this.transcriptionResult = 'No text fetch...';
+          }
           this.cdRef.detectChanges();
         },
         () => {
+          // 🔹 لما ينتهي الاستماع بدون نتيجة
+          if (
+            !this.transcriptionResult ||
+            this.transcriptionResult === 'Listening...'
+          ) {
+            this.transcriptionResult = 'No text fetch...';
+            this.cdRef.detectChanges();
+          }
           console.log('🎤 Listening ended (manual stop expected)');
         }
       );
@@ -696,13 +710,23 @@ export class StartCaseComponent implements OnInit, OnDestroy {
     }
   }
 
-  stopRecording() {
-    if (this.mediaRecorder && this.isRecording) {
-      this.mediaRecorder.stop();
-    }
-    this.isRecording = false;
-    if (this.timerRef) clearInterval(this.timerRef);
+ stopRecording() {
+  if (this.mediaRecorder && this.isRecording) {
+    this.mediaRecorder.stop();
   }
+  this.isRecording = false;
+
+  if (this.timerRef) clearInterval(this.timerRef);
+
+  // ✅ بعد ما توقف، شوف لو مفيش نتيجة فعلاً
+  setTimeout(() => {
+    if (!this.transcriptionResult || this.transcriptionResult === 'Listening...') {
+      this.transcriptionResult = 'No text fetch...';
+      this.cdRef.detectChanges();
+    }
+  }, 300);
+}
+
 
   startListening() {
     this.transcriptionResult = 'Listening...';
@@ -820,7 +844,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       cold: ['cold', 'ice', 'chilly'],
       chewing: ['chewing', 'biting', 'eat'],
       lying: ['lying', 'sleeping', 'night'],
-      none: ['none', 'no factor', 'nothing'],
+      none: ['none', 'no factor', 'no specific factor', 'nothing'],
     };
 
     this.aggravatingFactorsOptions.forEach((opt) => {
@@ -1289,28 +1313,32 @@ export class StartCaseComponent implements OnInit, OnDestroy {
     ]);
   }
   onManualDiagnosisClick() {
-    const startCaseData = this.buildStartCaseData();
-    console.log('🧾 Start Case Data:', startCaseData);
-    this.startCaseState.setStartCaseData(startCaseData);
+  const startCaseData = this.buildStartCaseData();
+  console.log('🧾 Start Case Data:', startCaseData);
+  this.startCaseState.setStartCaseData(startCaseData);
 
-    let route: any[] = [];
-    if (this.fromPage === 'patient-profile') {
-      if (!this.patientId) {
-        console.error('❌ patientId is null!');
-        return;
-      }
-      route = [
-        '/dashboard/patients/start-case/manual-diagnosis',
-        this.patientId,
-      ];
-    } else {
-      if (!this.appointmentId) {
-        console.error('❌ appointmentId is null!');
-        return;
-      }
-      route = ['/dashboard/appointments/manual-diagnosis', this.appointmentId];
+  let route: any[] = [];
+  if (this.fromPage === 'patient-profile') {
+    if (!this.patientId) {
+      console.error('❌ patientId is null!');
+      return;
     }
-
-    this._Router.navigate(route, { queryParams: { from: this.fromPage } });
+    route = ['/dashboard/patients/start-case/manual-diagnosis', this.patientId];
+  } else {
+    if (!this.appointmentId) {
+      console.error('❌ appointmentId is null!');
+      return;
+    }
+    route = ['/dashboard/appointments/manual-diagnosis', this.appointmentId];
   }
+
+  // 🟢 أضفنا التاريخ هنا
+  this._Router.navigate(route, { 
+    queryParams: { 
+      from: this.fromPage, 
+      date: this.appointmentDate 
+    } 
+  });
+}
+
 }

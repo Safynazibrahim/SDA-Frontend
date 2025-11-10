@@ -108,12 +108,14 @@ hasSlots: boolean = false;
   caseId: number | null = null;
 selectedSlot: any = null;
 selectedDate: string | null = null;
+appointmentDate:any
 
 
 
   ngOnInit() {
     this.calculateProgress();
     this.fromPage = this.route.snapshot.queryParamMap.get('from');
+    this.appointmentDate = this.route.snapshot.queryParamMap.get('date');
 
     const id = this.route.snapshot.paramMap.get('id');
     if (this.fromPage === 'appointments') this.appointmentId = id;
@@ -174,7 +176,9 @@ selectedDate: string | null = null;
   }
   cancelHandler() {
     if (this.fromPage === 'appointments') {
-      this.router.navigate(['/dashboard/appointments']);
+       this.router.navigate(['/dashboard/appointments'], {
+      queryParams: { date: this.appointmentDate }  
+    });
     }
     if (this.fromPage === 'patient-profile') {
       this.router.navigate([
@@ -204,11 +208,9 @@ showAvailableSlots() {
       next: (res) => {
         this.availableSlots = res; 
         this.hasSlots = true;
-        this.snackBar.open(res.message, 'Close', { duration: 3000 });
       },
       error: (err) => {
         this.hasSlots = false;
-        this.snackBar.open(err.message, 'Close', { duration: 3000 });
       },
     });
 }
@@ -239,9 +241,6 @@ castToDate(value: any): Date | null {
   };
   this._AppointmentsService.bookAppointment(payload).subscribe({
     next: (res) => {
-      this.snackBar.open(res.message, 'Close', {
-        duration: 3000,
-      });
       this.closeNextVisitModal();
 
       if (this.fromPage === 'appointments') {
@@ -263,6 +262,7 @@ castToDate(value: any): Date | null {
 selectSlot(slot: any, dateKey: unknown) {
   this.selectedSlot = slot;
   this.selectedDate = String(dateKey);
+  this.appointmentDate=this.selectedDate
   const payload = {
     clinicId: this.clinicId,
     caseId: this.caseId,
@@ -271,11 +271,10 @@ selectSlot(slot: any, dateKey: unknown) {
   };
   this._AppointmentsService.bookAppointment(payload).subscribe({
     next: (res) => {
-      this.snackBar.open(res.message, 'Close', {
-        duration: 3000,
-      });
       this.closeNextVisitModal();
-        this.router.navigate(['/dashboard/appointments']);
+        this.router.navigate(['/dashboard/appointments'],{
+          queryParams: {date: this.appointmentDate}
+        });
     },
     error: (err) => {
       this.snackBar.open(err.message, 'Close', {

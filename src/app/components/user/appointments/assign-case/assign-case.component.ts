@@ -39,7 +39,7 @@ export class AssignCaseComponent implements OnInit , OnDestroy{
   "Cetirizine",
 ];;
   diseases: string[] = ["Diabetes", "Hypertension", "Asthma"];
-
+  appointmentDate:any
   // selected values
   selectedInvestigations: string[] = [];
   selectedMedications: string[] = [];
@@ -52,15 +52,30 @@ searchDiseaseTerm = ''; // للسيرش في الأمراض
   openDropdown: string | null = null;
   searchTerm = '';
 appointmentId: string | null = null;
+patientName = '';
+gender = '';
+age: string | null = '';
+startTime = '';
+endTime = '';
+
   constructor(private _AppointmentsService: AppointmentsService , private route: ActivatedRoute , private router: Router , private caseState: CaseStateService) {}
  ngOnInit(): void {
+  const query = this.route.snapshot.queryParamMap;
   this.appointmentId = this.route.snapshot.paramMap.get('id');
-  const from = this.route.snapshot.queryParamMap.get('from');
-
+  const from = query.get('from');
+  this.appointmentDate = query.get('date');
+this.patientName = query.get('patientName') || '';
+  this.gender = query.get('gender') || '';
+  this.age = query.get('age') || '';
+  this.startTime = query.get('startTime') || '';
+  this.endTime = query.get('endTime') || '';
   if (from === 'appointmentsStartCase') {
     this.pageTitle = 'Start Case';
   } else if (from === 'appointmentsAssignCase') {
     this.pageTitle = 'Assign Case';
+  }else if(from === 'appointmentsEditAssignCase'){
+    this.pageTitle = 'Edit Case'
+    this.loadCaseData();
   }
   if (typeof document !== 'undefined') {
     document.addEventListener('click', this.handleClickOutside.bind(this));
@@ -114,34 +129,57 @@ appointmentId: string | null = null;
   }
 }
 
-  saveCase() {
-    const caseData = {
-      appointmentId : this.appointmentId,
-      chiefComplaint: this.chiefComplaint,
-      // medications: this.selectedMedications,
-      // diseases: this.selectedDiseases
-    };
-    this._AppointmentsService.assignCase(caseData).subscribe({
+ saveCase() {
+  const caseData = {
+    appointmentId: this.appointmentId,
+    chiefComplaint: this.chiefComplaint,
+    // medications: this.selectedMedications,
+    // diseases: this.selectedDiseases,
+    // clinicalInvestigations: this.selectedInvestigations
+  };
+  
+
+  // 🟢 لو صفحة عرض حالة قديمة (تعديل)
+  if (this.pageTitle === 'Edit Case') {
+    this._AppointmentsService.editCase(this.appointmentId!, caseData).subscribe({
       next: (res) => {
-        console.log('Case assigned successfully', res);
-        this.caseState.setCaseId(res.caseId);
-      this.caseState.setCaseData({
-        caseId: res.caseId,
-        appointmentId: this.appointmentId!,
-        chiefComplaint: this.chiefComplaint
-      });
-        if(this.pageTitle === 'Assign Case'){
-          this.router.navigate(['/dashboard/appointments']);
-        }
-        else{
-          this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId]);
-        }
+        console.log('✅ Case updated successfully', res);
+         this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId], {
+          queryParams: { date: this.appointmentDate, from: 'appointments' }
+        });
       },
-      error: (err) => {
-        console.error('Error assigning case', err);
-      }
+      error: (err) => console.error('❌ Error updating case', err)
     });
   }
+  // 🟢 لو صفحة جديدة (إنشاء)
+  else {
+    this._AppointmentsService.assignCase(caseData).subscribe({
+      next: (res) => {
+        console.log('✅ Case assigned successfully', res);
+        this.caseState.setCaseId(res.caseId);
+        this.caseState.setCaseData({
+          caseId: res.caseId,
+          appointmentId: this.appointmentId!,
+          chiefComplaint: this.chiefComplaint
+        });
+
+       if(this.pageTitle === 'Assign Case'){
+          this.router.navigate(['/dashboard/appointments'], {
+          queryParams: { date: this.appointmentDate }
+        });
+        }
+        else{
+          this.router.navigate(
+          ['/dashboard/appointments/start-case', this.appointmentId],
+          { queryParams: { date: this.appointmentDate, from: 'appointments' } }
+        );
+        }
+      },
+      error: (err) => console.error('❌ Error assigning case', err)
+    });
+  }
+}
+
   handleClickOutside(event: MouseEvent) {
   const target = event.target as HTMLElement;
   const dropdowns = document.querySelectorAll('.custom-dropdown');
@@ -162,5 +200,22 @@ ngOnDestroy() {
 if (typeof document !== 'undefined') {
     document.removeEventListener('click', this.handleClickOutside.bind(this));
   }}
+  loadCaseData() {
+  if (!this.appointmentId) return;
+
+  this._AppointmentsService.getCaseById(this.appointmentId).subscribe({
+    next: (res) => {
+      console.log('🩺 Case Data Loaded:', res);
+      this.chiefComplaint = res?.chiefComplaint || '';
+      this.selectedMedications = res?.medications || [];
+      this.selectedDiseases = res?.diseases || [];
+      this.selectedInvestigations = res?.clinicalInvestigations || [];
+    },
+    error: (err) => {
+      console.error('❌ Error loading case data', err);
+    }
+  });
+}
+
 
 }

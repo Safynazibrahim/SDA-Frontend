@@ -27,8 +27,8 @@
             alt="profile picture"
           />
           <div class="d-flex flex-column justify-content-center mx-2">
-            <p class="my-0 userName">Donia Ali</p>
-            <p class="my-0 userdetails">Female , Age 22</p>
+            <p class="my-0 userName">{{ patientName }}</p>
+            <p class="my-0 userdetails">{{ gender || '-' }} , Age {{ age || '-' }}</p>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
                 </clipPath>
               </defs>
             </svg>
-            <p class="mx-2 my-0 date-time">10 May 2025</p>
+            <p class="mx-2 my-0 date-time">{{ appointmentDate | date : 'dd MMM yyyy' }}</p>
           </div>
           <div class="d-flex align-items-center mb-2">
             <svg
@@ -81,7 +81,7 @@
                 fill="#8E7E66"
               />
             </svg>
-            <p class="mx-2 my-0 date-time">12:30 PM - 1:30 px</p>
+            <p class="mx-2 my-0 date-time"> {{ startTime }} - {{ endTime }}</p>
           </div>
         </div>
       </div>
@@ -241,7 +241,7 @@
   <button class="send-to-patient-btn" (click)="saveCase()">{{"Save" | translate}}</button>}
   @else{
   <button class="send-to-patient-btn" (click)="saveCase()">{{"Start Case" | translate}}</button>}
-  <button class="cancel-btn" [routerLink]="['/dashboard/appointments']">{{"cancel" | translate}}</button>
+  <button class="cancel-btn" [routerLink]="['/dashboard/appointments']" [queryParams]="{ date: appointmentDate , from:'appointments'}">{{"cancel" | translate}}</button>
 </div>
   </div>
 </div>

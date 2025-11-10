@@ -15,6 +15,12 @@ export class AppointmentsService {
   startCase(params: any , caseId : any): Observable<any> {
     return this.api.post<any>(`cases/${caseId}/start`, params);
   }
+  getCaseById(caseId:any){
+    return this.api.get<any>(`cases/${caseId}`);
+  }
+  editCase(caseId:any , params:any){
+    return this.api.patch<any>(`cases/${caseId}`, params);
+  }
 showAvailableTimeSlots(
   clinicId: any,
   recoveryPeriodInDays: any,

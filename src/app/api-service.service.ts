@@ -91,6 +91,14 @@ export class ApiServiceService {
       withCredentials: true,
     });
   }
+patch<T>(endpoint: string, data: any): Observable<T> {
+  let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+  return this.http.patch<T>(`${this.baseUrl}/${endpoint}`, data, {
+    headers,
+    withCredentials: true,
+  });
+}
 
   delete<T>(endpoint: string, params: any = {}): Observable<T> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');

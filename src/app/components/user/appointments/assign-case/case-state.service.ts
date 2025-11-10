@@ -16,18 +16,30 @@ export class CaseStateService {
 
   private caseData: CaseBasicData | null = null;
 
+  /** 🔒 Helper للتأكد إن الكود شغال داخل المتصفح */
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+  }
+
   setCaseId(id: number) {
     this.caseIdSource.next(id);
-    localStorage.setItem('caseId', id.toString());
+    if (this.isBrowser()) {
+      localStorage.setItem('caseId', id.toString());
+    }
   }
 
   setCaseData(data: CaseBasicData) {
     this.caseData = data;
-    localStorage.setItem('caseData', JSON.stringify(data));
+    if (this.isBrowser()) {
+      localStorage.setItem('caseData', JSON.stringify(data));
+    }
   }
 
   getCaseData(): CaseBasicData | null {
     if (this.caseData) return this.caseData;
+
+    if (!this.isBrowser()) return null;
+
     const stored = localStorage.getItem('caseData');
     return stored ? JSON.parse(stored) : null;
   }
@@ -35,7 +47,10 @@ export class CaseStateService {
   clearCase() {
     this.caseIdSource.next(null);
     this.caseData = null;
-    localStorage.removeItem('caseId');
-    localStorage.removeItem('caseData');
+
+    if (this.isBrowser()) {
+      localStorage.removeItem('caseId');
+      localStorage.removeItem('caseData');
+    }
   }
 }

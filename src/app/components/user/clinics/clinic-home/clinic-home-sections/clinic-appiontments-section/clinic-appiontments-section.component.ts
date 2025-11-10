@@ -34,20 +34,42 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
     this.generateWeek(this.currentDate);
   }
 
+  // ngOnInit(): void {
+  //  this.route.parent?.paramMap.subscribe((params) => {
+  //   this.clinicId = params.get('id');
+  //   this.fromPage = this.clinicId ? 'clinic' : 'navbar';
+  //   console.log('🦷 clinicId in appointments:', this.clinicId);
+  //   console.log('📍 fromPage detected as:', this.fromPage);
+  //   this.fetchAppointments();
+  // });
+  //   this.route.parent?.paramMap.subscribe((params) => {
+  //     this.clinicId = params.get('id');
+  //     console.log('clinicId in appointments', this.clinicId);
+  //     this.fetchAppointments();
+  //   });
+  // }
   ngOnInit(): void {
-   this.route.parent?.paramMap.subscribe((params) => {
+  // 🟢 1. اقرأ التاريخ من الـ URL (لو موجود)
+  this.route.queryParams.subscribe((params) => {
+    const dateParam = params['date'];
+    if (dateParam) {
+      this.currentDate = new Date(dateParam);
+      console.log('📅 Restored date from URL:', this.currentDate);
+    }
+  });
+
+  // 🟢 2. اشترك مرة واحدة في parent paramMap
+  this.route.parent?.paramMap.subscribe((params) => {
     this.clinicId = params.get('id');
     this.fromPage = this.clinicId ? 'clinic' : 'navbar';
     console.log('🦷 clinicId in appointments:', this.clinicId);
     console.log('📍 fromPage detected as:', this.fromPage);
+
+    this.generateWeek(this.currentDate);
     this.fetchAppointments();
   });
-    this.route.parent?.paramMap.subscribe((params) => {
-      this.clinicId = params.get('id');
-      console.log('clinicId in appointments', this.clinicId);
-      this.fetchAppointments();
-    });
-  }
+}
+
 
   // ✅ جلب المواعيد سواء بعيادة أو كل العيادات
  // ✅ تحديث fetchAppointments
@@ -119,6 +141,8 @@ formatHour(hour: number): string {
         patient: a?.patient,
         clinic: a?.clinic,
         isAssigned: a?.caseId!=null,
+        caseId: a?.caseId,       
+        case: a?.case,
         startMinutes: start.totalMinutes,
         endMinutes: end.totalMinutes,
         durationMinutes: end.totalMinutes - start.totalMinutes,
@@ -152,21 +176,34 @@ formatHour(hour: number): string {
       };
     });
   }
+changeWeek(direction: number) {
+  const newDate = new Date(this.currentDate);
+  newDate.setDate(this.currentDate.getDate() + direction * 7);
+  this.currentDate = newDate;
+  this.generateWeek(this.currentDate);
+  this.fetchAppointments();
 
-  changeWeek(direction: number) {
-    const newDate = new Date(this.currentDate);
-    newDate.setDate(this.currentDate.getDate() + direction * 7);
-    // if (direction === -1 && newDate < this.today) return;
-    this.currentDate = newDate;
-    this.generateWeek(this.currentDate);
-    this.fetchAppointments();
-  }
+  this.router.navigate([], {
+    relativeTo: this.route,
+    queryParams: { date: newDate.toISOString() },
+    queryParamsHandling: 'merge',
+  });
+}
 
-  selectDay(day: Date) {
-    this.currentDate = day;
-    this.generateWeek(day);
-    this.fetchAppointments();
-  }
+
+selectDay(day: Date) {
+  this.currentDate = day;
+  this.generateWeek(day);
+  this.fetchAppointments();
+
+  // 🟢 ضيفي ده لتحديث الـ URL بدون إعادة تحميل
+  this.router.navigate([], {
+    relativeTo: this.route,
+    queryParams: { date: day.toISOString() },
+    queryParamsHandling: 'merge', // يحافظ على باقي الـ params
+  });
+}
+
 
   isSelected(day: Date): boolean {
     return (
@@ -191,6 +228,7 @@ formatHour(hour: number): string {
   // ✅ لما المستخدم يضغط على كارت Appointment
   openDetails(appt: any) {
     this.selectedAppointment = appt;
+     console.log('🩺 Selected Appointment:', appt);
   }
 
   // ✅ لإغلاق الـ Sidebar
@@ -213,9 +251,21 @@ openStartCase(appt: any) {
 
   this.startCaseState.setClinicId(appt.clinic?.id);
   console.log('🏥 Saved clinicId:', appt.clinic?.id);
+
   this.router.navigate(
     ['/dashboard/appointments/assign-case', appt.id],
-    { queryParams: { from: 'appointments' } }
+    {
+      queryParams: {
+        from: 'appointmentsStartCase',
+        date: this.currentDate.toISOString(),
+        patientName: appt.patient?.user?.fullName,
+        gender: appt.patient?.gender || '-',
+        age: appt.patient?.age || '-',
+        appointmentDate: appt.date,
+        startTime: appt.startTime,
+        endTime: appt.endTime
+      }
+    }
   );
 }
 
