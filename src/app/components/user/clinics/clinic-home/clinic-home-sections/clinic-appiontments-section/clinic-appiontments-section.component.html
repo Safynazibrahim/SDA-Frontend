@@ -21,7 +21,8 @@
       </ng-template>
     </div>
 
-    <div class="select-date d-flex align-items-center">
+    <div class="responsive">
+      <div class="select-date d-flex align-items-center">
       <span class="page-item">
         <a class="page-link" (click)="changeWeek(-1)">&lt;</a>
       </span>
@@ -41,6 +42,7 @@
         <mat-icon>add</mat-icon>
         {{ "New Appointment" | translate }}
       </button>
+    </div>
     </div>
   </div>
 
@@ -214,7 +216,7 @@
         }
       </div>
 
-      <div style="height: 140px">
+      <div class="responsive-actions" style="height: 140px">
         <div class="actions mt-auto">
           <button
             class="btn-outline"

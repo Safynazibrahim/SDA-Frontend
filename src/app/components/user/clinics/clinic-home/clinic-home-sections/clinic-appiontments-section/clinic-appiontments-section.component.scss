@@ -3,18 +3,18 @@
   border-radius: 10px;
   // box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
- .route {
-    color: #8f8f8f;
-    font-weight: 400;
-    font-family: "IBM Plex Sans";
-    font-size: 27px;
-  }
-  .clinicActive {
-    color: var(--text-gray-head-table);
-    font-family: "IBM Plex Sans";
-    font-size: 30px;
-    font-weight: 500;
-  }
+.route {
+  color: #8f8f8f;
+  font-weight: 400;
+  font-family: "IBM Plex Sans";
+  font-size: 27px;
+}
+.clinicActive {
+  color: var(--text-gray-head-table);
+  font-family: "IBM Plex Sans";
+  font-size: 30px;
+  font-weight: 500;
+}
 .date-btn {
   border: none;
   background: transparent;
@@ -194,7 +194,6 @@
   z-index: 200;
   animation: slideIn 0.3s ease forwards;
   overflow-y: auto;
-  
 }
 
 @keyframes slideIn {
@@ -212,31 +211,31 @@
 }
 
 .details-body {
-  margin-top: 20px;;
+  margin-top: 20px;
 }
 
-.patientDetails{
+.patientDetails {
   padding-bottom: 10px;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #BFBFBF;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #bfbfbf;
   .patientName {
-  color: var( --text-gray-head-table);
-  font-size: 23px;
-  font-weight: 400;
-}
-.patientInfo{
-  color: var(--text-gray-sidebar);
-font-size: 19px;
-font-weight: 400;
-}
-.patientId{
-  color:var(--brown-dark);
-   display: inline-block;
-  max-width: 100%; /* ما يطلعش برا */
-  white-space: normal !important; /* ينزل سطر جديد */
-  word-break: break-all; /* يكسر الكلمة الطويلة */
-  line-break: anywhere;
-}
+    color: var(--text-gray-head-table);
+    font-size: 23px;
+    font-weight: 400;
+  }
+  .patientInfo {
+    color: var(--text-gray-sidebar);
+    font-size: 19px;
+    font-weight: 400;
+  }
+  .patientId {
+    color: var(--brown-dark);
+    display: inline-block;
+    max-width: 100%; /* ما يطلعش برا */
+    white-space: normal !important; /* ينزل سطر جديد */
+    word-break: break-all; /* يكسر الكلمة الطويلة */
+    line-break: anywhere;
+  }
 }
 
 .actions {
@@ -254,7 +253,7 @@ font-weight: 400;
   }
 
   .btn-filled {
-    background: #B19E7F;
+    background: #b19e7f;
     color: white;
     padding: 8px 16px;
     border: none;
@@ -282,7 +281,7 @@ font-weight: 400;
     border-radius: 6px;
     transition: 0.3s ease;
   }
-.btn-outline {
+  .btn-outline {
     border: 1px solid #b19e7f;
     background: transparent;
     color: #b19e7f;
@@ -292,7 +291,7 @@ font-weight: 400;
   }
 
   .btn-filled {
-    background: #B19E7F;
+    background: #b19e7f;
     color: white;
     padding: 8px 16px;
     border: none;
@@ -304,7 +303,6 @@ font-weight: 400;
   .btn-filled:hover {
     opacity: 0.9;
   }
-
 }
 
 .close-btn {
@@ -315,6 +313,92 @@ font-weight: 400;
   cursor: pointer;
   border-radius: 50%;
 }
-.first-section-tap{
-      min-height: calc(100vh - 260px);
+.first-section-tap {
+  min-height: calc(100vh - 260px);
+}
+.responsive {
+  display: contents;
+}
+/* 📱 Responsive styles for mobile view */
+@media (max-width: 768px) {
+  .appointments-container {
+    padding: 12px !important;
+  }
+  .responsive {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .d-flex.justify-content-between.align-items-center.mb-3 {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+  .date-btn {
+    margin-right: 0px !important;
+  }
+  .signin-button {
+    padding: 9px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .route,
+  .clinicActive {
+    font-size: 22px !important;
+  }
+
+  .week-days {
+    gap: 0px;
+    padding-bottom: 0;
+  }
+
+  .day-box {
+    width: 48px;
+    min-width: 48px;
+    padding: 6px;
+    border-radius: 6px;
+  }
+
+  .day-label {
+    font-size: 11px;
+  }
+
+  .day-date {
+    font-size: 14px;
+  }
+
+  .calendar {
+    flex-direction: column;
+  }
+
+  .time-column {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-appointment-two);
+  }
+  .time-slot {
+    border-bottom: 0;
+    height: fit-content;
+  }
+  .appointments-area {
+    min-height: 400px;
+  }
+
+  .appointment-details-sidebar {
+    width: 100%;
+    top: 70px;
+    height: calc(100vh - 80px);
+    border-left: none;
+    
+  }
+  .responsive-actions {
+      height: 20px !important;
+      .actions button{
+        padding: 7px;
+      }
+    }
 }
