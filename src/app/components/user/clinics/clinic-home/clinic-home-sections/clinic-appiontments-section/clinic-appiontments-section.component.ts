@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SearchComponent } from '../../../../../shared/search/search.component';
 import { ClinicService } from '../../../clinic.service';
 import { StartCaseStateService } from '../../../../appointments/start-case/start-case-state.service';
+import { PatientService } from '../../../../patients/patient.service';
 
 @Component({
   selector: 'app-appointments',
@@ -29,7 +30,8 @@ export class ClinicAppiontmentsSectionComponent implements OnInit {
     private route: ActivatedRoute,
     private clinicService: ClinicService,
     private router : Router,
-    private startCaseState: StartCaseStateService 
+    private startCaseState: StartCaseStateService,
+    private _PatientService: PatientService, 
   ) {
     this.generateWeek(this.currentDate);
   }
@@ -219,4 +221,11 @@ openStartCase(appt: any) {
   );
 }
 
+goToPatientProfile(selectedAppointment: any) {
+    if (selectedAppointment?.patient) {
+      this._PatientService.setSelectedPatient(selectedAppointment.patient);
+      this.router.navigate(['/dashboard/patients', selectedAppointment.patient.id]);
+    }
+  }
 }
+
