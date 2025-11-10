@@ -72,29 +72,27 @@ h3 {
   width: 100%;
   font-size: 1.3rem;
   font-weight: 500;
-
-  /* mobile: allow horizontal scroll if crowded */
-  overflow-x: auto;
-  -ms-overflow-style: none;  /* IE/Edge */
-  scrollbar-width: none;     /* Firefox */
+  white-space: normal; /* ✅ allow text wrapping */
+  word-break: break-word; /* ✅ allow long words to break */
 }
 .tabbar::-webkit-scrollbar { display: none; }
 
 /* The tab “buttons” */
 .tab {
   display: inline-flex;
+  white-space: normal; /* ✅ allow wrapping inside the tab */
+  word-break: break-word; /* ✅ break long text */
+  text-align: center; /* ✅ center multi-line text */
   align-items: center;
   justify-content: center;
-  white-space: nowrap;
   text-decoration: none;
   width: 25%;
-
   padding: 20px;
   border-radius: var(--pill-radius);
   color: var(--inactive);
   background: transparent;
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.2;
   user-select: none;
 
   /* No hover/ink/ripple effects */
@@ -173,7 +171,20 @@ h3 {
 /* Responsive: wrap on larger screens if you prefer, or keep scrolling */
 @media (max-width: 768px) {
   .tabbar { 
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     flex-wrap: wrap; 
-    overflow-x: visible; }
+    overflow-x: visible; 
+    font-weight: 400;
+  }
+  .tab,.tab.active {
+    padding: 8px;
+  }
+}
+
+.img {
+  width: 100%; /* default for all screens */
+
+  @media (max-width: 576px) { /* small screens (sm and below) */
+    width: 100%;
+  }
 }

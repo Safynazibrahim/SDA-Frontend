@@ -1,6 +1,6 @@
-<div class="container view-details">
+<div class="container view-details" *ngIf = "caseDetails">
   <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
-    <div class="col-lg-6">
+    <div class="col-lg-6 d-flex align-items-center">
       <h3>
         {{ "Patients" | translate }}
         <span>
@@ -18,7 +18,6 @@
           style="
             color: var(--text-gray-head-table);
             display: inline-block;
-            margin: 0px;
           "
         >
           {{ "case_details" | translate }}
@@ -41,7 +40,7 @@
           <div class="diagnosis-info my-1">
             <p class="diagnosis-name">
               <b>{{ "diagnosis_name" | translate }}:</b>
-              {{ cases.diagnosis }}
+              {{ caseDetails.diagnosis }}
             </p>
           </div>
 
@@ -123,6 +122,34 @@
                 <h6>Patient observed to be having seizures. Indever given to reduce blood pressure</h6>
               </div>
             </div>
+          </div>
+
+          <div class="diagnosis-header">
+            <img src="../../../../../assets/media/last-diagnose.svg" alt="" />
+            <span class="diagnosis-label">{{
+              "treatment" | translate
+            }}</span>
+          </div>
+
+          <div class="diagnosis-info my-1">
+            <p class="diagnosis-name">
+              <b>{{ "treatment_plan" | translate }}:</b>
+              {{ caseDetails.treatmentPlan || "-" }}
+            </p>
+          </div>
+
+          <div class="diagnosis-header">
+            <img src="../../../../../assets/media/last-diagnose.svg" alt="" />
+            <span class="diagnosis-label">{{
+              "instructions" | translate
+            }}</span>
+          </div>
+
+          <div class="diagnosis-info my-1">
+            <p class="diagnosis-name">
+              <b>{{ "instructionsVisits" | translate }}:</b>
+              {{ caseDetails.instructionsBetweenVisits || "-" }}
+            </p>
           </div>
         </div>
       </div>

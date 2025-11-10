@@ -490,6 +490,10 @@
   "Enter a valid check-up price": "Enter a valid check-up price",
   "Join as a owner": "Join as a owner",
   "Select Package Type" :"Select Package Type",
-  "All Types":"All Types"
+  "All Types":"All Types",
+  "treatment" : "Treatment",
+  "treatment_plan" : "Treatment Plan",
+  "instructions" : "Instructions",
+  "instructionsVisits" : "Instructions Between Visits"
 
 }

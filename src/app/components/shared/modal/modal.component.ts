@@ -25,10 +25,12 @@ export class ModalComponent {
     this.close.emit();
   }
 
+
   @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: KeyboardEvent) {
-    if (this.isOpen) {
-      this.onClose();
-    }
+onEscapeKey(event: Event) {
+  if (event instanceof KeyboardEvent && this.isOpen) {
+    this.onClose();
   }
+}
+
 }

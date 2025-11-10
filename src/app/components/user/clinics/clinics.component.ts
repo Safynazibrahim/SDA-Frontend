@@ -231,7 +231,7 @@ export class ClinicsComponent implements OnInit{
         // 🔴 Basic package — assigned_cases locked (pro)
         clinic.features = {
           add_material: { type: 'unlimited' },
-          assigned_cases: { type: 'none' }, // PRO feature
+          assigned_cases: { type: 'unlimited' }, // PRO feature
           inventory: { type: 'unlimited' },
         };
       } else {

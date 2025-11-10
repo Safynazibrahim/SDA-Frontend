@@ -6,13 +6,15 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  // padding: 1.5rem; /* NEW */
+  overflow-y: auto; /* NEW */
 }
 
 .modal-window {
   background: var(--bg-primary);
   border-radius: 12px;
   padding: 20px;
-  max-height: 100vh;
+  max-height: 90vh; /* EDITED */
   overflow-y: auto;
   animation: fadeIn 0.3s ease;
 
@@ -50,4 +52,13 @@
   font-size: 18px;
   cursor: pointer;
   margin: 0px 10px;
+}
+@media (max-width: 768px) {
+  .modal-window {
+    width: 100%;
+    max-width: 95%;
+    max-height: 85vh;
+    margin: 1rem auto;
+    border-radius: 10px;
+  }
 }

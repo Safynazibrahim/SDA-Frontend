@@ -141,14 +141,30 @@ h3 {
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .table thead th , .table tbody td {
   font-size: 13px;
   }
-}
 
-@media (max-width: 900px) {
-  .search-box {
-    width: 100% !important;
+  .modal-body {
+  padding: 5px;
+  .mini-table {
+    padding: 0px !important;
+  } 
+}
+  
+.in-stock {
+  mat-icon{
+    font-size: 0.9rem;
+    margin-right: 0px;
   }
 }
+
+.low-stock {
+  mat-icon{
+    font-size: 0.9rem;
+    margin-right: 0px;
+  }
+}
+}
+

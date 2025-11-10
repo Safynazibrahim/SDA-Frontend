@@ -1,7 +1,11 @@
 .clinic-home-container {
   display: flex;
-  min-height: 80vh;
   position: relative;
+  padding: 20px;
+  /* Push below fixed navbar (107px tall) */
+  // margin-top: 107px; 
+  min-height: calc(100vh - 107px);
+  overflow: hidden;
 }
 @keyframes sidebarSlideIn {
   from {
@@ -18,9 +22,12 @@
 }
 
 .sidebar {
-  margin-left: 20px;
+  position: sticky; /* stays fixed inside parent scroll area */
+  top: 0; /* already under the navbar because of margin-top */
   width: 270px;
-  height: 80vh;
+  height: calc(100vh - 107px); /* fit remaining space */
+  margin-left: 20px;
+  overflow-y: auto;
   background: var(--bg-primary);
   border: 1px solid var(--text-gray-home-about);
   padding: 0px 20px;
@@ -35,10 +42,12 @@
 
     li {
       color: var(--text-gray-home-about);
+      width: 100%;             /* ✅ always take full width of sidebar */
+      box-sizing: border-box;   /* ✅ padding stays inside width */
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 0;
+      padding: 12px 10px;
       cursor: pointer;
       font-size: 1.2rem;
       font-weight: 500;
@@ -46,11 +55,14 @@
     }
   }
 
+  mat-icon {
+      font-size: 1.4rem;
+    }
+
   &.closed {
-    width: 70px; 
+    width: 90px; 
     background-color: #7d6e59;
     margin-left: 5px;
-
     mat-icon {
       color: #fff !important;
     }
@@ -86,42 +98,146 @@
 
 }
 
-img {
-    width: 22px; 
-    height: 22px;
-    object-fit: contain; 
-    background: var(--text-gray-home-about);;
-  }
-
 .sidebar ul li.active {
   background: var(--bg-brown-gradient);
   border-radius: 8px;
   color: #fff;
-  padding: 10px;
-
   mat-icon {
     color: #fff !important;
   }
 }
 
 .sidebar.closed ul li.active {
-  background: var(--bg-brown-medium);           
+  background: var(--bg-brown-medium);     
+  display: flex;      
   justify-content: center; 
   align-items: center;
   border-radius: 50%;
-  padding: 2px; 
-  
   mat-icon {
     color: #fff !important;                  
   }
 }
 
-
-
 .main-content {
   flex-grow: 1;
-  padding: 0px 20px;
+  min-height: calc(100vh - 107px);
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+    position: fixed;
+    top: 120px;
+    left: 0;
+    height: calc(90vh - 107px);
+    overflow-y: auto;
+    padding: 0 10px;
+    transition: width 0.3s ease; /* ✅ smooth resize animation */
+
+    ul li {
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 12px 10px;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    ul li.active {
+      background: var(--bg-brown-gradient);
+      color: #fff;
+    }
+
+    li mat-icon {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pro-badge {
+      font-size: 0.8rem !important;
+      mat-icon {
+        font-size: 0.9rem !important;
+      }
+    }
+
+    &.closed {
+      width: 70px; /* ✅ collapsed state */
+    }
+  }
+
+  /* ✅ Main content auto adjusts based on sidebar state */
+  .main-content {
+    flex-grow: 1;
+    min-height: calc(90vh - 107px);
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+    margin-left: 200px; /* default (sidebar open) */
+  }
+
+  .sidebar.closed ~ .main-content {
+    margin-left: 70px; /* when sidebar closed */
+  }
+}
+
+
+@media (max-width: 767.98px) {
+  .sidebar {
+    position: fixed;
+    top: 120px;
+    left: 0;
+    width: 50px !important; /* ✅ fixed narrow sidebar */
+    height: calc(90vh - 107px);
+    border-radius: 0 12px 12px 0;
+    padding: 10px 0;
+    overflow-y: auto;
+    z-index: 100;
+    background: var(--bg-primary);
+    border: none;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+
+    ul li {
+      justify-content: center;
+      padding: 14px 0;
+      gap: 0;
+      text-align: center;
+      mat-icon {
+        font-size: 1.3rem;
+        color: var(--text-gray-home-about);
+      }
+
+      // span {
+      //   display: none; /* ✅ hide text */
+      // }
+    }
+
+    ul li span:not(.pro-badge) {
+  display: none;
+}
+    .pro-badge {
+      font-size: 0.6rem !important;
+      mat-icon {
+        font-size: 0.7rem !important;
+      }
+    }
+
+    ul li.active {
+      background: var(--bg-brown-gradient);
+      mat-icon {
+        color: #fff;
+      }
+    }
+  }
+
+  .main-content {
+    margin-left: 50px; /* ✅ always next to collapsed bar */
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: calc(100vh - 107px);
+  }
+}
 
 

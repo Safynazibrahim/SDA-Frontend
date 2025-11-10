@@ -552,7 +552,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .dropdown-menu {
   background-color: var(--bg-primary) !important;
+  
     .dropdown-item {
+      color: var(--text-gray-head-table);
     &:hover {
       background-color: var(--bg-brown-light);
       cursor: pointer;
