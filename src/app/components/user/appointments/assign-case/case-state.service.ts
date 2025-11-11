@@ -2,19 +2,20 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 interface CaseBasicData {
-  caseId: number;
-  appointmentId: string;
-  chiefComplaint: string;
+  caseId?: number;
+  appointmentId?: string;
+  chiefComplaint?: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CaseStateService {
   private caseIdSource = new BehaviorSubject<number | null>(null);
   caseId$ = this.caseIdSource.asObservable();
 
   private caseData: CaseBasicData | null = null;
+  private clinicId: string | null = null;
 
   /** 🔒 Helper للتأكد إن الكود شغال داخل المتصفح */
   private isBrowser(): boolean {
@@ -35,6 +36,29 @@ export class CaseStateService {
     }
   }
 
+  // ✅ النسخة المعدلة والصحيحة — تخزن clinicId فقط كسلسلة نصية
+  setClinicId(clinicId: any) {
+    const id =
+      typeof clinicId === 'object' && clinicId !== null
+        ? clinicId.clinicId
+        : clinicId;
+
+    this.clinicId = id;
+
+    if (this.isBrowser()) {
+      localStorage.setItem('clinicId', id);
+    }
+  }
+
+  getClinicId(): string | null {
+    if (this.clinicId) return this.clinicId;
+
+    if (!this.isBrowser()) return null;
+
+    const stored = localStorage.getItem('clinicId');
+    return stored ?? null;
+  }
+
   getCaseData(): CaseBasicData | null {
     if (this.caseData) return this.caseData;
 
@@ -47,10 +71,12 @@ export class CaseStateService {
   clearCase() {
     this.caseIdSource.next(null);
     this.caseData = null;
+    this.clinicId = null;
 
     if (this.isBrowser()) {
       localStorage.removeItem('caseId');
       localStorage.removeItem('caseData');
+      localStorage.removeItem('clinicId');
     }
   }
 }

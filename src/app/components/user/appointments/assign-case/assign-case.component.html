@@ -241,7 +241,7 @@
   <button class="send-to-patient-btn" (click)="saveCase()">{{"Save" | translate}}</button>}
   @else{
   <button class="send-to-patient-btn" (click)="saveCase()">{{"Start Case" | translate}}</button>}
-  <button class="cancel-btn" [routerLink]="['/dashboard/appointments']" [queryParams]="{ date: appointmentDate , from:'appointments'}">{{"cancel" | translate}}</button>
+  <button class="cancel-btn" (click)="cancelAction()">{{"cancel" | translate}}</button>
 </div>
   </div>
 </div>

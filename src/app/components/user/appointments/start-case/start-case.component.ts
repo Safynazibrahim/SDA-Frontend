@@ -27,7 +27,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   appointmentId: string | null = null;
   patientId: string | null = null;
   fromPage: any;
-  chiefComplaint = '';
+  chiefComplaint :any;
   appointmentDate:any;
   chiefComplaintOptions = [
     { key: 'pain', label: 'Pain (tooth / jaw / TMJ)', selected: false },
@@ -584,8 +584,8 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const savedData = this.startCaseState.getStartCaseData();
-    console.log('💾 From LocalStorage at init:', savedData);
+    // const savedData = this.startCaseState.getStartCaseData();
+    // console.log('💾 From LocalStorage at init:', savedData);
     this.fromPage = this.route.snapshot.queryParamMap.get('from');
     this.appointmentDate = this.route.snapshot.queryParamMap.get('date');
     const id = this.route.snapshot.paramMap.get('id');
@@ -611,10 +611,6 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       this.chiefComplaint = caseData.chiefComplaint;
       console.log('📦 Loaded from Assign Case:', caseData);
     }
-     if (savedData) {
-    console.log('♻️ Restoring Start Case Data:', savedData);
-    this.restoreStartCase(savedData);
-  }
   }
 private restoreStartCase(savedData: any) {
   this.chiefComplaint = savedData.chiefComplaint || '';

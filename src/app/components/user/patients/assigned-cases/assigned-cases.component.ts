@@ -3,7 +3,7 @@ import { Component, computed, OnInit, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from '../../../shared/pagination/pagination.component';
 import { SearchComponent } from '../../../shared/search/search.component';
 import { ClinicService } from '../../clinics/clinic.service';
@@ -32,7 +32,8 @@ export class AssignedCasesComponent implements OnInit {
     private _ActivatedRoute: ActivatedRoute,
     private _ClinicService: ClinicService,
     private _PatientService: PatientService,
-    private _MatSnackBar: MatSnackBar
+    private _MatSnackBar: MatSnackBar,
+    private route : Router
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +100,16 @@ export class AssignedCasesComponent implements OnInit {
       case 'completed': return 'completed';
       default: return '';
     }
+  }
+   goToAssignCase(caseId: number) {
+    this.route.navigate(
+      ['/dashboard/appointments/assign-case', caseId],
+      {
+        queryParams: {
+          from: 'appointmentsEditAssignCaseClinic',
+        },
+      }
+    );
   }
   openViewModal(){ } 
   openEditModal(){ }
