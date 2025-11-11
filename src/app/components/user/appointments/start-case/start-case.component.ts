@@ -27,7 +27,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   appointmentId: string | null = null;
   patientId: string | null = null;
   fromPage: any;
-  chiefComplaint = '';
+  chiefComplaint :any;
   appointmentDate:any;
   chiefComplaintOptions = [
     { key: 'pain', label: 'Pain (tooth / jaw / TMJ)', selected: false },

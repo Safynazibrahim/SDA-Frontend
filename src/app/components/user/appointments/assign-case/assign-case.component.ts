@@ -149,6 +149,9 @@ this.patientName = query.get('patientName') || '';
   if (this.pageTitle === 'Edit Case') {
     this._AppointmentsService.editCase(this.appointmentId!, caseData).subscribe({
       next: (res) => {
+          this.caseState.setCaseData({
+          chiefComplaint: this.chiefComplaint
+        });
         console.log('✅ Case updated successfully', res);
          this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId], {
           queryParams: { date: this.appointmentDate, from: 'appointments' }
@@ -218,6 +221,11 @@ if (typeof document !== 'undefined') {
       this.selectedInvestigations = res?.clinicalInvestigations || [];
        const appointment = res?.appointments[0];
        this.clinicId = appointment.doctorClinic?.clinic?.id || null;
+      //  this.caseState.setCaseData({
+      //     chiefComplaint: this.chiefComplaint
+      //   });
+       this.caseState.setClinicId(appointment.doctorClinic?.clinic?.id);
+
       if (appointment) {
         const patient = appointment.patient?.user;
         this.patientName = patient?.fullName || '-';

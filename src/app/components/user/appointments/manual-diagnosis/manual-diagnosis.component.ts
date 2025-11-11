@@ -98,14 +98,14 @@ hasSlots: boolean = false;
     this.isNextVisitModalOpen = false;
   }
 
-  appointmentId: string | null = null;
+  appointmentId: any;
   patientId: string | null = null;
   fromPage: any;
   fromDays: number | null = null;
   toDays: number | null = null;
   startDate: Date | null = null;
   endDate: Date | null = null;
-  caseId: number | null = null;
+  caseId: any;
 selectedSlot: any = null;
 selectedDate: string | null = null;
 appointmentDate:any
@@ -135,7 +135,6 @@ appointmentDate:any
     }
 
     const payload = {
-      appointmentId: startCaseData.appointmentId,
       chiefComplaint: startCaseData.chiefComplaint,
       clinicalInvestigation: startCaseData.clinicalInvestigation,
       diagnosis: this.diagnosisName,
@@ -145,7 +144,9 @@ appointmentDate:any
         (m) => m.dosage || m.frequency || m.duration
       ),
     };
-
+    if(this.caseId== null){
+      this.caseId = this.appointmentId
+    }
 
     this._AppointmentsService.startCase(payload,this.caseId).subscribe({
       next: (res) => {
@@ -197,6 +198,9 @@ appointmentDate:any
   }
 
 showAvailableSlots() {
+  if(!this.clinicId){
+    this.clinicId= this.assignCaseState.getClinicId()
+  }
   if (!this.clinicId || !this.fromDays || !this.toDays) {
     this.snackBar.open('⚠️ Please enter both values', 'Close', { duration: 3000 });
     return;
