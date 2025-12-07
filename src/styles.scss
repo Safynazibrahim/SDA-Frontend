@@ -473,12 +473,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         
         .signin-button {
             width: 100%;
-            padding: 16px;
+            padding: 10px 16px;
             background: var(--bg-brown-gradient);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -562,3 +562,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+
+/////// responsive on tablets
+@media (min-width: 768px) and (max-width: 1024px) {
+  .signin-button {
+            padding: 6px 10px;
+            font-size: 15px;
+        }
+}
+
+////// responsive on mobile
+@media (max-width: 767.98px) {
+  .signin-button {
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 8px;
+        }
+}

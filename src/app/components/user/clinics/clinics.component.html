@@ -2,12 +2,12 @@
   <div
     class="d-flex justify-content-between align-items-center header-responsive mb-4"
   >
-    <h2>{{ "Clinics" | translate }}</h2>
-    <div>
-      <button class="btn join-btn mx-2" (click)="goToJoinClinic()">
+    <h2 >{{ "Clinics" | translate }}</h2>
+    <div class="d-flex gap-2">
+      <button class="w-auto signin-button" (click)="goToJoinClinic()">
         {{ "join_clinic" | translate }}
       </button>
-      <button class="btn join-btn" (click)="openCreateModal()">
+      <button class="w-auto signin-button" (click)="openCreateModal()">
         {{ "create_clinic" | translate }}
       </button>
     </div>
