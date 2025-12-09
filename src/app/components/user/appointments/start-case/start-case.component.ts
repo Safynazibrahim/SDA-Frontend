@@ -594,6 +594,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       this.patientId = id;
     } else {
       this.appointmentId = id;
+      console.log('safyyy', this.appointmentId)
     }
 
     console.log(
@@ -605,6 +606,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       this.patientId
     );
     this.caseId=this.caseState.getCaseData()?.caseId;
+    console.log(this.caseId)
     
     const caseData = this.caseState.getCaseData();
     if (caseData) {
@@ -1394,5 +1396,7 @@ private restoreStartCase(savedData: any) {
     } 
   });
 }
-
+  goToReferral(){
+    return ['/dashboard/appointments/refer-case', this.appointmentId];
+  }
 }
