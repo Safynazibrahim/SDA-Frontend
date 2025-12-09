@@ -6,6 +6,7 @@ import { PatientService } from '../../../../../patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { injectQuery } from '@tanstack/angular-query-experimental';
+import { PaginationComponent } from '../../../../../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-appointment-history',
@@ -17,7 +18,7 @@ import { injectQuery } from '@tanstack/angular-query-experimental';
 export class AppointmentHistoryComponent implements OnInit {
 
   CurrentPage = signal(1);
-  limit = signal(50);
+  limit = signal(100);
   patientId!: any;
 
   constructor(private _ActivatedRoute: ActivatedRoute,
@@ -36,7 +37,7 @@ export class AppointmentHistoryComponent implements OnInit {
   }
 
   appointmentHistoryQuery = injectQuery(() => ({
-    queryKey:['appointment-hsitory'],
+    queryKey:['appointment-hsitory', this.patientId, this.params()],
     queryFn: () => this._PatientService.getPatientAppointmentHistory(this.patientId, this.params()),
     throwError: (err:any) => {
       this._MatSnackBar.open(err.error.message, 'Close', {
@@ -47,11 +48,16 @@ export class AppointmentHistoryComponent implements OnInit {
   }))
 
   get patientAppointmentHistory() {
-    return this.appointmentHistoryQuery.data() || [];
+    return this.appointmentHistoryQuery?.data() || [];
   }
 
   get total() {
     return this.appointmentHistoryQuery?.data()?.total || [];
+  }
+
+  onPageChange(page: number){
+    this.CurrentPage.set(page);
+    this.appointmentHistoryQuery.refetch();
   }
   
 }

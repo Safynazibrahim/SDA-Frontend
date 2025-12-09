@@ -108,4 +108,16 @@
       </div>
     </div>
   </div>
+
+  <div class="row my-3">
+    <div class="col-12 ">
+            <app-pagination
+              [totalItems]="total"
+              [pageSize]="limit()"
+              [currentPage]="CurrentPage()"
+              (pageChange)="onPageChange($event)"
+            >
+            </app-pagination>
+          </div>
+  </div>
 </div>

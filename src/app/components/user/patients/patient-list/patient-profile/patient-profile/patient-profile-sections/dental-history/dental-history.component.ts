@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { debounceTime, Subject } from 'rxjs';
+import { PaginationComponent } from "../../../../../../../shared/pagination/pagination.component";
 
 @Component({
   selector: 'app-dental-history',
@@ -25,14 +26,15 @@ import { debounceTime, Subject } from 'rxjs';
     MatIconModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-  ],
+    PaginationComponent
+],
   templateUrl: './dental-history.component.html',
   styleUrl: './dental-history.component.scss',
 })
 export class DentalHistoryComponent {
   patientId!: string;
   CurrentPage = signal(1);
-  limit = signal(50);
+  limit = signal(8);
 
   //signals for date filters
   fromDate = signal<Date | null>(null);
@@ -91,7 +93,7 @@ this.refetchTrigger$.pipe(debounceTime(300)).subscribe(() => {
 
   // 🧠 Query with automatic caching
   dentalHistoryQuery = injectQuery(() => ({
-      queryKey: [
+    queryKey: [
     'dental-history',
     this.patientId,
     this.CurrentPage(),
@@ -117,6 +119,15 @@ this.refetchTrigger$.pipe(debounceTime(300)).subscribe(() => {
   }
   get patientDentalHistory() {
     return this.dentalHistoryQuery.data()?.data || [];
+  }
+
+  get total() {
+    return this.dentalHistoryQuery.data()?.total || [];
+  }
+
+  onPageChange(page: number){
+    this.CurrentPage.set(page);
+    this.dentalHistoryQuery.refetch();
   }
 
   goToDetails(caseId: number) {
