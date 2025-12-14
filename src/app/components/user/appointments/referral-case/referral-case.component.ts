@@ -7,6 +7,7 @@ import { injectQuery } from '@tanstack/angular-query-experimental';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReferralService } from './referral.service';
 import { CommonModule } from '@angular/common';
+import { PaginationComponent } from '../../../shared/pagination/pagination.component';
 
 @Component({
   selector: 'app-referral-case',
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     TranslateModule,
     SearchComponent,
-    CommonModule
+    CommonModule,
+    PaginationComponent
   ],
   templateUrl: './referral-case.component.html',
   styleUrl: './referral-case.component.scss'
@@ -30,6 +32,7 @@ export class ReferralCaseComponent implements OnInit{
   selectedTab: 'refer_clinic' | 'refer_another_clinic' = 'refer_clinic';
 
   caseId:any;
+  clinicId:any;
   CurrentPage = signal(1);
   limit = signal(10);
   searchNameValue = ''; 
@@ -39,7 +42,7 @@ export class ReferralCaseComponent implements OnInit{
   
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log('caseID', id)
+    this.clinicId = this.route.snapshot.paramMap.get('clinicId');
   }
 
   // ⚙️ Computed params (auto-update when signals change)
@@ -49,9 +52,9 @@ export class ReferralCaseComponent implements OnInit{
       ...(this.searchName().trim() && { search: this.searchName().trim() }),
     }));
   
-    patientsQuery = injectQuery(() => ({
+    doctorsQuery = injectQuery(() => ({
     queryKey: ['doctors'], // ✅ shared key for caching
-    queryFn: () => this._ReferralService.getDoctorsOfClinic(this.params()),
+    queryFn: () => this._ReferralService.getDoctorsOfClinic(this.clinicId,this.params()),
     throwError: (err:any) => {
       this._MatSnackBar.open(err.error.message, 'Close', {
         duration:3000,
@@ -60,21 +63,21 @@ export class ReferralCaseComponent implements OnInit{
     },
   }));
   
-  //   get doctors() {
-  //     return this.doctorsQuery.data()?.data || [];
-  //   }
-  //   get total() {
-  //     return this.doctorsQuery.data()?.total || 0;
-  //   }
+    get doctors() {
+      return this.doctorsQuery.data()?.data || [];
+    }
+    get total() {
+      return this.doctorsQuery.data()?.total || 0;
+    }
   
     onSearch(){
       this.CurrentPage.set(1);
       this.searchName.set(this.searchNameValue);
-      // this.patientsQuery.refetch();
+      this.doctorsQuery.refetch();
     }
     onPageChange(page:number){
       this.CurrentPage.set(page);
-      // this.patientsQuery.refetch();
+      this.doctorsQuery.refetch();
     }
 
   

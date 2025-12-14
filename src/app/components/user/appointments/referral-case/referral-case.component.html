@@ -28,7 +28,7 @@
   </div>
   <!-- Refer Clinic -->
   <div *ngIf="selectedTab === 'refer_clinic'">
-    <div class="doctor-row my-3 mx-4" *ngFor="let item of [1, 2, 3, 4, 5]">
+    <div class="doctor-row my-3 mx-4" *ngFor="let item of doctors">
       <div class="doctor-info mx-1">
         <img
           src="../../../../../assets/media/medi.png"
@@ -37,7 +37,7 @@
         />
 
         <div class="doctor-text">
-          <h3 class="doc_name">Ali Omar</h3>
+          <h3 class="doc_name">{{item.user.fullName}}</h3>
           <h3 class="phone">+880 172524123123</h3>
         </div>
       </div>
@@ -46,6 +46,13 @@
         <input type="radio" formControlName="doc_id" [value]="false" />
       </div>
     </div>
+    <app-pagination
+      [totalItems]="total"
+      [pageSize]="limit()"
+      [currentPage]="CurrentPage()"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
   </div>
 
   <!-- Refer Another Clinic -->

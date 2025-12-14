@@ -11,7 +11,7 @@ export class ReferralService {
     private _ApiServiceService:ApiServiceService
   ) { }
 
-  getDoctorsOfClinic(params:any){
-    return firstValueFrom(this._ApiServiceService.get<any>(`doctors`, params));
+  getDoctorsOfClinic(clinicId:any,params:any){
+    return firstValueFrom(this._ApiServiceService.get<any>(`clinics/${clinicId}/doctors`, params));
   }
 }

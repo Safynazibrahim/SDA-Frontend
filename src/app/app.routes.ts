@@ -314,7 +314,7 @@ export const routes: Routes = [
               ).then((m) => m.GenerateAIComponent),
           },
           {
-            path: 'refer-case/:id',
+            path: 'refer-case/:id/:clinicId',
             loadComponent: () =>
               import(
                 './components/user/appointments/referral-case/referral-case.component'

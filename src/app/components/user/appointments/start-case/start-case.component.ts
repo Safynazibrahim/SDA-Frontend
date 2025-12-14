@@ -1401,8 +1401,10 @@ private restoreStartCase(savedData: any) {
    if(!caseId){
     caseId=this.appointmentId;
    }
+   let clicnicId = this.caseState.getClinicId();
    console.log(caseId);
+   console.log('ss',this.caseState.getClinicId());
    
-    return ['/dashboard/appointments/refer-case', caseId];
+    return ['/dashboard/appointments/refer-case', caseId,clicnicId];
   }
 }
