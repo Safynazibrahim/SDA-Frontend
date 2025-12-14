@@ -239,7 +239,9 @@
     <div class="page-footer-btns">
       @if(pageTitle === 'Assign Case'){
   <button class="send-to-patient-btn" (click)="saveCase()">{{"Save" | translate}}</button>}
-  @else{
+  @else if(pageTitle === 'Edit Case'){
+    <button class="send-to-patient-btn" (click)="saveCase()">{{"Edit Case" | translate}}</button>
+  }@else{
   <button class="send-to-patient-btn" (click)="saveCase()">{{"Start Case" | translate}}</button>}
   <button class="cancel-btn" (click)="cancelAction()">{{"cancel" | translate}}</button>
 </div>

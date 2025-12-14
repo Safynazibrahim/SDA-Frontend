@@ -24,7 +24,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   downloadFileName = '';
   selectedLang: 'ar' | 'en' = 'en';
   transcriptionResult = '';
-  appointmentId: string | null = null;
+  appointmentId: any;
   patientId: string | null = null;
   fromPage: any;
   chiefComplaint :any;
@@ -1397,6 +1397,12 @@ private restoreStartCase(savedData: any) {
   });
 }
   goToReferral(){
-    return ['/dashboard/appointments/refer-case', this.appointmentId];
+   let caseId= this.caseState.getCaseData()?.caseId;
+   if(!caseId){
+    caseId=this.appointmentId;
+   }
+   console.log(caseId);
+   
+    return ['/dashboard/appointments/refer-case', caseId];
   }
 }
