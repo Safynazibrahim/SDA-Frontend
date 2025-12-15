@@ -1,36 +1,43 @@
 <div class="container startCase pb-5">
   @if(fromPage == 'appointments'){
-  <div class="d-flex align-items-center mb-2">
-    <p class="mb-0 route" [routerLink]="['/dashboard/appointments']">
-      {{ "appointments" | translate }}
-    </p>
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <div class="d-flex">
+      <p class="mb-0 route" [routerLink]="['/dashboard/appointments']">
+        {{ "appointments" | translate }}
+      </p>
 
-    <a
-      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
-      style="cursor: pointer"
-      [routerLink]="['/dashboard/appointments']"
-      [queryParams]="{
-        date: appointmentDate
-      }"
-    >
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </a>
-    <div class="d-flex align-items-center mb-2">
-      <p class="mb-0 clinicActive">{{ "Assign Case" | translate }}</p>
+      <a
+        class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+        style="cursor: pointer"
+        [routerLink]="['/dashboard/appointments']"
+        [queryParams]="{
+          date: appointmentDate
+        }"
+      >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </a>
+      <div class="d-flex align-items-center mb-2">
+        <p class="mb-0 clinicActive">{{ "Assign Case" | translate }}</p>
+      </div>
+      <a
+        class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+        style="cursor: pointer"
+        [routerLink]="['/dashboard/appointments/assign-case', caseId]"
+        [queryParams]="{
+          date: appointmentDate,
+          from: 'appointmentsEditAssignCase'
+        }"
+      >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </a>
+      <div class="d-flex align-items-center mb-2">
+        <p class="mb-0 clinicActive">{{ "Start Case" | translate }}</p>
+      </div>
     </div>
-    <a
-      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
-      style="cursor: pointer"
-      [routerLink]="['/dashboard/appointments/assign-case' , caseId]"
-      [queryParams]="{
-        date: appointmentDate,
-        from:'appointmentsEditAssignCase'
-      }"
-    >
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </a>
-    <div class="d-flex align-items-center mb-2">
-      <p class="mb-0 clinicActive">{{ "Start Case" | translate }}</p>
+    <div>
+      <button class="signin-button" [routerLink]="goToReferral()">
+        {{"referaCase" | translate}}
+      </button>
     </div>
   </div>
   } @if(fromPage == 'patient-profile'){

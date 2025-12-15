@@ -276,48 +276,66 @@ export const routes: Routes = [
         ],
       },
       {
-  path: 'appointments',
-  children: [
-    {
-      path: '',
-      loadComponent: () =>
-        import(
-          './components/user/clinics/clinic-home/clinic-home-sections/clinic-appiontments-section/clinic-appiontments-section.component'
-        ).then((m) => m.ClinicAppiontmentsSectionComponent),
-    },
-    {
-      path: 'assign-case/:id',
-      loadComponent: () =>
-        import('./components/user/appointments/assign-case/assign-case.component')
-          .then((m) => m.AssignCaseComponent),
-    },
-    {
-      path: 'start-case/:id',
-      loadComponent: () =>
-        import('./components/user/appointments/start-case/start-case.component')
-          .then((m) => m.StartCaseComponent),
-    },
-    {
-      path: 'manual-diagnosis/:id',
-      loadComponent: () =>
-        import('./components/user/appointments/manual-diagnosis/manual-diagnosis.component')
-          .then((m) => m.ManualDiagnosisComponent),
-    },
-    {
-      path: 'generate-ai/:id',
-      loadComponent: () =>
-        import('./components/user/appointments/generate-ai/generate-ai.component')
-          .then((m) => m.GenerateAIComponent),
-    },
-    {
-      path: 'assigned-cases',
-      loadComponent: () =>
-        import('./components/user/patients/assigned-cases/assigned-cases.component')
-          .then((m) => m.AssignedCasesComponent),
-    },
-  ],
-}
-
+        path: 'appointments',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './components/user/clinics/clinic-home/clinic-home-sections/clinic-appiontments-section/clinic-appiontments-section.component'
+              ).then((m) => m.ClinicAppiontmentsSectionComponent),
+          },
+          {
+            path: 'assign-case/:id',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/assign-case/assign-case.component'
+              ).then((m) => m.AssignCaseComponent),
+          },
+          {
+            path: 'start-case/:id',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/start-case/start-case.component'
+              ).then((m) => m.StartCaseComponent),
+          },
+          {
+            path: 'manual-diagnosis/:id',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/manual-diagnosis/manual-diagnosis.component'
+              ).then((m) => m.ManualDiagnosisComponent),
+          },
+          {
+            path: 'generate-ai/:id',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/generate-ai/generate-ai.component'
+              ).then((m) => m.GenerateAIComponent),
+          },
+          {
+            path: 'refer-case/:id/:clinicId',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/referral-case/referral-case.component'
+              ).then((m) => m.ReferralCaseComponent),
+          },
+          {
+            path: 'assigned-cases',
+            loadComponent: () =>
+              import(
+                './components/user/patients/assigned-cases/assigned-cases.component'
+              ).then((m) => m.AssignedCasesComponent),
+          },
+        ],
+      },
+      {
+        path: 'notifications',
+        loadComponent: () =>
+          import('./components/user/notifications/notifications.component').then(
+            (m) => m.NotificationsComponent
+          ),
+      },
     ],
   },
 

@@ -1,0 +1,60 @@
+<div class="container my-5">
+  <app-search
+    [(model)]="searchNameValue"
+    [placeholder]="'search_name_phone' | translate"
+    (search)="onSearch()"
+  >
+  </app-search>
+  <!-- Tabs Section -->
+  <div class="row mx-3">
+    <div class="col-12">
+      <div class="group-tabs d-flex align-items-center">
+        <div
+          class="tab-item"
+          [class.active]="selectedTab === 'refer_clinic'"
+          (click)="selectedTab = 'refer_clinic'"
+        >
+          {{ "refer_clinic" | translate }}
+        </div>
+        <div
+          class="tab-item"
+          [class.active]="selectedTab === 'refer_another_clinic'"
+          (click)="selectedTab = 'refer_another_clinic'"
+        >
+          {{ "refer_another_clinic" | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Refer Clinic -->
+  <div *ngIf="selectedTab === 'refer_clinic'">
+    <div class="doctor-row my-3 mx-4" *ngFor="let item of doctors">
+      <div class="doctor-info mx-1">
+        <img
+          src="../../../../../assets/media/medi.png"
+          alt="doctor"
+          class="doctor-img"
+        />
+
+        <div class="doctor-text">
+          <h3 class="doc_name">{{item.user.fullName}}</h3>
+          <h3 class="phone">+880 172524123123</h3>
+        </div>
+      </div>
+
+      <div class="mx-1">
+        <input type="radio" formControlName="doc_id" [value]="false" />
+      </div>
+    </div>
+    <app-pagination
+      [totalItems]="total"
+      [pageSize]="limit()"
+      [currentPage]="CurrentPage()"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+
+  <!-- Refer Another Clinic -->
+  <div class="row m-3" *ngIf="selectedTab === 'refer_another_clinic'"></div>
+</div>

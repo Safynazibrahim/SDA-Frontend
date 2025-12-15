@@ -1,0 +1,219 @@
+// design of notification-cards
+.doctor-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.doctor-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-gray-head-table);
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.doctor-message {
+  margin: 4px 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-gray);
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.visit-date {
+  margin: 0px 22px;
+  font-size: 1.1rem;
+  color: var(--text-gray-home-about);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  mat-icon {
+    color: var(--bg-brown-dark);
+  }
+  span {
+    color: var(--text-gray-head-table);
+  }
+}
+
+.notification-date {
+  font-size: 1.2rem;
+  color: var(--text-gray);
+}
+
+.notification-actions {
+  margin: 12px 60px 0px 60px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.details-btn {
+  margin: 0px 22px;
+  background: var(--bg-brown-gradient);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-light-gray);
+  margin-top: 16px;
+}
+
+// design of sidebar
+.appointment-details-sidebar {
+  position: fixed;
+  top: 107px;
+  right: 0;
+  width: 550px;
+  height: calc(100vh - 107px);
+  background: var(--appointment-calendar);
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid var(--appointment-calendar);
+  padding: 20px;
+  z-index: 200;
+  animation: slideIn 0.3s ease forwards;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* prevent full container scrolling */
+}
+
+.close-btn {
+  background: #ccccc6;
+  width: 34px;
+  height: 34px;
+  color: #000;
+  border-radius: 50%;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+.sidebar-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: block;       
+  padding-right: 6px;
+  scrollbar-width: thin; 
+  scrollbar-color: var(--bg-brown-medium) transparent; /* Firefox */
+  .card {
+    background-color: var(--bg-white-secondary);
+    padding: 10px;
+    border-radius: 12px;
+    color: var(--text-gray);
+    mat-icon {
+      margin: 0px 5px;
+      color: var(--bg-brown-medium);
+    }
+    p {
+      margin: 0px 5px;
+      font-size: 1.2rem;
+    }
+  }
+  .notes {
+    h3{
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-gray-head-table);
+    }
+    p{
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text-gray-home-about);
+    }
+  }
+}
+.sidebar-footer {
+  .details-btn.accept {
+    width: 20%;
+  }
+  .details-btn.reject {
+    width: 20%;
+    background: #fff !important;
+    border: 1px solid #EB4335;
+    color: #EB4335;
+  }
+  .details-btn.refer {
+    width: 60%;
+    background: transparent !important;
+    color: var(--bg-brown-medium) !important;
+    border: 1px solid var(--bg-brown-medium) !important;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/////// responsive on tablets
+@media (min-width: 768px) and (max-width: 1024px) {
+  .doctor-img {
+    width: 60px;
+    height: 60px;
+  }
+  .appointment-details-sidebar {
+    width: 100%;
+    top: 120px;
+    height: calc(100vh - 107px);
+    border-left: none;
+  }
+}
+
+////// responsive on mobile
+@media (max-width: 767.98px) {
+  .doctor-section {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .doctor-name,
+  .doctor-message {
+    font-size: 0.9rem;
+  }
+  .doctor-img {
+    width: 40px;
+    height: 40px;
+  }
+  .visit-date {
+    margin: 0px;
+    font-size: 0.8rem;
+  }
+
+  .notification-date {
+    font-size: 0.9rem;
+  }
+
+  .details-btn {
+    margin: 0px;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    text-align: center;
+  }
+
+  .appointment-details-sidebar {
+    width: 100%;
+    top: 60px;
+    height: calc(100vh - 60px);
+    border-left: none;
+  }
+  .sidebar-footer {
+    display: flex;
+    gap: 10px;          
+    width: 100%;
+  }
+}

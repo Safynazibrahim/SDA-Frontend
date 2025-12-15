@@ -502,5 +502,15 @@
   "Show Slots": "عرض المواعيد المتاحة",
   "Available Time Slots": "المواعيد المتاحة",
   "slots": "مواعيد",
-  "No available slots found": "لم يتم العثور على مواعيد متاحة"
+  "No available slots found": "لم يتم العثور على مواعيد متاحة",
+  "referaCase": "إحالة حالة",
+  "search_name_phone": "البحث بالاسم/الهاتف",
+  "refer_clinic": "إحالة إلى عيادة",
+  "refer_another_clinic": "إحالة إلى عيادة أخرى",
+  "Notifications" : "الإشعارات",
+  "date_visit" : "موعد الزيارة",
+  "referral_details": "تفاصيل الإحالة",
+  "accept": "قبول",
+  "reject": "رفض",
+  "refer_another_doc": "إحالة إلى طبيب آخر"
 }

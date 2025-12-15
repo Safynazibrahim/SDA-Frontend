@@ -494,6 +494,15 @@
   "treatment" : "Treatment",
   "treatment_plan" : "Treatment Plan",
   "instructions" : "Instructions",
-  "instructionsVisits" : "Instructions Between Visits"
-
+  "instructionsVisits" : "Instructions Between Visits",
+  "referaCase" : "Refer a case",
+  "search_name_phone" : "Search by name/phone",
+  "refer_clinic" : "Refer to clinic",
+  "refer_another_clinic" : "Refer to another clinic",
+  "Notifications" : "Notifications",
+  "date_visit" : "Date of visit",
+  "referral_details" : "Referral details",
+  "accept" : "Accept",
+  "reject" : "Reject",
+  "refer_another_doc" : "Refer to another doctor"
 }
