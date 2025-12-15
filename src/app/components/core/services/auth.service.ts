@@ -14,24 +14,24 @@ export class AuthService {
   // private refreshTokenRequest$: Observable<any> | null = null;
 
   constructor(private _ApiServiceService: ApiServiceService, private router: Router) {
-    // this.checkAuthOnStartup();
-    this.isLoggedInSubject.next(null);
+    this.checkAuthOnStartup();
+    // this.isLoggedInSubject.next(null);
 
   }
 
-  // private checkAuthOnStartup() {
-  //   // جرب refresh token مرة واحدة عند بداية التطبيق
-  //   this.refreshToken().subscribe({
-  //     next: () => {
-  //       console.log('✅ User authenticated');
-  //       this.isLoggedInSubject.next(true);
-  //     },
-  //     error: () => {
-  //       console.log('❌ User not authenticated');
-  //       this.isLoggedInSubject.next(false);
-  //     }
-  //   });
-  // }
+  private checkAuthOnStartup() {
+    // جرب refresh token مرة واحدة عند بداية التطبيق
+    this.refreshToken().subscribe({
+      next: () => {
+        console.log('✅ User authenticated');
+        this.isLoggedInSubject.next(true);
+      },
+      error: () => {
+        console.log('❌ User not authenticated');
+        this.isLoggedInSubject.next(false);
+      }
+    });
+  }
 
   setAuthStatus(status: boolean): void {
     this.isLoggedInSubject.next(status);
