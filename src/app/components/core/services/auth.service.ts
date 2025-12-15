@@ -16,22 +16,23 @@ export class AuthService {
   constructor(private _ApiServiceService: ApiServiceService, private router: Router) {
     this.checkAuthOnStartup();
     // this.isLoggedInSubject.next(null);
-
   }
 
-  private checkAuthOnStartup() {
-    // جرب refresh token مرة واحدة عند بداية التطبيق
+  checkAuthOnStartup(): Promise<void> {
+  return new Promise((resolve) => {
     this.refreshToken().subscribe({
       next: () => {
-        console.log('✅ User authenticated');
         this.isLoggedInSubject.next(true);
+        resolve();
       },
       error: () => {
-        console.log('❌ User not authenticated');
         this.isLoggedInSubject.next(false);
+        resolve();
       }
     });
-  }
+  });
+}
+
 
   setAuthStatus(status: boolean): void {
     this.isLoggedInSubject.next(status);
