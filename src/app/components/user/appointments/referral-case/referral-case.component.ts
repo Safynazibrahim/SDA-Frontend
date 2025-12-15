@@ -16,69 +16,67 @@ import { PaginationComponent } from '../../../shared/pagination/pagination.compo
     TranslateModule,
     SearchComponent,
     CommonModule,
-    PaginationComponent
+    PaginationComponent,
   ],
   templateUrl: './referral-case.component.html',
-  styleUrl: './referral-case.component.scss'
+  styleUrl: './referral-case.component.scss',
 })
-export class ReferralCaseComponent implements OnInit{
-  
+export class ReferralCaseComponent implements OnInit {
   constructor(
-    private route:ActivatedRoute,
-    private _MatSnackBar:MatSnackBar,
-    private _ReferralService:ReferralService
-  ){}
+    private route: ActivatedRoute,
+    private _MatSnackBar: MatSnackBar,
+    private _ReferralService: ReferralService
+  ) {}
 
   selectedTab: 'refer_clinic' | 'refer_another_clinic' = 'refer_clinic';
 
-  caseId:any;
-  clinicId:any;
+  caseId: any;
+  clinicId: any;
   CurrentPage = signal(1);
   limit = signal(10);
-  searchNameValue = ''; 
+  searchNameValue = '';
   searchName = signal('');
-  DoctorsData:any[] = [];
-  totalData = 0 ;
-  
+  DoctorsData: any[] = [];
+  totalData = 0;
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.clinicId = this.route.snapshot.paramMap.get('clinicId');
   }
 
   // ⚙️ Computed params (auto-update when signals change)
-    params = computed(() => ({
-      page: this.CurrentPage(),
-      limit: this.limit(),
-      ...(this.searchName().trim() && { search: this.searchName().trim() }),
-    }));
-  
-    doctorsQuery = injectQuery(() => ({
+  params = computed(() => ({
+    page: this.CurrentPage(),
+    limit: this.limit(),
+    ...(this.searchName().trim() && { search: this.searchName().trim() }),
+  }));
+
+  doctorsQuery = injectQuery(() => ({
     queryKey: ['doctors'], // ✅ shared key for caching
-    queryFn: () => this._ReferralService.getDoctorsOfClinic(this.clinicId,this.params()),
-    throwError: (err:any) => {
+    queryFn: () =>
+      this._ReferralService.getDoctorsOfClinic(this.clinicId, this.params()),
+    throwError: (err: any) => {
       this._MatSnackBar.open(err.error.message, 'Close', {
-        duration:3000,
-        panelClass:['snackbar-error']
+        duration: 3000,
+        panelClass: ['snackbar-error'],
       });
     },
   }));
-  
-    get doctors() {
-      return this.doctorsQuery.data()?.data || [];
-    }
-    get total() {
-      return this.doctorsQuery.data()?.total || 0;
-    }
-  
-    onSearch(){
-      this.CurrentPage.set(1);
-      this.searchName.set(this.searchNameValue);
-      this.doctorsQuery.refetch();
-    }
-    onPageChange(page:number){
-      this.CurrentPage.set(page);
-      this.doctorsQuery.refetch();
-    }
 
-  
+  get doctors() {
+    return this.doctorsQuery.data()?.data || [];
+  }
+  get total() {
+    return this.doctorsQuery.data()?.total || 0;
+  }
+
+  onSearch() {
+    this.CurrentPage.set(1);
+    this.searchName.set(this.searchNameValue);
+    this.doctorsQuery.refetch();
+  }
+  onPageChange(page: number) {
+    this.CurrentPage.set(page);
+    this.doctorsQuery.refetch();
+  }
 }

@@ -119,4 +119,8 @@ patch<T>(endpoint: string, data: any): Observable<T> {
   logout() {
     this.router.navigate(['/login']);
   }
+  // send device token(created from firebase)
+  saveDeviceToken(token: string) {
+  return this.post('users/me/devices-token', { token });
+}
 }

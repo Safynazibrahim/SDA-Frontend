@@ -30,9 +30,8 @@ export class AppComponent {
     this.firebaseMsg.requestPermission().then(token => {
       if (token) {
         console.log("FCM Token:", token);
-
         // 🚀 2) أبعت التوكين للباك
-        this.api.post('save-fcm-token', { token }).subscribe({
+        this.api.saveDeviceToken(token).subscribe({
           next: () => console.log("Token sent to backend successfully"),
           error: (err) => console.error("Error sending token:", err)
         });
