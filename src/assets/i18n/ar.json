@@ -512,5 +512,11 @@
   "referral_details": "تفاصيل الإحالة",
   "accept": "قبول",
   "reject": "رفض",
-  "refer_another_doc": "إحالة إلى طبيب آخر"
+  "refer_another_doc": "إحالة إلى طبيب آخر",
+  "my_account": "حسابي",
+  "profile": "الملف الشخصي",
+  "appointmentDuration" : "مدة الموعد",
+  "Enter_Appointment_Duration": "ادخل مدة الموعد",
+  "PROFILE_UPDATED_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
+  "PROFILE_UPDATE_FAILED": "فشل تحديث الملف الشخصي"
 }
