@@ -1,4 +1,10 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest, HttpEventType } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpRequest,
+  HttpEventType,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
@@ -10,11 +16,9 @@ import { environment } from '../environments/environment.prod';
 })
 export class ApiServiceService {
   private baseUrl = environment.apiUrl;
-  
 
   constructor(private http: HttpClient, private router: Router) {}
- 
-  
+
   get<T>(endpoint: string, params: any = {}): Observable<T> {
     let headers = new HttpHeaders().set('Accept', 'application/json');
 
@@ -30,46 +34,46 @@ export class ApiServiceService {
         withCredentials: true,
       })
       .pipe(
-      catchError((err) => {
-        // ✅ مهم جدًا علشان الـ interceptor يشوف الـ error
-        return throwError(() => err);
-      })
-    );
+        catchError((err) => {
+          // ✅ مهم جدًا علشان الـ interceptor يشوف الـ error
+          return throwError(() => err);
+        })
+      );
   }
-  
+
   post<T>(endpoint: string, data: any, reportProgress = false): Observable<T> {
-  let headers = new HttpHeaders();
+    let headers = new HttpHeaders();
 
-  // ❌ Don't force JSON if data is FormData
-  if (!(data instanceof FormData)) {
-    headers = headers.set('Content-Type', 'application/json');
-  }
+    // ❌ Don't force JSON if data is FormData
+    if (!(data instanceof FormData)) {
+      headers = headers.set('Content-Type', 'application/json');
+    }
 
-  if (reportProgress) {
-    const req = new HttpRequest('POST', `${this.baseUrl}/${endpoint}`, data, {
+    if (reportProgress) {
+      const req = new HttpRequest('POST', `${this.baseUrl}/${endpoint}`, data, {
+        headers,
+        reportProgress: true,
+        withCredentials: true,
+      });
+
+      return this.http.request(req).pipe(
+        map((event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            const percent = Math.round((100 * event.loaded) / event.total);
+            return { percent } as any;
+          }
+          if (event.type === HttpEventType.Response) {
+            return event.body;
+          }
+        }),
+        last()
+      );
+    }
+
+    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
       headers,
-      reportProgress: true,
       withCredentials: true,
     });
-
-    return this.http.request(req).pipe(
-      map((event: any) => {
-        if (event.type === HttpEventType.UploadProgress) {
-          const percent = Math.round((100 * event.loaded) / event.total);
-          return { percent } as any;
-        }
-        if (event.type === HttpEventType.Response) {
-          return event.body;
-        }
-      }),
-      last()
-    );
-  }
-
-  return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data, {
-    headers,
-    withCredentials: true,
-  });
   }
 
   postDirect<T>(endpoint: string, data: any): Observable<T> {
@@ -91,14 +95,27 @@ export class ApiServiceService {
       withCredentials: true,
     });
   }
-patch<T>(endpoint: string, data: any): Observable<T> {
-  let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  // patch<T>(endpoint: string, data: any): Observable<T> {
+  //   let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  return this.http.patch<T>(`${this.baseUrl}/${endpoint}`, data, {
-    headers,
-    withCredentials: true,
-  });
-}
+  //   return this.http.patch<T>(`${this.baseUrl}/${endpoint}`, data, {
+  //     headers,
+  //     withCredentials: true,
+  //   });
+  // }
+  patch<T>(endpoint: string, data: any): Observable<T> {
+    let headers = new HttpHeaders();
+
+    // ✅ if json
+    if (!(data instanceof FormData)) {
+      headers = headers.set('Content-Type', 'application/json');
+    }
+
+    return this.http.patch<T>(`${this.baseUrl}${endpoint}`, data, {
+      headers,
+      withCredentials: true,
+    });
+  }
 
   delete<T>(endpoint: string, params: any = {}): Observable<T> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');

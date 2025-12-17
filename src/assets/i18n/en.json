@@ -504,5 +504,11 @@
   "referral_details" : "Referral details",
   "accept" : "Accept",
   "reject" : "Reject",
-  "refer_another_doc" : "Refer to another doctor"
+  "refer_another_doc" : "Refer to another doctor",
+  "my_account":"My Account",
+  "profile" : "Profile",
+  "appointmentDuration" : "Appointment Duration",
+  "Enter_Appointment_Duration" : "Enter appointment duration",
+  "PROFILE_UPDATED_SUCCESS": "Profile updated successfully",
+  "PROFILE_UPDATE_FAILED": "Update failed"
 }
