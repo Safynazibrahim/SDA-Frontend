@@ -518,5 +518,7 @@
   "appointmentDuration" : "مدة الموعد",
   "Enter_Appointment_Duration": "ادخل مدة الموعد",
   "PROFILE_UPDATED_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
-  "PROFILE_UPDATE_FAILED": "فشل تحديث الملف الشخصي"
+  "PROFILE_UPDATE_FAILED": "فشل تحديث الملف الشخصي",
+  "create_clinic" : "إنشاء عيادة",
+  "edit_clinic" : "تعديل العيادة"
 }

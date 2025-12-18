@@ -111,7 +111,7 @@ export class ApiServiceService {
       headers = headers.set('Content-Type', 'application/json');
     }
 
-    return this.http.patch<T>(`${this.baseUrl}${endpoint}`, data, {
+    return this.http.patch<T>(`${this.baseUrl}/${endpoint}`, data, {
       headers,
       withCredentials: true,
     });

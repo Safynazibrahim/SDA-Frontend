@@ -2,7 +2,7 @@
   <div
     class="d-flex justify-content-between align-items-center header-responsive mb-4"
   >
-    <h2 >{{ "Clinics" | translate }}</h2>
+    <h2>{{ "Clinics" | translate }}</h2>
     <div class="d-flex gap-2">
       <button class="w-auto signin-button" (click)="goToJoinClinic()">
         {{ "join_clinic" | translate }}
@@ -41,6 +41,7 @@
           <th>{{ "City" | translate }}</th>
           <th>{{ "Created Date" | translate }}</th>
           <th>{{ "Seats" | translate }}</th>
+          <th>{{ "action" | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -53,6 +54,18 @@
           <td>{{ clinic.location }}</td>
           <td>{{ clinic.createdAt | date : "dd-MM-yyyy" }}</td>
           <td>-</td>
+          <td>
+            <div class="d-flex">
+              <mat-icon (click)="openEditModal(clinic); $event.stopPropagation()"
+                style="font-size: 16px !important; color: #0099f7;">
+                edit
+              </mat-icon>
+              <mat-icon (click)="openDeleteModal()"
+                style="font-size: 16px !important; color: red;">
+                delete
+              </mat-icon>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -86,6 +99,7 @@
           <th>{{ "Clinic Name" | translate }}</th>
           <th>{{ "City" | translate }}</th>
           <th>{{ "Owner" | translate }}</th>
+          <th>{{ "action" | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -97,6 +111,18 @@
           <td>{{ clinic.name }}</td>
           <td>{{ clinic.location }}</td>
           <td>{{ clinic.ownerName }}</td>
+          <td>
+            <div class="d-flex">
+              <mat-icon (click)="openEditModal(clinic); $event.stopPropagation()"
+                style="font-size: 16px !important; color: #0099f7;">
+                edit
+              </mat-icon>
+              <mat-icon (click)="openDeleteModal()"
+                style="font-size: 16px !important; color: red;">
+                delete
+              </mat-icon>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -123,6 +149,7 @@
           <th>{{ "Owner Name" | translate }}</th>
           <th>{{ "City" | translate }}</th>
           <th>{{ "Seats" | translate }}</th>
+          <th>{{ "action" | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -135,7 +162,18 @@
           <td>{{ clinic.ownerName }}</td>
           <td>{{ clinic.location }}</td>
           <td>-</td>
-          <!-- seats مش موجودة -->
+          <td>
+            <div class="d-flex">
+              <mat-icon (click)="openEditModal(clinic); $event.stopPropagation()"
+                style="font-size: 16px !important; color: #0099f7;">
+                edit
+              </mat-icon>
+              <mat-icon (click)="openDeleteModal()"
+                style="font-size: 16px !important; color: red;">
+                delete
+              </mat-icon>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -152,7 +190,8 @@
 
 <app-modal
   [isOpen]="isCreateClinicModalOpen"
-  title="{{ 'create_clinic' | translate }}"
+  
+  [title]="isEditMode ? ('edit_clinic' | translate) : ('create_clinic' | translate)"
   size="medium"
   (close)="closeCreateClinic()"
 >
@@ -181,7 +220,13 @@
         <mat-icon
           class="toggle-location"
           (click)="getCurrentLocation()"
-          style="cursor: pointer; position: absolute; right: 10px; top: 50%; color: black;"
+          style="
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            color: black;
+          "
           >location_on</mat-icon
         >
       </div>

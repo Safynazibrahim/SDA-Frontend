@@ -510,5 +510,6 @@
   "appointmentDuration" : "Appointment Duration",
   "Enter_Appointment_Duration" : "Enter appointment duration",
   "PROFILE_UPDATED_SUCCESS": "Profile updated successfully",
-  "PROFILE_UPDATE_FAILED": "Update failed"
+  "PROFILE_UPDATE_FAILED": "Update failed",
+  "edit_clinic" : "Edit clinic"
 }

@@ -49,4 +49,12 @@ export class ClinicService {
   getPackages(params: any) {
     return firstValueFrom(this.api.get<any>('packages', params));
   }
+  
+  getClinicById(id: string): Observable<any> {
+    return this.api.get<any>(`clinics/${id}`);
+  }
+
+  updateClinic(id: string, payload: any): Observable<any> {
+    return this.api.patch<any>(`clinics/${id}`, payload);
+  }
 }
