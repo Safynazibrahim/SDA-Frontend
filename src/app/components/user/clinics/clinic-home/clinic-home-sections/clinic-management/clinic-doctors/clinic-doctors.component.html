@@ -25,7 +25,7 @@
       </div>
     </div>
   </div>
-  
+
   <app-search
     [placeholder]="'Search the doctor' | translate"
     (search)="onSearch()"
@@ -33,23 +33,28 @@
   </app-search>
 
   <!-- Doctor Cards Grid -->
-  <div class="doctor-cards-grid mt-4">
+  <div class="doctor-cards-grid my-4">
     <div class="doctor-card" *ngFor="let doctor of doctors">
       <!-- Header -->
       <div class="card-header">
         <div class="doctor-info">
           @if(doctor.user !== undefined && doctor.user !== null){
-          <h3 class="doctor-name">{{ doctor.user.fullName }}</h3>}
-          @if(doctor.specialization !== undefined && doctor.specialization !== null){
-          <p class="specialization">{{ doctor.specialization }}</p>}
-          @if(doctor.consultationFee !== undefined && doctor.consultationFee !== null){
-            <p class="price">{{ doctor.consultationFee }} EGP</p>
+          <h3 class="doctor-name">{{ doctor.user.fullName }}</h3>
+          } @if(doctor.specialization !== undefined && doctor.specialization !==
+          null){
+          <p class="specialization">{{ doctor.specialization }}</p>
+          } @if(doctor.consultationFee !== undefined && doctor.consultationFee
+          !== null){
+          <p class="price">{{ doctor.consultationFee }} EGP</p>
           }
         </div>
         @if(doctor.stockType !== undefined && doctor.stockType !== null){
-        <span class="badge" [ngClass]="doctor.stockType ? 'stock-based' : 'non-stock-based'">
-          {{ doctor.stockType }}
-        </span>}
+        <span
+          class="badge"
+          [ngClass]="doctor.stockType ? 'stock-based' : 'non-stock-based'"
+        >
+          {{ doctor.stockType }} </span
+        >}
       </div>
 
       <!-- Schedule Days -->
@@ -57,27 +62,159 @@
         <ng-container *ngFor="let day of getScheduleDays(doctor.schedule)">
           <div class="day-badge">
             <span class="day-name">{{ getDayName(day.dayNumber) }}</span>
-            <span class="day-time">{{ day.startTime }} - {{ day.endTime }}</span>
+            <span class="day-time"
+              >{{ day.startTime }} - {{ day.endTime }}</span
+            >
           </div>
         </ng-container>
       </div>
 
       <!-- Actions -->
       <div class="card-actions">
-        <button class="action-btn">
-          <mat-icon>event</mat-icon>
+        <button class="action-btn schedule-btn" (click)="openSchedule(doctor)">
+          <!-- <mat-icon>event</mat-icon> -->
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_1539_5128)">
+              <path
+                d="M22.04 14.7463L20.6267 13.333L14.12 19.8397L11.2933 17.013L9.88 18.4263L14.12 22.6663L22.04 14.7463ZM25.3333 3.99967H24V1.33301H21.3333V3.99967H10.6667V1.33301H8V3.99967H6.66667C5.18667 3.99967 4.01333 5.19967 4.01333 6.66634L4 25.333C4 26.7997 5.18667 27.9997 6.66667 27.9997H25.3333C26.8 27.9997 28 26.7997 28 25.333V6.66634C28 5.19967 26.8 3.99967 25.3333 3.99967ZM25.3333 25.333H6.66667V10.6663H25.3333V25.333Z"
+                fill="#B19E7F"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_1539_5128">
+                <rect width="32" height="32" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+
           {{ "Set Schedule" | translate }}
         </button>
         <button class="action-btn">
-          <mat-icon>edit</mat-icon>
+          <!-- <mat-icon>edit</mat-icon> -->
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.2579 7.58594L7.26002 19.5838C6.38182 20.4621 5.68844 21.5281 5.47736 22.752C5.26423 23.9877 5.1933 25.5213 5.92462 26.2526C6.65594 26.984 8.18951 26.913 9.42526 26.6998C10.6492 26.4888 11.7152 25.7954 12.5934 24.9172L24.5913 12.9193M19.2579 7.58594C19.2579 7.58594 23.2579 3.58594 25.9246 6.2526C28.5913 8.91927 24.5913 12.9193 24.5913 12.9193M19.2579 7.58594L24.5913 12.9193"
+              stroke="#8F8F8F"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+
           {{ "Edit" | translate }}
         </button>
         <button class="action-btn delete-btn">
-          <mat-icon>delete</mat-icon>
-          
+          <!-- <mat-icon>delete</mat-icon> -->
+          <svg
+            width="30"
+            height="26"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 0C22.3137 0 25 2.68629 25 6H31C31.5523 6 32 6.44772 32 7C32 7.55228 31.5523 8 31 8L28 7.999V26C28 29.3137 25.3137 32 22 32H10C6.68629 32 4 29.3137 4 26V8H1C0.447715 8 0 7.55228 0 7C0 6.44772 0.447715 6 1 6H7C7 2.68629 9.68629 0 13 0H19ZM26 8H6V26C6 28.1422 7.68397 29.8911 9.80036 29.9951L10 30H22C24.1422 30 25.8911 28.316 25.9951 26.1996L26 26V8ZM13 14C13.5523 14 14 14.4477 14 15V22C14 22.5523 13.5523 23 13 23C12.4477 23 12 22.5523 12 22V15C12 14.4477 12.4477 14 13 14ZM19 14C19.5523 14 20 14.4477 20 15V22C20 22.5523 19.5523 23 19 23C18.4477 23 18 22.5523 18 22V15C18 14.4477 18.4477 14 19 14ZM19 2H13C10.8578 2 9.10892 3.68397 9.0049 5.80036L9 6H16H23C23 3.8578 21.316 2.10892 19.1996 2.0049L19 2Z"
+              fill="#8F8F8F"
+            />
+          </svg>
+
           {{ "Delete" | translate }}
         </button>
       </div>
     </div>
   </div>
+  <app-pagination
+    [totalItems]="totalDoctors"
+    [pageSize]="limit"
+    [currentPage]="page"
+    (pageChange)="onPageChange($event)"
+  >
+  </app-pagination>
 </div>
+<app-modal
+  [isOpen]="isScheduleOpen"
+  title="{{ 'Set Schedule' | translate }}"
+  size="medium"
+  (close)="closesetSchedule()"
+>
+  <div modal-body *ngIf="selectedDoctor">
+    <!-- Days -->
+    <div class="days-container">
+      <button
+        *ngFor="let day of days"
+        class="day-pill"
+        [class.active]="isDaySelected(day.id)"
+        (click)="toggleDay(day.id)"
+      >
+        {{ day.name }}
+      </button>
+    </div>
+
+    <!-- Times per day -->
+    <div
+      class="day-times"
+      *ngFor="let day of days"
+      [hidden]="!isDaySelected(day.id)"
+    >
+      <h5>{{ day.name }}</h5>
+
+      <div
+        class="time-row mt-2"
+        *ngFor="let slot of scheduleForm[day.id]; let i = index"
+      >
+          <div class="d-flex w-50">
+            <input
+            type="time"
+            [(ngModel)]="slot.startTime"
+            (change)="validateTime(day.id, i)"
+          />
+          </div>
+
+          <div class="d-flex flex-column w-50">
+            <input
+            type="time"
+            [(ngModel)]="slot.endTime"
+            (change)="validateTime(day.id, i)"
+            [class.input-error]="slot.hasError"
+          />
+
+          <div class="time-error" *ngIf="slot.hasError">
+            End time should be after start time
+          </div>
+          </div>
+
+        <mat-icon
+          class="delete-time"
+          *ngIf="scheduleForm[day.id].length > 1"
+          (click)="removeTime(day.id, i)"
+        >
+          delete
+        </mat-icon>
+      </div>
+
+      <p class="add-time" (click)="addTime(day.id)">+ Add Time</p>
+    </div>
+  </div>
+  <div class="page-footer-btns" modal-footer>
+    <button class="ai-btn" [disabled]="hasAnyTimeError()"
+  (click)="saveSchedule()">
+      {{ "Save" | translate }}
+    </button>
+
+    <button class="manual-btn" (click)="closesetSchedule()">
+      {{ "Cancel" | translate }}
+    </button>
+  </div>
+</app-modal>
