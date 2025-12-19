@@ -70,7 +70,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { routes } from './app/app.routes';
 
-import { importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
@@ -83,9 +83,14 @@ import {
 import { persistQueryClient } from '@tanstack/query-persist-client-core';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { credentialsInterceptor } from './app/components/core/interceptors/credentials.interceptor';
+import { AuthService } from './app/components/core/services/auth.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
+
+function authInitializer(auth: AuthService) {
+  return () => auth.checkAuthOnStartup();
 }
 
 const queryClient = new QueryClient({
@@ -111,6 +116,12 @@ persistQueryClient({
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: authInitializer,
+      deps: [AuthService],
+      multi: true
+    },
     // ✅ Single provideHttpClient with BOTH interceptors
     provideHttpClient(
       withFetch(), 

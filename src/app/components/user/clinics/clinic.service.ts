@@ -63,4 +63,11 @@ export class ClinicService {
   setSchedule(payload: any): Observable<any> {
     return this.api.post<any>('schedule', payload);
   }
+  getClinicById(id: string): Observable<any> {
+    return this.api.get<any>(`clinics/${id}`);
+  }
+
+  updateClinic(id: string, payload: any): Observable<any> {
+    return this.api.patch<any>(`clinics/${id}`, payload);
+  }
 }

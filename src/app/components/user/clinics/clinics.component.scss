@@ -76,26 +76,6 @@
   background-color: #9b8a6b;
 }
 
-input[type="radio"] {
-  appearance: none;              /* Remove browser default */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid gray;        /* White border */
-  border-radius: 50%;
-  cursor: pointer;
-  position: relative;
-  outline: none;
-  transition: all 0.2s ease;
-  background-color: transparent; /* Clear background */
-}
-
-/* When checked, fill with your accent color */
-input[type="radio"]:checked {  
-  background-color: var(--bg-brown-medium);
-}
-
 @media (max-width: 600px) {
   .search-box {
     width: 100% !important;

@@ -338,6 +338,13 @@ export const routes: Routes = [
               ).then((m) => m.GenerateAIComponent),
           },
           {
+            path: 'refer-case/:id/:clinicId',
+            loadComponent: () =>
+              import(
+                './components/user/appointments/referral-case/referral-case.component'
+              ).then((m) => m.ReferralCaseComponent),
+          },
+          {
             path: 'assigned-cases',
             loadComponent: () =>
               import(
@@ -346,9 +353,13 @@ export const routes: Routes = [
           },
          
         ],
+        path: 'notifications',
+        loadComponent: () =>
+          import('./components/user/notifications/notifications.component').then(
+            (m) => m.NotificationsComponent
+          ),
       },
     ],
   },
-
   { path: '**', redirectTo: 'home' },
 ];

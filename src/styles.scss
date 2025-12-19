@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -21,28 +20,30 @@ $SDA-warn: mat.define-palette(mat.$red-palette);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 // .mat-mdc-form-field {
-//   background-color: #fff !important;   
-//   border: 1px solid #000 !important;  
-//   border-radius: 4px;               
+//   background-color: #fff !important;
+//   border: 1px solid #000 !important;
+//   border-radius: 4px;
 // }
 
-*{
+* {
   font-family: "IBM Plex Sans";
 }
 .mat-mdc-text-field-wrapper {
   background-color: #fff !important;
-  border: 1px solid #000 !important;  
-  border-radius: 4px;  
+  border: 1px solid #000 !important;
+  border-radius: 4px;
 }
-$SDA-theme: mat.define-light-theme((
-  color: (
-    primary: $SDA-primary,
-    accent: $SDA-accent,
-    warn: $SDA-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0
-));
+$SDA-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $SDA-primary,
+      accent: $SDA-accent,
+      warn: $SDA-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -54,169 +55,169 @@ $SDA-theme: mat.define-light-theme((
 :root {
   /* Light Mode - Based on your design */
 
-  --bg-primary: #faf9f7;         
-  --bg-custom-dropdown: #faf9f7;          
-  --appointment-calendar: #fafafa;  
-  --border-appointment: #f0f0f0;    
+  --bg-primary: #faf9f7;
+  --bg-custom-dropdown: #faf9f7;
+  --appointment-calendar: #fafafa;
+  --border-appointment: #f0f0f0;
   --border-appointment-two: #e5e5e5;
   --number-pagination: #888889;
-  --appointment-card: #f8f7f4;   
-  --bg-secondary: #f5f3f0;        /* Card backgrounds - light beige */
-  --bg-form-field: #f7f5f2;         /* Section backgrounds */
-  --bg-accent: #e8e3dd;           /* Subtle accent background */
+  --appointment-card: #f8f7f4;
+  --bg-secondary: #f5f3f0; /* Card backgrounds - light beige */
+  --bg-form-field: #f7f5f2; /* Section backgrounds */
+  --bg-accent: #e8e3dd; /* Subtle accent background */
   --bg-white: #f9f9f9;
   --bg-white-secondary: #fff;
   --bg-light-gray: #ebebeb;
-  --bg-gray: #ebebeb; 
-  --brown-dark:#85775F;
+  --bg-gray: #ebebeb;
+  --brown-dark: #85775f;
   /* Brown gradient section backgrounds */
-  --bg-brown-light: #d4c4a8;      /* Light brown from your design */
-  --bg-brown-medium: #b19e7f;     /* Medium brown */
-  --bg-brown-dark: #8E7E66;       /* Darker brown */
-  --bg-brown-gradient: linear-gradient(90deg, #4B4336 0%, #B19E7F 100%);
-  --bg-sec-brown-gradient: linear-gradient(90deg, #B19E7F 0%, #4B4336 100%);
+  --bg-brown-light: #d4c4a8; /* Light brown from your design */
+  --bg-brown-medium: #b19e7f; /* Medium brown */
+  --bg-brown-dark: #8e7e66; /* Darker brown */
+  --bg-brown-gradient: linear-gradient(90deg, #4b4336 0%, #b19e7f 100%);
+  --bg-sec-brown-gradient: linear-gradient(90deg, #b19e7f 0%, #4b4336 100%);
   --focus-form-field: #d3c8b7;
   --border-form-field: #b0b0b0;
   /* Text Colors */
-  --text-black-biege:#3E372C;
-  --text-black-light-gray:#3E372C;
-  --sections-bg:#F3F0EC;
+  --text-black-biege: #3e372c;
+  --text-black-light-gray: #3e372c;
+  --sections-bg: #f3f0ec;
   --text-black-white: #131213;
   --text-gray-home-about: #565656;
   --text-gray-head-table: #434343;
-  --background-gray-head-table: #F9F9F9;
+  --background-gray-head-table: #f9f9f9;
   --border-white-gray: #eee;
   --user-name: #434343;
-  --text-primary: #2d2a26;        /* Main text - dark brown */
-  --text-secondary: #4a453f;      /* Secondary text */
-  --text-tertiary: #6b6358;       /* Muted text */
-  --text-light: #8a7f73;          /* Light text for less important content */
-  --text-on-brown: #ffffff;       /* White text on brown backgrounds */
+  --text-primary: #2d2a26; /* Main text - dark brown */
+  --text-secondary: #4a453f; /* Secondary text */
+  --text-tertiary: #6b6358; /* Muted text */
+  --text-light: #8a7f73; /* Light text for less important content */
+  --text-on-brown: #ffffff; /* White text on brown backgrounds */
   --text-on-brown-secondary: #f5f3f0; /* Light text on brown */
-  --svg-color:#F7F5F2;
+  --svg-color: #f7f5f2;
 
   --text-orange: #d5a618;
   --text-gray: #737373;
   --text-gray-sidebar: #737373;
   --text-light-gray: #bfbfbf;
   --text-light-gray-placeholder: #737373;
-    /* Orange accent colors from your design */
-  --accent-orange: #a67f00;       /* Primary orange */
+  /* Orange accent colors from your design */
+  --accent-orange: #a67f00; /* Primary orange */
   --accent-orange-light: #f39c12; /* Lighter orange */
-  --accent-orange-dark: #d35400;  /* Darker orange */
-  --accent-orange-bg: #fef7f0;    /* Very light orange background */
-  --brown-on-home: #6A5F4C;
-  --gray-on-home: #C26E07;
+  --accent-orange-dark: #d35400; /* Darker orange */
+  --accent-orange-bg: #fef7f0; /* Very light orange background */
+  --brown-on-home: #6a5f4c;
+  --gray-on-home: #c26e07;
   /* UI Colors */
-  --border-light: #e8e3dd;        /* Light borders */
-  --border-medium: #d4c4a8;       /* Medium borders */
-  --border-dark: #b19e7f;         /* Dark borders */
-  
+  --border-light: #e8e3dd; /* Light borders */
+  --border-medium: #d4c4a8; /* Medium borders */
+  --border-dark: #b19e7f; /* Dark borders */
+
   /* Interactive elements */
-  --hover-bg: #f0ede8;            /* Hover background */
-  --hover-border: #c7b59f;        /* Hover border */
-  --active-bg: #e8e3dd;           /* Active/pressed state */
-  
+  --hover-bg: #f0ede8; /* Hover background */
+  --hover-border: #c7b59f; /* Hover border */
+  --active-bg: #e8e3dd; /* Active/pressed state */
+
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(45, 42, 38, 0.06);
   --shadow-md: 0 4px 12px rgba(45, 42, 38, 0.1);
   --shadow-lg: 0 8px 24px rgba(45, 42, 38, 0.12);
   --shadow-brown: 0 4px 12px rgba(177, 158, 127, 0.2);
-  
+
   /* Medical/Dental specific colors */
-  --medical-blue: #3498db;        /* Professional blue */
-  --medical-green: #27ae60;       /* Success/healthy green */
-  --medical-red: #e74c3c;         /* Alert/urgent red */
-  --medical-teal: #16a085;        /* Calming teal */
-  
+  --medical-blue: #3498db; /* Professional blue */
+  --medical-green: #27ae60; /* Success/healthy green */
+  --medical-red: #e74c3c; /* Alert/urgent red */
+  --medical-teal: #16a085; /* Calming teal */
+
   /* Status colors */
   --success: #27ae60;
   --warning: #f39c12;
   --error: #e74c3c;
   --info: #3498db;
-  
+
   /* Focus and accessibility */
   --focus-ring: rgba(228, 126, 34, 0.4); /* Orange focus ring */
 }
 
 [data-theme="dark"] {
   /* Dark Mode - Inverted with warm tones */
-  --bg-primary: #383D36;         
-  --bg-custom-dropdown: gray;         
-  --appointment-calendar: #383D36;          
-  --border-appointment: gray;          
-  --border-appointment-two: gray;          
-  --appointment-card: #C1C3C1;          
-  --bg-secondary: #e8e3dd;        /* Slightly lighter dark brown */
-  --bg-tertiary: #2f281f;         /* Card backgrounds */
-  --bg-accent: #3a3127;           /* Accent backgrounds */
-  --bg-white: #2a2e29;    
-  --bg-white-secondary: #222520;   
-  --bg-light-gray: #EBEBEB ;
+  --bg-primary: #383d36;
+  --bg-custom-dropdown: gray;
+  --appointment-calendar: #383d36;
+  --border-appointment: gray;
+  --border-appointment-two: gray;
+  --appointment-card: #c1c3c1;
+  --bg-secondary: #e8e3dd; /* Slightly lighter dark brown */
+  --bg-tertiary: #2f281f; /* Card backgrounds */
+  --bg-accent: #3a3127; /* Accent backgrounds */
+  --bg-white: #2a2e29;
+  --bg-white-secondary: #222520;
+  --bg-light-gray: #ebebeb;
   --bg-gray: #383d36;
   --text-light-gray: #999999;
   --text-light-gray-placeholder: #999999;
   --number-pagination: #999;
-  --text-gray-sidebar:#BFBFBF;
+  --text-gray-sidebar: #bfbfbf;
   /* Brown sections in dark mode */
-  --brown-dark:#9D8A6F;
-  --bg-brown-light: #4a3f32;      /* Dark brown equivalent */
-  --bg-brown-medium: #D1B894;     /* Medium dark brown */
-  --bg-brown-dark: #8E7E66;       /* Darkest brown */
-  --bg-brown-gradient:  linear-gradient(180deg, #D1B894 0%, #6B5E4C 100%);
-  --bg-sec-brown-gradient: linear-gradient(90deg, #D1B894 0%, #6B5E4C 100%);
+  --brown-dark: #9d8a6f;
+  --bg-brown-light: #4a3f32; /* Dark brown equivalent */
+  --bg-brown-medium: #d1b894; /* Medium dark brown */
+  --bg-brown-dark: #8e7e66; /* Darkest brown */
+  --bg-brown-gradient: linear-gradient(180deg, #d1b894 0%, #6b5e4c 100%);
+  --bg-sec-brown-gradient: linear-gradient(90deg, #d1b894 0%, #6b5e4c 100%);
   /* Text Colors for dark mode */
-    --text-black-biege:#D1B894;
-    --text-black-light-gray:#F3F0EC;
-    --sections-bg:#222520;
-   --text-black-white: #ffff;
-   --background-gray-head-table: #2D312B;
-   --text-gray-home-about: #C4C4C4;
-   --text-gray-head-table: #F9F9F9;
-   --border-white-gray: #434343;
-    --user-name: #fff;
-  --text-primary: #f5f3f0;        /* Light text */
-  --text-secondary: #e8e3dd;      /* Secondary light text */
-  --text-tertiary: #d4c4a8;       /* Muted light text */
-  --text-light: #b19e7f;          /* Subtle text */
-  --text-on-brown: #f5f3f0;       /* Light text on brown */
+  --text-black-biege: #d1b894;
+  --text-black-light-gray: #f3f0ec;
+  --sections-bg: #222520;
+  --text-black-white: #ffff;
+  --background-gray-head-table: #2d312b;
+  --text-gray-home-about: #c4c4c4;
+  --text-gray-head-table: #f9f9f9;
+  --border-white-gray: #434343;
+  --user-name: #fff;
+  --text-primary: #f5f3f0; /* Light text */
+  --text-secondary: #e8e3dd; /* Secondary light text */
+  --text-tertiary: #d4c4a8; /* Muted light text */
+  --text-light: #b19e7f; /* Subtle text */
+  --text-on-brown: #f5f3f0; /* Light text on brown */
   --text-on-brown-secondary: #e8e3dd; /* Secondary text on brown */
-  --svg-color:#F7F5F2;
+  --svg-color: #f7f5f2;
   /* Orange accents remain similar but adjusted */
-  --accent-orange: #a67f00;       /* Brighter orange for dark mode */
+  --accent-orange: #a67f00; /* Brighter orange for dark mode */
   --accent-orange-light: #e67e22; /* Orange light */
-  --accent-orange-dark: #e67e22;  /* Orange dark */
-  --accent-orange-bg: #2d1f0a;    /* Dark orange background */
-  --brown-on-home: #6A5F4C;
-  --gray-on-home: #C26E07;
+  --accent-orange-dark: #e67e22; /* Orange dark */
+  --accent-orange-bg: #2d1f0a; /* Dark orange background */
+  --brown-on-home: #6a5f4c;
+  --gray-on-home: #c26e07;
   /* UI Colors for dark mode */
-  --border-light: #3a3127;        /* Dark borders */
-  --border-medium: #4a3f32;       /* Medium dark borders */
-  --border-dark: #5c4f3e;         /* Lighter borders */
-  
+  --border-light: #3a3127; /* Dark borders */
+  --border-medium: #4a3f32; /* Medium dark borders */
+  --border-dark: #5c4f3e; /* Lighter borders */
+
   /* Interactive elements */
-  --hover-bg: #2f281f;            /* Dark hover */
-  --hover-border: #5c4f3e;        /* Hover border */
-  --active-bg: #3a3127;           /* Active state */
-  
+  --hover-bg: #2f281f; /* Dark hover */
+  --hover-border: #5c4f3e; /* Hover border */
+  --active-bg: #3a3127; /* Active state */
+
   /* Shadows for dark mode */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   --shadow-brown: 0 4px 12px rgba(0, 0, 0, 0.3);
-  
+
   /* Medical colors adjusted for dark mode */
   --medical-blue: #5dade2;
   --medical-green: #58d68d;
   --medical-red: #ec7063;
   --medical-teal: #48c9b0;
-  
+
   /* Status colors for dark mode */
   --success: #58d68d;
   --warning: #f7dc6f;
   --error: #ec7063;
   --info: #5dade2;
-  
+
   /* Focus ring for dark mode */
   --focus-ring: rgba(243, 156, 18, 0.5);
 }
@@ -233,8 +234,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -242,17 +243,37 @@ body {
 }
 
 /* Utility classes for your dental theme */
-.bg-primary { background-color: var(--bg-primary); }
-.bg-secondary { background-color: var(--bg-secondary); }
-.bg-tertiary { background-color: var(--bg-tertiary); }
-.bg-brown { background: var(--bg-brown-gradient); }
-.bg-orange-accent { background-color: var(--accent-orange-bg); }
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+.bg-brown {
+  background: var(--bg-brown-gradient);
+}
+.bg-orange-accent {
+  background-color: var(--accent-orange-bg);
+}
 
-.text-primary { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-tertiary { color: var(--text-tertiary); }
-.text-orange { color: var(--accent-orange); }
-.text-on-brown { color: var(--text-on-brown); }
+.text-primary {
+  color: var(--text-primary);
+}
+.text-secondary {
+  color: var(--text-secondary);
+}
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+.text-orange {
+  color: var(--accent-orange);
+}
+.text-on-brown {
+  color: var(--text-on-brown);
+}
 
 /* Card styles matching your design */
 .dental-card {
@@ -281,13 +302,14 @@ body {
 }
 
 .brown-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>')
+    repeat;
   opacity: 0.3;
 }
 
@@ -337,13 +359,21 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-.main-title h3 {
+.main-title {
+  h3 {
     font-size: 1.7rem;
     font-weight: 500;
-    color: var(--text-gray-home-about);
-    span mat-icon {
+    color: var(--text-gray);
+  }
+  span mat-icon {
+    color: var(--text-gray-head-table);
     cursor: pointer;
-    font-size: 30px; 
+    font-size: 30px;
+  }
+  .active {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-gray-head-table);
   }
 }
 
@@ -353,7 +383,7 @@ body {
     padding: 1.5rem;
     border-radius: 12px;
   }
-  
+
   .brown-section {
     padding: 2rem 1rem;
     border-radius: 16px;
@@ -362,129 +392,130 @@ body {
 
 /* Smooth transitions for theme switching */
 .theme-transition {
-  transition: 
-    background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /////////////////////global styles///////////////////
 //styles of signin and signup
 .container {
-    background-color: var(--bg-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 .form-section {
-            border-radius: 10px;
-            padding: 50px;
-            background: #fff;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            z-index: 1;
+  border-radius: 10px;
+  padding: 50px;
+  background: #fff;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
 }
-        
-        .form-subtitle {
-            color: var(--text-gray);
-            font-size: 16px;
-            margin:0px 0px 15px 0px;
-        }
-        
-        .signup-link {
-            color: var(--bg-brown-medium);
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            color: var(--text-gray);
-            font-weight: 500;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
 
-        label.required::after {
+.form-subtitle {
+  color: var(--text-gray);
+  font-size: 16px;
+  margin: 0px 0px 15px 0px;
+}
+
+.signup-link {
+  color: var(--bg-brown-medium);
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  color: var(--text-gray);
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+label.required::after {
   content: " *";
   color: red;
 }
-        
-        .form-input {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid var(--border-form-field);
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #fafafa;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border: 3px solid var(--focus-form-field);
-            background: var(--bg-form-field);
-        }
-        
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-        
-        .remember-me input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--bg-brown-medium);
-            cursor: pointer;
-        }
-        
-        .remember-me label {
-            color: var(--text-gray);;
-            font-size: 14px;
-            margin: 0;
-            cursor: pointer;
-        }
-        
-        .forgot-password {
-            color: var(--text-gray);;
-            text-decoration: underline;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        
-        .signin-button {
-            width: 100%;
-            padding: 16px;
-            background: var(--bg-brown-gradient);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
 
-        .signin-button:disabled {
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid var(--border-form-field);
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.form-input:focus {
+  outline: none;
+  border: 3px solid var(--focus-form-field);
+  background: var(--bg-form-field);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--bg-brown-medium);
+  cursor: pointer;
+}
+
+.remember-me label {
+  color: var(--text-gray);
+  font-size: 14px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.forgot-password {
+  color: var(--text-gray);
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.signin-button {
+  width: 100%;
+  padding: 10px 16px;
+  background: var(--bg-brown-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signin-button:disabled {
   background: var(--bg-brown-gradient); /* muted gradient */
   color: white;
   cursor: not-allowed;
@@ -492,69 +523,68 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   filter: grayscale(0.3);
 }
 
+.divider {
+  text-align: center;
+  margin: 10px 0;
+  position: relative;
+  color: var(--text-gray);
+  font-size: 14px;
+}
 
-        .divider {
-            text-align: center;
-            margin: 10px 0;
-            position: relative;
-            color: var(--text-gray);
-            font-size: 14px;
-        }
-        
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--text-gray);
-            z-index: 1;
-        }
-        
-        .divider span {
-            background: #fff;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .social-login {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .social-button {
-            color: black;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #e1e1e1;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 18px;
-        }
-        
-        .social-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        ///////dropdown
-        .dropdown-toggle:focus {
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--text-gray);
+  z-index: 1;
+}
+
+.divider span {
+  background: #fff;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.social-login {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.social-button {
+  color: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #e1e1e1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.social-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+///////dropdown
+.dropdown-toggle:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 .dropdown-menu {
   background-color: var(--bg-primary) !important;
-  
-    .dropdown-item {
-      color: var(--text-gray-head-table);
+
+  .dropdown-item {
+    color: var(--text-gray-head-table);
     &:hover {
       background-color: var(--bg-brown-light);
       cursor: pointer;
@@ -562,3 +592,74 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+// radio-button-design
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--bg-brown-medium) !important;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+
+/* Inner circle */
+input[type="radio"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px; /* size of inner circle */
+  height: 10px;
+  background-color: var(--bg-brown-medium);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0); /* hidden */
+  transition: 0.2s ease;
+}
+
+/* When checked, show inner circle */
+input[type="radio"]:checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/////// responsive on tablets
+@media (min-width: 768px) and (max-width: 1024px) {
+  .signin-button {
+    padding: 6px 10px;
+    font-size: 15px;
+  }
+}
+
+////// responsive on mobile
+@media (max-width: 767.98px) {
+  .signin-button {
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  input[type="radio"] {
+    width: 15px;
+    height: 15px;
+  }
+  input[type="radio"]::after {
+    width: 9px;
+    height: 9px;
+  }
+  .main-title {
+  h3 {
+    font-size: 1.2rem;
+  }
+  span mat-icon {
+    font-size: 20px;
+  }
+  .active {
+    font-size: 1.2rem;
+  }
+}
+
+  
+}
