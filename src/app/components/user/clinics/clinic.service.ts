@@ -70,4 +70,7 @@ export class ClinicService {
   updateClinic(id: string, payload: any): Observable<any> {
     return this.api.patch<any>(`clinics/${id}`, payload);
   }
+  editDoctor(clinicId: string, doctorId: string, payload: any): Observable<any> {
+    return this.api.patch<any>(`clinics/${clinicId}/doctors/${doctorId}`, payload);
+  }
 }

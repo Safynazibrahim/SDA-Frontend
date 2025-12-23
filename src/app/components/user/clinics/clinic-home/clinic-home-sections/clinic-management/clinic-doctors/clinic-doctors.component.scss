@@ -55,7 +55,7 @@
     font-size: 24px;
     font-weight: 400;
     color: #434343;
-    margin: 0 0 4px 0;
+    margin: 0;
   }
 
   .specialization {
@@ -66,28 +66,28 @@
   }
 
   .price {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
-    color: #333;
+    color: #8E7E66;
     margin: 0;
   }
 }
 
 .badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 12px;
+  border-radius: 7px;
+  font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
 
   &.stock-based {
-    background-color: #e8f5e9;
-    color: #2e7d32;
+    background-color: #EBF6EE;
+    color: #34A853;
   }
 
   &.non-stock-based {
-    background-color: #fff3e0;
-    color: #e65100;
+    background-color: #F9F1E6;
+    color: #C26E07;
   }
 }
 
@@ -96,8 +96,6 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #f0f0f0;
 }
 
 .day-badge {
@@ -125,6 +123,8 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  padding-top: 12px;
+    border-top: 2px solid #f0f0f0;
 }
 
 .action-btn {
