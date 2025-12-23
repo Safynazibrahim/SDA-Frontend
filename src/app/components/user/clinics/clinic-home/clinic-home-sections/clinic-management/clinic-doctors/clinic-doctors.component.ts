@@ -13,14 +13,14 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-clinic-doctors',
   standalone: true,
-  imports: [CommonModule, TranslateModule, SearchComponent, MatIcon, RouterLink , PaginationComponent , ModalComponent , FormsModule ] ,
+  imports: [CommonModule, TranslateModule, SearchComponent, MatIcon, RouterLink, PaginationComponent, ModalComponent, FormsModule],
   templateUrl: './clinic-doctors.component.html',
   styleUrl: './clinic-doctors.component.scss'
 })
 export class ClinicDoctorsComponent implements OnInit {
-  clinicId: string = ''; 
+  clinicId: string = '';
   page: number = 1;
-  limit: number = 10; 
+  limit: number = 10;
   doctors: any;
   totalDoctors: number = 0;
   dayNames: { [key: string]: string } = {
@@ -33,73 +33,84 @@ export class ClinicDoctorsComponent implements OnInit {
     '6': 'Friday'
   };
   isScheduleOpen = false;
-selectedDoctor: any = null;
-days = [
-  { id: 0, name: 'Saturday' },
-  { id: 1, name: 'Sunday' },
-  { id: 2, name: 'Monday' },
-  { id: 3, name: 'Tuesday' },
-  { id: 4, name: 'Wednesday' },
-  { id: 5, name: 'Thursday' },
-  { id: 6, name: 'Friday' }
-];
+  isEditDoctorOpen = false;
+  isOwner: boolean = false;
+  selectedDoctor: any = null;
+  days = [
+    { id: 0, name: 'Saturday' },
+    { id: 1, name: 'Sunday' },
+    { id: 2, name: 'Monday' },
+    { id: 3, name: 'Tuesday' },
+    { id: 4, name: 'Wednesday' },
+    { id: 5, name: 'Thursday' },
+    { id: 6, name: 'Friday' }
+  ];
+editDoctorForm = {
+  stockType: 'clinic',        // default
+  consultationFee: null,
+  doctorShare: null
+};
 
-// ده اللي هنشتغل عليه داخل المودال
-scheduleForm: { [key: number]: any[] } = {};
+
+  // ده اللي هنشتغل عليه داخل المودال
+  scheduleForm: { [key: number]: any[] } = {};
 
   constructor(
     private clinicService: ClinicService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.clinicId = this.route.parent?.parent?.snapshot.paramMap.get('id') || '';
-    console.log("DONIA ID: ", this.clinicId);
+    // Query params are globally accessible on the route snapshot
+    this.isOwner = this.route.snapshot.queryParamMap.get('isOwner') === 'true';
+    console.log("Clinic ID:", this.clinicId);
+    console.log("Is Owner:", this.isOwner);
     this.loadDoctors();
   }
 
   loadDoctors() {
-  if (this.clinicId) {
-    this.clinicService
-      .getDoctorsForClinic(this.clinicId, this.page, this.limit)
-      .subscribe((response: any) => {
-        this.doctors = response.data;
-        this.totalDoctors = response.total;
-      });
+    if (this.clinicId) {
+      this.clinicService
+        .getDoctorsForClinic(this.clinicId, this.page, this.limit)
+        .subscribe((response: any) => {
+          this.doctors = response.data;
+          this.totalDoctors = response.total;
+        });
+    }
   }
-}
-onPageChange(page: number) {
-  this.page = page;
-  this.loadDoctors();
-}
-validateTime(dayId: number, index: number) {
-  const slot = this.scheduleForm[dayId][index];
+  onPageChange(page: number) {
+    this.page = page;
+    this.loadDoctors();
+  }
+  validateTime(dayId: number, index: number) {
+    const slot = this.scheduleForm[dayId][index];
 
-  if (!slot.startTime || !slot.endTime) {
-    slot.hasError = false;
-    return;
+    if (!slot.startTime || !slot.endTime) {
+      slot.hasError = false;
+      return;
+    }
+
+    slot.hasError = slot.endTime < slot.startTime;
   }
 
-  slot.hasError = slot.endTime < slot.startTime;
-}
-
-removeTime(dayId: number, index: number) {
-  if (this.scheduleForm[dayId].length > 1) {
-    this.scheduleForm[dayId].splice(index, 1);
+  removeTime(dayId: number, index: number) {
+    if (this.scheduleForm[dayId].length > 1) {
+      this.scheduleForm[dayId].splice(index, 1);
+    }
   }
-}
 
 
   // فانكشن لاستخراج الأيام والمواعيد من الـ schedule
   getScheduleDays(schedule: any): any[] {
     if (!schedule) return [];
-    
+
     const days: any[] = [];
-    
+
     // نلف على كل يوم في الـ schedule
     Object.keys(schedule).forEach(dayNumber => {
       const slots = schedule[dayNumber];
-      
+
       if (slots && slots.length > 0) {
         slots.forEach((slot: any) => {
           days.push({
@@ -110,7 +121,7 @@ removeTime(dayId: number, index: number) {
         });
       }
     });
-    
+
     return days;
   }
 
@@ -123,95 +134,137 @@ removeTime(dayId: number, index: number) {
     console.log('Searching...');
   }
   openSchedule(doctor: any) {
-  this.selectedDoctor = doctor;
-  this.isScheduleOpen = true;
+    this.selectedDoctor = doctor;
+    this.isScheduleOpen = true;
 
-  this.scheduleForm = {};
+    this.scheduleForm = {};
 
-  this.days.forEach(day => {
-    this.scheduleForm[day.id] =
-  doctor.schedule?.[day.id]
-    ? doctor.schedule[day.id].map((s: any) => ({
-        startTime: s.startTime,
-        endTime: s.endTime,
-        hasError: false
-      }))
-    : [];
+    this.days.forEach(day => {
+      this.scheduleForm[day.id] =
+        doctor.schedule?.[day.id]
+          ? doctor.schedule[day.id].map((s: any) => ({
+            startTime: s.startTime,
+            endTime: s.endTime,
+            hasError: false
+          }))
+          : [];
 
-  });
-}
-isDaySelected(dayId: number): boolean {
-  return this.scheduleForm[dayId]?.length > 0;
-}
-toggleDay(dayId: number) {
-  if (this.scheduleForm[dayId].length === 0) {
-    this.scheduleForm[dayId].push({
-  startTime: '00:00',
-  endTime: '00:00',
-  hasError: false
-});
-
-  } else {
-    this.scheduleForm[dayId] = [];
+    });
   }
-}
-addTime(dayId: number) {
-  this.scheduleForm[dayId].push({
-    startTime: '',
-    endTime: '',
-    hasError: false
-  });
-}
+  isDaySelected(dayId: number): boolean {
+    return this.scheduleForm[dayId]?.length > 0;
+  }
+  toggleDay(dayId: number) {
+    if (this.scheduleForm[dayId].length === 0) {
+      this.scheduleForm[dayId].push({
+        startTime: '00:00',
+        endTime: '00:00',
+        hasError: false
+      });
 
-hasAnyTimeError(): boolean {
-  return Object.values(this.scheduleForm).some(daySlots =>
-    daySlots.some(slot => slot.hasError)
-  );
-}
+    } else {
+      this.scheduleForm[dayId] = [];
+    }
+  }
+  addTime(dayId: number) {
+    this.scheduleForm[dayId].push({
+      startTime: '',
+      endTime: '',
+      hasError: false
+    });
+  }
 
-saveSchedule() {
-  if (this.hasAnyTimeError()) return;
+  hasAnyTimeError(): boolean {
+    return Object.values(this.scheduleForm).some(daySlots =>
+      daySlots.some(slot => slot.hasError)
+    );
+  }
 
-  const schedules = Object.keys(this.scheduleForm)
-    .map(dayKey => {
-      const hours = this.scheduleForm[+dayKey]
-        .filter(slot => slot.startTime && slot.endTime)
-        .map(slot => ({
-          startTime: slot.startTime,
-          endTime: slot.endTime
-        }));
+  saveSchedule() {
+    if (this.hasAnyTimeError()) return;
 
-      if (hours.length === 0) return null;
+    const schedules = Object.keys(this.scheduleForm)
+      .map(dayKey => {
+        const hours = this.scheduleForm[+dayKey]
+          .filter(slot => slot.startTime && slot.endTime)
+          .map(slot => ({
+            startTime: slot.startTime,
+            endTime: slot.endTime
+          }));
 
-      return {
-        day: +dayKey,
-        hours
-      };
-    })
-    .filter(item => item !== null);
+        if (hours.length === 0) return null;
 
-  const payload = {
-    clinicId: this.clinicId,
-    doctorId: this.selectedDoctor.doctorId,
-    schedules
+        return {
+          day: +dayKey,
+          hours
+        };
+      })
+      .filter(item => item !== null);
+
+    const payload = {
+      clinicId: this.clinicId,
+      doctorId: this.selectedDoctor.doctorId,
+      schedules
+    };
+
+    console.log('FINAL PAYLOAD:', payload);
+
+    this.clinicService.setSchedule(payload).subscribe({
+      next: () => {
+        this.closesetSchedule();
+        this.loadDoctors(); // refresh cards
+      },
+      error: err => {
+        console.error('Schedule error', err);
+      }
+    });
+  }
+
+  closesetSchedule() {
+    this.isScheduleOpen = false;
+    this.selectedDoctor = null;
+  }
+  closeEditDoctor() {
+    this.isEditDoctorOpen = false;
+    this.selectedDoctor = null;
+  }
+  editDoctor(doctor: any) {
+  this.selectedDoctor = doctor;
+
+  this.editDoctorForm = {
+    stockType: doctor.stockType ?? 'clinic',
+    consultationFee: doctor.consultationFee ?? null,
+    doctorShare: doctor.doctorShare ?? null
   };
 
-  console.log('FINAL PAYLOAD:', payload);
-
-  this.clinicService.setSchedule(payload).subscribe({
-    next: () => {
-      this.closesetSchedule();
-      this.loadDoctors(); // refresh cards
-    },
-    error: err => {
-      console.error('Schedule error', err);
-    }
-  });
+  this.isEditDoctorOpen = true;
 }
+saveEditDoctor() {
+  if (!this.selectedDoctor) return;
 
-closesetSchedule() {
-  this.isScheduleOpen = false;
-  this.selectedDoctor = null;
+  const payload = {
+    stockType: this.editDoctorForm.stockType,
+    consultationFee: this.editDoctorForm.consultationFee,
+    doctorShare: this.editDoctorForm.doctorShare
+  };
+
+  console.log('Edit Doctor Payload:', payload);
+
+  this.clinicService
+    .editDoctor(
+      this.clinicId,
+      this.selectedDoctor.doctorId,
+      payload
+    )
+    .subscribe({
+      next: () => {
+        this.closeEditDoctor();
+        this.loadDoctors(); // refresh cards
+      },
+      error: err => {
+        console.error('Edit doctor error', err);
+      }
+    });
 }
 
 }
