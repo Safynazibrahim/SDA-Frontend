@@ -520,5 +520,13 @@
   "PROFILE_UPDATED_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
   "PROFILE_UPDATE_FAILED": "فشل تحديث الملف الشخصي",
   "create_clinic" : "إنشاء عيادة",
-  "edit_clinic" : "تعديل العيادة"
+  "edit_clinic" : "تعديل العيادة",
+  "create_custom_package": "إنشاء باقة مخصصة",
+  "customize_clinic_package": "تخصيص باقة العيادة",
+  "SubscriptionDuration": "مدة الاشتراك",
+  "Months": "شهور",
+  "Limited": "محدود",
+  "UnLimited": "غير محدود",
+  "Create & Pay": "إنشاء والدفع",
+  "Total": "الإجمالي"
 }

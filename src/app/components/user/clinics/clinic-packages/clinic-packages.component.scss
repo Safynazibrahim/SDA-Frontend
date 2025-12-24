@@ -1,5 +1,5 @@
 .package-max-width {
-  width: 1130px !important;
+  // width: 1130px !important;
   .route {
     color: #8f8f8f;
     font-weight: 400;
@@ -132,4 +132,43 @@
       height: auto;
     }
   }
+}
+
+
+
+//// duration options 
+.duration-options button.active {
+  background: #2f3e2b;
+  color: #fff;
+  border-radius: 20px;
+}
+////// features
+.card-body.feature {
+  max-height: 250px;
+  overflow-y: auto;
+  scrollbar-width: thin; 
+  scrollbar-color: var(--bg-brown-medium) transparent; /* Firefox */
+}
+.feature-card {
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.feature-card.active {
+  border-color: #2f3e2b;
+  background: #f5f2ea;
+}
+
+.controls {
+  margin-top: 12px;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

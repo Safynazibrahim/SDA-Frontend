@@ -1,38 +1,36 @@
 <div class="container py-4 package-max-width">
-  <!-- <div class="d-flex align-items-center mb-3">
-    <h5 class="fw-bold mb-0">{{ "Clinic" | translate }}</h5>
-
-    <a
-      [routerLink]="['/dashboard/clinics']"
-      class="m-0 p-0 text-black mt-2 arrow-color"
-      style="cursor: pointer"
+  <div class="row d-flex align-items-center justify-content-between mb-3">
+    <div class="main-title d-flex align-items-center gap-2 col-lg-6 col-md-12">
+      <h3>
+        {{ "Clinic" | translate }}
+      </h3>
+      <span style="cursor: pointer" [routerLink]="['/dashboard/clinics']">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </span>
+      <h2 class="active">
+        {{ "Clinic Packages" | translate }}
+      </h2>
+    </div>
+    <div
+      class="col-lg-6 col-md-12 d-flex justify-content-end align-items-center"
     >
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </a>
-    <h5 class="fw-bold mb-0">{{ "Clinic Packages" | translate }}</h5>
-  </div> -->
-  <div class="d-flex align-items-center mb-2">
-    <p class="mb-0 route">{{ "Clinic" | translate }}</p>
-
-    <a
-      [routerLink]="['/dashboard/clinics']"
-      class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
-      style="cursor: pointer"
-    >
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </a>
-    <p class="mb-0 clinicActive">{{ "Clinic Packages" | translate }}</p>
+      <button
+        [routerLink]="['/dashboard/clinics/clinicPackage/customize']"
+        class="signin-button w-50 w-auto d-flex align-items-center justify-content-center"
+      >
+        {{ "create_custom_package" | translate }}
+      </button>
+    </div>
   </div>
-  <div class="select-clinic">
-    <!-- <h5 class="mb-2">{{ "Select Clinics" | translate }}</h5> -->
 
+  <div class="select-clinic">
     <mat-form-field class="w-100">
       <mat-label>{{ "Select Package Type" | translate }}</mat-label>
       <mat-select
         [value]="selectedType()"
         (selectionChange)="onTypeChange($event)"
       >
-      <mat-option [value]="null">{{ 'All Types' | translate }}</mat-option>
+        <mat-option [value]="null">{{ "All Types" | translate }}</mat-option>
         <mat-option value="clinic">{{
           "Clinic Packages" | translate
         }}</mat-option>
@@ -44,7 +42,7 @@
   </div>
 
   <div class="row g-4 mb-3">
-    <div class="col-md-4" *ngFor="let pkg of packages">
+    <div class="col-md-6 col-lg-4" *ngFor="let pkg of packages">
       <div class="card package-card" [class.premium]="isPremium(pkg)">
         <div class="badge" *ngIf="isPremium(pkg)">
           <span class="padge-pro">{{ "Pro" | translate }}</span>
@@ -65,8 +63,9 @@
           </svg>
         </div>
         <div class="card-header text-center">
-            <h5>{{ getPackageName(pkg) }}
-              <svg
+          <h5>
+            {{ getPackageName(pkg) }}
+            <svg
               *ngIf="isPremium(pkg)"
               xmlns="http://www.w3.org/2000/svg"
               width="29"
@@ -79,11 +78,11 @@
                 fill="white"
               />
             </svg>
-            </h5>
+          </h5>
         </div>
         <p class="price">
           {{ pkg.price }} USD / {{ pkg.durationInMonths }}
-          {{ 'Months' | translate }}
+          {{ "Months" | translate }}
         </p>
 
         <div class="card-body">
@@ -108,77 +107,11 @@
             </li>
           </ul>
           <button class="btn btn-subscribe w-100 mt-3">
-            {{ 'Subscribe Now' | translate }}
-          </button>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="col-md-4">
-      <div class="card package-card">
-        <div class="card-header text-center">
-          <h5>{{ "Basic" | translate }}</h5>
-        </div>
-        <p class="price">200 USD/Month</p>
-
-        <div class="card-body">
-          <ul class="features">
-            <li *ngFor="let i of [1, 2, 3, 4, 5]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="21"
-                height="20"
-                viewBox="0 0 21 20"
-                fill="none"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12.0794 0.638839C11.0702 -0.212947 9.59389 -0.212946 8.58472 0.638839L7.66566 1.41457C7.23673 1.7766 6.70594 1.99648 6.14664 2.04378L4.94823 2.14512C3.63234 2.25641 2.58844 3.30031 2.47715 4.6162L2.37581 5.81461C2.32851 6.37391 2.10864 6.9047 1.74661 7.33364L0.97087 8.25269C0.119084 9.26186 0.119086 10.7382 0.97087 11.7473L1.74661 12.6664C2.10864 13.0953 2.32851 13.6261 2.37581 14.1854L2.47715 15.3839C2.58844 16.6998 3.63234 17.7437 4.94823 17.8549L6.14664 17.9562C6.70594 18.0036 7.23673 18.2234 7.66567 18.5855L8.58472 19.3612C9.59389 20.2129 11.0702 20.2129 12.0794 19.3612L12.9984 18.5855C13.4273 18.2234 13.9582 18.0036 14.5174 17.9562L15.7159 17.8549C17.0318 17.7437 18.0757 16.6998 18.1869 15.3839L18.2882 14.1854C18.3356 13.6261 18.5555 13.0953 18.9175 12.6664L19.6933 11.7473C20.545 10.7382 20.545 9.26186 19.6933 8.25269L18.9175 7.33362C18.5555 6.9047 18.3356 6.37391 18.2882 5.81461L18.1869 4.6162C18.0757 3.30031 17.0318 2.25641 15.7159 2.14512L14.5174 2.04378C13.9582 1.99648 13.4273 1.7766 12.9984 1.41457L12.0794 0.638839ZM15.2581 8.15307C15.7342 7.677 15.7342 6.90514 15.2581 6.42908C14.7821 5.953 14.0102 5.953 13.5341 6.42908L8.97812 10.9851L7.13113 9.13807C6.65506 8.66199 5.8832 8.66199 5.40714 9.13807C4.93106 9.61414 4.93106 10.386 5.40714 10.8621L8.11614 13.571C8.5922 14.0471 9.36406 14.0471 9.84013 13.571L15.2581 8.15307Z"
-                  fill="#8F8F8F"
-                />
-              </svg>
-              {{ "Features usage limit" | translate }}
-            </li>
-          </ul>
-          <button class="btn btn-subscribe w-100 mt-3">
             {{ "Subscribe Now" | translate }}
           </button>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card package-card">
-        <div class="card-header text-center">
-          <h5>{{ "Standard" | translate }}</h5>
-        </div>
-        <p class="price">200 USD/Month</p>
-
-        <div class="card-body">
-          <ul class="features">
-            <li *ngFor="let i of [1, 2, 3, 4, 5]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="21"
-                height="20"
-                viewBox="0 0 21 20"
-                fill="none"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12.0794 0.638839C11.0702 -0.212947 9.59389 -0.212946 8.58472 0.638839L7.66566 1.41457C7.23673 1.7766 6.70594 1.99648 6.14664 2.04378L4.94823 2.14512C3.63234 2.25641 2.58844 3.30031 2.47715 4.6162L2.37581 5.81461C2.32851 6.37391 2.10864 6.9047 1.74661 7.33364L0.97087 8.25269C0.119084 9.26186 0.119086 10.7382 0.97087 11.7473L1.74661 12.6664C2.10864 13.0953 2.32851 13.6261 2.37581 14.1854L2.47715 15.3839C2.58844 16.6998 3.63234 17.7437 4.94823 17.8549L6.14664 17.9562C6.70594 18.0036 7.23673 18.2234 7.66567 18.5855L8.58472 19.3612C9.59389 20.2129 11.0702 20.2129 12.0794 19.3612L12.9984 18.5855C13.4273 18.2234 13.9582 18.0036 14.5174 17.9562L15.7159 17.8549C17.0318 17.7437 18.0757 16.6998 18.1869 15.3839L18.2882 14.1854C18.3356 13.6261 18.5555 13.0953 18.9175 12.6664L19.6933 11.7473C20.545 10.7382 20.545 9.26186 19.6933 8.25269L18.9175 7.33362C18.5555 6.9047 18.3356 6.37391 18.2882 5.81461L18.1869 4.6162C18.0757 3.30031 17.0318 2.25641 15.7159 2.14512L14.5174 2.04378C13.9582 1.99648 13.4273 1.7766 12.9984 1.41457L12.0794 0.638839ZM15.2581 8.15307C15.7342 7.677 15.7342 6.90514 15.2581 6.42908C14.7821 5.953 14.0102 5.953 13.5341 6.42908L8.97812 10.9851L7.13113 9.13807C6.65506 8.66199 5.8832 8.66199 5.40714 9.13807C4.93106 9.61414 4.93106 10.386 5.40714 10.8621L8.11614 13.571C8.5922 14.0471 9.36406 14.0471 9.84013 13.571L15.2581 8.15307Z"
-                  fill="#8F8F8F"
-                />
-              </svg>
-              {{ "Features usage limit" | translate }}
-            </li>
-          </ul>
-          <button class="btn btn-subscribe w-100 mt-3">
-            {{ "Subscribe Now" | translate }}
-          </button>
-        </div>
-      </div>
-    </div> -->
   </div>
 
   <app-pagination
@@ -187,5 +120,4 @@
     [currentPage]="CurrentPage()"
     (pageChange)="onPageChange($event)"
   ></app-pagination>
-
 </div>
