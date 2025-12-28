@@ -520,5 +520,21 @@
   "PROFILE_UPDATED_SUCCESS": "تم تحديث الملف الشخصي بنجاح",
   "PROFILE_UPDATE_FAILED": "فشل تحديث الملف الشخصي",
   "create_clinic" : "إنشاء عيادة",
-  "edit_clinic" : "تعديل العيادة"
+  "edit_clinic" : "تعديل العيادة",
+  "create_custom_package": "إنشاء باقة مخصصة",
+  "customize_clinic_package": "تخصيص باقة العيادة",
+  "SubscriptionDuration": "مدة الاشتراك",
+  "Months": "شهور",
+  "Limited": "محدود",
+  "UnLimited": "غير محدود",
+  "Create & Pay": "إنشاء والدفع",
+  "Total": "الإجمالي",
+  "search_doc_clinic_loc" : "البحث بالدكتور/العيادة/الموقع",
+  "recoveryDays": "أيام التعافي",
+  "ENTER_recoveryDays": "أدخل عدد أيام التعافي",
+  "Notes": "ملاحظات",
+  "ENTER_Your_Notes": "أدخل ملاحظاتك",
+  "send_request": "إرسال الطلب",
+  "no_doctors_found": "لا يوجد أطباء متاحون حالياً.",
+  "choose_doctor_from": "اختر طبيباً من"
 }

@@ -511,5 +511,21 @@
   "Enter_Appointment_Duration" : "Enter appointment duration",
   "PROFILE_UPDATED_SUCCESS": "Profile updated successfully",
   "PROFILE_UPDATE_FAILED": "Update failed",
-  "edit_clinic" : "Edit clinic"
+  "edit_clinic" : "Edit clinic",
+  "create_custom_package" :"Create custom package",
+  "customize_clinic_package" : "Customize clinic package",
+  "SubscriptionDuration" : "Subscription Duration",
+  "Months" : "Months",
+  "Limited" : "Limited",
+  "UnLimited" : "Unlimited",
+  "Create & Pay" :"Create & Pay",
+  "Total" : "Total",
+  "search_doc_clinic_loc" : "Search by Doctor/Clinic/Location",
+  "recoveryDays": "Recovery Days",
+  "ENTER_recoveryDays": "Enter recovery days",
+  "Notes": "Notes",
+  "ENTER_Your_Notes": "Enter your notes",
+  "send_request": "Send Request",
+  "no_doctors_found": "No doctors are available at the moment.",
+  "choose_doctor_from": "Choose doctor from"
 }

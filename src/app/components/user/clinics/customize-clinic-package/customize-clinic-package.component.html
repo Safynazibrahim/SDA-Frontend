@@ -1,0 +1,151 @@
+<div class="container py-4">
+  <div class="main-title d-flex align-items-center gap-1">
+    <h3>
+      {{ "Clinic Packages" | translate }}
+    </h3>
+    <span
+      style="cursor: pointer"
+      [routerLink]="['/dashboard/clinics/clinicPackage']"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </span>
+    <h2 class="active">
+      {{ "customize_clinic_package" | translate }}
+    </h2>
+  </div>
+
+  <div class="row d-flex justify-content-center align-items-center my-4">
+    <div class="col-12 col-sm-12 col-md-10">
+      <div class="duration-card package-slider-theme" >
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="subtitle mb-0">{{"SubscriptionDuration" | translate}}</h4>
+          <span class="months-badge"> {{ subscriptionMonths }} {{"Months" | translate}} </span>
+        </div>
+        <mat-slider
+          min="1"
+          max="12"
+          step="1"
+          showTickMarks
+          discrete
+          class="w-100"
+        >
+          <input matSliderThumb [(ngModel)]="subscriptionMonths" />
+        </mat-slider>
+        <div class="months-labels">
+          <button
+            *ngFor="let m of quickMonths"
+            class="month-chip"
+            [class.active]="subscriptionMonths === m"
+            (click)="setMonths(m)"
+          >
+            {{ m }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-3">
+    <div class="col-12 col-md-6 my-3" *ngFor="let feature of features">
+      <div
+        class="feature-card package-toggle-theme"
+        [class.disabled]="!feature.enabled"
+      >
+        <!-- Header -->
+        <div class="feature-header">
+          <div class="feature-left">
+            <div class="feature-icon">
+              <mat-icon>{{ feature.icon }}</mat-icon>
+            </div>
+            <div>
+              <h5 class="feature-title">{{ feature.name }}</h5>
+              <p class="feature-desc">{{ feature.description }}</p>
+            </div>
+          </div>
+
+          <mat-slide-toggle [(ngModel)]="feature.enabled" color="primary">
+          </mat-slide-toggle>
+        </div>
+
+        <!-- Options -->
+        <div class="feature-options mx-2" *ngIf="feature.enabled">
+          <label class="radio-option">
+            <input
+              type="radio"
+              [name]="feature.key"
+              value="unlimited"
+              [(ngModel)]="feature.type"
+            />
+            {{"UnLimited" | translate}}
+          </label>
+
+          <div class="d-flex gap-2">
+            <label class="radio-option">
+              <input
+                type="radio"
+                [name]="feature.key"
+                value="limited"
+                [(ngModel)]="feature.type"
+              />
+              {{"Limited" | translate}}
+            </label>
+
+            <!-- Counter -->
+            <div class="limit-counter" *ngIf="feature.type === 'limited'">
+              <button
+                type="button"
+                (click)="feature.limit = feature.limit - 1"
+                [disabled]="feature.limit <= 1"
+              >
+                −
+              </button>
+
+              <input
+                type="number"
+                class="limit-input"
+                [(ngModel)]="feature.limit"
+                min="1"
+                (click)="$event.stopPropagation()"
+                (keydown)="$event.stopPropagation()"
+              />
+
+              <button type="button" (click)="feature.limit = feature.limit + 1">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+  <div class="col-12">
+    <div class="checkout-bar">
+
+      <!-- LEFT SIDE -->
+      <div class="checkout-info">
+        <div class="checkout-total">
+          {{ "Total" | translate }}:
+          <strong>{{ 500 }} USD</strong>
+        </div>
+
+        <div class="checkout-count">
+          {{ selectedFeaturesCount }}
+          {{ selectedFeaturesCount === 1 ? 'Feature' : 'Features' }}
+          {{ "Selected" | translate }}
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <button
+        class="signin-button w-auto"
+        [disabled]="selectedFeaturesCount === 0"
+      >
+        {{ "Create & Pay" | translate }}
+      </button>
+
+    </div>
+  </div>
+</div>
+
+</div>

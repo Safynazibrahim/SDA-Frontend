@@ -138,7 +138,7 @@ this.patientName = query.get('patientName') || '';
  saveCase() {
   const caseData = {
     appointmentId: this.appointmentId,
-    chiefComplaint: this.chiefComplaint,
+    initialChiefComplaint: this.chiefComplaint,
     // medications: this.selectedMedications,
     // diseases: this.selectedDiseases,
     // clinicalInvestigations: this.selectedInvestigations

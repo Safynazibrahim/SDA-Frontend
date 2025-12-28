@@ -205,12 +205,31 @@ export const routes: Routes = [
                 './components/user/clinics/operator-packages/operator-packages.component'
               ).then((m) => m.OperatorPackagesComponent),
           },
+          // {
+          //   path: 'clinicPackage',
+          //   loadComponent: () =>
+          //     import(
+          //       './components/user/clinics/clinic-packages/clinic-packages.component'
+          //     ).then((m) => m.ClinicPackagesComponent),
+          // },
           {
             path: 'clinicPackage',
-            loadComponent: () =>
-              import(
-                './components/user/clinics/clinic-packages/clinic-packages.component'
-              ).then((m) => m.ClinicPackagesComponent),
+            children: [
+              {
+                path: '',
+                loadComponent: () =>
+                  import(
+                    './components/user/clinics/clinic-packages/clinic-packages.component'
+                  ).then((m) => m.ClinicPackagesComponent),
+              },
+              {
+                path: 'customize',
+                loadComponent: () =>
+                  import(
+                    './components/user/clinics/customize-clinic-package/customize-clinic-package.component'
+                  ).then((m) => m.CustomizeClinicPackageComponent),
+              },
+            ],
           },
           {
             path: ':id',
@@ -356,9 +375,9 @@ export const routes: Routes = [
       },{
         path: 'notifications',
         loadComponent: () =>
-          import('./components/user/notifications/notifications.component').then(
-            (m) => m.NotificationsComponent
-          ),
+          import(
+            './components/user/notifications/notifications.component'
+          ).then((m) => m.NotificationsComponent),
       },
     ],
   },
