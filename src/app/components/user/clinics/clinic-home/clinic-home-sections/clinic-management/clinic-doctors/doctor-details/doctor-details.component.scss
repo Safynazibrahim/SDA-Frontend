@@ -19,7 +19,7 @@
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  padding-bottom: 120px;
+  padding-bottom: 125px;
   .first-section {
     padding: 0px 26px;
 
@@ -39,21 +39,232 @@
 
 }
 .wave-container {
-  margin-top: -125px;
+  margin-top: -138px;
 }
-// .wave-container {
-//   position: absolute;
-//   bottom: 0;
-//   left: 0;
-//   width: 100%;
-//   overflow: hidden;
-//   line-height: 0;
-//   transform: rotate(180deg); // لو عايزها تنزل لتحت
-  
-//   svg {
-//     position: relative;
-//     display: block;
-//     width: 100%;
-//     height: 120px; // ممكن تزود أو تقلل حسب احتياجك
-//   }
-// }
+.DoctorInformation{
+  margin-top: -25px;
+.highlight {
+  background-color: var(--brown-dark);
+  border-radius: 45px;
+  padding: 2px 8px;
+  color: white;
+}
+}
+.specialization-card {
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+}
+
+.specialization-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-gray-head-table);
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-gray-head-table);
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+  }
+}
+.day-block {
+  margin-top: 20px;
+}
+
+.day-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+}
+
+.edit-icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: #b19e7f;
+}
+
+.time-chip {
+  border: 1px solid #7c7a7a;
+  border-radius: 25px;
+  padding: 6px 14px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #7c7a7a;
+  white-space: nowrap;
+}
+.badge {
+  padding: 12px;
+  border-radius: 7px;
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+
+  &.stock-based {
+    background-color: #EBF6EE;
+    color: #34A853;
+  }
+
+  &.non-stock-based {
+    background-color: #F9F1E6;
+    color: #C26E07;
+  }
+}
+.days-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.day-pill{
+  border: 2px solid #b19e7f;
+  background-color: transparent;
+  border-radius: 16px;
+  color: #b19e7f;
+  width: 133px;
+  padding: 6px 0px;
+  font-size: 19px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.day-pill:hover {
+  background-color: #f1f1f1;
+}
+
+.day-pill.active {
+  background-color: #b19e7f;
+  border-color: #b19e7f;
+  color: #fff;
+}
+// time
+.day-times {
+  margin-bottom: 18px;
+}
+
+.day-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.time-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-time {
+  font-size: 18px;
+  cursor: pointer;
+  color: #999;
+}
+
+.delete-time:hover {
+  color: #d9534f;
+}
+.time-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-error {
+  font-size: 12px;
+  color: #d32f2f;
+  margin-top: 4px;
+}
+
+.input-error {
+  border: 1px solid #d32f2f;
+}
+
+.time-row input[type="time"]{
+  border: 1px solid #cfcfcf;
+  border-radius: 11px;
+  font-size: 21px;
+  width: 100%;
+  color: #737373;
+  padding: 8px;
+}
+
+.add-time {
+  color: #b19e7f;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.add-time:hover {
+  text-decoration: underline;
+}
+// footer
+.schedule-footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.btn-save {
+  background-color: #b19e7f;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  opacity: 0.9;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  border: 1px solid #cfcfcf;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.page-footer-btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  button {
+    border: none;
+    border-radius: 6px;
+    padding: 10px 35px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 50%;
+  }
+
+  .ai-btn {
+    background: var(--bg-sec-brown-gradient);
+    color: #fff;
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  }
+
+  .manual-btn {
+    background: var(--bg-primary);
+    border: 1.5px solid var(--bg-brown-medium);
+    color: var(--bg-brown-medium);
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}

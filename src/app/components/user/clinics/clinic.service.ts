@@ -73,4 +73,7 @@ export class ClinicService {
   editDoctor(clinicId: string, doctorId: string, payload: any): Observable<any> {
     return this.api.patch<any>(`clinics/${clinicId}/doctors/${doctorId}`, payload);
   }
+  getDoctorById(clinicId: string, doctorId: string): Observable<any> {
+    return this.api.get<any>(`clinics/${clinicId}/doctors/${doctorId}`);
+  }
 }
