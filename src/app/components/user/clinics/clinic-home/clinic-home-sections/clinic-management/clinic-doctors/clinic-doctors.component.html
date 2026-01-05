@@ -50,7 +50,7 @@
       @if(isOwner){
 
       <div class="card-actions">
-        <button class="action-btn schedule-btn" (click)="openSchedule(doctor)">
+        <button class="action-btn schedule-btn" (click)="openSchedule(doctor); $event.stopPropagation()">
           <!-- <mat-icon>event</mat-icon> -->
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_1539_5128)">
@@ -68,7 +68,7 @@
           {{ "Set Schedule" | translate }}
         </button>
 
-        <button class="action-btn" (click)="editDoctor(doctor)">
+        <button class="action-btn" (click)="editDoctor(doctor) ; $event.stopPropagation()">
           <!-- <mat-icon>edit</mat-icon> -->
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

@@ -1,12 +1,14 @@
 .doctor-clinics {
   margin-inline-start: 15px;
 }
+
 .route {
   color: #8f8f8f;
   font-weight: 400;
   font-family: "IBM Plex Sans";
   font-size: 27px;
 }
+
 .clinicActive {
   color: var(--text-gray-head-table);
   font-family: "IBM Plex Sans";
@@ -22,6 +24,7 @@
   border: none;
   font-weight: 500;
 }
+
 .doctor-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -55,13 +58,13 @@
   .doctor-name {
     font-size: 24px;
     font-weight: 400;
-    color: #434343;
+    color: var(--text-gray-head-table);
     margin: 0;
   }
 
   .specialization {
     font-size: 24px;
-    color: #737373;
+    color: var(--text-gray-sidebar);
     margin: 0;
     text-transform: capitalize;
   }
@@ -69,7 +72,7 @@
   .price {
     font-size: 20px;
     font-weight: 600;
-    color: #8E7E66;
+    color: var(--bg-brown-dark-two);
     margin: 0;
   }
 }
@@ -100,12 +103,12 @@
 }
 
 .day-badge {
-      display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3px 11px;
-    border: 2px solid #b19e7f;
-    border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px 11px;
+  border: 2px solid #b19e7f;
+  border-radius: 22px;
 
   .day-name {
     font-size: 18px;
@@ -125,7 +128,7 @@
   gap: 8px;
   flex-wrap: wrap;
   padding-top: 12px;
-    border-top: 2px solid #f0f0f0;
+  border-top: 2px solid #f0f0f0;
 }
 
 .action-btn {
@@ -145,9 +148,11 @@
     border-color: #ccc;
   }
 }
+
 .schedule-btn {
   color: #b19e7f;
 }
+
 .days-container {
   display: flex;
   gap: 8px;
@@ -155,12 +160,12 @@
   flex-wrap: wrap;
 }
 
-.day-pill{
+.day-pill {
   border: 2px solid #b19e7f;
   background-color: transparent;
   border-radius: 16px;
   color: #b19e7f;
-  width: 133px;
+  width: 130px;
   padding: 6px 0px;
   font-size: 19px;
   cursor: pointer;
@@ -176,6 +181,7 @@
   border-color: #b19e7f;
   color: #fff;
 }
+
 // time
 .day-times {
   margin-bottom: 18px;
@@ -202,6 +208,7 @@
 .delete-time:hover {
   color: #d9534f;
 }
+
 .time-input-wrapper {
   display: flex;
   flex-direction: column;
@@ -217,7 +224,7 @@
   border: 1px solid #d32f2f;
 }
 
-.time-row input[type="time"]{
+.time-row input[type="time"] {
   border: 1px solid #cfcfcf;
   border-radius: 11px;
   font-size: 21px;
@@ -237,6 +244,7 @@
 .add-time:hover {
   text-decoration: underline;
 }
+
 // footer
 .schedule-footer {
   display: flex;
@@ -266,11 +274,13 @@
   font-size: 14px;
   cursor: pointer;
 }
+
 .page-footer-btns {
   display: flex;
   align-items: center;
   gap: 20px;
   width: 100%;
+
   button {
     border: none;
     border-radius: 6px;
@@ -302,17 +312,45 @@
     }
   }
 }
+
 // Responsive
 @media (max-width: 768px) {
   .doctor-cards-grid {
     grid-template-columns: 1fr;
   }
 
-  .schedule-days {
-    justify-content: center;
-  }
-
   .card-actions {
     justify-content: space-between;
+  }
+}
+
+@media (max-width: 567px) {
+  .doctor-card {
+    padding: 10px;
+  }
+
+  .doctor-info {
+    .doctor-name {
+      font-size: 17px;
+    }
+    .specialization {
+      font-size: 18px;
+    }
+    .price {
+      font-size: 18px;
+    }
+  }
+  .badge {
+    padding: 5px;
+    font-size: 15px;
+  }
+  .day-badge {
+    padding: 0px 8px;
+  }
+  .time-row input[type="time"] {
+    font-size: 15px;
+  }
+  .add-time {
+    font-size: 18px;
   }
 }
