@@ -1,7 +1,7 @@
 // clinic-doctors.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ClinicService } from '../../../../clinic.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink , Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SearchComponent } from '../../../../../../shared/search/search.component';
@@ -57,7 +57,8 @@ editDoctorForm = {
 
   constructor(
     private clinicService: ClinicService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -265,6 +266,13 @@ saveEditDoctor() {
         console.error('Edit doctor error', err);
       }
     });
+}
+goToProfileDetails(doctorId: string) {
+  this.router.navigate([`dashboard/doctor/${doctorId}`], {
+    queryParams: { clinicId: this.clinicId ,
+      isOwner: this.isOwner
+    }
+  });
 }
 
 }

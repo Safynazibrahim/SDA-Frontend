@@ -71,6 +71,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'doctor/:id',
+        loadComponent: () =>
+          import(
+            './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/doctor-details/doctor-details.component'
+          ).then((m) => m.DoctorDetailsComponent),
+      },
+      {
         path: 'profile',
         loadComponent: () =>
           import('./components/user/profile/profile.component').then(
@@ -290,30 +297,19 @@ export const routes: Routes = [
                 canActivate: [FeatureGuard],
                 data: { feature: 'assigned_cases' },
               },
-               {
-            path: 'management',
-            children: [
               {
-                path: '',
-                redirectTo: 'schedule',
-                pathMatch: 'full',
+                path: 'management',
+                children: [
+                  {
+                    path: 'schedule',
+                    loadComponent: () =>
+                      import(
+                        './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/clinic-doctors.component'
+                      ).then((m) => m.ClinicDoctorsComponent),
+                  },
+
+                ],
               },
-              {
-                path: 'schedule',
-                loadComponent: () =>
-                  import(
-                    './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/schedule/schedule.component'
-                  ).then((m) => m.ScheduleComponent),
-              },
-              {
-                path: 'clinic-doctors',
-                loadComponent: () =>
-                  import(
-                    './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/clinic-doctors.component'
-                  ).then((m) => m.ClinicDoctorsComponent),
-              },
-            ],
-          },
             ],
           },
         ],
@@ -370,9 +366,9 @@ export const routes: Routes = [
                 './components/user/patients/assigned-cases/assigned-cases.component'
               ).then((m) => m.AssignedCasesComponent),
           },
-         
+
         ],
-      },{
+      }, {
         path: 'notifications',
         loadComponent: () =>
           import(

@@ -70,6 +70,7 @@ $SDA-theme: mat.define-light-theme(
   --bg-light-gray: #ebebeb;
   --bg-gray: #ebebeb;
   --brown-dark: #85775f;
+  --bg-brown-dark-two:#8E7E66;
   /* Brown gradient section backgrounds */
   --bg-brown-light: #d4c4a8; /* Light brown from your design */
   --bg-brown-medium: #b19e7f; /* Medium brown */
@@ -164,6 +165,7 @@ $SDA-theme: mat.define-light-theme(
   --bg-brown-light: #4a3f32; /* Dark brown equivalent */
   --bg-brown-medium: #d1b894; /* Medium dark brown */
   --bg-brown-dark: #8e7e66; /* Darkest brown */
+  --bg-brown-dark-two: #A79376;
   --bg-brown-gradient: linear-gradient(180deg, #d1b894 0%, #6b5e4c 100%);
   --bg-sec-brown-gradient: linear-gradient(90deg, #d1b894 0%, #6b5e4c 100%);
   /* Text Colors for dark mode */
