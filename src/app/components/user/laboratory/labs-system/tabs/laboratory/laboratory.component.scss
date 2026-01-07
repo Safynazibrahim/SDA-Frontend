@@ -1,0 +1,51 @@
+.patient-card {
+  padding: 30px;
+  border: 1px solid var(--text-gray);
+  border-radius: 6px;
+  background: var(--bg-white);
+  overflow: hidden;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .patient-details {
+    // padding: 10px;
+
+    .service{
+        padding: 10px;
+        border: 1px solid var(--bg-brown-medium);
+        border-radius: 30px;
+        color: var(--bg-brown-medium);
+    }
+
+    .title h5{
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(text-gray-head-table);
+      span {
+        color: var(--text-gray);
+      }
+    }
+    p {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-gray);
+    }
+    .view-details {
+      cursor: pointer;
+      h3{
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--bg-brown-medium);
+    }
+    mat-icon {
+        color: var(--bg-brown-medium) !important;
+      }
+    }
+
+  }
+}

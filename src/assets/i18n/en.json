@@ -527,5 +527,11 @@
   "ENTER_Your_Notes": "Enter your notes",
   "send_request": "Send Request",
   "no_doctors_found": "No doctors are available at the moment.",
-  "choose_doctor_from": "Choose doctor from"
+  "choose_doctor_from": "Choose doctor from",
+  "no_laboratories_linked" : "There are no laboratories currently linked to you.",
+  "find_nearby_laboratory" : "Find the nearby laboratory",
+  "lab_requests" : "Lab Requests",
+  "orders" : "Orders",
+  "expences" : "Expences",
+  "Services" : "Services"
 }

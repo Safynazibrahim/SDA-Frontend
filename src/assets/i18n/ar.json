@@ -536,5 +536,11 @@
   "ENTER_Your_Notes": "أدخل ملاحظاتك",
   "send_request": "إرسال الطلب",
   "no_doctors_found": "لا يوجد أطباء متاحون حالياً.",
-  "choose_doctor_from": "اختر طبيباً من"
+  "choose_doctor_from": "اختر طبيباً من",
+  "no_laboratories_linked" : "لا توجد معامل مرتبطة بك حاليًا.",
+  "find_nearby_laboratory" : "ابحث عن أقرب معمل",
+  "lab_requests": "طلبات المعامل",
+  "orders": "الطلبات",
+  "expences": "المصروفات",
+  "Services" : "خدمات"
 }

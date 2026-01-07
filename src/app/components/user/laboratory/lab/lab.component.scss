@@ -1,0 +1,22 @@
+.title {
+    color: #565656;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+
+
+/////// responsive on tablets
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .title{
+        font-size: 20px;
+    }
+}
+
+////// responsive on mobile
+@media (max-width: 767.98px) {
+    .title{
+        font-size: 18px;
+    }
+}

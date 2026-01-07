@@ -78,6 +78,68 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'labs',
+        children: [
+          // Decision page
+          {
+            path: '',
+            loadComponent: () =>
+              import('./components/user/laboratory/lab/lab.component').then(
+                (m) => m.LabComponent
+              ),
+          },
+
+          // Nearby page
+          {
+            path: 'nearby',
+            loadComponent: () =>
+              import(
+                './components/user/laboratory/nearby-labs/nearby-labs.component'
+              ).then((m) => m.NearbyLabsComponent),
+          },
+
+          // Main system (tabs parent)
+          {
+            path: 'system',
+            loadComponent: () =>
+              import(
+                './components/user/laboratory/labs-system/labs-system.component'
+              ).then((m) => m.LabsSystemComponent),
+            children: [
+              { path: '', redirectTo: 'laboratory', pathMatch: 'full' },
+              {
+                path: 'laboratory',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/laboratory/laboratory.component'
+                  ).then((m) => m.LaboratoryComponent),
+              },
+              {
+                path: 'requests',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/requests/requests.component'
+                  ).then((m) => m.RequestsComponent),
+              },
+              {
+                path: 'orders',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/orders/orders.component'
+                  ).then((m) => m.OrdersComponent),
+              },
+              {
+                path: 'expenses',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/expences/expences.component'
+                  ).then((m) => m.ExpencesComponent),
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: 'patients',
         children: [
           {
@@ -290,30 +352,30 @@ export const routes: Routes = [
                 canActivate: [FeatureGuard],
                 data: { feature: 'assigned_cases' },
               },
-               {
-            path: 'management',
-            children: [
               {
-                path: '',
-                redirectTo: 'schedule',
-                pathMatch: 'full',
+                path: 'management',
+                children: [
+                  {
+                    path: '',
+                    redirectTo: 'schedule',
+                    pathMatch: 'full',
+                  },
+                  {
+                    path: 'schedule',
+                    loadComponent: () =>
+                      import(
+                        './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/schedule/schedule.component'
+                      ).then((m) => m.ScheduleComponent),
+                  },
+                  {
+                    path: 'clinic-doctors',
+                    loadComponent: () =>
+                      import(
+                        './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/clinic-doctors.component'
+                      ).then((m) => m.ClinicDoctorsComponent),
+                  },
+                ],
               },
-              {
-                path: 'schedule',
-                loadComponent: () =>
-                  import(
-                    './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/schedule/schedule.component'
-                  ).then((m) => m.ScheduleComponent),
-              },
-              {
-                path: 'clinic-doctors',
-                loadComponent: () =>
-                  import(
-                    './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/clinic-doctors.component'
-                  ).then((m) => m.ClinicDoctorsComponent),
-              },
-            ],
-          },
             ],
           },
         ],
@@ -370,9 +432,9 @@ export const routes: Routes = [
                 './components/user/patients/assigned-cases/assigned-cases.component'
               ).then((m) => m.AssignedCasesComponent),
           },
-         
         ],
-      },{
+      },
+      {
         path: 'notifications',
         loadComponent: () =>
           import(

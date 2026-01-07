@@ -1,0 +1,26 @@
+<div class="container px-3">
+  <div class="row d-flex align-items-center justify-content-between mb-3">
+    <div class="col-lg-6 main-title">
+      <h3 class="main-title">{{ "Laboratory" | translate }}</h3>
+    </div>
+  </div>
+
+  <!-- if labs are empty -->
+  <div
+    *ngIf="labsSource() === 'none' && !loading()"
+    class="my-5 mx-auto d-flex flex-column gap-5 justify-content-between align-items-center"
+  >
+    <h3 class="title my-5">
+      {{ "no_laboratories_linked" | translate }}
+    </h3>
+    <button
+      (click)="onFindNearby()"
+      class="signin-button w-auto d-flex justify-content-between gap-2 align-items-center"
+    >
+      <i class="fa fa-search"></i>
+      <h5 class="m-0">
+        {{ "find_nearby_laboratory" | translate }}
+      </h5>
+    </button>
+  </div>
+</div>

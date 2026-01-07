@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row d-flex align-items-center my-3">
+    <div class="col-md-6 col-sm-6 my-3" *ngFor="let lab of labs()">
+      <div class="patient-card">
+        <div class="patient-details my-3">
+          <div class="title d-flex justify-content-between align-items-center">
+            <h5>{{ lab.name }}</h5>
+            <div class="service">
+              <span>{{ lab.totalServices }} {{ "Services" | translate }}</span>
+            </div>
+          </div>
+          <p class="detail">{{ lab.location }}</p>
+          <hr />
+          <div
+            (click)="goToDetails(lab)"
+            class="view-details d-flex align-items-center justify-content-end"
+          >
+            <h3>{{ "view_details" | translate }}</h3>
+            <mat-icon>arrow_forward</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-pagination
+      [totalItems]="total()"
+      [pageSize]="limit()"
+      [currentPage]="page()"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+</div>

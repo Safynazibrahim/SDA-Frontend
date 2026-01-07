@@ -69,9 +69,26 @@
             "Clinics" | translate
           }}</a>
         </li>
-        <li class="nav-item itemsLinks" routerLinkActive="active">
-          <a class="nav-link">{{ "Laboratory" | translate }}</a>
+        <!-- <li class="nav-item itemsLinks" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/dashboard/labs']">{{
+            "Laboratory" | translate
+          }}</a>
+        </li> -->
+
+        <li
+          class="nav-item itemsLinks"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+        >
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="['/dashboard/labs']"
+          >
+            {{ "Laboratory" | translate }}
+          </a>
         </li>
+
         <li class="nav-item dropdown" routerLinkActive="active">
           <a
             class="nav-link dropdown-toggle"
@@ -150,9 +167,10 @@
             ></a>
           </li>
           <li class="nav-item right-section-nav">
-            <a class="nav-link" 
-            [routerLink]="['/dashboard/notifications']"
-            style="cursor: pointer; margin-top: 2px"
+            <a
+              class="nav-link"
+              [routerLink]="['/dashboard/notifications']"
+              style="cursor: pointer; margin-top: 2px"
               ><span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +195,8 @@
             ></a>
           </li>
           <li class="nav-item right-section-nav">
-            <a [routerLink]="['/dashboard/profile']"
+            <a
+              [routerLink]="['/dashboard/profile']"
               class="nav-link"
               style="
                 width: 70px;
