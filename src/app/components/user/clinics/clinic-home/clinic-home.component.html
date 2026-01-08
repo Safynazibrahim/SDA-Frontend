@@ -30,26 +30,29 @@
           <mat-icon>lock</mat-icon> pro
         </span>
       </li>
-      <li (click)="toggleManagement()">
+      <li routerLink="management/schedule" routerLinkActive="active" queryParamsHandling="merge">
+        <mat-icon matTooltip="{{'Management' | translate}}">manage_accounts</mat-icon>
+        <span *ngIf="!isClosed">{{"Schedule Management" | translate}}</span>
+      </li>
+      <!-- <li (click)="toggleManagement()">
         <mat-icon matTooltip="Management">manage_accounts</mat-icon>
-        <span *ngIf="!isClosed">Management</span>
+        <span *ngIf="!isClosed">{{"Management" | translate}}</span>
         <mat-icon class="arrow" *ngIf="!isClosed">
           {{ managementOpen ? "expand_less" : "expand_more" }}
         </mat-icon>
       </li>
 
-      <!-- Submenu -->
       <ul class="submenu" *ngIf="managementOpen && !isClosed">
-        <li routerLink="management/schedule" routerLinkActive="active" queryParamsHandling="merge">
+         <li routerLink="management/schedule" routerLinkActive="active" queryParamsHandling="merge">
           <mat-icon>schedule</mat-icon>
           <span>Schedule</span>
-        </li>
+        </li> 
 
         <li routerLink="management/clinic-doctors" routerLinkActive="active" queryParamsHandling="merge">
           <mat-icon>groups</mat-icon>
-          <span>Clinic Doctors</span>
+          <span>{{'Doctors' | translate}}</span>
         </li>
-      </ul>
+      </ul> -->
 
       <li (click)="backToClinics()">
         <mat-icon>logout</mat-icon>

@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center mb-3 route-container">
       <div class="d-flex align-items-center mb-2">
         <p class="mb-0 route">{{ "Clinic" | translate }}</p>
-        <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0 text-black mt-1 mx-1 clinicActive arrow-color"
+        <a [routerLink]="['/dashboard/clinics']" class="m-0 p-0  mt-1 mx-1 clinicActive arrow-color"
           style="cursor: pointer">
           <mat-icon>keyboard_arrow_left</mat-icon>
         </a>
@@ -17,7 +17,7 @@
 
   <!-- Doctor Cards Grid -->
   <div class="doctor-cards-grid my-4">
-    <div class="doctor-card" *ngFor="let doctor of doctors">
+    <div class="doctor-card" *ngFor="let doctor of doctors" (click)="goToProfileDetails(doctor.doctorId)">
       <!-- Header -->
       <div class="card-header">
         <div class="doctor-info">
@@ -28,12 +28,16 @@
           <p class="specialization">{{ doctor.specialization }}</p>
           } @if(doctor.consultationFee !== undefined && doctor.consultationFee
           !== null){
-          <p class="price">{{ doctor.consultationFee }} EGP</p>
+          <p class="price">{{ doctor.consultationFee }} <span class="currency">{{ 'Currency_EGP' | translate }}</span></p>
           }
-        </div>
+        </div> 
         @if(doctor.stockType !== undefined && doctor.stockType !== null && isOwner){
         <span class="badge" [ngClass]="doctor.stockType === 'clinic' ? 'stock-based' : 'non-stock-based'">
-          {{ doctor.stockType === 'clinic' ? 'Stock Based' : 'Non Stock Based' }} </span>}
+          {{ (doctor.stockType === 'clinic'
+    ? 'Stock_Based'
+    : 'Non_Stock_Based') | translate }}
+
+        </span>}
       </div>
 
       <!-- Schedule Days -->
@@ -50,7 +54,7 @@
       @if(isOwner){
 
       <div class="card-actions">
-        <button class="action-btn schedule-btn" (click)="openSchedule(doctor)">
+        <button class="action-btn schedule-btn" (click)="openSchedule(doctor); $event.stopPropagation()">
           <!-- <mat-icon>event</mat-icon> -->
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_1539_5128)">
@@ -68,7 +72,7 @@
           {{ "Set Schedule" | translate }}
         </button>
 
-        <button class="action-btn" (click)="editDoctor(doctor)">
+        <button class="action-btn" (click)="editDoctor(doctor) ; $event.stopPropagation()">
           <!-- <mat-icon>edit</mat-icon> -->
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -120,7 +124,7 @@
             [class.input-error]="slot.hasError" />
 
           <div class="time-error" *ngIf="slot.hasError">
-            End time should be after start time
+            {{ 'End_Time_Error' | translate }}
           </div>
         </div>
 
@@ -129,7 +133,7 @@
         </mat-icon>
       </div>
 
-      <p class="add-time" (click)="addTime(day.id)">+ Add Time</p>
+      <p class="add-time" (click)="addTime(day.id)">+ {{ 'Add_Time' | translate }}</p>
     </div>
   </div>
   <div class="page-footer-btns" modal-footer>
@@ -148,7 +152,7 @@
   <!-- Stock Type -->
   <!-- Stock Type -->
 <div class="form-group mb-3">
-  <label class="fw-bold d-block">
+  <label class="fw-bold d-block color-gray">
     {{ 'Stock Type' | translate }}
   </label>
 
@@ -160,17 +164,17 @@
         [(ngModel)]="editDoctorForm.stockType"
         value="clinic"
       />
-      <span>{{ 'Stock Based' | translate }}</span>
+      <span class="color-gray">{{ 'Stock_Based' | translate }}</span>
     </label>
 
     <label class="d-flex align-items-center gap-1">
       <input
-        type="radio"
+        type="radio" 
         name="stockType"
         [(ngModel)]="editDoctorForm.stockType"
         value="self"
       />
-      <span>{{ 'Non Stock Based' | translate }}</span>
+      <span class="color-gray">{{ 'Non_Stock_Based' | translate }}</span>
     </label>
   </div>
 </div>
@@ -178,23 +182,23 @@
 
   <!-- Consultation Fee -->
   <div class="form-group mb-3">
-    <label>{{ 'Consultation Fee' | translate }}</label>
+    <label class="fw-bold d-block color-gray">{{ 'Consultation Fee' | translate }}</label>
     <input
       type="number"
       class="form-input"
       [(ngModel)]="editDoctorForm.consultationFee"
-      placeholder="Consultation Fee "
+      placeholder="{{'Consultation Fee' | translate}}"
     />
   </div>
 
   <!-- Doctor Share -->
   <div class="form-group mb-3">
-    <label>{{ 'Doctor Share (%)' | translate }}</label>
+    <label class="fw-bold d-block color-gray">{{ 'Doctor Share' | translate }}</label>
     <input
       type="number"
       class="form-input"
       [(ngModel)]="editDoctorForm.doctorShare"
-      placeholder="Doctor Share (%)"
+      placeholder="{{'Doctor Share' | translate}}"
       min="0"
       max="100"
     />

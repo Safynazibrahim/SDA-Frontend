@@ -71,6 +71,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'doctor/:id',
+        loadComponent: () =>
+          import(
+            './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/doctor-details/doctor-details.component'
+          ).then((m) => m.DoctorDetailsComponent),
+      },
+      {
         path: 'profile',
         loadComponent: () =>
           import('./components/user/profile/profile.component').then(

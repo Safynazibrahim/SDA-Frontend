@@ -24,7 +24,7 @@
 .sidebar {
   position: sticky; /* stays fixed inside parent scroll area */
   top: 0; /* already under the navbar because of margin-top */
-  width: 270px;
+  width: 290px;
   height: calc(100vh - 107px); /* fit remaining space */
   margin-left: 20px;
   overflow-y: auto;
