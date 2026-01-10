@@ -1,0 +1,87 @@
+.request-card {
+  background: transparent !important;
+  border: 1px solid var(--text-gray);
+  border-radius: 6px;
+  background: var(--bg-white);
+  padding: 20px;
+  height: 100%;
+}
+
+/* Avatar */
+.lab-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Text */
+.lab-name {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-gray-head-table);
+  margin: 0;
+}
+
+.lab-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+  color: var(--text-gray-head-table);
+  font-weight: 400;
+  margin: 0;
+  mat-icon {
+    color: var(--bg-brown-dark);
+  }
+}
+
+/* Status */
+.status-badge {
+  padding: 6px 16px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-badge.waiting {
+  background: #f9f1e6;
+  color: #a67f00;
+}
+
+.status-badge.accepted {
+  background: #ebf6ee;
+  color: #34a853;
+}
+
+.status-badge.rejected {
+  background: #fce8e6;
+  color: #e51908;
+}
+
+////// responsive on mobile
+@media (max-width: 767.98px) {
+  .lab-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  .lab-name {
+    font-size: 16px;
+  }
+
+  .lab-location {
+    font-size: 16px;
+  }
+  .status-badge {
+    font-size: 15px;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

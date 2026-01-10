@@ -25,4 +25,10 @@ export class LabService {
   createOrderRequest(labId: string, formData: FormData) {
     return this._ApiServiceService.post(`labs/${labId}/orders`, formData);
   }
+
+  getRequests(params:any) {
+    return firstValueFrom(
+      this._ApiServiceService.get<any>(`doctors/me/labs/links`, params)
+    );
+  }
 }

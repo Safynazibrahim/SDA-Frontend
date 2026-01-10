@@ -566,5 +566,9 @@
   "Add_Time": "إضافة وقت",
   "End_Time_Error": "وقت الانتهاء يجب أن يكون بعد وقت البدء",
   "Currency_EGP": "جنيه",
-  "laboratory_details": "تفاصيل المعمل"
+  "laboratory_details": "تفاصيل المعمل",
+  "request_lab_order": "إرسال طلب للمعمل",
+  "orderName": "اسم طلب المعمل",
+  "order_deadline": "تاريخ التسليم",
+  "orderNote": "ملاحظات إضافية"
 }

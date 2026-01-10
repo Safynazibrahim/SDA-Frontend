@@ -1,1 +1,49 @@
-<p>requests works!</p>
+<div class="container">
+  <app-search
+    [(model)]="searchNameValue"
+    [placeholder]="'search_patient_name_phone' | translate"
+    (search)="onSearch()"
+  >
+  </app-search>
+  <div class="row d-flex align-items-center my-2">
+    <div class="row mt-4">
+      <div
+        class="col-xl-6 col-lg-6 col-sm-12 mb-4"
+        *ngFor="let req of labRequests()"
+      >
+        <div class="request-card">
+          <!-- Header -->
+          <div class="header d-flex align-items-center justify-content-between">
+            <div class="d-flex justify-content-between align-items-center gap-2">
+              <img
+                src="assets/media/pic-not-found.png"
+                class="lab-avatar"
+                alt="lab"
+              />
+              <div class="d-flex flex-column align-items-start">
+                <h5 class="lab-name">{{ req.lab.name }}</h5>
+                <p class="lab-location">
+                  <mat-icon>location_on</mat-icon>
+                  {{ req.lab.location }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Status -->
+            <span class="status-badge" [ngClass]="req.status">
+              <mat-icon>{{ getStatusIcon(req.status) }}</mat-icon>
+              {{ req.status | titlecase }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-pagination
+      [totalItems]="total()"
+      [pageSize]="limit()"
+      [currentPage]="page()"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+</div>
