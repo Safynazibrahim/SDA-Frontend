@@ -1,11 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { LabService } from '../../../lab.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-expences',
   standalone: true,
-  imports: [MatIcon],
+  imports: [MatIcon, TranslateModule],
   templateUrl: './expences.component.html',
   styleUrl: './expences.component.scss',
 })
@@ -19,7 +20,7 @@ export class ExpencesComponent implements OnInit {
   constructor(private _LabService: LabService) {}
 
   ngOnInit(): void {
-    this.loadExpenses()
+    this.loadExpenses();
   }
 
   loadExpenses(): void {
