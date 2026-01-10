@@ -1,11 +1,11 @@
 <div class="container">
   <app-search
     [(model)]="searchNameValue"
-    [placeholder]="'search_patient_name_phone' | translate"
+    [placeholder]="'search_lab_request' | translate"
     (search)="onSearch()"
   >
   </app-search>
-  <div class="row d-flex align-items-center my-2">
+  <div class="row d-flex align-items-center my-2" *ngIf="labRequests().length > 0">
     <div class="row mt-4">
       <div
         class="col-xl-6 col-lg-6 col-sm-12 mb-4"
@@ -14,13 +14,15 @@
         <div class="request-card">
           <!-- Header -->
           <div class="header d-flex align-items-center justify-content-between">
-            <div class="d-flex justify-content-between align-items-center gap-2">
+            <div
+              class="d-flex justify-content-between align-items-center gap-2"
+            >
               <img
                 src="assets/media/pic-not-found.png"
                 class="lab-avatar"
                 alt="lab"
               />
-              <div class="d-flex flex-column align-items-start">
+              <div class="d-flex flex-column">
                 <h5 class="lab-name">{{ req.lab.name }}</h5>
                 <p class="lab-location">
                   <mat-icon>location_on</mat-icon>
@@ -45,5 +47,12 @@
       (pageChange)="onPageChange($event)"
     >
     </app-pagination>
+  </div>
+  <!-- Empty State -->
+  <div *ngIf="!loading() && labRequests().length === 0" class="text-center my-4">
+    <mat-icon style="font-size: 48px; color: #b0b0b0"> inbox </mat-icon>
+    <p class="mt-2">
+      {{ "no_lab_requests_found" | translate }}
+    </p>
   </div>
 </div>

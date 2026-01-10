@@ -1,1 +1,164 @@
-<p>orders works!</p>
+<div class="container">
+  <div class="row d-flex align-items-center justify-content-between mb-3 mx-3">
+    <div class="col-lg-2 col-sm-3">
+      <div class="dropdown">
+        <button
+          class="btn dropdown-toggle w-100"
+          type="button"
+          data-bs-toggle="dropdown"
+        >
+          <ng-container *ngIf="!selectedStatus()">
+            {{ "status" | translate }}
+          </ng-container>
+          <ng-container *ngIf="selectedStatus">
+            {{ selectedStatus() | translate }}
+          </ng-container>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" (click)="changeStatus('waiting')">{{
+              "waiting" | translate
+            }}</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="changeStatus('in_progress')">{{
+              "in_progress" | translate
+            }}</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="changeStatus('try_in')">{{
+              "try_in" | translate
+            }}</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="changeStatus('completed')">{{
+              "completed" | translate
+            }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="orders().length > 0"
+    class="row d-flex align-items-center justify-content-center mb-4"
+  >
+    <div class="table-responsive my-2">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{{ "lab_name" | translate }}</th>
+            <th>{{ "order_name" | translate }}</th>
+            <th>{{ "created_at" | translate }}</th>
+            <th>{{ "last_status_updated" | translate }}</th>
+            <th>{{ "status" | translate }}</th>
+            <th>{{ "action" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders()" stryle="cursor: pointer;">
+            <td>{{ order.lab.name }}</td>
+            <td>{{ order.name }}</td>
+            <td>{{ order.createdAt | date : "dd/MM/yyyy, h:mm a" }}</td>
+            <td>{{ order.updatedAt | date : "dd/MM/yyyy, h:mm a" }}</td>
+            <td>
+              <div
+                class="d-flex align-items-center gap-1 status"
+                [ngClass]="order.status"
+              >
+                <mat-icon>{{ getStatusIcon(order.status) }}</mat-icon>
+                {{ order.status | titlecase }}
+              </div>
+            </td>
+            <td>
+              <button
+                style="
+                  color: var(--text-black-white) !important;
+                  border: none !important;
+                  background-color: transparent !important;
+                "
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openViewModal(order)">
+                  <mat-icon>visibility</mat-icon>
+                  <span>{{ "view_details" | translate }}</span>
+                </button>
+                <button mat-menu-item (click)="openEditModal()">
+                  <mat-icon>edit</mat-icon>
+                  <span>{{ "edit" | translate }}</span>
+                </button>
+                <button mat-menu-item (click)="openDeleteModal()">
+                  <mat-icon>delete</mat-icon>
+                  <span>{{ "delete" | translate }}</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination
+      [totalItems]="total()"
+      [pageSize]="limit()"
+      [currentPage]="page()"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+  <!-- Empty State -->
+  <div *ngIf="!loading() && orders().length === 0" class="text-center my-4">
+    <mat-icon style="font-size: 48px; color: #b0b0b0"> inbox </mat-icon>
+    <p class="mt-2">
+      {{ "no_orders_found" | translate }}
+    </p>
+  </div>
+</div>
+
+<app-modal
+  [isOpen]="isOpenViewOrder"
+  title="{{ 'order_details' | translate }}"
+  size="medium"
+  (close)="closeViewModal()"
+>
+  <!-- Body -->
+  <div modal-body class="modal-body">
+    <h4>
+      {{ "order_name" | translate }}: <span>{{ selectedOrder?.name }}</span>
+    </h4>
+    <h4>
+      {{ "lab_name" | translate }}: <span>{{ selectedOrder?.lab?.name }}</span>
+    </h4>
+    <h4>
+      {{ "created_at" | translate }}:
+      <span>{{ selectedOrder?.createdAt | date : "dd/MM/yyyy, h:mm a" }}</span>
+    </h4>
+    <h4>
+      {{ "last_status_updated" | translate }}:
+      <span>{{ selectedOrder?.updatedAt | date : "dd/MM/yyyy, h:mm a" }}</span>
+    </h4>
+    <h4>
+      {{ "status" | translate }}:
+      <span
+        ><div
+          class="d-flex align-items-center gap-1 status my-2"
+          [ngClass]="selectedOrder?.status"
+        >
+          <mat-icon>{{ getStatusIcon(selectedOrder?.status) }}</mat-icon>
+          {{ selectedOrder?.status | titlecase }}
+        </div></span
+      >
+    </h4>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="w-100 mt-2">
+    <button class="signin-button close" (click)="closeViewModal()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</app-modal>

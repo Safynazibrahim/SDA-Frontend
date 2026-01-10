@@ -1,1 +1,27 @@
-<p>expences works!</p>
+<section class="expenses-summary">
+  <div class="expenses-content">
+    <mat-icon>receipt_long</mat-icon>
+    <p class="label">{{"total_expences"}}</p>
+    <h3 class="amount">{{total()}} EGP</h3>
+  </div>
+
+  <!-- Wave -->
+  <svg
+    class="wave"
+    viewBox="0 0 1440 120"
+    preserveAspectRatio="none"
+  >
+    <path
+      d="
+        M0,60
+        C120,100 240,20 360,60
+        C480,100 600,20 720,60
+        C840,100 960,20 1080,60
+        C1200,100 1320,20 1440,60
+        L1440,120
+        L0,120
+        Z
+      "
+    ></path>
+  </svg>
+</section>

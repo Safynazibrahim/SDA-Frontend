@@ -43,7 +43,7 @@ export class LabDetailsComponent {
     private router: Router,
     private _LabService: LabService,
     private fb: FormBuilder,
-    private _MatSnackBar:MatSnackBar
+    private _MatSnackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -72,19 +72,9 @@ export class LabDetailsComponent {
   }
 
   toggleService(serviceId: number) {
-    this.servicesArray.clear(); // 👈 امسحي أي اختيار قديم
+    this.servicesArray.clear();
     this.servicesArray.push(this.fb.control(serviceId));
   }
-//   toggleService(serviceId: number) {
-//   const index = this.servicesArray.value.indexOf(serviceId);
-
-//   if (index > -1) {
-//     this.servicesArray.removeAt(index);
-//   } else {
-//     this.servicesArray.push(this.fb.control(serviceId));
-//   }
-// }
-
 
   isServiceSelected(serviceId: number): boolean {
     return this.servicesArray.value.includes(serviceId);
@@ -101,8 +91,6 @@ export class LabDetailsComponent {
   sendOrderRequest() {
     if (this.orderForm.invalid) return;
 
-    const selectedServiceId = this.servicesArray.value[0];
-
     const formData = new FormData();
 
     formData.append('name', this.orderForm.value.name);
@@ -116,11 +104,7 @@ export class LabDetailsComponent {
       formData.append('notes', this.orderForm.value.notes);
     }
 
-    // formData.append('services[0]', selectedServiceId.toString());
-    // ✅ services as array<number>
-  this.servicesArray.value.forEach((serviceId: number, index: number) => {
-    formData.append(`services[${index}]`, serviceId.toString());
-  });
+    formData.append('services', JSON.stringify(this.servicesArray.value));
 
     this._LabService.createOrderRequest(this.labId, formData).subscribe({
       next: () => {

@@ -558,5 +558,18 @@
   "request_lab_order" : "Request Lab Order",
   "orderName" : "Order Name",
   "order_deadline" : "Order Deadline",
-  "orderNote" : "Order Note"
-}
+  "orderNote" : "Order Note",
+  "search_lab_request" : "Search Lab Request",
+  "waiting" : "Waiting",
+  "in_progress" : "In Progress",
+  "try_in" : "Try In",
+  "completed" : "Completed",
+  "lab_name": "Lab Name",
+  "order_name": "Order Name",
+  "created_at": "Created At",
+  "last_status_updated": "Last Status Updated",
+  "no_orders_found": "No orders found for the selected status",
+  "no_lab_requests_found": "No lab requests found",
+  "order_details" : "Order Details",
+  "total_expenses" :"Total Expenses"
+  }

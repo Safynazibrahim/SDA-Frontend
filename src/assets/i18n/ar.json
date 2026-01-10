@@ -570,5 +570,18 @@
   "request_lab_order": "إرسال طلب للمعمل",
   "orderName": "اسم طلب المعمل",
   "order_deadline": "تاريخ التسليم",
-  "orderNote": "ملاحظات إضافية"
+  "orderNote": "ملاحظات إضافية",
+  "search_lab_request": "بحث عن طلب معمل",
+  "waiting": "قيد الانتظار",
+  "in_progress": "قيد التنفيذ",
+  "try_in": "قيد التجربة",
+  "completed": "مكتمل",
+  "lab_name": "اسم المعمل",
+  "order_name": "اسم الطلب",
+  "created_at": "تاريخ الإنشاء",
+  "last_status_updated": "آخر تحديث للحالة",
+  "no_orders_found": "لا توجد طلبات مطابقة للحالة المختارة",
+  "no_lab_requests_found": "لا توجد طلبات معامل",
+  "order_details" : "تفاصيل الطلب",
+  "total_expenses": "إجمالي المصروفات"
 }

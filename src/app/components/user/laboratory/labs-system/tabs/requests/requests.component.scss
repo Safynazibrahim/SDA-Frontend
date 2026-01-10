@@ -76,12 +76,14 @@
   .lab-location {
     font-size: 16px;
   }
+  .header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
   .status-badge {
     font-size: 15px;
-  }
-  .header {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    margin-top: 10px;
+    margin-left: auto;   /* pushes it to the right */
+    align-self: flex-end; /* ensures bottom-right feel */
   }
 }

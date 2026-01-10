@@ -1,0 +1,43 @@
+.expenses-summary {
+  position: relative;
+  background-color: var(--bg-brown-dark); // نفس لون التصميم
+  color: #fff;
+  text-align: center;
+  padding: 30px 0px 0px 0px;
+  overflow: hidden;
+}
+
+.expenses-content {
+  position: relative;
+  z-index: 2;
+}
+
+.expenses-content .label {
+  font-size: 17px;
+  margin: 0;
+}
+
+.expenses-content .amount {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Wave */
+.wave {
+  display: block;
+  width: 100%;
+}
+
+.wave path {
+  fill: var(--bg-primary); // لون الخلفية اللي تحت
+}
+
+@media (max-width: 768px) {
+  .expenses-content .amount {
+    font-size: 18px;
+  }
+
+  .wave {
+    height: 100px;
+  }
+}
