@@ -363,24 +363,13 @@ export const routes: Routes = [
                 path: 'management',
                 children: [
                   {
-                    path: '',
-                    redirectTo: 'schedule',
-                    pathMatch: 'full',
-                  },
-                  {
                     path: 'schedule',
-                    loadComponent: () =>
-                      import(
-                        './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/schedule/schedule.component'
-                      ).then((m) => m.ScheduleComponent),
-                  },
-                  {
-                    path: 'clinic-doctors',
                     loadComponent: () =>
                       import(
                         './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/clinic-doctors.component'
                       ).then((m) => m.ClinicDoctorsComponent),
                   },
+
                 ],
               },
             ],
