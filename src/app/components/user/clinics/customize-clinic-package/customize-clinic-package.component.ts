@@ -209,13 +209,21 @@ export class CustomizeClinicPackageComponent implements OnInit {
     this._ClinicService.createCustomPackage(payload).subscribe({
       next: (res: any) => {
         this.isCreating = false;
+        this._MatSnackBar.open('Package customized successfully', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
 
         // هنا بعدين هتعمل route لصفحة الدفع
         // مثال:
         // this.router.navigate(['/payment'], { queryParams: { packageId: res.id } });
       },
-      error: () => {
+      error: (err) => {
         this.isCreating = false;
+        this._MatSnackBar.open(err.error.message, 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
       },
     });
   }

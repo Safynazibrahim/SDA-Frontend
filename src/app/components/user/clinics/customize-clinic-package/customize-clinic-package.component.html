@@ -174,16 +174,15 @@
               {{ totalPrice !== null ? totalPrice + " USD" : "-" }}
             </strong>
           </div>
-          <div class="checkout-count">
-            {{ selectedFeaturesCount }}
-            {{ selectedFeaturesCount === 1 ? "Feature" : "Features" }}
-            {{ "Selected" | translate }}
-          </div>
+          {{ selectedFeaturesCount }}
+          {{
+            (selectedFeaturesCount === 1 ? "Feature" : "Features") | translate
+          }}
+          {{ "Selected" | translate }}
         </div>
 
         <!-- RIGHT SIDE -->
         <div class="d-flex gap-2">
-          <!-- Calculate يظهر أول ما يختار feature -->
           <button
             class="signin-button w-auto"
             *ngIf="selectedFeaturesCount > 0"
@@ -191,18 +190,17 @@
             [disabled]="!canCalculate || isCalculating"
           >
             {{
-              isCalculating ? "Calculating..." : ("CalculatePrice" | translate)
+              isCalculating ? ("Calculating" | translate) : ("CalculatePrice" | translate)
             }}
           </button>
 
-          <!-- Create يظهر فقط بعد ما السعر يتحسب -->
           <button
             class="signin-button w-auto"
             *ngIf="totalPrice !== null"
             (click)="createAndPay()"
             [disabled]="isCreating"
           >
-            {{ isCreating ? "Creating..." : ("Create & Pay" | translate) }}
+            {{ isCreating ? ("Creating" | translate) : ("Create & Pay" | translate) }}
           </button>
         </div>
       </div>

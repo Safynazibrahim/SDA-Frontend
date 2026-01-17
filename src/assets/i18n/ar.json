@@ -589,5 +589,11 @@
   "NearbyLaboratory": "معمل قريب",
   "no_laboratories_nearby": "لا توجد معامل قريبة",
   "link_request": "طلب معمل",
-  "SearchNearbyLabs": "ابحث عن معامل قريبة"
+  "SearchNearbyLabs": "ابحث عن معامل قريبة",
+  "Calculating": "جاري الحساب...",
+  "Creating": "جاري الإنشاء...",
+  "CalculatePrice": "احسب السعر",
+  "Feature": "ميزة",
+  "Features": "ميزات",
+  "Selected": "مختارة"
 }

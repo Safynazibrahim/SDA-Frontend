@@ -578,5 +578,11 @@
   "NearbyLaboratory": "Nearby Laboratory",
   "no_laboratories_nearby": "No laboratories nearby",
   "link_request": "Request a lab",
-  "SearchNearbyLabs": "Search nearby labs"
+  "SearchNearbyLabs": "Search nearby labs",
+  "Calculating": "Calculating...",
+  "Creating": "Creating...",
+  "CalculatePrice": "Calculate price",
+  "Feature": "Feature",
+  "Features": "Features",
+  "Selected": "Selected"
   }
