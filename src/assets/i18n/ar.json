@@ -583,5 +583,9 @@
   "no_orders_found": "لا توجد طلبات مطابقة للحالة المختارة",
   "no_lab_requests_found": "لا توجد طلبات معامل",
   "order_details" : "تفاصيل الطلب",
-  "total_expenses": "إجمالي المصروفات"
+  "total_expenses": "إجمالي المصروفات",
+  "NearbyLaboratory": "معمل قريب",
+  "no_laboratories_nearby": "لا توجد معامل قريبة",
+  "link_request": "طلب معمل",
+  "SearchNearbyLabs": "ابحث عن معامل قريبة"
 }

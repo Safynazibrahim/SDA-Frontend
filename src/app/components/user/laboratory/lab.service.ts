@@ -14,7 +14,7 @@ export class LabService {
 
   getNearByLabs(params: any) {
     return firstValueFrom(
-      this._ApiServiceService.get<any>(`labs/nearby`, params)
+      this._ApiServiceService.get<any>(`labs/nearby`, params),
     );
   }
 
@@ -28,32 +28,32 @@ export class LabService {
 
   getRequests(params: any) {
     return firstValueFrom(
-      this._ApiServiceService.get<any>(`doctors/me/labs/links`, params)
+      this._ApiServiceService.get<any>(`doctors/me/labs/links`, params),
     );
   }
 
   getOrders(params: any) {
     return firstValueFrom(
-      this._ApiServiceService.get<any>(`doctors/me/labs/orders`, params)
+      this._ApiServiceService.get<any>(`doctors/me/labs/orders`, params),
     );
   }
 
   getExpenses() {
     return firstValueFrom(
-      this._ApiServiceService.get<any>(`doctors/me/labs/total-expenses`)
+      this._ApiServiceService.get<any>(`doctors/me/labs/total-expenses`),
     );
   }
 
-  getOrderDetails(orderId:number){
+  getOrderDetails(orderId: number) {
     return firstValueFrom(
-      this._ApiServiceService.get<any>(`labs/orders/${orderId}`)
+      this._ApiServiceService.get<any>(`labs/orders/${orderId}`),
     );
   }
 
   updateOrderStatus(orderId: number, body: { status: string }) {
-    return this._ApiServiceService.patch(
-      `labs/orders/${orderId}/status`,
-      body
-    );
+    return this._ApiServiceService.patch(`labs/orders/${orderId}/status`, body);
+  }
+  sendLinkRequest(body: { labId: string }) {
+    return this._ApiServiceService.post('labs/links/send-request', body);
   }
 }

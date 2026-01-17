@@ -572,5 +572,9 @@
   "no_lab_requests_found": "No lab requests found",
   "order_details" : "Order Details",
   "total_expenses" :"Total Expenses" ,
-  "edit_order_status":"Edit Order Status"
+  "edit_order_status":"Edit Order Status",
+  "NearbyLaboratory": "Nearby Laboratory",
+  "no_laboratories_nearby": "No laboratories nearby",
+  "link_request": "Request a lab",
+  "SearchNearbyLabs": "Search nearby labs"
   }
