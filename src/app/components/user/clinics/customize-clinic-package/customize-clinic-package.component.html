@@ -16,10 +16,14 @@
 
   <div class="row d-flex justify-content-center align-items-center my-4">
     <div class="col-12 col-sm-12 col-md-10">
-      <div class="duration-card package-slider-theme" >
+      <div class="duration-card package-slider-theme">
         <div class="d-flex justify-content-between align-items-center mb-2">
-          <h4 class="subtitle mb-0">{{"SubscriptionDuration" | translate}}</h4>
-          <span class="months-badge"> {{ subscriptionMonths }} {{"Months" | translate}} </span>
+          <h4 class="subtitle mb-0">
+            {{ "SubscriptionDuration" | translate }}
+          </h4>
+          <span class="months-badge">
+            {{ subscriptionMonths }} {{ "Months" | translate }}
+          </span>
         </div>
         <mat-slider
           min="1"
@@ -29,7 +33,11 @@
           discrete
           class="w-100"
         >
-          <input matSliderThumb [(ngModel)]="subscriptionMonths" />
+          <input
+            (ngModelChange)="onSelectionChanged()"
+            matSliderThumb
+            [(ngModel)]="subscriptionMonths"
+          />
         </mat-slider>
         <div class="months-labels">
           <button
@@ -47,36 +55,64 @@
 
   <div class="row my-3">
     <div class="col-12 col-md-6 my-3" *ngFor="let feature of features">
-      <div
-        class="feature-card package-toggle-theme"
-        [class.disabled]="!feature.enabled"
-      >
+      <div class="feature-card" [class.disabled]="!feature.enabled">
         <!-- Header -->
         <div class="feature-header">
           <div class="feature-left">
             <div class="feature-icon">
-              <mat-icon>{{ feature.icon }}</mat-icon>
+              <mat-icon>new_releases</mat-icon>
             </div>
             <div>
-              <h5 class="feature-title">{{ feature.name }}</h5>
-              <p class="feature-desc">{{ feature.description }}</p>
+              <h5 class="feature-title">
+                {{ lang === "ar" ? feature.nameAr : feature.name }}
+              </h5>
+              <p
+                class="feature-desc d-flex align-items-center gap-1"
+                style="cursor: pointer"
+                (click)="
+                  openDescModal(
+                    lang === 'ar' ? feature.descriptionAr : feature.description
+                  )
+                "
+              >
+                {{ "Description" | translate }}
+                <mat-icon style="color: #09f">touch_app</mat-icon>
+              </p>
             </div>
           </div>
 
-          <mat-slide-toggle [(ngModel)]="feature.enabled" color="primary">
+          <mat-slide-toggle
+            class="package-toggle-theme"
+            [(ngModel)]="feature.enabled"
+            (ngModelChange)="onFeatureToggleChanged(feature, $event)"
+            color="primary"
+          >
           </mat-slide-toggle>
         </div>
 
+        <div
+          class="d-flex align-items-center justify-content-between mx-3 my-1"
+        >
+          <h3 class="feature-desc">
+            {{ "pricePerUse" | translate }} :
+            <strong>{{ feature.pricePerUse ?? "-" }}</strong>
+          </h3>
+          <h3 class="feature-desc">
+            {{ "monthlyPrice" | translate }} :
+            <strong>{{ feature.monthlyPrice ?? "-" }}</strong>
+          </h3>
+        </div>
         <!-- Options -->
-        <div class="feature-options mx-2" *ngIf="feature.enabled">
+        <div class="feature-options mx-3" *ngIf="feature.enabled">
           <label class="radio-option">
             <input
               type="radio"
               [name]="feature.key"
               value="unlimited"
               [(ngModel)]="feature.type"
+              (ngModelChange)="onFeatureTypeChanged(feature)"
             />
-            {{"UnLimited" | translate}}
+            {{ "UnLimited" | translate }}
           </label>
 
           <div class="d-flex gap-2">
@@ -86,15 +122,18 @@
                 [name]="feature.key"
                 value="limited"
                 [(ngModel)]="feature.type"
+                (ngModelChange)="onFeatureTypeChanged(feature)"
               />
-              {{"Limited" | translate}}
+              {{ "Limited" | translate }}
             </label>
 
             <!-- Counter -->
             <div class="limit-counter" *ngIf="feature.type === 'limited'">
               <button
                 type="button"
-                (click)="feature.limit = feature.limit - 1"
+                (click)="
+                  feature.limit = feature.limit - 1; onLimitChanged(feature)
+                "
                 [disabled]="feature.limit <= 1"
               >
                 −
@@ -105,11 +144,17 @@
                 class="limit-input"
                 [(ngModel)]="feature.limit"
                 min="1"
+                (ngModelChange)="onLimitChanged(feature)"
                 (click)="$event.stopPropagation()"
                 (keydown)="$event.stopPropagation()"
               />
 
-              <button type="button" (click)="feature.limit = feature.limit + 1">
+              <button
+                type="button"
+                (click)="
+                  feature.limit = feature.limit + 1; onLimitChanged(feature)
+                "
+              >
                 +
               </button>
             </div>
@@ -119,33 +164,71 @@
     </div>
   </div>
   <div class="row my-3">
-  <div class="col-12">
-    <div class="checkout-bar">
-
-      <!-- LEFT SIDE -->
-      <div class="checkout-info">
-        <div class="checkout-total">
-          {{ "Total" | translate }}:
-          <strong>{{ 500 }} USD</strong>
+    <div class="col-12">
+      <div class="checkout-bar">
+        <!-- LEFT SIDE -->
+        <div class="checkout-info">
+          <div class="checkout-total">
+            {{ "Total" | translate }}:
+            <strong>
+              {{ totalPrice !== null ? totalPrice + " USD" : "-" }}
+            </strong>
+          </div>
+          <div class="checkout-count">
+            {{ selectedFeaturesCount }}
+            {{ selectedFeaturesCount === 1 ? "Feature" : "Features" }}
+            {{ "Selected" | translate }}
+          </div>
         </div>
 
-        <div class="checkout-count">
-          {{ selectedFeaturesCount }}
-          {{ selectedFeaturesCount === 1 ? 'Feature' : 'Features' }}
-          {{ "Selected" | translate }}
+        <!-- RIGHT SIDE -->
+        <div class="d-flex gap-2">
+          <!-- Calculate يظهر أول ما يختار feature -->
+          <button
+            class="signin-button w-auto"
+            *ngIf="selectedFeaturesCount > 0"
+            (click)="calculatePrice()"
+            [disabled]="!canCalculate || isCalculating"
+          >
+            {{
+              isCalculating ? "Calculating..." : ("CalculatePrice" | translate)
+            }}
+          </button>
+
+          <!-- Create يظهر فقط بعد ما السعر يتحسب -->
+          <button
+            class="signin-button w-auto"
+            *ngIf="totalPrice !== null"
+            (click)="createAndPay()"
+            [disabled]="isCreating"
+          >
+            {{ isCreating ? "Creating..." : ("Create & Pay" | translate) }}
+          </button>
         </div>
       </div>
-
-      <!-- RIGHT SIDE -->
-      <button
-        class="signin-button w-auto"
-        [disabled]="selectedFeaturesCount === 0"
-      >
-        {{ "Create & Pay" | translate }}
-      </button>
-
     </div>
   </div>
 </div>
 
-</div>
+<app-modal
+  [isOpen]="viewDescModal"
+  title="{{ 'Description' | translate }}"
+  size="medium"
+  (close)="closeDescModal()"
+>
+  <!-- Body -->
+  <div modal-body>
+    <div class="modal-body">
+      <h4>
+        {{ clickableDesc }}
+      </h4>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="w-100 mt-2">
+    <button class="signin-button close" (click)="closeDescModal()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</app-modal>

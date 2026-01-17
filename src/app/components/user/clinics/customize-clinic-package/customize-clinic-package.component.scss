@@ -71,7 +71,6 @@
 }
 
 ::ng-deep .package-toggle-theme {
-
   /* ON state track */
   --mdc-switch-selected-track-color: var(--bg-brown-medium);
   --mdc-switch-selected-hover-track-color: var(--bg-brown-medium);
@@ -110,7 +109,6 @@
 .feature-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .feature-left {
@@ -258,6 +256,16 @@
   box-shadow: var(--shadow-brown);
 }
 
+.modal-body {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: var(--bg-white-secondary);
+  h4 {
+    color: var(--text-gray-head-table);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
 
 /////// responsive on tablets
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -284,13 +292,12 @@
     font-size: 15px;
   }
   .checkout-total {
-  font-size: 18px;
-}
+    font-size: 18px;
+  }
 
-.checkout-count {
-  font-size: 16px;
-}
-
+  .checkout-count {
+    font-size: 16px;
+  }
 }
 
 ////// responsive on mobile
@@ -321,23 +328,28 @@
     font-size: 12px;
   }
   .limit-input {
-  width: 40px;
-  height: 28px;
-  font-size: 12px;
-  border-radius: 8px;
+    width: 40px;
+    height: 28px;
+    font-size: 12px;
+    border-radius: 8px;
   }
   .limit-counter button {
-  width: 30px;
-  height: 30px; 
-  color: 15px;
+    width: 30px;
+    height: 30px;
+    color: 15px;
   }
-    .checkout-total {
-  font-size: 14px;
-}
+  .checkout-total {
+    font-size: 14px;
+  }
 
-.checkout-count {
-  font-size: 13px;
-}
-}
+  .checkout-count {
+    font-size: 13px;
+  }
 
-
+  .modal-body {
+    padding: 5px;
+    h4 {
+      font-size: 0.9rem;
+    }
+  }
+}

@@ -572,5 +572,7 @@
   "no_lab_requests_found": "No lab requests found",
   "order_details" : "Order Details",
   "total_expenses" :"Total Expenses" ,
-  "edit_order_status":"Edit Order Status"
+  "edit_order_status":"Edit Order Status",
+  "pricePerUse": "Price per use",
+  "monthlyPrice": "Monthly price"
   }

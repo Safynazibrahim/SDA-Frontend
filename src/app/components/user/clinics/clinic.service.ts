@@ -32,7 +32,7 @@ export class ClinicService {
 
   getAssignedCasesForEachClinic(clinicId: any, params: any) {
     return firstValueFrom(
-      this.api.get<any>(`clinics/${clinicId}/assigned-cases`, params)
+      this.api.get<any>(`clinics/${clinicId}/assigned-cases`, params),
     );
   }
 
@@ -52,7 +52,7 @@ export class ClinicService {
   getDoctorsForClinic(
     clinicId: string,
     page: number,
-    limit: number
+    limit: number,
   ): Observable<any> {
     const params = {
       page: page,
@@ -70,10 +70,28 @@ export class ClinicService {
   updateClinic(id: string, payload: any): Observable<any> {
     return this.api.patch<any>(`clinics/${id}`, payload);
   }
-  editDoctor(clinicId: string, doctorId: string, payload: any): Observable<any> {
-    return this.api.patch<any>(`clinics/${clinicId}/doctors/${doctorId}`, payload);
+  editDoctor(
+    clinicId: string,
+    doctorId: string,
+    payload: any,
+  ): Observable<any> {
+    return this.api.patch<any>(
+      `clinics/${clinicId}/doctors/${doctorId}`,
+      payload,
+    );
   }
   getDoctorById(clinicId: string, doctorId: string): Observable<any> {
     return this.api.get<any>(`clinics/${clinicId}/doctors/${doctorId}`);
+  }
+
+  getFeatures() {
+    return this.api.get<any>(`features`);
+  }
+  calculatePackagePrice(body: any) {
+    return this.api.post('packages/calculate-price', body);
+  }
+
+  createCustomPackage(body: any) {
+    return this.api.post('packages/custom', body);
   }
 }
