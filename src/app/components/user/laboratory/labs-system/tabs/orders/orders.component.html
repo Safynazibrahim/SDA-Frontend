@@ -59,8 +59,8 @@
           <tr *ngFor="let order of orders()" stryle="cursor: pointer;">
             <td>{{ order.lab.name }}</td>
             <td>{{ order.name }}</td>
-            <td>{{ order.createdAt | date : "dd/MM/yyyy, h:mm a" }}</td>
-            <td>{{ order.updatedAt | date : "dd/MM/yyyy, h:mm a" }}</td>
+            <td>{{ order.createdAt | date: "dd/MM/yyyy, h:mm a" }}</td>
+            <td>{{ order.updatedAt | date: "dd/MM/yyyy, h:mm a" }}</td>
             <td>
               <div
                 class="d-flex align-items-center gap-1 status"
@@ -88,7 +88,13 @@
                   <mat-icon>visibility</mat-icon>
                   <span>{{ "view_details" | translate }}</span>
                 </button>
-                <button mat-menu-item (click)="openEditModal(order)">
+                <button
+                  *ngIf="
+                    order.status !== 'completed' && order.status !== 'waiting'
+                  "
+                  mat-menu-item
+                  (click)="openEditModal(order)"
+                >
                   <mat-icon>edit</mat-icon>
                   <span>{{ "edit" | translate }}</span>
                 </button>
@@ -137,15 +143,11 @@
       </h4>
       <h4>
         {{ "created_at" | translate }}:
-        <span>{{
-          selectedOrder?.createdAt | date : "dd/MM/yyyy, h:mm a"
-        }}</span>
+        <span>{{ selectedOrder?.createdAt | date: "dd/MM/yyyy, h:mm a" }}</span>
       </h4>
       <h4>
         {{ "last_status_updated" | translate }}:
-        <span>{{
-          selectedOrder?.updatedAt | date : "dd/MM/yyyy, h:mm a"
-        }}</span>
+        <span>{{ selectedOrder?.updatedAt | date: "dd/MM/yyyy, h:mm a" }}</span>
       </h4>
       <h4>
         {{ "status" | translate }}:
