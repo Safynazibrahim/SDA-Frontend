@@ -1,1 +1,51 @@
-<p>nearby-labs works!</p>
+<div class="container px-3 py-2">
+  <div class="row d-flex align-items-center my-1">
+    <div class="col-12 main-title d-flex align-items-center">
+      <h3 class="main-title">{{ "NearbyLaboratory" | translate }}</h3>
+    </div>
+  </div>
+  <!-- Search -->
+  <app-search
+    [(model)]="searchNameValue"
+    [placeholder]="'SearchNearbyLabs' | translate"
+    (search)="onSearch()"
+  >
+  </app-search>
+  <div class="my-3 mx-4" *ngFor="let lab of nearbyLabs()">
+    <div class="d-flex flex-column gap-2 justify-content-between">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-2">
+          <img src="../../../../../assets/media/medi.png" class="lab-img" />
+          <div>
+            <h3 class="lab-name">{{ lab.name }}</h3>
+            <p class="lab-location">{{ lab.location }}</p>
+          </div>
+        </div>
+        <div>
+          <button (click)="sendRequestToLab(lab.id)" class="signin-button">
+            {{ "link_request" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </div>
+  <div class="my-4">
+    <app-pagination
+      [totalItems]="total()"
+      [pageSize]="limit()"
+      [currentPage]="page()"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+
+  <div
+    class="my-3 mx-4 d-flex align-items-center justify-content-center"
+    *ngIf="nearbyLabs().length === 0 && !loading()"
+  >
+    <h3 class="title my-5">
+      {{ "no_laboratories_nearby" | translate }}
+    </h3>
+  </div>
+</div>

@@ -585,5 +585,9 @@
   "order_details" : "تفاصيل الطلب",
   "total_expenses": "إجمالي المصروفات",
   "pricePerUse": "السعر لكل استخدام",
-  "monthlyPrice": "السعر الشهري"
+  "monthlyPrice": "السعر الشهري",
+  "NearbyLaboratory": "معمل قريب",
+  "no_laboratories_nearby": "لا توجد معامل قريبة",
+  "link_request": "طلب معمل",
+  "SearchNearbyLabs": "ابحث عن معامل قريبة"
 }
