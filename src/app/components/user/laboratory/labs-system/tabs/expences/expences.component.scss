@@ -32,6 +32,131 @@
   fill: var(--bg-primary); // لون الخلفية اللي تحت
 }
 
+//////
+.search-wrapper {
+  width: 100%;
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 50%;
+    background: var(--bg-primary);
+  }
+
+  .search-icon {
+    color: var(--text-gray);
+    pointer-events: none; // so it doesn’t block typing
+  }
+
+  .search-form-control {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: none !important;
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--text-gray) !important;
+      background: none !important;
+    }
+  }
+  .btn-search {
+    color: var(--bg-white) !important;
+    background-color: var(--bg-brown-medium);
+    border-radius: 25px;
+    border: none !important;
+    padding: 9px 15px;
+  }
+}
+
+.dropdown {
+  background-color: var(--bg-light-gray) !important;
+  border-radius: 7px;
+}
+
+.table {
+  animation: cardFadeUp 0.9s ease forwards;
+}
+
+.table thead th {
+  font-weight: 400;
+  font-size: 1.2rem;
+  background: var(--bg-white);
+  color: var(--text-black-white);
+}
+.table tbody td {
+  background: var(--bg-white-secondary);
+  color: var(--text-black-white);
+}
+
+.status {
+  color: #a67f00;
+}
+
+.status.accepted {
+  background: #ebf6ee;
+  color: #34a853;
+}
+
+.signin-button {
+  &.close {
+    background: var(--text-light-gray) !important;
+  }
+}
+
+.signin-button.cancel {
+  background: transparent !important;
+  border: 1px solid var(--bg-brown-medium);
+  color: var(--bg-brown-medium);
+}
+
+.modal-body {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: var(--bg-white-secondary);
+  h4 {
+    color: var(--text-gray-head-table);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-black-biege);
+  }
+}
+.title {
+  color: var(--text-gray-head-table);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 12px 0px;
+}
+.card {
+  background-color: var(--bg-white-secondary);
+  padding: 8px;
+  border-radius: 12px;
+  color: var(--text-gray);
+  h4 {
+    color: var(--text-gray-head-table);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0px;
+  }
+  p {
+    color: var(--bg-brown-dark);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0px;
+    span {
+      font-weight: 500;
+      margin: 0px;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .expenses-content .amount {
     font-size: 18px;
@@ -39,5 +164,21 @@
 
   .wave {
     height: 100px;
+  }
+
+  .table thead th {
+    font-size: 13px;
+  }
+  .table tbody td {
+    font-size: 12px;
+  }
+  .modal-body {
+    padding: 5px;
+    h4 {
+      font-size: 0.9rem;
+    }
+    span {
+      font-size: 0.8rem;
+    }
   }
 }

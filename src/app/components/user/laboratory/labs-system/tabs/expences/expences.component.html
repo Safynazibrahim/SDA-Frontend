@@ -1,16 +1,11 @@
 <section class="expenses-summary">
   <div class="expenses-content">
     <mat-icon>receipt_long</mat-icon>
-    <p class="label">{{"total_expenses" | translate}}</p>
-    <h3 class="amount">{{total()}} EGP</h3>
+    <p class="label">{{ "total_expenses" | translate }}</p>
+    <h3 class="amount">{{ totalExpenses() }} EGP</h3>
   </div>
-
   <!-- Wave -->
-  <svg
-    class="wave"
-    viewBox="0 0 1440 120"
-    preserveAspectRatio="none"
-  >
+  <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none">
     <path
       d="
         M0,60
@@ -25,3 +20,118 @@
     ></path>
   </svg>
 </section>
+<div class="conatiner">
+  <div
+    *ngIf="orders().length > 0"
+    class="row d-flex align-items-center justify-content-center mb-4"
+  >
+    <div class="table-responsive my-2">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>{{ "lab_name" | translate }}</th>
+            <th>{{ "order_name" | translate }}</th>
+            <th>{{ "created_at" | translate }}</th>
+            <th>{{ "last_status_updated" | translate }}</th>
+            <th>{{ "status" | translate }}</th>
+            <th>{{ "action" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders()" stryle="cursor: pointer;">
+            <td>{{ order.lab.name }}</td>
+            <td>{{ order.name }}</td>
+            <td>{{ order.createdAt | date: "dd/MM/yyyy, h:mm a" }}</td>
+            <td>{{ order.updatedAt | date: "dd/MM/yyyy, h:mm a" }}</td>
+            <td>
+              <div
+                class="d-flex align-items-center gap-1 status"
+                [ngClass]="order.status"
+              >
+                <mat-icon>{{ getStatusIcon(order.status) }}</mat-icon>
+                {{ order.status | titlecase }}
+              </div>
+            </td>
+            <td>
+              <mat-icon
+                style="cursor: pointer"
+                (click)="openViewModal(order.id)"
+                >visibility
+              </mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination
+      [totalItems]="totalOrders()"
+      [pageSize]="limit()"
+      [currentPage]="page()"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+  </div>
+</div>
+
+<app-modal
+  [isOpen]="isOpenViewOrder"
+  title="{{ 'order_details' | translate }}"
+  size="medium"
+  (close)="closeViewModal()"
+>
+  <!-- Body -->
+  <div modal-body>
+    <div class="modal-body">
+      <h4>
+        {{ "order_name" | translate }}: <span>{{ selectedOrder?.name }}</span>
+      </h4>
+      <h4>
+        {{ "lab_name" | translate }}:
+        <span>{{ selectedOrder?.lab?.name }}</span>
+      </h4>
+      <h4>
+        {{ "created_at" | translate }}:
+        <span>{{ selectedOrder?.createdAt | date: "dd/MM/yyyy, h:mm a" }}</span>
+      </h4>
+      <h4>
+        {{ "last_status_updated" | translate }}:
+        <span>{{ selectedOrder?.updatedAt | date: "dd/MM/yyyy, h:mm a" }}</span>
+      </h4>
+      <h4>
+        {{ "status" | translate }}:
+        <span
+          ><div
+            class="d-flex align-items-center gap-1 status my-2"
+            [ngClass]="selectedOrder?.status"
+          >
+            <mat-icon>{{ getStatusIcon(selectedOrder?.status) }}</mat-icon>
+            {{ selectedOrder?.status | titlecase }}
+          </div></span
+        >
+      </h4>
+    </div>
+    <div class="p-1" *ngIf="selectedOrder?.services?.length">
+      <h4 class="title">{{ "Services" | translate }}</h4>
+      <div
+        class="d-flex gap-1"
+        *ngFor="let item of selectedOrder.services; let i = index"
+      >
+        <span>{{ i + 1 }}</span>
+        <div class="card col-12 flex-column flex gap-2">
+          <h4>{{ item.service?.name }}</h4>
+          <p>
+            {{ item.price }}
+            <span>EGP</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="w-100 mt-2">
+    <button class="signin-button close" (click)="closeViewModal()">
+      {{ "close" | translate }}
+    </button>
+  </div>
+</app-modal>
