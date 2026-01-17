@@ -17,12 +17,12 @@
         <div class="d-flex align-items-center gap-2">
           <img src="../../../../../assets/media/medi.png" class="lab-img" />
           <div>
-            <h3 class="lab-name">{{ "lab.name" }}</h3>
-            <p class="lab-location">{{ "lab.location" }}</p>
+            <h3 class="lab-name">{{ lab.name }}</h3>
+            <p class="lab-location">{{ lab.location }}</p>
           </div>
         </div>
         <div>
-          <button (click)="sendRequestToLab('24c8a7f4-61c1-4559-99ba-5b06f5ceabb6')" class="signin-button">
+          <button (click)="sendRequestToLab(lab.id)" class="signin-button">
             {{ "link_request" | translate }}
           </button>
         </div>
