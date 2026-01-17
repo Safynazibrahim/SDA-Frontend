@@ -6,6 +6,7 @@ import { LabService } from '../../../lab.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ModalComponent } from '../../../../../shared/modal/modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-orders',
@@ -46,7 +47,10 @@ export class OrdersComponent implements OnInit {
   originalStatus = signal<string>('');
   editedStatus = signal<string>('');
 
-  constructor(private _LabService: LabService) {}
+  constructor(
+    private _LabService: LabService,
+    private _MatSnackBar:MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.loadOrders();
@@ -145,9 +149,16 @@ export class OrdersComponent implements OnInit {
 
         this.closeEditModal();
         this.loadOrders(); // refresh table
+        this._MatSnackBar.open('Status updated succeefully', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
       },
       error: (err) => {
-        console.error(err);
+        this._MatSnackBar.open(err.error.message, 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
       },
     });
   }

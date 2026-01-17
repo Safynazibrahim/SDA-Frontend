@@ -25,7 +25,7 @@ export class NearbyLabsComponent implements OnInit {
   lat: number = 0;
   lng: number = 0;
   page = signal(1);
-  limit = signal(6);
+  limit = signal(10);
   searchNameValue = '';
   search = signal('');
   distanceInKm = 6;
