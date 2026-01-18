@@ -215,7 +215,7 @@ if (typeof document !== 'undefined') {
   this._AppointmentsService.getCaseById(this.appointmentId).subscribe({
     next: (res) => {
       console.log('🩺 Case Data Loaded:', res);
-      this.chiefComplaint = res?.chiefComplaint || '';
+      this.chiefComplaint = res?.initialChiefComplaint || '';
       this.selectedMedications = res?.medications || [];
       this.selectedDiseases = res?.diseases || [];
       this.selectedInvestigations = res?.clinicalInvestigations || [];

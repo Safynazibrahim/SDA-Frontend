@@ -27,8 +27,8 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   appointmentId: any;
   patientId: string | null = null;
   fromPage: any;
-  chiefComplaint :any;
-  appointmentDate:any;
+  chiefComplaint: any;
+  appointmentDate: any;
   chiefComplaintOptions = [
     { key: 'pain', label: 'Pain (tooth / jaw / TMJ)', selected: false },
     { key: 'swelling', label: 'Swelling (facial / gingival)', selected: false },
@@ -51,6 +51,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       selected: false,
     },
   ];
+
 
   natureOfComplaintOptions = [
     { key: 'sharp', label: 'Sharp', selected: false },
@@ -104,6 +105,13 @@ export class StartCaseComponent implements OnInit, OnDestroy {
     },
     { key: 'none', label: 'None', selected: false },
   ];
+  chiefComplaintNotes = {
+    chiefComplaintNote: '',
+    natureOfComplaintNote: '',
+    aggravatingFactorsNote: '',
+    relevantMedicalHistoryNote: '',
+    medicationsOfConcernNote: '',
+  };
 
   facialSymmetryOptions = [
     { key: 'symmetrical', label: 'Symmetrical (Normal)', selected: false },
@@ -148,6 +156,14 @@ export class StartCaseComponent implements OnInit, OnDestroy {
     { key: 'deviation', label: 'Deviation to right / left', selected: false },
     { key: 'shape', label: 'S-shape or C-shape movement', selected: false },
   ];
+  extraoralNotes = {
+    facialSymmetryNote: '',
+    facialProfileNote: '',
+    lymphNodesNote: '',
+    tmjSoundsNote: '',
+    tmjOpeningNote: '',
+  };
+
   softTissueOptions = [
     { key: 'normal', label: 'Normal', selected: false },
     {
@@ -207,6 +223,14 @@ export class StartCaseComponent implements OnInit, OnDestroy {
     { key: 'mild', label: '4–5 mm (Mild / Moderate)', selected: false },
     { key: 'deep', label: '≥6 mm (Deep)', selected: false },
   ];
+  periodontalExaminationNotes = {
+    tongueSoftTissuesNote: '',
+    gingivalColorNote: '',
+    gingivalEnlargementNote: '',
+    bleedingOnProbingNote: '',
+    pocketDepthNote: '',
+  };
+
   occlusionClassOptions = [
     { key: 'class1', label: 'Class I', selected: false },
     {
@@ -271,6 +295,15 @@ export class StartCaseComponent implements OnInit, OnDestroy {
     },
     { key: 'hypersensitivity', label: 'Hypersensitivity', selected: false },
   ];
+  dentalOcclusionNotes = {
+    occlusionNote: '',
+    overbiteNote: '',
+    mobilityNote: '',
+    cariesNote: '',
+    restorationsNote: '',
+    pulpVitalityNote: '',
+  };
+
   toothDiagnosisOptions = [
     { key: 'reversible', label: 'Reversible pulpitis', selected: false },
     { key: 'irreversible', label: 'Irreversible pulpitis', selected: false },
@@ -324,6 +357,13 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       selected: false,
     },
   ];
+  diagnosisRiskNotes = {
+    toothDiagnosisNote: '',
+    periodontalDiagnosisNote: '',
+    cariesRiskNote: '',
+    prognosisNote: '',
+    treatmentPlanNote: '',
+  };
 
   private sectionMap = [
     {
@@ -433,133 +473,216 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       handler: 'analyzeSpeechForTreatmentPlan',
     },
   ];
+  // buildStartCaseData() {
+  //   const clinicalInvestigation = [
+  //     {
+  //       question: 'Chief Complaint',
+  //       answer: this.getSelectedLabels(this.chiefComplaintOptions),
+  //     },
+  //     {
+  //       question: 'Nature of Complaint',
+  //       answer: this.getSelectedLabels(this.natureOfComplaintOptions),
+  //     },
+  //     {
+  //       question: 'Aggravating Factors',
+  //       answer: this.getSelectedLabels(this.aggravatingFactorsOptions),
+  //     },
+  //     {
+  //       question: 'Medical History',
+  //       answer: this.getSelectedLabels(this.medicalHistoryOptions),
+  //     },
+  //     {
+  //       question: 'Medications of Concern',
+  //       answer: this.getSelectedLabels(this.medicationsOfConcernOptions),
+  //     },
+  //     {
+  //       question: 'Facial Symmetry',
+  //       answer: this.getSelectedLabels(this.facialSymmetryOptions),
+  //     },
+  //     {
+  //       question: 'Facial Profile',
+  //       answer: this.getSelectedLabels(this.facialProfileOptions),
+  //     },
+  //     {
+  //       question: 'Lymph Nodes',
+  //       answer: this.getSelectedLabels(this.lymphNodesOptions),
+  //     },
+  //     {
+  //       question: 'TMJ Sounds',
+  //       answer: this.getSelectedLabels(this.tmjSoundsOptions),
+  //     },
+  //     {
+  //       question: 'TMJ Opening',
+  //       answer: this.getSelectedLabels(this.tmjOpeningOptions),
+  //     },
+  //     {
+  //       question: 'Soft Tissue Examination',
+  //       answer: this.getSelectedLabels(this.softTissueOptions),
+  //     },
+  //     {
+  //       question: 'Gingival Color & Texture',
+  //       answer: this.getSelectedLabels(this.gingivalColorOptions),
+  //     },
+  //     {
+  //       question: 'Gingival Enlargement',
+  //       answer: this.getSelectedLabels(this.gingivalEnlargementOptions),
+  //     },
+  //     {
+  //       question: 'Bleeding on Probing',
+  //       answer: this.getSelectedLabels(this.bleedingOnProbingOptions),
+  //     },
+  //     {
+  //       question: 'Pocket Depth',
+  //       answer: this.getSelectedLabels(this.pocketDepthOptions),
+  //     },
+  //     {
+  //       question: 'Occlusion Class',
+  //       answer: this.getSelectedLabels(this.occlusionClassOptions),
+  //     },
+  //     {
+  //       question: 'Vertical Overlap',
+  //       answer: this.getSelectedLabels(this.verticalOverlapOptions),
+  //     },
+  //     {
+  //       question: 'Tooth Mobility',
+  //       answer: this.getSelectedLabels(this.toothMobilityOptions),
+  //     },
+  //     {
+  //       question: 'Caries (ICDAS)',
+  //       answer: this.getSelectedLabels(this.cariesOptions),
+  //     },
+  //     {
+  //       question: 'Existing Restorations',
+  //       answer: this.getSelectedLabels(this.existingRestorationsOptions),
+  //     },
+  //     {
+  //       question: 'Pulp Vitality',
+  //       answer: this.getSelectedLabels(this.pulpVitalityOptions),
+  //     },
+  //     {
+  //       question: 'Tooth Diagnosis',
+  //       answer: this.getSelectedLabels(this.toothDiagnosisOptions),
+  //     },
+  //     {
+  //       question: 'Periodontal Diagnosis',
+  //       answer: this.getSelectedLabels(this.periodontalDiagnosisOptions),
+  //     },
+  //     {
+  //       question: 'Caries Risk',
+  //       answer: this.getSelectedLabels(this.cariesRiskOptions),
+  //     },
+  //     {
+  //       question: 'Prognosis',
+  //       answer: this.getSelectedLabels(this.prognosisOptions),
+  //     },
+  //     {
+  //       question: 'Treatment Plan',
+  //       answer: this.getSelectedLabels(this.treatmentPlanOptions),
+  //     },
+  //   ];
+  //   const filteredInvestigation = clinicalInvestigation
+  //     .filter((i) => i.answer && i.answer.length > 0)
+  //     .reduce((acc, item) => {
+  //       acc[item.question] = item.answer;
+  //       return acc;
+  //     }, {} as Record<string, string[]>);
+  //   const data = {
+  //     images: this.uploadedFiles.map((f) => f.name), // في API الحقيقي هنبعته multipart
+  //     appointmentId: this.appointmentId,
+  //     chiefComplaint: this.chiefComplaint,
+  //     clinicalInvestigation: filteredInvestigation,
+  //     medications: [],
+  //     diseases: [],
+  //     diagnosis: '',
+  //     treatmentPlan: '',
+  //     instructionsBetweenVisits: '',
+  //   };
+
+  //   return data;
+  // }
   buildStartCaseData() {
-    const clinicalInvestigation = [
-      {
-        question: 'Chief Complaint',
-        answer: this.getSelectedLabels(this.chiefComplaintOptions),
-      },
-      {
-        question: 'Nature of Complaint',
-        answer: this.getSelectedLabels(this.natureOfComplaintOptions),
-      },
-      {
-        question: 'Aggravating Factors',
-        answer: this.getSelectedLabels(this.aggravatingFactorsOptions),
-      },
-      {
-        question: 'Medical History',
-        answer: this.getSelectedLabels(this.medicalHistoryOptions),
-      },
-      {
-        question: 'Medications of Concern',
-        answer: this.getSelectedLabels(this.medicationsOfConcernOptions),
-      },
-      {
-        question: 'Facial Symmetry',
-        answer: this.getSelectedLabels(this.facialSymmetryOptions),
-      },
-      {
-        question: 'Facial Profile',
-        answer: this.getSelectedLabels(this.facialProfileOptions),
-      },
-      {
-        question: 'Lymph Nodes',
-        answer: this.getSelectedLabels(this.lymphNodesOptions),
-      },
-      {
-        question: 'TMJ Sounds',
-        answer: this.getSelectedLabels(this.tmjSoundsOptions),
-      },
-      {
-        question: 'TMJ Opening',
-        answer: this.getSelectedLabels(this.tmjOpeningOptions),
-      },
-      {
-        question: 'Soft Tissue Examination',
-        answer: this.getSelectedLabels(this.softTissueOptions),
-      },
-      {
-        question: 'Gingival Color & Texture',
-        answer: this.getSelectedLabels(this.gingivalColorOptions),
-      },
-      {
-        question: 'Gingival Enlargement',
-        answer: this.getSelectedLabels(this.gingivalEnlargementOptions),
-      },
-      {
-        question: 'Bleeding on Probing',
-        answer: this.getSelectedLabels(this.bleedingOnProbingOptions),
-      },
-      {
-        question: 'Pocket Depth',
-        answer: this.getSelectedLabels(this.pocketDepthOptions),
-      },
-      {
-        question: 'Occlusion Class',
-        answer: this.getSelectedLabels(this.occlusionClassOptions),
-      },
-      {
-        question: 'Vertical Overlap',
-        answer: this.getSelectedLabels(this.verticalOverlapOptions),
-      },
-      {
-        question: 'Tooth Mobility',
-        answer: this.getSelectedLabels(this.toothMobilityOptions),
-      },
-      {
-        question: 'Caries (ICDAS)',
-        answer: this.getSelectedLabels(this.cariesOptions),
-      },
-      {
-        question: 'Existing Restorations',
-        answer: this.getSelectedLabels(this.existingRestorationsOptions),
-      },
-      {
-        question: 'Pulp Vitality',
-        answer: this.getSelectedLabels(this.pulpVitalityOptions),
-      },
-      {
-        question: 'Tooth Diagnosis',
-        answer: this.getSelectedLabels(this.toothDiagnosisOptions),
-      },
-      {
-        question: 'Periodontal Diagnosis',
-        answer: this.getSelectedLabels(this.periodontalDiagnosisOptions),
-      },
-      {
-        question: 'Caries Risk',
-        answer: this.getSelectedLabels(this.cariesRiskOptions),
-      },
-      {
-        question: 'Prognosis',
-        answer: this.getSelectedLabels(this.prognosisOptions),
-      },
-      {
-        question: 'Treatment Plan',
-        answer: this.getSelectedLabels(this.treatmentPlanOptions),
-      },
-    ];
-    const filteredInvestigation = clinicalInvestigation
-      .filter((i) => i.answer && i.answer.length > 0)
-      .reduce((acc, item) => {
-        acc[item.question] = item.answer;
-        return acc;
-      }, {} as Record<string, string[]>);
-    const data = {
-      images: this.uploadedFiles.map((f) => f.name), // في API الحقيقي هنبعته multipart
-      appointmentId: this.appointmentId,
-      chiefComplaint: this.chiefComplaint,
-      clinicalInvestigation: filteredInvestigation,
-      medications: [],
-      diseases: [],
+    return {
+      images: this.uploadedFiles.map(f => f.file), // multipart
+      imagesNote: '',
+
       diagnosis: '',
       treatmentPlan: '',
       instructionsBetweenVisits: '',
-    };
+      progress: 0,
 
-    return data;
+      medications: [],
+
+      chiefComplaint: {
+        chiefComplaint: this.getSelected(this.chiefComplaintOptions),
+        natureOfComplaint: this.getSelected(this.natureOfComplaintOptions),
+        aggravatingFactors: this.getSelected(this.aggravatingFactorsOptions),
+        relevantMedicalHistory: this.getSelected(this.medicalHistoryOptions),
+        medicationsOfConcern: this.getSelected(this.medicationsOfConcernOptions),
+        chiefComplaintNote: this.chiefComplaintNotes.chiefComplaintNote,
+        natureOfComplaintNote: this.chiefComplaintNotes.natureOfComplaintNote,
+        aggravatingFactorsNote: this.chiefComplaintNotes.aggravatingFactorsNote,
+        relevantMedicalHistoryNote: this.chiefComplaintNotes.relevantMedicalHistoryNote,
+        medicationsOfConcernNote: this.chiefComplaintNotes.medicationsOfConcernNote,
+      },
+
+      extraoralExamination: {
+        facialSymmetry: this.getSelected(this.facialSymmetryOptions),
+        facialProfile: this.getSelected(this.facialProfileOptions),
+        lymphNodes: this.getSelected(this.lymphNodesOptions),
+        tmjSounds: this.getSelected(this.tmjSoundsOptions),
+        tmjOpening: this.getSelected(this.tmjOpeningOptions),
+        facialSymmetryNote: this.extraoralNotes.facialSymmetryNote,
+        facialProfileNote: this.extraoralNotes.facialProfileNote,
+        lymphNodesNote: this.extraoralNotes.lymphNodesNote,
+        tmjSoundsNote: this.extraoralNotes.tmjSoundsNote,
+        tmjOpeningNote: this.extraoralNotes.tmjOpeningNote,
+      },
+
+      periodontalExamination: {
+        tongueSoftTissues: this.getSelected(this.softTissueOptions),
+        gingivalColor: this.getSelected(this.gingivalColorOptions),
+        gingivalEnlargement: this.getSelected(this.gingivalEnlargementOptions),
+        bleedingOnProbing: this.getSelected(this.bleedingOnProbingOptions),
+        pocketDepth: this.getSelected(this.pocketDepthOptions),
+        tongueSoftTissuesNote: this.periodontalExaminationNotes.tongueSoftTissuesNote,
+        gingivalColorNote: this.periodontalExaminationNotes.gingivalColorNote,
+        gingivalEnlargementNote: this.periodontalExaminationNotes.gingivalEnlargementNote,
+        bleedingOnProbingNote: this.periodontalExaminationNotes.bleedingOnProbingNote,
+        pocketDepthNote: this.periodontalExaminationNotes.pocketDepthNote,
+      },
+
+      dentalOcclusion: {
+        occlusion: this.getSelected(this.occlusionClassOptions),
+        overbite: this.getSelected(this.verticalOverlapOptions),
+        mobility: this.getSelected(this.toothMobilityOptions),
+        caries: this.getSelected(this.cariesOptions),
+        restorations: this.getSelected(this.existingRestorationsOptions),
+        pulpVitality: this.getSelected(this.pulpVitalityOptions),
+
+        occlusionalNote: this.dentalOcclusionNotes.occlusionNote,
+        overbiteNote: this.dentalOcclusionNotes.overbiteNote,
+        mobilityNote: this.dentalOcclusionNotes.mobilityNote,
+        cariesNote: this.dentalOcclusionNotes.cariesNote,
+        restorationsNote: this.dentalOcclusionNotes.restorationsNote,
+        pulpVitalityNote: this.dentalOcclusionNotes.pulpVitalityNote,
+      },
+
+      diagnosisRisk: {
+        toothDiagnosis: this.getSelected(this.toothDiagnosisOptions),
+        periodontalDiagnosis: this.getSelected(this.periodontalDiagnosisOptions),
+        cariesRisk: this.getSelected(this.cariesRiskOptions),
+        prognosis: this.getSelected(this.prognosisOptions),
+        treatmentPlan: this.getSelected(this.treatmentPlanOptions),
+
+        toothDiagnosisNote: this.diagnosisRiskNotes.toothDiagnosisNote,
+        periodontalDiagnosisNote: this.diagnosisRiskNotes.periodontalDiagnosisNote,
+        cariesRiskNote: this.diagnosisRiskNotes.cariesRiskNote,
+        prognosisNote: this.diagnosisRiskNotes.prognosisNote,
+        treatmentPlanNote: this.diagnosisRiskNotes.treatmentPlanNote,
+      },
+    };
   }
+
   getSelectedLabels(options: { label: string; selected: boolean }[]): string[] {
     return options.filter((o) => o.selected).map((o) => o.label);
   }
@@ -569,7 +692,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   private timerRef?: any;
   private seconds = 0;
   private currentSection: string | null = null;
-  caseId:any;
+  caseId: any;
 
   audioBlob: Blob | null = null;
   audioUrl: string | null = null;
@@ -581,7 +704,7 @@ export class StartCaseComponent implements OnInit, OnDestroy {
     private _Router: Router,
     private startCaseState: StartCaseStateService,
     private caseState: CaseStateService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // const savedData = this.startCaseState.getStartCaseData();
@@ -605,65 +728,65 @@ export class StartCaseComponent implements OnInit, OnDestroy {
       'patientId:',
       this.patientId
     );
-    this.caseId=this.caseState.getCaseData()?.caseId;
+    this.caseId = this.caseState.getCaseData()?.caseId;
     console.log(this.caseId)
-    
+
     const caseData = this.caseState.getCaseData();
     if (caseData) {
       this.chiefComplaint = caseData.chiefComplaint;
       console.log('📦 Loaded from Assign Case:', caseData);
     }
   }
-private restoreStartCase(savedData: any) {
-  this.chiefComplaint = savedData.chiefComplaint || '';
+  private restoreStartCase(savedData: any) {
+    this.chiefComplaint = savedData.chiefComplaint || '';
 
-  if (savedData.images) {
-    this.uploadedFiles = savedData.images.map((name: string) => ({
-      name,
-      preview: '',
-      file: null,
-    }));
+    if (savedData.images) {
+      this.uploadedFiles = savedData.images.map((name: string) => ({
+        name,
+        preview: '',
+        file: null,
+      }));
+    }
+
+    const restoreSelection = (
+      options: { label: string; selected: boolean }[],
+      selectedLabels: string[]
+    ) => {
+      options.forEach((opt) => {
+        opt.selected = selectedLabels.includes(opt.label);
+      });
+    };
+
+    const ci = savedData.clinicalInvestigation;
+    if (!ci) return;
+
+    restoreSelection(this.chiefComplaintOptions, ci['Chief Complaint'] || []);
+    restoreSelection(this.natureOfComplaintOptions, ci['Nature of Complaint'] || []);
+    restoreSelection(this.aggravatingFactorsOptions, ci['Aggravating Factors'] || []);
+    restoreSelection(this.medicalHistoryOptions, ci['Medical History'] || []);
+    restoreSelection(this.medicationsOfConcernOptions, ci['Medications of Concern'] || []);
+    restoreSelection(this.facialSymmetryOptions, ci['Facial Symmetry'] || []);
+    restoreSelection(this.facialProfileOptions, ci['Facial Profile'] || []);
+    restoreSelection(this.lymphNodesOptions, ci['Lymph Nodes'] || []);
+    restoreSelection(this.tmjSoundsOptions, ci['TMJ Sounds'] || []);
+    restoreSelection(this.tmjOpeningOptions, ci['TMJ Opening'] || []);
+    restoreSelection(this.softTissueOptions, ci['Soft Tissue Examination'] || []);
+    restoreSelection(this.gingivalColorOptions, ci['Gingival Color & Texture'] || []);
+    restoreSelection(this.gingivalEnlargementOptions, ci['Gingival Enlargement'] || []);
+    restoreSelection(this.bleedingOnProbingOptions, ci['Bleeding on Probing'] || []);
+    restoreSelection(this.pocketDepthOptions, ci['Pocket Depth'] || []);
+    restoreSelection(this.occlusionClassOptions, ci['Occlusion Class'] || []);
+    restoreSelection(this.verticalOverlapOptions, ci['Vertical Overlap'] || []);
+    restoreSelection(this.toothMobilityOptions, ci['Tooth Mobility'] || []);
+    restoreSelection(this.cariesOptions, ci['Caries (ICDAS)'] || []);
+    restoreSelection(this.existingRestorationsOptions, ci['Existing Restorations'] || []);
+    restoreSelection(this.pulpVitalityOptions, ci['Pulp Vitality'] || []);
+    restoreSelection(this.toothDiagnosisOptions, ci['Tooth Diagnosis'] || []);
+    restoreSelection(this.periodontalDiagnosisOptions, ci['Periodontal Diagnosis'] || []);
+    restoreSelection(this.cariesRiskOptions, ci['Caries Risk'] || []);
+    restoreSelection(this.prognosisOptions, ci['Prognosis'] || []);
+    restoreSelection(this.treatmentPlanOptions, ci['Treatment Plan'] || []);
   }
-
-  const restoreSelection = (
-    options: { label: string; selected: boolean }[],
-    selectedLabels: string[]
-  ) => {
-    options.forEach((opt) => {
-      opt.selected = selectedLabels.includes(opt.label);
-    });
-  };
-
-  const ci = savedData.clinicalInvestigation;
-  if (!ci) return;
-
-  restoreSelection(this.chiefComplaintOptions, ci['Chief Complaint'] || []);
-  restoreSelection(this.natureOfComplaintOptions, ci['Nature of Complaint'] || []);
-  restoreSelection(this.aggravatingFactorsOptions, ci['Aggravating Factors'] || []);
-  restoreSelection(this.medicalHistoryOptions, ci['Medical History'] || []);
-  restoreSelection(this.medicationsOfConcernOptions, ci['Medications of Concern'] || []);
-  restoreSelection(this.facialSymmetryOptions, ci['Facial Symmetry'] || []);
-  restoreSelection(this.facialProfileOptions, ci['Facial Profile'] || []);
-  restoreSelection(this.lymphNodesOptions, ci['Lymph Nodes'] || []);
-  restoreSelection(this.tmjSoundsOptions, ci['TMJ Sounds'] || []);
-  restoreSelection(this.tmjOpeningOptions, ci['TMJ Opening'] || []);
-  restoreSelection(this.softTissueOptions, ci['Soft Tissue Examination'] || []);
-  restoreSelection(this.gingivalColorOptions, ci['Gingival Color & Texture'] || []);
-  restoreSelection(this.gingivalEnlargementOptions, ci['Gingival Enlargement'] || []);
-  restoreSelection(this.bleedingOnProbingOptions, ci['Bleeding on Probing'] || []);
-  restoreSelection(this.pocketDepthOptions, ci['Pocket Depth'] || []);
-  restoreSelection(this.occlusionClassOptions, ci['Occlusion Class'] || []);
-  restoreSelection(this.verticalOverlapOptions, ci['Vertical Overlap'] || []);
-  restoreSelection(this.toothMobilityOptions, ci['Tooth Mobility'] || []);
-  restoreSelection(this.cariesOptions, ci['Caries (ICDAS)'] || []);
-  restoreSelection(this.existingRestorationsOptions, ci['Existing Restorations'] || []);
-  restoreSelection(this.pulpVitalityOptions, ci['Pulp Vitality'] || []);
-  restoreSelection(this.toothDiagnosisOptions, ci['Tooth Diagnosis'] || []);
-  restoreSelection(this.periodontalDiagnosisOptions, ci['Periodontal Diagnosis'] || []);
-  restoreSelection(this.cariesRiskOptions, ci['Caries Risk'] || []);
-  restoreSelection(this.prognosisOptions, ci['Prognosis'] || []);
-  restoreSelection(this.treatmentPlanOptions, ci['Treatment Plan'] || []);
-}
 
   get formattedTime(): string {
     const m = Math.floor(this.seconds / 60)
@@ -766,22 +889,22 @@ private restoreStartCase(savedData: any) {
     }
   }
 
- stopRecording() {
-  if (this.mediaRecorder && this.isRecording) {
-    this.mediaRecorder.stop();
-  }
-  this.isRecording = false;
-
-  if (this.timerRef) clearInterval(this.timerRef);
-
-  // ✅ بعد ما توقف، شوف لو مفيش نتيجة فعلاً
-  setTimeout(() => {
-    if (!this.transcriptionResult || this.transcriptionResult === 'Listening...') {
-      this.transcriptionResult = 'No text fetch...';
-      this.cdRef.detectChanges();
+  stopRecording() {
+    if (this.mediaRecorder && this.isRecording) {
+      this.mediaRecorder.stop();
     }
-  }, 300);
-}
+    this.isRecording = false;
+
+    if (this.timerRef) clearInterval(this.timerRef);
+
+    // ✅ بعد ما توقف، شوف لو مفيش نتيجة فعلاً
+    setTimeout(() => {
+      if (!this.transcriptionResult || this.transcriptionResult === 'Listening...') {
+        this.transcriptionResult = 'No text fetch...';
+        this.cdRef.detectChanges();
+      }
+    }, 300);
+  }
 
 
   startListening() {
@@ -1369,42 +1492,46 @@ private restoreStartCase(savedData: any) {
     ]);
   }
   onManualDiagnosisClick() {
-  const startCaseData = this.buildStartCaseData();
-  console.log('🧾 Start Case Data:', startCaseData);
-  this.startCaseState.setStartCaseData(startCaseData);
+    const startCaseData = this.buildStartCaseData();
+    console.log('🧾 Start Case Data:', startCaseData);
+    this.startCaseState.setStartCaseData(startCaseData);
 
-  let route: any[] = [];
-  if (this.fromPage === 'patient-profile') {
-    if (!this.patientId) {
-      console.error('❌ patientId is null!');
-      return;
+    let route: any[] = [];
+    if (this.fromPage === 'patient-profile') {
+      if (!this.patientId) {
+        console.error('❌ patientId is null!');
+        return;
+      }
+      route = ['/dashboard/patients/start-case/manual-diagnosis', this.patientId];
+    } else {
+      if (!this.appointmentId) {
+        console.error('❌ appointmentId is null!');
+        return;
+      }
+      route = ['/dashboard/appointments/manual-diagnosis', this.appointmentId];
     }
-    route = ['/dashboard/patients/start-case/manual-diagnosis', this.patientId];
-  } else {
-    if (!this.appointmentId) {
-      console.error('❌ appointmentId is null!');
-      return;
+
+    // 🟢 أضفنا التاريخ هنا
+    this._Router.navigate(route, {
+      queryParams: {
+        from: this.fromPage,
+        date: this.appointmentDate
+      }
+    });
+  }
+  goToReferral() {
+    let caseId = this.caseState.getCaseData()?.caseId;
+    if (!caseId) {
+      caseId = this.appointmentId;
     }
-    route = ['/dashboard/appointments/manual-diagnosis', this.appointmentId];
+    let clicnicId = this.caseState.getClinicId();
+    console.log(caseId);
+    console.log('ss', this.caseState.getClinicId());
+
+    return ['/dashboard/appointments/refer-case', caseId, clicnicId];
+  }
+  getSelected(options: { label: string; selected: boolean }[]) {
+    return options.filter(o => o.selected).map(o => o.label);
   }
 
-  // 🟢 أضفنا التاريخ هنا
-  this._Router.navigate(route, { 
-    queryParams: { 
-      from: this.fromPage, 
-      date: this.appointmentDate 
-    } 
-  });
-}
-  goToReferral(){
-   let caseId= this.caseState.getCaseData()?.caseId;
-   if(!caseId){
-    caseId=this.appointmentId;
-   }
-   let clicnicId = this.caseState.getClinicId();
-   console.log(caseId);
-   console.log('ss',this.caseState.getClinicId());
-   
-    return ['/dashboard/appointments/refer-case', caseId,clicnicId];
-  }
 }

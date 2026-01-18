@@ -89,6 +89,14 @@
       <div class="progress-text">{{ treatmentProgress }}%</div>
     </div>
     <p class="progress-label">{{ "Treatment Progress" | translate }}</p>
+     <input
+  type="range"
+  min="0"
+  max="100"
+  [(ngModel)]="treatmentProgress"
+  (input)="onProgressChange($any($event.target).value)"
+/>
+
   </div>
   <div class="row mt-2">
     <div class="col-md-6 mb-3">

@@ -113,7 +113,7 @@ appointmentDate:any
 
 
   ngOnInit() {
-    this.calculateProgress();
+    this.onProgressChange(this.treatmentProgress);
     this.fromPage = this.route.snapshot.queryParamMap.get('from');
     this.appointmentDate = this.route.snapshot.queryParamMap.get('date');
 
@@ -125,40 +125,49 @@ appointmentDate:any
     this.clinicId = this.startCaseState.getClinicId();
     this.caseId = this.assignCaseState.getCaseData()?.caseId || null;
   }
+  onProgressChange(value: number) {
+  if (value < 0) value = 0;
+  if (value > 100) value = 100;
+
+  this.treatmentProgress = value;
+  this.calculateProgress();
+}
+
   sendManualDiagnosis() {
-    const startCaseData = this.startCaseState.getStartCaseData();
-    if (!startCaseData) {
-      this.snackBar.open(' Missing start case data', 'Close', {
-        duration: 3000,
-      });
-      return;
-    }
+  const startCaseData = this.startCaseState.getStartCaseData();
 
-    const payload = {
-      chiefComplaint: startCaseData.chiefComplaint,
-      clinicalInvestigation: startCaseData.clinicalInvestigation,
-      diagnosis: this.diagnosisName,
-      treatmentPlan: this.treatmentPlan,
-      instructionsBetweenVisits: this.instructionBetweenVisits,
-      medications: this.medications.filter(
-        (m) => m.dosage || m.frequency || m.duration
-      ),
-    };
-    if(this.caseId== null){
-      this.caseId = this.appointmentId
-    }
-
-    this._AppointmentsService.startCase(payload,this.caseId).subscribe({
-      next: (res) => {
-          this.openNextVisitModal();
-      },
-      error: (err) => {
-        this.snackBar.open(err.message, 'Close', {
-          duration: 3000,
-        });
-      },
-    });
+  if (!startCaseData) {
+    this.snackBar.open('Missing start case data', 'Close', { duration: 3000 });
+    return;
   }
+
+  const payload = {
+    ...startCaseData,
+
+    diagnosis: this.diagnosisName,
+    treatmentPlan: this.treatmentPlan,
+    instructionsBetweenVisits: this.instructionBetweenVisits,
+    progress: this.treatmentProgress,
+
+    medications: this.medications
+      .filter(m => m.dosage || m.frequency || m.duration)
+      .map(m => ({
+        name: m.name,
+        dosage: Number(m.dosage),
+        frequency: Number(m.frequency),
+        duration: Number(m.duration),
+      })),
+  };
+
+  const caseId = this.caseId ?? this.appointmentId;
+
+  this._AppointmentsService.startCase(payload, caseId).subscribe({
+    next: () => this.openNextVisitModal(),
+    error: err =>
+      this.snackBar.open(err.message || 'Error', 'Close', { duration: 3000 }),
+  });
+}
+
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
