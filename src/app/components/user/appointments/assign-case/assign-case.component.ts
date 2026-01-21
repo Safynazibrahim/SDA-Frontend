@@ -153,18 +153,18 @@ this.patientName = query.get('patientName') || '';
   
 
   if (this.pageTitle === 'Edit Case') {
-    this._AppointmentsService.editCase(this.appointmentId!, editCaseData).subscribe({
-      next: (res) => {
-          this.caseState.setCaseData({
-          chiefComplaint: this.chiefComplaint
-        });
-        console.log('✅ Case updated successfully', res);
+    // this._AppointmentsService.editCase(this.appointmentId!, editCaseData).subscribe({
+    //   next: (res) => {
+    //       this.caseState.setCaseData({
+    //       chiefComplaint: this.chiefComplaint
+    //     });
+    //     console.log('✅ Case updated successfully', res);
          this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId], {
           queryParams: { date: this.appointmentDate, from: 'appointments' }
         });
-      },
-      error: (err) => console.error('❌ Error updating case', err)
-    });
+    //   },
+    //   error: (err) => console.error('❌ Error updating case', err)
+    // });
   }
   else {
     this._AppointmentsService.assignCase(caseData).subscribe({

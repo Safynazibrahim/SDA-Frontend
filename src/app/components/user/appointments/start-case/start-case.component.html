@@ -74,15 +74,26 @@
         />
       </div>
 
-      <div class="checkbox-grid">
-        <label *ngFor="let item of chiefComplaintOptions">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            [(ngModel)]="item.selected"
-          />
-          {{ item.label }}
-        </label>
+      <div class="checkbox-grid ps-4">
+       <div *ngFor="let item of chiefComplaintOptions" class="mb-2">
+
+  <!-- العنوان -->
+  <p class="fw-bold m-0">{{ item.label }}</p>
+
+  <!-- لو ليه sub options -->
+  <div class="ms-3" *ngIf="item.subOptions?.length">
+    <label *ngFor="let sub of item.subOptions" class="d-block">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [(ngModel)]="sub.selected"
+      />
+      {{ sub.label }}
+    </label>
+  </div>
+
+</div>
+
       </div>
     </div>
 

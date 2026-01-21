@@ -124,6 +124,7 @@ appointmentDate:any
    
     this.clinicId = this.startCaseState.getClinicId();
     this.caseId = this.assignCaseState.getCaseData()?.caseId || null;
+    this.loadCaseFromApi();
   }
   onProgressChange(value: number) {
   if (value < 0) value = 0;
@@ -132,8 +133,16 @@ appointmentDate:any
   this.treatmentProgress = value;
   this.calculateProgress();
 }
-
-  sendManualDiagnosis() {
+loadCaseFromApi() {
+  this._AppointmentsService.getCaseById(this.appointmentId)
+    .subscribe(res => {
+      this.onProgressChange(res.progress);
+      this.diagnosisName=res.diagnosis;
+      this.treatmentPlan=res.treatmentPlan;
+      this.instructionBetweenVisits=res.instructionsBetweenVisits;
+    });
+}
+ sendManualDiagnosis() {
   const startCaseData = this.startCaseState.getStartCaseData();
 
   if (!startCaseData) {
@@ -141,27 +150,74 @@ appointmentDate:any
     return;
   }
 
-  const payload = {
-    ...startCaseData,
+  const formData = new FormData();
 
-    diagnosis: this.diagnosisName,
-    treatmentPlan: this.treatmentPlan,
-    instructionsBetweenVisits: this.instructionBetweenVisits,
-    progress: this.treatmentProgress,
+  // ===============================
+  // 🟢 Images
+  // ===============================
+  if (startCaseData.images?.length) {
+  startCaseData.images.forEach((file: File) => {
+    formData.append('images', file); // ✅ بدون []
+  });
+}
 
-    medications: this.medications
-      .filter(m => m.dosage || m.frequency || m.duration)
-      .map(m => ({
-        name: m.name,
-        dosage: Number(m.dosage),
-        frequency: Number(m.frequency),
-        duration: Number(m.duration),
-      })),
-  };
+
+  // ===============================
+  // 🟢 Primitive fields
+  // ===============================
+  formData.append('diagnosis', this.diagnosisName);
+  formData.append('treatmentPlan', this.treatmentPlan);
+  formData.append(
+    'instructionsBetweenVisits',
+    this.instructionBetweenVisits
+  );
+  formData.append('progress', String(this.treatmentProgress));
+
+  // ===============================
+  // 🟢 Complex objects (JSON)
+  // ===============================
+  formData.append(
+    'chiefComplaint',
+    JSON.stringify(startCaseData.chiefComplaint)
+  );
+
+  formData.append(
+    'extraoralExamination',
+    JSON.stringify(startCaseData.extraoralExamination)
+  );
+
+  formData.append(
+    'periodontalExamination',
+    JSON.stringify(startCaseData.periodontalExamination)
+  );
+
+  formData.append(
+    'dentalOcclusion',
+    JSON.stringify(startCaseData.dentalOcclusion)
+  );
+
+  formData.append(
+    'diagnosisRisk',
+    JSON.stringify(startCaseData.diagnosisRisk)
+  );
+
+  // ===============================
+  // 🟢 Medications
+  // ===============================
+  const meds = this.medications
+    .filter(m => m.dosage || m.frequency || m.duration)
+    .map(m => ({
+      name: m.name,
+      dosage: Number(m.dosage),
+      frequency: Number(m.frequency),
+      duration: Number(m.duration),
+    }));
+
+  formData.append('medications', JSON.stringify(meds));
 
   const caseId = this.caseId ?? this.appointmentId;
 
-  this._AppointmentsService.startCase(payload, caseId).subscribe({
+  this._AppointmentsService.startCase(formData, caseId).subscribe({
     next: () => this.openNextVisitModal(),
     error: err =>
       this.snackBar.open(err.message || 'Error', 'Close', { duration: 3000 }),

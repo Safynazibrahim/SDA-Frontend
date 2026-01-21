@@ -31,27 +31,40 @@ export class StartCaseComponent implements OnInit, OnDestroy {
   chiefComplaint: any;
   appointmentDate: any;
   chiefComplaintOptions = [
-    { key: 'pain', label: 'Pain (tooth / jaw / TMJ)', selected: false },
-    { key: 'swelling', label: 'Swelling (facial / gingival)', selected: false },
-    { key: 'bleeding', label: 'Bleeding', selected: false },
-    {
-      key: 'sensitivity',
-      label: 'Sensitivity (hot / cold / sweet)',
-      selected: false,
-    },
-    {
-      key: 'esthetic',
-      label: 'Esthetic concerns (discoloration / malalignment)',
-      selected: false,
-    },
-    { key: 'chewing', label: 'Difficulty chewing', selected: false },
-    { key: 'broken', label: 'Broken tooth', selected: false },
-    {
-      key: 'routine',
-      label: 'Routine check-up / No complaint',
-      selected: false,
-    },
-  ];
+  {
+    key: 'pain',
+    label: 'Pain',
+    subOptions: [
+      { key: 'tooth', label: 'Tooth', selected: false },
+      { key: 'jaw', label: 'Jaw', selected: false },
+      { key: 'tmj', label: 'TMJ', selected: false },
+    ]
+  },
+  {
+    key: 'swelling',
+    label: 'Swelling',
+    subOptions: [
+      { key: 'facial', label: 'Facial', selected: false },
+      { key: 'gingival', label: 'Gingival', selected: false },
+    ]
+  },
+  {
+    key: 'bleeding',
+    label: 'Bleeding',
+    subOptions: [
+      { key: 'bleeding', label: 'Bleeding', selected: false }
+    ] // مفيش تفاصيل
+  },
+  {
+    key: 'routine',
+    label: 'Routine check-up / No complaint',
+    subOptions: [
+      { key: 'routine check-up', label: 'Routine check-up', selected: false },
+      { key: 'no complaint', label: 'No complaint', selected: false }
+    ]
+  }
+];
+
 
 
   natureOfComplaintOptions = [
@@ -1004,9 +1017,22 @@ patchFromApiModel(caseData: any) {
   this.caseId = caseData.id;
 }
 
+// restoreSelected(options: any[], values: string[] = []) {
+//   options.forEach(o => {
+//     o.selected = values.includes(o.label);
+//   });
+// }
+
+
 restoreSelected(options: any[], values: string[] = []) {
+  if (!Array.isArray(values)) return;
+
   options.forEach(o => {
-    o.selected = values.includes(o.label);
+    if (o.subOptions?.length) {
+      o.subOptions.forEach((s: any) => {
+        s.selected = values.includes(`${o.label} - ${s.label}`);
+      });
+    }
   });
 }
 
@@ -1022,13 +1048,20 @@ restoreSelected(options: any[], values: string[] = []) {
     }
 
     const restoreSelection = (
-      options: { label: string; selected: boolean }[],
-      selectedLabels: string[]
-    ) => {
-      options.forEach((opt) => {
-        opt.selected = selectedLabels.includes(opt.label);
+  options: any[],
+  selectedLabels: string[]
+) => {
+  options.forEach(opt => {
+    if (opt.subOptions?.length) {
+      opt.subOptions.forEach((s: any) => {
+        s.selected = selectedLabels.includes(`${opt.label} - ${s.label}`);
       });
-    };
+    } else if ('selected' in opt) {
+      opt.selected = selectedLabels.includes(opt.label);
+    }
+  });
+};
+
 
     const ci = savedData.clinicalInvestigation;
     if (!ci) return;
@@ -1264,7 +1297,10 @@ restoreSelected(options: any[], values: string[] = []) {
     this.chiefComplaintOptions.forEach((opt) => {
       for (const kw of keywordMap[opt.key]) {
         if (lowerText.includes(kw)) {
-          opt.selected = true;
+          opt.subOptions?.forEach((s: any) => {
+  s.selected = true;
+});
+
           break;
         }
       }
@@ -1803,8 +1839,24 @@ restoreSelected(options: any[], values: string[] = []) {
 
     return ['/dashboard/appointments/refer-case', caseId, clicnicId];
   }
-  getSelected(options: { label: string; selected: boolean }[]) {
-    return options.filter(o => o.selected).map(o => o.label);
-  }
+  // getSelected(options: { label: string; selected: boolean }[]) {
+  //   return options.filter(o => o.selected).map(o => o.label);
+  // }
+  getSelected(options: any[] = []) {
+  const result: string[] = [];
+
+  options.forEach(o => {
+    if (o.subOptions?.length) {
+      o.subOptions.forEach((s: any) => {
+        if (s.selected) {
+          result.push(`${o.label} - ${s.label}`);
+        }
+      });
+    }
+  });
+
+  return result;
+}
+
 
 }
