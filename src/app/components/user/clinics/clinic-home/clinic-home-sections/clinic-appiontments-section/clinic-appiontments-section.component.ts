@@ -7,11 +7,12 @@ import { SearchComponent } from '../../../../../shared/search/search.component';
 import { ClinicService } from '../../../clinic.service';
 import { StartCaseStateService } from '../../../../appointments/start-case/start-case-state.service';
 import { PatientService } from '../../../../patients/patient.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-appointments',
   standalone: true,
-  imports: [CommonModule, TranslateModule, SearchComponent, MatIcon , RouterLink],
+  imports: [CommonModule, TranslateModule, SearchComponent, MatIcon , RouterLink , MatTooltipModule],
   templateUrl: './clinic-appiontments-section.component.html',
   styleUrl: './clinic-appiontments-section.component.scss',
 })

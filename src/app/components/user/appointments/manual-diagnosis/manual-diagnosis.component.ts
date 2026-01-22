@@ -369,6 +369,28 @@ isSelectedSlot(slot: any, dateKey: unknown): boolean {
     this.selectedDate === String(dateKey)
   );
 }
+editStatusCase(){
+  const payload = {
+    status: 'completed'
+  };
+  const caseId = this.caseId ?? this.appointmentId;
+  this._AppointmentsService.editCase(caseId,payload).subscribe({
+    next: (res) => {
+      this.closeNextVisitModal();
+       this.startCaseState.clearStartCaseData();
+      this.startCaseState.clearClinicId();
+      this.assignCaseState.clearCase();
+        this.router.navigate(['/dashboard/appointments'],{
+          queryParams: {date: this.appointmentDate}
+        });
+    },
+    error: (err) => {
+      this.snackBar.open(err.message, 'Close', {
+        duration: 3000,
+      });
+    },
+  });
+}
   // ngOnDestroy() {
   //   this.startCaseState.clearStartCaseData();
   //   this.startCaseState.clearClinicId();

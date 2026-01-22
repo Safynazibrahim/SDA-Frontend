@@ -151,15 +151,42 @@
         />
       </div>
 
-      <div class="checkbox-grid">
+      <!-- <div class="checkbox-grid">
         <label *ngFor="let item of medicalHistoryOptions">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            [(ngModel)]="item.selected"
-          />
-          {{ item.label }}
+          <p class="fw-bold m-0">{{ item.label }}</p>
+
+  <div class="ms-3" *ngIf="item.subOptions?.length">
+    <label *ngFor="let sub of item.subOptions" class="d-block">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [(ngModel)]="sub.selected"
+      />
+      {{ sub.label }}
+    </label>
+  </div>
         </label>
+      </div> -->
+      <div class="checkbox-grid ps-4">
+       <div *ngFor="let item of medicalHistoryOptions" class="mb-2">
+
+  <!-- العنوان -->
+  <p class="fw-bold m-0">{{ item.label }}</p>
+
+  <!-- لو ليه sub options -->
+  <div class="ms-3" *ngIf="item.subOptions?.length">
+    <label *ngFor="let sub of item.subOptions" class="d-block">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [(ngModel)]="sub.selected"
+      />
+      {{ sub.label }}
+    </label>
+  </div>
+
+</div>
+
       </div>
     </div>
 
@@ -252,7 +279,7 @@
           [(ngModel)]="extraoralNotes.lymphNodesNote"
         />
       </div>
-      <div class="checkbox-grid">
+      <!-- <div class="checkbox-grid">
         <label *ngFor="let item of lymphNodesOptions">
           <input
             type="checkbox"
@@ -261,6 +288,27 @@
           />
           {{ item.label }}
         </label>
+      </div> -->
+      <div class="checkbox-grid ps-4">
+       <div *ngFor="let item of lymphNodesOptions" class="mb-2">
+
+  <!-- العنوان -->
+  <p class="fw-bold m-0">{{ item.label }}</p>
+
+  <!-- لو ليه sub options -->
+  <div class="ms-3" *ngIf="item.subOptions?.length">
+    <label *ngFor="let sub of item.subOptions" class="d-block">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [(ngModel)]="sub.selected"
+      />
+      {{ sub.label }}
+    </label>
+  </div>
+
+</div>
+
       </div>
     </div>
 
@@ -276,7 +324,7 @@
           [(ngModel)]="extraoralNotes.tmjSoundsNote"
         />
       </div>
-      <div class="checkbox-grid">
+      <!-- <div class="checkbox-grid">
         <label *ngFor="let item of tmjSoundsOptions">
           <input
             type="checkbox"
@@ -285,6 +333,27 @@
           />
           {{ item.label | translate }}
         </label>
+      </div> -->
+      <div class="checkbox-grid ps-4">
+       <div *ngFor="let item of tmjSoundsOptions" class="mb-2">
+
+  <!-- العنوان -->
+  <p class="fw-bold m-0">{{ item.label }}</p>
+
+  <!-- لو ليه sub options -->
+  <div class="ms-3" *ngIf="item.subOptions?.length">
+    <label *ngFor="let sub of item.subOptions" class="d-block">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [(ngModel)]="sub.selected"
+      />
+      {{ sub.label }}
+    </label>
+  </div>
+
+</div>
+
       </div>
     </div>
     <div class="section">

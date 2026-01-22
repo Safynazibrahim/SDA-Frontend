@@ -84,6 +84,9 @@
         [style.inset-inline-start.px]="20 + i * 30"
         [style.height.px]="getAppointmentHeight(appt)"
         (click)="openDetails(appt)"
+        [class.cardComplete]="appt?.case?.status === 'completed'"
+        matTooltip="Status: {{ appt?.case?.status || 'No Case' }}"
+        matTooltipPosition="above"
         style="min-height: 50px !important"
       >
         @if (appt.name) {

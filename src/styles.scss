@@ -113,7 +113,7 @@ $SDA-theme: mat.define-light-theme(
   --border-light: #e8e3dd; /* Light borders */
   --border-medium: #d4c4a8; /* Medium borders */
   --border-dark: #b19e7f; /* Dark borders */
-
+  --cardComplete: #08d7082b;
   /* Interactive elements */
   --hover-bg: #f0ede8; /* Hover background */
   --hover-border: #c7b59f; /* Hover border */
@@ -160,6 +160,7 @@ $SDA-theme: mat.define-light-theme(
   --text-light-gray-placeholder: #999999;
   --number-pagination: #999;
   --text-gray-sidebar: #bfbfbf;
+  --cardComplete: #ffffff;
   /* Brown sections in dark mode */
   --brown-dark: #9d8a6f;
   --bg-brown-light: #4a3f32; /* Dark brown equivalent */
