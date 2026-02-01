@@ -577,6 +577,22 @@ label.required::after {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+
+////// form-select
+.select {
+  width: 100%;
+  padding: 14px 0px;
+  border: 2px solid var(--border-form-field);
+  border-radius: 12px;
+  color: var(--text-gray);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+.select:focus {
+  outline: none !important;
+}
+
 ///////dropdown
 .dropdown-toggle:focus {
   border: none !important;

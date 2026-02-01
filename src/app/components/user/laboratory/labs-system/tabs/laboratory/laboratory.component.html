@@ -1,32 +1,63 @@
 <div class="container">
-  <div class="row d-flex align-items-center my-3">
-    <div class="col-md-6 col-sm-6 my-3" *ngFor="let lab of labs()">
-      <div class="patient-card">
-        <div class="patient-details my-3">
-          <div class="title d-flex justify-content-between align-items-center">
-            <h5>{{ lab.name }}</h5>
-            <div class="service">
-              <span>{{ lab.totalServices }} {{ "Services" | translate }}</span>
+  <ng-container *ngIf="viewMode() === 'list'">
+    <div class="row d-flex align-items-center my-3">
+      <div class="col-md-6 col-sm-6 my-3" *ngFor="let lab of labs()">
+        <div class="patient-card">
+          <div class="patient-details my-3">
+            <div
+              class="title d-flex justify-content-between align-items-center"
+            >
+              <h5>{{ lab.name }}</h5>
+              <div class="service">
+                <span
+                  >{{ lab.totalServices }} {{ "Services" | translate }}</span
+                >
+              </div>
             </div>
-          </div>
-          <p class="detail">{{ lab.location }}</p>
-          <hr />
-          <div
-            (click)="goToDetails(lab.id)"
-            class="view-details d-flex align-items-center justify-content-end"
-          >
-            <h3>{{ "view_details" | translate }}</h3>
-            <mat-icon>arrow_forward</mat-icon>
+            <p class="detail">{{ lab.location }}</p>
+            <hr />
+            <div
+              class="view-details d-flex align-items-center justify-content-end"
+              [class.disabled]="lab.totalServices === 0"
+              [style.cursor]="
+                lab.totalServices === 0 ? 'not-allowed' : 'pointer'
+              "
+              (click)="lab.totalServices > 0 && goToDetails(lab.id)"
+            >
+              <h3>{{ "view_details" | translate }}</h3>
+              <mat-icon>arrow_forward</mat-icon>
+            </div>
           </div>
         </div>
       </div>
+      <app-pagination
+        [totalItems]="total()"
+        [pageSize]="limit()"
+        [currentPage]="page()"
+        (pageChange)="onPageChange($event)"
+      >
+      </app-pagination>
     </div>
-    <app-pagination
-      [totalItems]="total()"
-      [pageSize]="limit()"
-      [currentPage]="page()"
-      (pageChange)="onPageChange($event)"
+  </ng-container>
+  <ng-container *ngIf="viewMode() === 'empty'">
+    <div
+      class="my-5 mx-auto d-flex flex-column gap-2 justify-content-between align-items-center"
     >
-    </app-pagination>
-  </div>
+      <h3 class="title my-5">
+        {{ "no_laboratories_linked" | translate }}
+      </h3>
+      <button
+        (click)="showNearby()"
+        class="signin-button w-auto d-flex justify-content-between gap-2 align-items-center"
+      >
+        <i class="fa fa-search"></i>
+        <h5 class="m-0">
+          {{ "find_nearby_laboratory" | translate }}
+        </h5>
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="viewMode() === 'nearby'">
+    <app-nearby-labs></app-nearby-labs>
+  </ng-container>
 </div>

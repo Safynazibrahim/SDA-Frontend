@@ -5,7 +5,10 @@
     (search)="onSearch()"
   >
   </app-search>
-  <div class="row d-flex align-items-center my-2" *ngIf="labRequests().length > 0">
+  <div
+    class="row d-flex align-items-center my-2"
+    *ngIf="labRequests().length > 0"
+  >
     <div class="row mt-4">
       <div
         class="col-xl-6 col-lg-6 col-sm-12 mb-4"
@@ -24,6 +27,10 @@
               />
               <div class="d-flex flex-column">
                 <h5 class="lab-name">{{ req.lab.name }}</h5>
+                <h5 class="lab-location">
+                  {{ "sender" | translate }} :
+                  <span>{{ req.sender }}</span>
+                </h5>
                 <p class="lab-location">
                   <mat-icon>location_on</mat-icon>
                   {{ req.lab.location }}
@@ -31,11 +38,57 @@
               </div>
             </div>
 
-            <!-- Status -->
-            <span class="status-badge" [ngClass]="req.status">
-              <mat-icon>{{ getStatusIcon(req.status) }}</mat-icon>
-              {{ req.status | titlecase }}
-            </span>
+            <!-- STATUS AREA -->
+            <div class="status-wrapper">
+              <!-- WAITING + FROM LAB (CLICKABLE) -->
+              <div
+                *ngIf="req.status === 'waiting' && req.sender === 'lab'"
+                class="status-badge waiting clickable"
+                (click)="toggleActions(req)"
+              >
+                <mat-icon>hourglass_top</mat-icon>
+                {{ "Waiting approval" | translate }}
+                <mat-icon class="arrow">keyboard_arrow_down</mat-icon>
+              </div>
+              <!-- ACTION BUTTONS -->
+              <div
+                class="action-buttons"
+                *ngIf="expandedRequestId() === req.id"
+              >
+                <button
+                  class="accept-btn"
+                  (click)="changeStatus(req.id, 'accepted')"
+                >
+                  {{ "accept" | translate }}
+                </button>
+
+                <button
+                  class="reject-btn"
+                  (click)="changeStatus(req.id, 'rejected')"
+                >
+                  {{ "reject" | translate }}
+                </button>
+              </div>
+
+              <!-- WAITING + FROM DOCTOR -->
+              <span
+                *ngIf="req.status === 'waiting' && req.sender === 'doctor'"
+                class="status-badge waiting"
+              >
+                <mat-icon>hourglass_top</mat-icon>
+                {{ req.status | titlecase }}
+              </span>
+
+              <!-- NORMAL STATUS (ACCEPTED / REJECTED) -->
+              <span
+                *ngIf="req.status !== 'waiting'"
+                class="status-badge"
+                [ngClass]="req.status"
+              >
+                <mat-icon>{{ getStatusIcon(req.status) }}</mat-icon>
+                {{ req.status | titlecase }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -49,7 +102,10 @@
     </app-pagination>
   </div>
   <!-- Empty State -->
-  <div *ngIf="!loading() && labRequests().length === 0" class="text-center my-4">
+  <div
+    *ngIf="!loading() && labRequests().length === 0"
+    class="text-center my-4"
+  >
     <mat-icon style="font-size: 48px; color: #b0b0b0"> inbox </mat-icon>
     <p class="mt-2">
       {{ "no_lab_requests_found" | translate }}

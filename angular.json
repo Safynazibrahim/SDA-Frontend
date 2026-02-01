@@ -71,8 +71,7 @@
               "buildTarget": "SDA:build:production"
             },
             "development": {
-              "buildTarget": "SDA:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "buildTarget": "SDA:build:development"
             }
           },
           "defaultConfiguration": "development"

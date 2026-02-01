@@ -87,24 +87,6 @@ export const routes: Routes = [
       {
         path: 'labs',
         children: [
-          // Decision page
-          {
-            path: '',
-            loadComponent: () =>
-              import('./components/user/laboratory/lab/lab.component').then(
-                (m) => m.LabComponent
-              ),
-          },
-
-          // Nearby page
-          {
-            path: 'nearby',
-            loadComponent: () =>
-              import(
-                './components/user/laboratory/nearby-labs/nearby-labs.component'
-              ).then((m) => m.NearbyLabsComponent),
-          },
-
           // Main system (tabs parent)
           {
             path: 'system',
@@ -144,6 +126,7 @@ export const routes: Routes = [
               },
             ],
           },
+          // Lab Details
           {
             path: 'lab-details/:labId',
             loadComponent: () =>

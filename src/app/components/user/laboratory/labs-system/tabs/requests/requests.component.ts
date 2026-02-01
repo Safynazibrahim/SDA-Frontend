@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 import { LabService } from '../../../lab.service';
 import { MatIcon } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-requests',
@@ -20,7 +21,10 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './requests.component.scss',
 })
 export class RequestsComponent implements OnInit {
-  constructor(private _LabService: LabService) {}
+  constructor(
+    private _LabService: LabService,
+    private _MatSnackBar: MatSnackBar
+  ) {}
 
   // =====================
   // DATA
@@ -36,6 +40,8 @@ export class RequestsComponent implements OnInit {
   limit = signal(6);
   searchNameValue = '';
   search = signal('');
+
+  expandedRequestId = signal<number | null>(null);
 
   ngOnInit(): void {
     this.loadLabRequests();
@@ -83,5 +89,31 @@ export class RequestsComponent implements OnInit {
       default:
         return 'help_outline';
     }
+  }
+
+  toggleActions(req: any) {
+    if (req.status !== 'waiting' || req.sender !== 'lab') return;
+    this.expandedRequestId.set(
+      this.expandedRequestId() === req.id ? null : req.id,
+    );
+  }
+
+  changeStatus(reqId: number, status: 'accepted' | 'rejected') {
+    this._LabService.updateRequestStatus(reqId, status).subscribe({
+      next: () => {
+        this.expandedRequestId.set(null);
+        this.loadLabRequests(); // refresh list
+        this._MatSnackBar.open('Status request changed successfully', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
+      },
+      error: () => {
+        this._MatSnackBar.open('Failed to change request status', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
+      },
+    });
   }
 }

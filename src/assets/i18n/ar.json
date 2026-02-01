@@ -595,5 +595,6 @@
   "CalculatePrice": "احسب السعر",
   "Feature": "ميزة",
   "Features": "ميزات",
-  "Selected": "مختارة"
+  "Selected": "مختارة",
+  "sender" : "مرسل من"
 }
