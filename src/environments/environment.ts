@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api', // your local backend during development
+  apiUrl: 'https://backend-staging-47c6.up.railway.app/api', // your local backend during development
   firebaseConfig: {
     apiKey: 'AIzaSyDMWzVkMlmgNft4pKNvCpuC_y383M21mRk',
     authDomain: 'one-ai-5f96b.firebaseapp.com',

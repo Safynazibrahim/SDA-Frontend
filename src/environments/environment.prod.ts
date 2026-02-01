@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    apiUrl: '/api', // your deployed backend URL
+    apiUrl: 'https://backend-staging-47c6.up.railway.app/api', // your deployed backend URL
     //// fake data
     firebaseConfig: {
     apiKey: "xxxx",

@@ -26,7 +26,7 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    // 🚀 1) اطلب إذن النوتيفيكيشن
+    setTimeout(() => {
     this.firebaseMsg.requestPermission().then(token => {
       if (token) {
         console.log("FCM Token:", token);
@@ -38,8 +38,8 @@ export class AppComponent {
       }
     });
 
-    // 🚀 3) استلم أي نوتيفيكيشن جديدة
     this.firebaseMsg.listen();
+  });
   }
 
 }
