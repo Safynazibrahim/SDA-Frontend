@@ -13,14 +13,14 @@
   .patient-details {
     // padding: 10px;
 
-    .service{
-        padding: 10px;
-        border: 1px solid var(--bg-brown-medium);
-        border-radius: 30px;
-        color: var(--bg-brown-medium);
+    .service {
+      padding: 10px;
+      border: 1px solid var(--bg-brown-medium);
+      border-radius: 30px;
+      color: var(--bg-brown-medium);
     }
 
-    .title h5{
+    .title h5 {
       font-size: 1.2rem;
       font-weight: 600;
       color: var(text-gray-head-table);
@@ -36,17 +36,19 @@
     }
     .view-details {
       cursor: pointer;
-      h3{
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--bg-brown-medium);
-      text-decoration: underline;
-    }
-    mat-icon {
+      h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--bg-brown-medium);
+        text-decoration: underline;
+      }
+      mat-icon {
         color: var(--bg-brown-medium) !important;
       }
     }
-
+    .view-details.disabled {
+      opacity: 0.6;
+    }
   }
 }

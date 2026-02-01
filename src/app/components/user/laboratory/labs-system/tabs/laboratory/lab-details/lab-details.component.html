@@ -162,15 +162,162 @@
           />
         </div>
       </div>
+
+      <!-- Whole Tooth -->
       <div class="form-group">
-        <label>{{ "orderNote" | translate }}</label>
-        <textarea
-          type="text"
-          rows="4"
-          class="form-input"
-          formControlName="notes"
-          placeholder="{{ 'orderNote' | translate }}"
-        ></textarea>
+        <label>Whole Tooth Properties</label>
+
+        <div class="d-flex gap-3">
+          <div class="d-flex flex-column w-100">
+            <label>Shade</label>
+            <select
+              class="select"
+              (change)="setWholeTooth('Shade', $any($event.target).value)"
+            >
+              <option value="">Select</option>
+              <option *ngFor="let s of shadeOptions" [value]="s">
+                {{ s }}
+              </option>
+            </select>
+          </div>
+
+          <div class="d-flex flex-column w-100">
+            <label>Texture</label>
+            <select
+              class="select"
+              (change)="setWholeTooth('Texture', $any($event.target).value)"
+            >
+              <option value="">Select</option>
+              <option *ngFor="let t of textureOptions" [value]="t">
+                {{ t }}
+              </option>
+            </select>
+          </div>
+
+          <div class="d-flex flex-column w-100">
+            <label>Stains</label>
+            <select
+              class="select"
+              (change)="setWholeTooth('Stains', $any($event.target).value)"
+            >
+              <option value="">Select</option>
+              <option *ngFor="let s of stainOptions" [value]="s">
+                {{ s }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tooth Type -->
+      <div class="form-group">
+        <label>Tooth Type</label>
+
+        <div class="d-flex gap-3">
+          <button
+            type="button"
+            class="chip"
+            [class.active]="toothType === 'Anterior'"
+            (click)="setToothType('Anterior')"
+          >
+            Anterior
+          </button>
+
+          <button
+            type="button"
+            class="chip"
+            [class.active]="toothType === 'Premolar'"
+            (click)="setToothType('Premolar')"
+          >
+            Premolar
+          </button>
+
+          <button
+            type="button"
+            class="chip"
+            [class.active]="toothType === 'Molar'"
+            (click)="setToothType('Molar')"
+          >
+            Molar
+          </button>
+        </div>
+      </div>
+
+      <!-- Segment Grid -->
+      <div class="form-group" *ngIf="toothType">
+        <label>Select a segment to define its properties:</label>
+
+        <div class="row d-flex g-0">
+          <div *ngFor="let row of rows" class="col-4">
+            <div
+              *ngFor="let col of cols"
+              class="segment-card text-center"
+              [class.active]="segments[getSegmentId(row, col)]"
+              (click)="toggleSegment(row, col)"
+            >
+              <strong>{{ getSegmentId(row, col) }} </strong>
+              <small>{{ row }} {{ col }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inline Segment Editor -->
+      <div *ngIf="selectedSegments.length > 0" class="border rounded p-3 mt-3">
+        <div *ngFor="let segment of selectedSegments" class="mb-3">
+          <h6>Segment: {{ segment }}</h6>
+
+          <div class="d-flex gap-3">
+            <div class="d-flex flex-column w-100">
+              <label>Shade</label>
+              <select
+                class="select"
+                [value]="segments[segment]?.['Shade'] || ''"
+                (change)="
+                  setSegment(segment, 'Shade', $any($event.target).value)
+                "
+              >
+                <option value="">Select</option>
+                <option *ngFor="let s of shadeOptions" [value]="s">
+                  {{ s }}
+                </option>
+              </select>
+            </div>
+
+            <div class="d-flex flex-column w-100">
+              <label>Translucency</label>
+              <select
+                class="select"
+                [value]="segments[segment]?.['Translucency'] || ''"
+                (change)="
+                  setSegment(segment, 'Translucency', $any($event.target).value)
+                "
+              >
+                <option value="">Select</option>
+                <option *ngFor="let t of translucencyOptions" [value]="t">
+                  {{ t }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-2">
+          <button class="details-btn save w-50" (click)="saveSegments()">
+            Save
+          </button>
+          <button class="details-btn cancel w-50" (click)="cancelSegments()">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="order-summary" *ngIf="showSummary">
+        <div class="order-summary-title">Your Chosen Segments</div>
+        <div class="order-summary-content">
+          {{ generatedNotes }}
+        </div>
       </div>
     </form>
   </div>

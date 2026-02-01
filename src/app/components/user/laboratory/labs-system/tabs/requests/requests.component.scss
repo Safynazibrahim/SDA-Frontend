@@ -34,6 +34,9 @@
   mat-icon {
     color: var(--bg-brown-dark);
   }
+  span {
+    color: var(--bg-brown-dark);
+  }
 }
 
 /* Status */
@@ -63,6 +66,48 @@
   color: #e51908;
 }
 
+.status-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-badge.clickable {
+  cursor: pointer;
+  display: flex;
+  align-items: stretch;
+  min-width: 180px;
+  gap: 4px;
+}
+
+.status-badge.clickable:hover {
+  opacity: 0.85;
+}
+
+.action-buttons {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.accept-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 4px 20px;
+  border-radius: 4px;
+}
+
+.reject-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 4px 20px;
+  border-radius: 4px;
+}
+
+
 ////// responsive on mobile
 @media (max-width: 767.98px) {
   .lab-avatar {
@@ -83,6 +128,8 @@
   .status-badge {
     font-size: 15px;
     margin-top: 10px;
+  }
+  .status-wrapper{
     margin-left: auto;   /* pushes it to the right */
     align-self: flex-end; /* ensures bottom-right feel */
   }

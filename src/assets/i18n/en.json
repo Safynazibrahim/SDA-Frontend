@@ -584,5 +584,6 @@
   "CalculatePrice": "Calculate price",
   "Feature": "Feature",
   "Features": "Features",
-  "Selected": "Selected"
+  "Selected": "Selected",
+  "sender" : "Sender"
   }

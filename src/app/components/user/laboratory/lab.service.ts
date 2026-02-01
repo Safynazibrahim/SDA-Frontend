@@ -32,6 +32,12 @@ export class LabService {
     );
   }
 
+  updateRequestStatus(linkId: number, status: 'accepted' | 'rejected') {
+    return this._ApiServiceService.put(`labs/links/${linkId}/status`, {
+      status,
+    });
+  }
+
   getOrders(params: any) {
     return firstValueFrom(
       this._ApiServiceService.get<any>(`doctors/me/labs/orders`, params),
