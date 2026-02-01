@@ -92,7 +92,7 @@ export class RequestsComponent implements OnInit {
   }
 
   toggleActions(req: any) {
-    if (req.status !== 'waiting' || req.sender !== 'doctor') return;
+    if (req.status !== 'waiting' || req.sender !== 'lab') return;
     this.expandedRequestId.set(
       this.expandedRequestId() === req.id ? null : req.id,
     );

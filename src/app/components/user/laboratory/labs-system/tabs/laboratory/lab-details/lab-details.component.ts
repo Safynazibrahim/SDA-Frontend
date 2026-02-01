@@ -135,13 +135,62 @@ export class LabDetailsComponent {
   showSummary = false;
 
   /* ==== OPTIONS (same idea as Flutter) ==== */
-  shadeOptions = ['A1', 'A2', 'A3', 'A3.5', 'A4'];
-  textureOptions = ['Natural', 'Smooth', 'Rugged'];
-  stainOptions = ['None', 'White Spots', 'Brown Stains'];
+  /* ===== WHOLE TOOTH (Flutter-equivalent) ===== */
+  toothOptions: Record<string, string[]> = {
+    Contour: ['Flat', 'Convex', 'Concave', 'Bulky (Cervical)', 'Straight'],
+    Contact: [
+      'Tight',
+      'Light',
+      'Open (Diastema)',
+      'Point Contact',
+      'Surface Contact',
+    ],
+    'Stains/Effects': [
+      'None',
+      'White Spots',
+      'Brown Stains',
+      'Enamel Cracks',
+      'Hypocalcification',
+      'Mamelons',
+    ],
+    Texture: [
+      'Smooth (High Gloss)',
+      'Moderate (Natural)',
+      'Heavy (Rugged)',
+      'Horizontal Striations',
+    ],
+  };
 
-  segmentOptions = {
-    Shade: this.shadeOptions,
-    Translucency: ['High', 'Medium', 'Low', 'Opaque'],
+  /* ===== SEGMENT OPTIONS (Flutter-equivalent) ===== */
+  segmentOptions: Record<string, string[]> = {
+    Shade: [
+      'A1',
+      'A2',
+      'A3',
+      'A3.5',
+      'A4',
+      'B1',
+      'B2',
+      'B3',
+      'B4',
+      'C1',
+      'C2',
+      'C3',
+      'C4',
+      'D2',
+      'D3',
+      'D4',
+      'OM1',
+      'OM2',
+      'OM3',
+    ],
+    Translucency: [
+      'High (HT)',
+      'Medium (MT)',
+      'Low (LT)',
+      'Opaque (HO)',
+      'Incisal Effect',
+    ],
   };
 
   /* ===== Flutter-equivalent anatomy ===== */
@@ -174,7 +223,7 @@ export class LabDetailsComponent {
     }
   }
 
-  /* ==== WHOLE TOOTH ==== */ 
+  /* ==== WHOLE TOOTH ==== */
   setWholeTooth(key: string, value: string) {
     if (!value) return;
     this.wholeTooth[key] = value;

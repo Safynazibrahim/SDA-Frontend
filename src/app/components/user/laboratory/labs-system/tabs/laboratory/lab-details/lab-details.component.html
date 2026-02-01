@@ -86,8 +86,6 @@
   <div
     *ngFor="let service of labDetails()?.services"
     class="row d-flex justify-content-between align-items-center"
-    style="cursor: pointer"
-    (click)="toggleService(service.id)"
   >
     <div
       class="col-11 service-info gap-1 d-flex flex-column justify-content-between"
@@ -99,7 +97,7 @@
     <div class="col-1 text-center">
       <input
         [checked]="isServiceSelected(service.id)"
-        (click)="$event.stopPropagation()"
+        (click)="toggleService(service.id)"
         type="radio"
       />
     </div>
@@ -167,42 +165,16 @@
       <div class="form-group">
         <label>Whole Tooth Properties</label>
 
-        <div class="d-flex gap-3">
-          <div class="d-flex flex-column w-100">
-            <label>Shade</label>
+        <div class="row g-3">
+          <div class="col-6" *ngFor="let option of toothOptions | keyvalue">
+            <label>{{ option.key }}</label>
             <select
               class="select"
-              (change)="setWholeTooth('Shade', $any($event.target).value)"
+              (change)="setWholeTooth(option.key, $any($event.target).value)"
             >
               <option value="">Select</option>
-              <option *ngFor="let s of shadeOptions" [value]="s">
-                {{ s }}
-              </option>
-            </select>
-          </div>
-
-          <div class="d-flex flex-column w-100">
-            <label>Texture</label>
-            <select
-              class="select"
-              (change)="setWholeTooth('Texture', $any($event.target).value)"
-            >
-              <option value="">Select</option>
-              <option *ngFor="let t of textureOptions" [value]="t">
-                {{ t }}
-              </option>
-            </select>
-          </div>
-
-          <div class="d-flex flex-column w-100">
-            <label>Stains</label>
-            <select
-              class="select"
-              (change)="setWholeTooth('Stains', $any($event.target).value)"
-            >
-              <option value="">Select</option>
-              <option *ngFor="let s of stainOptions" [value]="s">
-                {{ s }}
+              <option *ngFor="let v of option.value" [value]="v">
+                {{ v }}
               </option>
             </select>
           </div>
@@ -247,11 +219,11 @@
       <div class="form-group" *ngIf="toothType">
         <label>Select a segment to define its properties:</label>
 
-        <div class="row d-flex g-0">
+        <div class="row g-0 d-flex justify-content-center">
           <div *ngFor="let row of rows" class="col-4">
             <div
               *ngFor="let col of cols"
-              class="segment-card text-center"
+              class="segment-card text-center my-1 mx-1"
               [class.active]="segments[getSegmentId(row, col)]"
               (click)="toggleSegment(row, col)"
             >
@@ -278,7 +250,7 @@
                 "
               >
                 <option value="">Select</option>
-                <option *ngFor="let s of shadeOptions" [value]="s">
+                <option *ngFor="let s of segmentOptions['Shade']" [value]="s">
                   {{ s }}
                 </option>
               </select>
@@ -294,7 +266,10 @@
                 "
               >
                 <option value="">Select</option>
-                <option *ngFor="let t of translucencyOptions" [value]="t">
+                <option
+                  *ngFor="let t of segmentOptions['Translucency']"
+                  [value]="t"
+                >
                   {{ t }}
                 </option>
               </select>
