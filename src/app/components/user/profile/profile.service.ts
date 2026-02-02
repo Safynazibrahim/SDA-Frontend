@@ -8,10 +8,10 @@ export class ProfileService {
   constructor(private _ApiServiceService: ApiServiceService) {}
 
   getDoctorProfile() {
-    return this._ApiServiceService.get<any>('/users/me');
+    return this._ApiServiceService.get<any>('users/me');
   }
 
   updateProfile(payload: any){
-    return this._ApiServiceService.patch<any>(`/users/me`, payload);
+    return this._ApiServiceService.patch<any>(`users/me`, payload);
   }
 }

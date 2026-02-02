@@ -68,6 +68,7 @@ export class AuthService {
       }
     });
   }
+  
 
 
   signUpDoctor(formData: FormData) {

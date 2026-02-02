@@ -12,6 +12,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { injectQuery } from '@tanstack/angular-query-experimental';
 import { ProfileService } from './profile.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -39,12 +40,17 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private _ProfileService: ProfileService,
     private _MatSnackBar: MatSnackBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.loadProfile();
+  }
+
+  logout() {
+    this.authService.logout();  // استدعاء logout في AuthService
   }
 
   // 🟢 1. إنشاء الفورم مرة واحدة
