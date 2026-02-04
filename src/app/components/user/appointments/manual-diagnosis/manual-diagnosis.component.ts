@@ -121,7 +121,7 @@ appointmentDate:any
     if (this.fromPage === 'appointments') this.appointmentId = id;
     else if (this.fromPage === 'patient-profile') this.patientId = id;
 
-   
+    
     this.clinicId = this.startCaseState.getClinicId();
     this.caseId = this.assignCaseState.getCaseData()?.caseId || null;
     this.loadCaseFromApi();
@@ -304,10 +304,12 @@ castToDate(value: any): Date | null {
     });
     return;
   }
-
+  console.log(this.appointmentId);
+  
+  const caseId = this.caseId ?? this.appointmentId;
   const payload = {
     clinicId: this.clinicId,
-    caseId: this.caseId,
+    caseId: caseId,
     date: this.selectedDate,
     startTime: this.selectedSlot.startTime,
   };
@@ -338,9 +340,10 @@ selectSlot(slot: any, dateKey: unknown) {
   this.selectedSlot = slot;
   this.selectedDate = String(dateKey);
   this.appointmentDate=this.selectedDate
+  const caseId = this.caseId ?? this.appointmentId;
   const payload = {
     clinicId: this.clinicId,
-    caseId: this.caseId,
+    caseId: caseId,
     date: this.selectedDate,
     startTime: this.selectedSlot.startTime,
   };
