@@ -91,7 +91,7 @@ export class LabDetailsComponent {
   sendOrderRequest() {
     if (this.orderForm.invalid) return;
 
-    this.updateNotes();
+    const notes = this.buildFullNotes();
 
     const formData = new FormData();
 
@@ -102,8 +102,8 @@ export class LabDetailsComponent {
       new Date(this.orderForm.value.deadline).toISOString(),
     );
 
-    if (this.orderForm.value.notes) {
-      formData.append('notes', this.orderForm.value.notes);
+    if (notes) {
+      formData.append('notes', notes);
     }
 
     formData.append('services', JSON.stringify(this.servicesArray.value));
@@ -131,7 +131,7 @@ export class LabDetailsComponent {
     this.router.navigate(['/dashboard/labs/system']);
   }
 
-  toothType: 'Anterior' | 'Premolar' | 'Molar' | null = null;
+  toothType!: 'Anterior' | 'Premolar' | 'Molar';
   showSummary = false;
 
   /* ==== OPTIONS (same idea as Flutter) ==== */
@@ -198,9 +198,24 @@ export class LabDetailsComponent {
   cols: string[] = [];
 
   /* ===== STATE ===== */
-  segments: Record<string, Record<string, string>> = {};
+  segmentsByType: Record<
+    'Anterior' | 'Premolar' | 'Molar',
+    Record<string, Record<string, string>>
+  > = {
+    Anterior: {},
+    Premolar: {},
+    Molar: {},
+  };
+  draftSegmentsByType: Record<
+    'Anterior' | 'Premolar' | 'Molar',
+    Record<string, Record<string, string>>
+  > = {
+    Anterior: {},
+    Premolar: {},
+    Molar: {},
+  };
+
   wholeTooth: Record<string, string> = {};
-  generatedNotes = '';
 
   /* ===== OPTIONS ===== */
   translucencyOptions = ['High', 'Medium', 'Low', 'Opaque'];
@@ -208,8 +223,11 @@ export class LabDetailsComponent {
   /* ===== Tooth Type ===== */
   setToothType(type: 'Anterior' | 'Premolar' | 'Molar') {
     this.toothType = type;
-    this.segments = {};
-    this.showSummary = false;
+
+    // clone committed → draft
+    this.draftSegmentsByType[type] = JSON.parse(
+      JSON.stringify(this.segmentsByType[type]),
+    );
 
     if (type === 'Anterior') {
       this.rows = ['Cervical', 'Middle', 'Incisal'];
@@ -246,53 +264,92 @@ export class LabDetailsComponent {
   /* ===== Select / Unselect segment ===== */
   toggleSegment(row: string, col: string) {
     const id = this.getSegmentId(row, col);
+    const draft = this.draftSegmentsByType[this.toothType];
 
-    if (this.segments[id]) {
-      delete this.segments[id];
+    if (draft[id]) {
+      delete draft[id];
     } else {
-      this.segments[id] = {};
+      draft[id] = {};
     }
   }
 
   /* ===== Set segment property ===== */
   setSegment(segmentId: string, key: string, value: string) {
     if (!value) return;
-    this.segments[segmentId][key] = value;
+    this.draftSegmentsByType[this.toothType][segmentId][key] = value;
   }
 
   /* ===== Save (review step like Flutter) ===== */
   saveSegments() {
+    this.segmentsByType[this.toothType] = JSON.parse(
+      JSON.stringify(this.draftSegmentsByType[this.toothType]),
+    );
+
     this.updateNotes();
     this.showSummary = true;
   }
 
   /* ===== Cancel ===== */
   cancelSegments() {
-    this.segments = {};
-    this.updateNotes();
+    // reset draft back to saved state
+    this.draftSegmentsByType[this.toothType] = JSON.parse(
+      JSON.stringify(this.segmentsByType[this.toothType]),
+    );
   }
 
   /* ===== Notes generator (Flutter-style) ===== */
   updateNotes() {
     let text = '';
 
-    text += `TOOTH TYPE: ${this.toothType}\n\n`;
+    Object.entries(this.segmentsByType).forEach(([type, segments]) => {
+      if (Object.keys(segments).length === 0) return;
 
-    text += 'Segment Properties:\n';
-    Object.entries(this.segments).forEach(([segment, props]) => {
-      text += `[${segment}]: `;
-      text += Object.entries(props)
-        .map(([k, v]) => `${k}: ${v}`)
-        .join(', ');
+      text += `TOOTH TYPE: ${type}\n`;
+      text += 'Segment Properties:\n';
+
+      Object.entries(segments).forEach(([segment, props]) => {
+        if (Object.keys(props).length === 0) return;
+
+        text += `[${segment}]: `;
+        text += Object.entries(props)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join(', ');
+        text += '\n';
+      });
       text += '\n';
     });
+    return text.trim();
+  }
 
-    this.generatedNotes = text;
-    this.orderForm.patchValue({ notes: text });
+  get generatedNotes(): string {
+  return this.updateNotes();
+}
+
+  get segments() {
+    return this.draftSegmentsByType[this.toothType];
   }
 
   /* ===== Helper ===== */
   get selectedSegments(): string[] {
-    return Object.keys(this.segments);
+    if (!this.toothType) return [];
+    return Object.keys(this.draftSegmentsByType[this.toothType]);
+  }
+
+  buildFullNotes(): string {
+    let text = '';
+
+    /* ===== WHOLE TOOTH (backend only) ===== */
+    if (Object.keys(this.wholeTooth).length > 0) {
+      text += 'WHOLE TOOTH PROPERTIES:\n';
+      Object.entries(this.wholeTooth).forEach(([k, v]) => {
+        text += `${k}: ${v}\n`;
+      });
+      text += '\n';
+    }
+
+    /* ===== SEGMENTS ===== */
+    text += this.updateNotes();
+
+    return text.trim();
   }
 }
