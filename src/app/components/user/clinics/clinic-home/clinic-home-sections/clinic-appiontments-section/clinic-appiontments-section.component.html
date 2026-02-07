@@ -23,26 +23,26 @@
 
     <div class="responsive">
       <div class="select-date d-flex align-items-center">
-      <span class="page-item">
-        <a class="page-link" (click)="changeWeek(-1)">&lt;</a>
-      </span>
+        <span class="page-item">
+          <a class="page-link" (click)="changeWeek(-1)">&lt;</a>
+        </span>
 
-      <button class="date-btn me-3">
-        {{ currentDate | date : "dd MMM yyyy" }}
-      </button>
-      <span class="page-item">
-        <a class="page-link" (click)="changeWeek(1)">&gt;</a>
-      </span>
-    </div>
+        <button class="date-btn me-3">
+          {{ currentDate | date : "dd MMM yyyy" }}
+        </button>
+        <span class="page-item">
+          <a class="page-link" (click)="changeWeek(1)">&gt;</a>
+        </span>
+      </div>
 
-    <div class="d-flex align-items-center">
-      <button
-        class="signin-button w-auto d-flex align-items-center justify-content-center"
-      >
-        <mat-icon>add</mat-icon>
-        {{ "New Appointment" | translate }}
-      </button>
-    </div>
+      <div class="d-flex align-items-center">
+        <button
+          class="signin-button w-auto d-flex align-items-center justify-content-center"
+        >
+          <mat-icon>add</mat-icon>
+          {{ "New Appointment" | translate }}
+        </button>
+      </div>
     </div>
   </div>
 
@@ -84,6 +84,9 @@
         [style.inset-inline-start.px]="20 + i * 30"
         [style.height.px]="getAppointmentHeight(appt)"
         (click)="openDetails(appt)"
+        [class.cardComplete]="appt?.case?.status === 'completed'"
+        matTooltip="Status: {{ appt?.case?.status || 'No Case' }}"
+        matTooltipPosition="above"
         style="min-height: 50px !important"
       >
         @if (appt.name) {
@@ -231,20 +234,22 @@
               selectedAppointment?.id
             ]"
             [queryParams]="{
-    from: 'appointmentsAssignCase',
-    date: currentDate.toISOString(),
-    patientName: selectedAppointment?.patient?.user?.fullName,
-    gender: selectedAppointment?.patient?.gender || '-',
-    age: selectedAppointment?.patient?.age || '-',
-    appointmentDate: selectedAppointment?.date,
-    startTime: selectedAppointment?.startTime,
-    endTime: selectedAppointment?.endTime
-  }">
-          
+              from: 'appointmentsAssignCase',
+              date: currentDate.toISOString(),
+              patientName: selectedAppointment?.patient?.user?.fullName,
+              gender: selectedAppointment?.patient?.gender || '-',
+              age: selectedAppointment?.patient?.age || '-',
+              appointmentDate: selectedAppointment?.date,
+              startTime: selectedAppointment?.startTime,
+              endTime: selectedAppointment?.endTime
+            }"
+          >
             {{ "Assign Case" | translate }}
           </button>
-          <button class="btn-outline" 
-            (click)="goToPatientProfile(selectedAppointment)">
+          <button
+            class="btn-outline"
+            (click)="goToPatientProfile(selectedAppointment)"
+          >
             {{ "Patient Profile" | translate }}
           </button>
         </div>
@@ -349,26 +354,25 @@
       </div>
       <div style="height: 140px">
         <div class="assigned-actions">
-         <button
-  class="btn-filled"
-  [routerLink]="[
-    '/dashboard/appointments/assign-case',
-    selectedAppointment?.case?.id || selectedAppointment?.caseId
-  ]"
-  [queryParams]="{
-    from: 'appointmentsEditAssignCase',
-    date: currentDate.toISOString(),
-    patientName: selectedAppointment?.patient?.user?.fullName,
-    gender: selectedAppointment?.patient?.gender || '-',
-    age: selectedAppointment?.patient?.age || '-',
-    appointmentDate: selectedAppointment?.date,
-    startTime: selectedAppointment?.startTime,
-    endTime: selectedAppointment?.endTime
-  }"
->
-  {{ 'View Case' | translate }}
-</button>
-
+          <button
+            class="btn-filled"
+            [routerLink]="[
+              '/dashboard/appointments/assign-case',
+              selectedAppointment?.case?.id || selectedAppointment?.caseId
+            ]"
+            [queryParams]="{
+              from: 'appointmentsEditAssignCase',
+              date: currentDate.toISOString(),
+              patientName: selectedAppointment?.patient?.user?.fullName,
+              gender: selectedAppointment?.patient?.gender || '-',
+              age: selectedAppointment?.patient?.age || '-',
+              appointmentDate: selectedAppointment?.date,
+              startTime: selectedAppointment?.startTime,
+              endTime: selectedAppointment?.endTime
+            }"
+          >
+            {{ "View Case" | translate }}
+          </button>
 
           <button
             class="btn-outline"

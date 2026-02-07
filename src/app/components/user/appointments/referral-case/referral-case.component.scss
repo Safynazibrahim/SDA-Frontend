@@ -58,6 +58,16 @@
   color: var(--text-gray-home-about);
 }
 
+textarea {
+  resize: none !important;
+}
+
+.signin-button.cancel {
+  background: transparent !important;
+  border: 2px solid var(--bg-brown-medium) !important;
+  color: var(--bg-brown-medium) !important;
+}
+
 /* 💻 Tablets */
 @media (min-width: 768px) and (max-width: 1024px) {
   .tab-item {

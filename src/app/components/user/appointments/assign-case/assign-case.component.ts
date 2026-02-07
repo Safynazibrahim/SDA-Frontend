@@ -138,29 +138,34 @@ this.patientName = query.get('patientName') || '';
  saveCase() {
   const caseData = {
     appointmentId: this.appointmentId,
-    chiefComplaint: this.chiefComplaint,
+    initialChiefComplaint: this.chiefComplaint,
+    // medications: this.selectedMedications,
+    // diseases: this.selectedDiseases,
+    // clinicalInvestigations: this.selectedInvestigations
+  };
+  const editCaseData = {
+    // appointmentId: this.appointmentId,
+    initialChiefComplaint: this.chiefComplaint,
     // medications: this.selectedMedications,
     // diseases: this.selectedDiseases,
     // clinicalInvestigations: this.selectedInvestigations
   };
   
 
-  // 🟢 لو صفحة عرض حالة قديمة (تعديل)
   if (this.pageTitle === 'Edit Case') {
-    this._AppointmentsService.editCase(this.appointmentId!, caseData).subscribe({
-      next: (res) => {
-          this.caseState.setCaseData({
-          chiefComplaint: this.chiefComplaint
-        });
-        console.log('✅ Case updated successfully', res);
+    // this._AppointmentsService.editCase(this.appointmentId!, editCaseData).subscribe({
+    //   next: (res) => {
+    //       this.caseState.setCaseData({
+    //       chiefComplaint: this.chiefComplaint
+    //     });
+    //     console.log('✅ Case updated successfully', res);
          this.router.navigate(['/dashboard/appointments/start-case', this.appointmentId], {
           queryParams: { date: this.appointmentDate, from: 'appointments' }
         });
-      },
-      error: (err) => console.error('❌ Error updating case', err)
-    });
+    //   },
+    //   error: (err) => console.error('❌ Error updating case', err)
+    // });
   }
-  // 🟢 لو صفحة جديدة (إنشاء)
   else {
     this._AppointmentsService.assignCase(caseData).subscribe({
       next: (res) => {
@@ -215,7 +220,7 @@ if (typeof document !== 'undefined') {
   this._AppointmentsService.getCaseById(this.appointmentId).subscribe({
     next: (res) => {
       console.log('🩺 Case Data Loaded:', res);
-      this.chiefComplaint = res?.chiefComplaint || '';
+      this.chiefComplaint = res?.initialChiefComplaint || '';
       this.selectedMedications = res?.medications || [];
       this.selectedDiseases = res?.diseases || [];
       this.selectedInvestigations = res?.clinicalInvestigations || [];

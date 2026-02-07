@@ -1,0 +1,255 @@
+.wave-section {
+  position: relative;
+  width: 100%;
+  background: var(--bg-brown-gradient);
+  overflow: hidden;
+}
+
+.wave-content {
+  padding: 20px 0px 120px 0px;
+  text-align: center;
+  color: white;
+}
+
+.wave-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+}
+
+.wave-path {
+  fill: var(--bg-primary) !important;
+}
+.lab-profile {
+  .pic-profile {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+  }
+  p {
+    font-weight: 400;
+    font-size: 30px;
+  }
+}
+
+.lab-details {
+  .tooth-icon {
+    width: 60px;
+    height: 60px;
+  }
+  p {
+    font-size: 24px;
+    font-weight: 400;
+  }
+}
+
+.lab-contact {
+  gap: 40px;
+}
+
+.service-info {
+  h3 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--text-gray-head-table);
+  }
+  h4 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--text-gray-head-table);
+  }
+  h5 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--bg-brown-dark);
+  }
+}
+
+.signin-button.btn {
+  background: transparent !important;
+  border: 1px solid var(--bg-brown-medium);
+  color: var(--bg-brown-medium);
+}
+
+.custom-date-wrapper {
+  background-color: red;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--border-form-field);
+  border-radius: 8px;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.custom-date-input {
+  margin-left: 5px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-gray) !important;
+  background-color: transparent !important;
+}
+
+.calendar-icon {
+  cursor: pointer;
+  color: var(--text-gray);
+}
+
+.chip {
+  padding: 8px 16px;
+  border-radius: 14px;
+  border: none;
+  color: var(--bg-primary);
+  background: var(--bg-brown-medium);
+}
+.chip.active {
+  background: var(--bg-brown-dark);
+}
+
+.segment-card {
+  padding: 8px 16px;
+  border: 1px solid var(--bg-brown-dark);
+  border-radius: 6px;
+  background: var(--bg-white);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.segment-card.active {
+  border: 2px solid var(--bg-brown-dark);
+  background: var(--bg-form-field);
+}
+
+.details-btn {
+  background: var(--bg-brown-gradient);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.details-btn.save {
+  background: transparent !important;
+  color: var(--bg-brown-dark) !important;
+  border: 1px solid var(--bg-brown-dark) !important;
+}
+.details-btn.cancel {
+  background: #fff !important;
+  border: 1px solid #eb4335;
+  color: #eb4335;
+}
+
+.order-summary {
+  margin-top: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--bg-brown-dark);
+}
+
+.order-summary-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b4f3b; /* brown-ish like Flutter */
+}
+
+.order-summary-content {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-gray-home-about);
+  white-space: pre-line; /* 🔥 keeps line breaks */
+  word-break: break-word;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .lab-profile {
+    .pic-profile {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+    p {
+      font-size: 22px;
+    }
+  }
+  .lab-details {
+    .tooth-icon {
+      width: 40px;
+      height: 40px;
+    }
+    p {
+      font-size: 18px;
+    }
+  }
+  .service-info {
+    h3 {
+      font-size: 26px;
+    }
+    h4 {
+      font-size: 20px;
+    }
+    h5 {
+      font-size: 22px;
+    }
+  }
+}
+
+////// responsive on mobile
+@media (max-width: 767.98px) {
+  .title h3 {
+    font-size: 16px;
+    margin: 0px !important;
+  }
+  .title mat-icon {
+    font-size: 16px !important;
+  }
+  .lab-profile {
+    .pic-profile {
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+    }
+    p {
+      font-size: 18px;
+    }
+  }
+
+  .lab-contact {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .lab-details {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .lab-details p {
+    text-align: left;
+    font-size: 14px;
+  }
+  .lab-details {
+    .tooth-icon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .service-info {
+    h3 {
+      font-size: 18px;
+    }
+    h4 {
+      font-size: 16px;
+    }
+    h5 {
+      font-size: 16px;
+    }
+  }
+}

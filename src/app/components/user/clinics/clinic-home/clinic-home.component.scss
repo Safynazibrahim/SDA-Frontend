@@ -24,7 +24,7 @@
 .sidebar {
   position: sticky; /* stays fixed inside parent scroll area */
   top: 0; /* already under the navbar because of margin-top */
-  width: 270px;
+  width: 290px;
   height: calc(100vh - 107px); /* fit remaining space */
   margin-left: 20px;
   overflow-y: auto;
@@ -122,6 +122,14 @@
   flex-grow: 1;
   min-height: calc(100vh - 107px);
 }
+.submenu {
+  margin-inline-start: 15px;
+}
+
+.arrow {
+  margin-left: auto;
+}
+
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .sidebar {

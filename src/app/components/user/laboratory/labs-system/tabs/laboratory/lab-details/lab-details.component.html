@@ -1,0 +1,313 @@
+<section class="wave-section">
+  <div class="wave-content">
+    <div class="title d-flex mx-5 mb-2">
+      <h3
+        (click)="backToLabs()"
+        style="cursor: pointer"
+        class="text-white d-flex"
+      >
+        {{ "Laboratory" | translate }}
+        <span (click)="backToLabs()">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+      </h3>
+      <h3 style="display: inline-block">
+        {{ "laboratory_details" | translate }}
+      </h3>
+    </div>
+
+    <div
+      class="lab-profile d-flex flex-column justify-content-center align-items-center"
+    >
+      <img
+        class="pic-profile"
+        src="../../../../../../../../../assets/media/pic-not-found.png"
+        alt="user picture"
+      />
+      <p class="my-0 py-0 text-white">
+        {{ labDetails()?.name }}
+      </p>
+    </div>
+    <div
+      class="lab-contact d-flex justify-content-center align-items-center mt-3"
+    >
+      <div class="lab-details d-flex align-items-center flex-column">
+        <img
+          class="tooth-icon"
+          src="../../../../../../../../assets/media/tooth-location.svg"
+          alt=""
+        />
+        <p class="my-0 py-0 text-white">
+          {{ labDetails()?.location }}
+        </p>
+      </div>
+
+      <div class="lab-details d-flex align-items-center flex-column">
+        <img
+          class="tooth-icon"
+          src="../../../../../../../../assets/media/tooth-number.svg"
+          alt=""
+        />
+        <p class="my-0 py-0 text-white">
+          {{ labDetails()?.phoneNumber }}
+        </p>
+      </div>
+
+      <div class="lab-details d-flex align-items-center flex-column">
+        <img
+          class="tooth-icon"
+          src="../../../../../../../../assets/media/tooth-email.svg"
+          alt=""
+        />
+        <p class="my-0 py-0 text-white">
+          {{ labDetails()?.email }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- ROUND WAVE -->
+  <svg class="wave-border" viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path
+      class="wave-path"
+      d="
+        M0,60
+        C120,100 240,20 360,60
+        C480,100 600,20 720,60
+        C840,100 960,20 1080,60
+        C1200,100 1320,20 1440,60
+        L1440,120
+        L0,120
+        Z
+      "
+    />
+  </svg>
+</section>
+<section class="container">
+  <div
+    *ngFor="let service of labDetails()?.services"
+    class="row d-flex justify-content-between align-items-center"
+  >
+    <div
+      class="col-11 service-info gap-1 d-flex flex-column justify-content-between"
+    >
+      <h3>{{ service.name }}</h3>
+      <!-- <h4>descript</h4> -->
+      <h5>{{ service.price }}</h5>
+    </div>
+    <div class="col-1 text-center">
+      <input
+        [checked]="isServiceSelected(service.id)"
+        (click)="toggleService(service.id)"
+        type="radio"
+      />
+    </div>
+    <hr class="my-2" />
+  </div>
+
+  <div class="d-flex justify-content-between row my-4">
+    <div class="col-lg-5 col-md-6 col-sm-12 my-1">
+      <button
+        [disabled]="servicesArray.length === 0"
+        (click)="openRequestModal()"
+        class="signin-button d-flex align-items-center justify-content-center"
+      >
+        <h5 class="m-0">{{ "send_request" | translate }}</h5>
+      </button>
+    </div>
+    <div class="col-lg-5 col-md-6 col-sm-12 my-1">
+      <button
+        (click)="backToLabs()"
+        class="signin-button btn d-flex align-items-center justify-content-center"
+      >
+        <h5 class="m-0">{{ "cancel" | translate }}</h5>
+      </button>
+    </div>
+  </div>
+</section>
+
+<app-modal
+  [isOpen]="isRequestModal"
+  title="{{ 'request_lab_order' | translate }}"
+  size="medium"
+  (close)="closeRequestModal()"
+>
+  <!-- Body -->
+  <div modal-body class="modal-body">
+    <form [formGroup]="orderForm">
+      <div class="form-group">
+        <label class="required">{{ "orderName" | translate }}</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="form-input"
+          placeholder="{{ 'orderName' | translate }}"
+        />
+      </div>
+      <div class="form-group">
+        <label class="required">{{ "order_deadline" | translate }}</label>
+        <div class="custom-date-wrapper w-100" (click)="fromPicker.open()">
+          <mat-icon class="calendar-icon" (click)="fromPicker.open()"
+            >calendar_today</mat-icon
+          >
+          <mat-datepicker #fromPicker></mat-datepicker>
+          <input
+            matInput
+            [matDatepicker]="fromPicker"
+            placeholder="DD/MM/YYYY"
+            class="custom-date-input"
+            formControlName="deadline"
+            readonly
+          />
+        </div>
+      </div>
+
+      <!-- Whole Tooth -->
+      <div class="form-group">
+        <label>Whole Tooth Properties</label>
+
+        <div class="row g-3">
+          <div class="col-6" *ngFor="let option of toothOptions | keyvalue">
+            <label>{{ option.key }}</label>
+            <select
+              class="select"
+              (change)="setWholeTooth(option.key, $any($event.target).value)"
+            >
+              <option value="">Select</option>
+              <option *ngFor="let v of option.value" [value]="v">
+                {{ v }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tooth Type -->
+      <div class="form-group">
+        <label>Tooth Type</label>
+
+        <div class="d-flex gap-3">
+          <button
+            type="button"
+            class="chip"
+            [class.active]="toothType === 'Anterior'"
+            (click)="setToothType('Anterior')"
+          >
+            Anterior
+          </button>
+
+          <button
+            type="button"
+            class="chip"
+            [class.active]="toothType === 'Premolar'"
+            (click)="setToothType('Premolar')"
+          >
+            Premolar
+          </button>
+
+          <button
+            type="button"
+            class="chip"
+            [class.active]="toothType === 'Molar'"
+            (click)="setToothType('Molar')"
+          >
+            Molar
+          </button>
+        </div>
+      </div>
+
+      <!-- Segment Grid -->
+      <div class="form-group" *ngIf="toothType">
+        <label>Select a segment to define its properties:</label>
+
+        <div class="row g-0 d-flex justify-content-center">
+          <div *ngFor="let row of rows" class="col-6">
+            <div
+              *ngFor="let col of cols"
+              class="segment-card text-center my-1 mx-1"
+              [class.active]="segments[getSegmentId(row, col)]"
+              (click)="toggleSegment(row, col)"
+            >
+              <strong>{{ getSegmentId(row, col) }} </strong>
+              <small>{{ row }} {{ col }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inline Segment Editor -->
+      <div *ngIf="selectedSegments.length > 0" class="border rounded p-3 mt-3">
+        <div *ngFor="let segment of selectedSegments" class="mb-3">
+          <h6>Segment: {{ segment }}</h6>
+
+          <div class="d-flex gap-3">
+            <div class="d-flex flex-column w-100">
+              <label>Shade</label>
+              <select
+                class="select"
+                [value]="segments[segment]['Shade'] || ''"
+                (change)="
+                  setSegment(segment, 'Shade', $any($event.target).value)
+                "
+              >
+                <option value="">Select</option>
+                <option *ngFor="let s of segmentOptions['Shade']" [value]="s">
+                  {{ s }}
+                </option>
+              </select>
+            </div>
+
+            <div class="d-flex flex-column w-100">
+              <label>Translucency</label>
+              <select
+                class="select"
+                [value]="segments[segment]['Translucency'] || ''"
+                (change)="
+                  setSegment(segment, 'Translucency', $any($event.target).value)
+                "
+              >
+                <option value="">Select</option>
+                <option
+                  *ngFor="let t of segmentOptions['Translucency']"
+                  [value]="t"
+                >
+                  {{ t }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-2">
+          <button class="details-btn save w-50" (click)="saveSegments()">
+            Save
+          </button>
+          <button class="details-btn cancel w-50" (click)="cancelSegments()">
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="order-summary" *ngIf="showSummary">
+        <div class="order-summary-title">Your Chosen Segments</div>
+        <div class="order-summary-content">
+          {{ generatedNotes }}
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <div modal-footer class="w-100 mt-2 d-flex gap-1">
+    <button
+      [disabled]="orderForm.invalid"
+      class="signin-button w-50"
+      (click)="sendOrderRequest()"
+    >
+      {{ "CONFIRM" | translate }}
+    </button>
+    <button class="signin-button btn w-50" (click)="closeRequestModal()">
+      {{ "cancel" | translate }}
+    </button>
+  </div>
+</app-modal>

@@ -1,1 +1,183 @@
-<p>profile works!</p>
+<div class="container py-3 px-5">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="main-title d-flex align-items-center gap-2">
+      <h3>
+        {{ "my_account" | translate }}
+      </h3>
+      <span style="cursor: pointer" [routerLink]="['/dashboard/homeDashboard']">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </span>
+      <h2 class="active">
+        {{ "profile" | translate }}
+      </h2>
+    </div>
+    <div>
+      <button (click)="logout()" class="signin-button w-auto">Logout</button>
+    </div>
+  </div>
+
+  <form class="row" [formGroup]="profileForm" (ngSubmit)="submit()">
+    <div
+      class="col-12 my-2 position-relative d-flex justify-content-between align-items-center"
+    >
+      <img
+        class="user-img"
+        src="../../../../assets/media/pic-not-found.png"
+        alt=""
+      />
+      <div class="img-action">
+        <mat-icon class="icon">edit</mat-icon>
+        <mat-icon class="icon">delete</mat-icon>
+      </div>
+      <div (click)="enableEdit()">
+        <mat-icon class="edit-all">edit</mat-icon>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 form-group">
+      <label for="fullName">{{ "NAME" | translate }}</label>
+      <input
+        type="text"
+        formControlName="fullName"
+        id="fullName"
+        type="text"
+        class="form-input"
+        placeholder="{{ 'ENTER_YOUR_NAME' | translate }}"
+      />
+    </div>
+    <div class="col-12 col-md-6 form-group">
+      <label for="email">{{ "EMAIL" | translate }}</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-input"
+        placeholder="{{ 'ENTER_EMAIL_ADDRESS' | translate }}"
+      />
+    </div>
+    <div class="col-12 col-md-6 form-group">
+      <label for="phoneNumber">{{ "PHONENUMBER" | translate }}</label>
+      <input
+        type="tel"
+        id="phoneNumber"
+        formControlName="phoneNumber"
+        class="form-input"
+        placeholder="{{ 'ENTER_YOUR_PHONENUMBER' | translate }}"
+      />
+    </div>
+    <div class="col-12 col-md-6 form-group">
+      <label for="appointmentDuration">{{
+        "appointmentDuration" | translate
+      }}</label>
+      <input
+        type="number"
+        id="appointmentDuration"
+        formControlName="appointmentDuration"
+        class="form-input"
+        placeholder="{{ 'Enter_Appointment_Duration' | translate }}"
+      />
+    </div>
+    <!-- <div class="col-12 form-group">
+      <label for="password">{{ "PASSWORD" | translate }}</label>
+      <div class="position-relative">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          id="password"
+          formControlName="password"
+          class="form-input"
+          placeholder="{{ 'ENTER_PASSWORD' | translate }}"
+        />
+        <button
+          style="
+            position: absolute;
+            top: 50%;
+            right: 0%;
+            transform: translateX(-50%);
+            transform: translateY(-50%);
+          "
+          mat-icon-button
+          matSuffix
+          (click)="togglePasswordVisibility()"
+          type="button"
+        >
+          <mat-icon>{{
+            showPassword ? "visibility" : "visibility_off"
+          }}</mat-icon>
+        </button>
+      </div>
+    </div> -->
+
+    <div class="col-12 col-md-6 form-group">
+      <label for="medical-license">{{ "MEDICAL_LICENSE" | translate }}</label>
+      <div class="file-upload-container">
+        <input
+          id="medical-license"
+          hidden
+          type="file"
+          (change)="onFileSelected($event, 'medicalLicense')"
+        />
+        <div
+          class="file-upload-display"
+          [class.disabled]="!isEditMode"
+          (click)="isEditMode && triggerFileInput('medical-license')"
+        >
+          <mat-icon>image_upload</mat-icon>
+          <span *ngIf="medicalLicenseFile">
+            {{ medicalLicenseFile.name }}
+          </span>
+          <span *ngIf="!medicalLicenseFile && medicalLicenseName">
+            {{ medicalLicenseName }}
+          </span>
+          <span *ngIf="!medicalLicenseFile && !medicalLicenseName">
+            {{ "UPLOAD_MEDICAL_LICENSE" | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 form-group">
+      <label for="certificate">{{ "CERTIFICATE" | translate }}</label>
+      <div class="file-upload-container">
+        <input
+          id="certificate"
+          multiple
+          hidden
+          type="file"
+          (change)="onFileSelected($event, 'certificate')"
+        />
+        <div
+          class="file-upload-display"
+          [class.disabled]="!isEditMode"
+          (click)="isEditMode && triggerFileInput('certificate')"
+        >
+          <mat-icon>image_upload</mat-icon>
+          <ul *ngIf="certificateFiles.length > 0">
+            <li *ngFor="let file of certificateFiles">{{ file.name }}</li>
+          </ul>
+          <ul
+            *ngIf="certificateFiles.length === 0 && certificateNames.length > 0"
+          >
+            <li *ngFor="let name of certificateNames">{{ name }}</li>
+          </ul>
+          <span
+            *ngIf="
+              certificateFiles.length === 0 && certificateNames.length === 0
+            "
+          >
+            {{ "UPLOAD_CERTIFICATE" | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isEditMode" class="col-12 d-flex align-items-center gap-4">
+      <button type="submit" class="w-50 signin-button">
+        {{ "save" | translate }}
+      </button>
+      <button
+        (click)="cancelEdit()"
+        type="submit"
+        class="w-50 signin-button cancel"
+      >
+        {{ "cancel" | translate }}
+      </button>
+    </div>
+  </form>
+</div>

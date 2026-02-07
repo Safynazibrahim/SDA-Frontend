@@ -20,10 +20,18 @@ export class ClinicHomeComponent implements OnInit{
   clinicId!: string;
   isClosed = false;
   isMobile = false;
+managementOpen = false;
+
+
 
   constructor(private route: ActivatedRoute,private router: Router,
     public featureService: ClinicFeaturesService
-  ){}
+  ){
+     this.router.events.subscribe(() => {
+  this.managementOpen = this.router.url.includes("management");
+});
+
+  }
 
   ngOnInit(): void {
     this.checkScreenSize();
@@ -59,5 +67,9 @@ export class ClinicHomeComponent implements OnInit{
   backToClinics(){
     this.router.navigate(['/dashboard/clinics']);
   }
+  toggleManagement() {
+  this.managementOpen = !this.managementOpen;
+}
+
 
 }

@@ -1,0 +1,67 @@
+/* Container behind tabs (matches your Figma pill rail) */
+.tabbar {
+  --pill-radius: 35px;
+  --inactive: var(--text-gray);
+  --rail-bg: var(--svg-color,);
+  --active-text: #fff;
+  /* fallback if your gradient var isn't defined */
+  --active-bg: var(--bg-brown-gradient);
+  display: flex;
+  align-items: center;
+  background: #f7f5f2;
+  border-radius: var(--pill-radius);
+  width: 100%;
+  font-size: 1.3rem;
+  font-weight: 500;
+  white-space: normal; /* ✅ allow text wrapping */
+  word-break: break-word; /* ✅ allow long words to break */
+}
+.tabbar::-webkit-scrollbar { display: none; }
+
+/* The tab “buttons” */
+.tab {
+  display: inline-flex;
+  white-space: normal; /* ✅ allow wrapping inside the tab */
+  word-break: break-word; /* ✅ break long text */
+  text-align: center; /* ✅ center multi-line text */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 25%;
+  padding: 20px;
+  border-radius: var(--pill-radius);
+  color: #201F19;
+  background: transparent;
+  font-weight: 500;
+  line-height: 1.2;
+  user-select: none;
+
+  /* No hover/ink/ripple effects */
+  transition: none;
+}
+
+/* Active state (matches your filled brown pill) */
+.tab.active {
+  background: var(--bg-brown-medium);
+  color: var(--active-text);
+  padding: 20px;
+}
+
+/* Focus-visible for keyboard users (accessibility) */
+.tab:focus-visible {
+  outline: 2px solid var(--bg-brown-gradient);
+  outline-offset: 2px;
+}
+
+/* Responsive: wrap on larger screens if you prefer, or keep scrolling */
+@media (max-width: 768px) {
+  .tabbar { 
+    font-size: 0.8rem;
+    flex-wrap: wrap; 
+    overflow-x: visible; 
+    font-weight: 400;
+  }
+  .tab,.tab.active {
+    padding: 8px;
+  }
+}

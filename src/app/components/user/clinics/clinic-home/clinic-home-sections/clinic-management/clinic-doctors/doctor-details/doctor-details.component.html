@@ -1,0 +1,207 @@
+<div class="profile-detaild container py-3">
+  <div class="bg-profile">
+    <div
+      class="d-flex justify-content-between align-items-center first-section"
+    >
+      <div class="d-flex align-items-center route-container">
+        <div class="d-flex align-items-center">
+          <p class="mb-0 route">{{ "Clinic" | translate }}</p>
+          <a
+            [routerLink]="['/dashboard/clinics']"
+            class="m-0 p-0 text-white mt-1 mx-1 clinicActive arrow-color"
+            style="cursor: pointer"
+          >
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </a>
+          <p class="mb-0 route">{{ "Doctors" | translate }}</p>
+          <a
+            [routerLink]="[
+              '/dashboard/clinics',
+              clinicId,
+              'management',
+              'schedule'
+            ]"
+            class="m-0 p-0 text-white mt-1 mx-1 clinicActive arrow-color"
+            style="cursor: pointer"
+          >
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </a>
+          <p class="mb-0 clinicActive">{{ "Details" | translate }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <img
+        class="pic-profile"
+        src="../../../../../../../../../assets/media/pic-not-found.png"
+        alt="user picture"
+        srcset=""
+      />
+      <p class="my-0 py-0 fs-5 fw-bold text-white">
+        {{ doctorDetails?.user?.fullName }}
+      </p>
+      <p class="my-0 py-0 fs-5 fw-bold text-white">
+        {{ doctorDetails?.specialization }}
+      </p>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mt-3">
+      <div class="d-flex align-items-center flex-column">
+        <img
+          class="icon-bg"
+          src="../../../../../../../../../assets/media/phone-rounded-svgrepo-com (3) 1.svg"
+          alt=""
+        />
+        <p class="my-0 py-0 fs-5 text-white">
+          {{ doctorDetails?.user?.phoneNumber }}
+        </p>
+      </div>
+      <div class="d-flex align-items-center flex-column ms-4">
+        <img
+          class="icon-bg"
+          src="../../../../../../../../../assets/media/email-svgrepo-com (15) 1.svg"
+          alt=""
+        />
+        <p class="my-0 py-0 fs-5 text-white">
+          {{ doctorDetails?.user?.email }}
+        </p>
+      </div>
+    </div>
+  </div>
+@if(theme === 'light'){
+  <div class="wave-container">
+    <img
+      src="../../../../../../../../../assets/media/wave-haikei.png"
+      class="w-100"
+      alt=""
+      srcset=""
+    />
+  </div>}@else{
+    <div class="wave-container">
+    <img
+      src="../../../../../../../../../assets/media/wave-haikei-dark.png"
+      class="w-100"
+      alt=""
+      srcset=""
+    />
+  </div>
+  }
+  <div
+    class="DoctorInformation d-flex align-items-center justify-content-center"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="81"
+      height="107"
+      viewBox="0 0 81 107"
+      fill="none"
+    >
+      <path
+        d="M80.4999 83.3339L40.5 106.667V23.334L80.4999 46.6673V83.3339Z"
+        fill="#6A5F4C"
+      />
+      <path
+        d="M40.4999 59.9999L0.5 83.3332V0L40.4999 23.3333V59.9999Z"
+        fill="#B19E7F"
+      />
+    </svg>
+    <p class="fs-2 ms-2 fw-bold mt-3">
+  {{ "Information_Part1" | translate }}
+  <span class="highlight rounded-0">
+    {{ "Information_Part2" | translate }}
+  </span>
+</p>
+
+  </div>
+  <div class="container my-4">
+    <div class="specialization-card p-4">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <p class="mb-1 specialization-title">
+            {{ doctorDetails?.specialization }}
+          </p>
+          <p class="price mb-0">
+            {{ doctorDetails?.consultationFee }} <span class="currency">{{ 'Currency_EGP' | translate }}</span>
+          </p>
+        </div>
+        <span
+          class="badge"
+          [class]="
+            doctorDetails.stockType === 'clinic'
+              ? 'stock-based'
+              : 'non-stock-based'
+          "
+        >
+          {{ (doctorDetails.stockType === 'clinic'
+    ? 'Stock_Based'
+    : 'Non_Stock_Based') | translate }}
+
+        </span>
+      </div>
+      <hr />
+      @for(day of formattedSchedule; track $index){
+      <div class="day-block">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <p class="day-name mb-0">{{ day.dayName }}</p>
+          @if($index === 0 && isOwner){
+          <mat-icon class="edit-icon" (click)="openScheduleFromDetails()">edit</mat-icon>}
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+          @for (slot of day.slots; track $index) {
+          <span class="time-chip">
+            {{ slot.startTime }} - {{ slot.endTime }} </span>
+          }
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+<app-modal [isOpen]="isScheduleOpen" title="{{ 'Set Schedule' | translate }}" size="medium"
+  (close)="closeSchedule()">
+  <div modal-body *ngIf="selectedDoctor">
+    <!-- Days -->
+    <div class="days-container">
+      <button *ngFor="let day of days" class="day-pill" [class.active]="isDaySelected(day.id)"
+        (click)="toggleDay(day.id)">
+        {{ day.name }}
+      </button>
+    </div>
+
+    <!-- Times per day -->
+    <div class="day-times" *ngFor="let day of days" [hidden]="!isDaySelected(day.id)">
+      <h5>{{ day.name }}</h5>
+
+      <div class="time-row mt-2" *ngFor="let slot of scheduleForm[day.id]; let i = index">
+        <div class="d-flex w-50">
+          <input type="time" [(ngModel)]="slot.startTime" (change)="validateTime(day.id, i)" />
+        </div>
+
+        <div class="d-flex flex-column w-50">
+          <input type="time" [(ngModel)]="slot.endTime" (change)="validateTime(day.id, i)"
+            [class.input-error]="slot.hasError" />
+
+          <div class="time-error" *ngIf="slot.hasError">
+            {{ 'End_Time_Error' | translate }}
+          </div>
+        </div>
+
+        <mat-icon class="delete-time" *ngIf="scheduleForm[day.id].length > 1" (click)="removeTime(day.id, i)">
+          delete
+        </mat-icon>
+      </div>
+
+      <p class="add-time" (click)="addTime(day.id)">+ {{ 'Add_Time' | translate }}</p>
+    </div>
+  </div>
+  <div class="page-footer-btns" modal-footer>
+    <button class="ai-btn" [disabled]="hasAnyTimeError()" (click)="saveSchedule()">
+      {{ "Save" | translate }}
+    </button>
+
+    <button class="manual-btn" (click)="closeSchedule()">
+      {{ "Cancel" | translate }}
+    </button>
+  </div>
+</app-modal>

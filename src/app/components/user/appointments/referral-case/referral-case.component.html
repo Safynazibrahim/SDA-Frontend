@@ -1,10 +1,4 @@
 <div class="container my-5">
-  <app-search
-    [(model)]="searchNameValue"
-    [placeholder]="'search_name_phone' | translate"
-    (search)="onSearch()"
-  >
-  </app-search>
   <!-- Tabs Section -->
   <div class="row mx-3">
     <div class="col-12">
@@ -12,14 +6,14 @@
         <div
           class="tab-item"
           [class.active]="selectedTab === 'refer_clinic'"
-          (click)="selectedTab = 'refer_clinic'"
+          (click)="onTabChange('refer_clinic')"
         >
           {{ "refer_clinic" | translate }}
         </div>
         <div
           class="tab-item"
           [class.active]="selectedTab === 'refer_another_clinic'"
-          (click)="selectedTab = 'refer_another_clinic'"
+          (click)="onTabChange('refer_another_clinic')"
         >
           {{ "refer_another_clinic" | translate }}
         </div>
@@ -27,7 +21,7 @@
     </div>
   </div>
   <!-- Refer Clinic -->
-  <div *ngIf="selectedTab === 'refer_clinic'">
+  <form [formGroup]="referForm" *ngIf="selectedTab === 'refer_clinic'">
     <div class="doctor-row my-3 mx-4" *ngFor="let item of doctors">
       <div class="doctor-info mx-1">
         <img
@@ -37,24 +31,218 @@
         />
 
         <div class="doctor-text">
-          <h3 class="doc_name">{{item.user.fullName}}</h3>
-          <h3 class="phone">+880 172524123123</h3>
+          <h3 class="doc_name">{{ item.user.fullName }}</h3>
+          <h3 class="phone">
+            {{ "SPECIALIZATION" | translate }}: {{ item.specialization }}
+          </h3>
+        </div>
+      </div>
+      <div class="mx-1">
+        <input
+          type="radio"
+          formControlName="referredDoctorId"
+          [value]="item.doctorId"
+        />
+      </div>
+    </div>
+
+    <div *ngIf="hasResults">
+      <div class="row flex justify-content-between my-2 mx-4">
+        <div class="col-12 col-md-6 form-group">
+          <label class="required" for="recoveryDays">{{
+            "recoveryDays" | translate
+          }}</label>
+          <input
+            type="number"
+            id="recoveryDays"
+            class="form-input"
+            min="1"
+            step="1"
+            formControlName="recoveryDays"
+            placeholder="{{ 'ENTER_recoveryDays' | translate }}"
+          />
+        </div>
+        <div class="col-12 col-md-6 form-group">
+          <label class="required" for="note">{{ "Notes" | translate }}</label>
+          <textarea
+            type="text"
+            id="note"
+            rows="4"
+            class="form-input"
+            formControlName="note"
+            placeholder="{{ 'ENTER_Your_Notes' | translate }}"
+          ></textarea>
         </div>
       </div>
 
-      <div class="mx-1">
-        <input type="radio" formControlName="doc_id" [value]="false" />
+      <div
+        class="row flex justify-content-between align-items-center mx-4 mb-3"
+      >
+        <div class="col-md-6 col-sm-12 my-1">
+          <button
+            type="button"
+            (click)="submitReferral()"
+            [disabled]="referForm.invalid || loading"
+            class="signin-button"
+          >
+            {{ "send_request" | translate }}
+          </button>
+        </div>
+        <div class="col-md-6 col-sm-12 my-1">
+          <button class="signin-button cancel">
+            {{ "cancel" | translate }}
+          </button>
+        </div>
       </div>
+      <app-pagination
+        [totalItems]="total"
+        [pageSize]="limit"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+      >
+      </app-pagination>
     </div>
-    <app-pagination
-      [totalItems]="total"
-      [pageSize]="limit()"
-      [currentPage]="CurrentPage()"
-      (pageChange)="onPageChange($event)"
+
+    <div
+      class="mx-4 my-4 text-center text-muted"
+      *ngIf="!loading && !hasResults"
     >
-    </app-pagination>
-  </div>
+      {{ "no_doctors_found" | translate }}
+    </div>
+  </form>
 
   <!-- Refer Another Clinic -->
-  <div class="row m-3" *ngIf="selectedTab === 'refer_another_clinic'"></div>
+  <form [formGroup]="referForm" *ngIf="selectedTab === 'refer_another_clinic'">
+    <div class="mt-3">
+      <app-search
+        [(model)]="searchNameValue"
+        [placeholder]="'search_doc_clinic_loc' | translate"
+        (search)="onSearch()"
+      >
+      </app-search>
+    </div>
+    <div class="doctor-row my-3 mx-4" *ngFor="let item of doctors">
+      <!-- لو دكتور -->
+      <ng-container *ngIf="item.type === 'doctor'">
+        <div class="doctor-info">
+          <img src="../../../../../assets/media/medi.png" />
+          <div class="doctor-text">
+            <h3 class="doc_name">{{ item.user.fullName }}</h3>
+            <h3 class="phone">
+              {{ "SPECIALIZATION" | translate }}: {{ item.specialization }}
+            </h3>
+          </div>
+        </div>
+
+        <input
+          type="radio"
+          formControlName="referredDoctorId"
+          [value]="item.id"
+        />
+      </ng-container>
+
+      <!-- لو عيادة -->
+      <ng-container *ngIf="item.type === 'clinic'">
+        <div
+          class="d-flex w-100 justify-content-between align-items-center"
+          style="cursor: pointer"
+          (click)="openClinicDoctors(item)"
+        >
+          <div class="doctor-info">
+            <img src="../../../../../assets/media/house 1 (1).svg" />
+            <div class="doctor-text">
+              <h3 class="doc_name">{{ item.name }}</h3>
+              <h3 class="phone">
+                {{ "Location" | translate }}: {{ item.location }}
+              </h3>
+            </div>
+          </div>
+          <div>
+            <mat-icon>visibility</mat-icon>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div *ngIf="hasResults">
+      <div class="row flex justify-content-between my-2 mx-4">
+        <div class="col-12 col-md-6 form-group">
+          <label class="required" for="recoveryDays">{{
+            "recoveryDays" | translate
+          }}</label>
+          <input
+            type="number"
+            id="recoveryDays"
+            class="form-input"
+            min="1"
+            step="1"
+            formControlName="recoveryDays"
+            placeholder="{{ 'ENTER_recoveryDays' | translate }}"
+          />
+        </div>
+        <div class="col-12 col-md-6 form-group">
+          <label class="required" for="note">{{ "Notes" | translate }}</label>
+          <textarea
+            type="text"
+            id="note"
+            rows="4"
+            class="form-input"
+            formControlName="note"
+            placeholder="{{ 'ENTER_Your_Notes' | translate }}"
+          ></textarea>
+        </div>
+      </div>
+      <div
+        class="row flex justify-content-between align-items-center mx-4 mb-3"
+      >
+        <div class="col-md-6 col-sm-12 my-1">
+          <button
+            type="button"
+            (click)="submitReferral()"
+            [disabled]="referForm.invalid || loading"
+            class="signin-button"
+          >
+            {{ "send_request" | translate }}
+          </button>
+        </div>
+        <div class="col-md-6 col-sm-12 my-1">
+          <button class="signin-button cancel">
+            {{ "cancel" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mx-4 my-4 text-center text-muted"
+      *ngIf="!loading && !hasResults"
+    >
+      {{ "no_doctors_found" | translate }}
+    </div>
+  </form>
 </div>
+
+<app-modal
+  [isOpen]="showDoctorsInClinic"
+  [title]="('choose_doctor_from' | translate) + ' ' + selectedClinicName"
+  size="medium"
+  (close)="closeDoctorsModal()"
+>
+  <div modal-body class="modal-body">
+    <div class="doctor-row my-3" *ngFor="let doc of clinicDoctors">
+      <div class="doctor-info">
+        <img src="../../../../../assets/media/medi.png" />
+        <div class="doctor-text">
+          <h3 class="doc_name">{{ doc.user.fullName }}</h3>
+          <h3 class="phone">
+            {{ "SPECIALIZATION" | translate }}: {{ doc.specialization }}
+          </h3>
+        </div>
+      </div>
+
+      <input
+        type="radio"
+        name="clinicDoctor"
+        (change)="selectDoctorFromModal(doc.doctorId)"
+      />
+    </div>
+  </div>
+</app-modal>

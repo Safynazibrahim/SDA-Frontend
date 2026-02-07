@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,8 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
+import { Chart, registerables } from 'chart.js'; // Import chart.js
 import { PaginationComponent } from '../../../../../shared/pagination/pagination.component';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
@@ -19,7 +19,7 @@ import { ModalComponent } from '../../../../../shared/modal/modal.component';
   standalone: true,
   imports: [
     CommonModule,
-    TranslateModule, 
+    TranslateModule,
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
@@ -28,15 +28,14 @@ import { ModalComponent } from '../../../../../shared/modal/modal.component';
     MatInputModule,
     MatNativeDateModule,
     FormsModule,
-    BaseChartDirective,
     PaginationComponent,
-    ModalComponent
+    ModalComponent,
   ],
   templateUrl: './clinic-home-section.component.html',
-  styleUrl: './clinic-home-section.component.scss'
+  styleUrl: './clinic-home-section.component.scss',
 })
-export class ClinicHomeSectionComponent {
-  clinicId!:  any;
+export class ClinicHomeSectionComponent implements AfterViewInit {
+  clinicId!: any;
   selectedRange = 'Monthly';
   totalRevenue = '85,000 SAR';
   fromDate!: Date | null;
@@ -46,157 +45,80 @@ export class ClinicHomeSectionComponent {
   isViewDoctorsModalOpen = false;
 
   openViewMaterialModal() {
-  this.isViewMaterialModalOpen = true;
-}
+    this.isViewMaterialModalOpen = true;
+  }
 
-openViewDoctorsModal() {
-  this.isViewDoctorsModalOpen = true;
-}
+  openViewDoctorsModal() {
+    this.isViewDoctorsModalOpen = true;
+  }
 
-closeViewMaterialModal() {
-  this.isViewMaterialModalOpen = false;
-}
+  closeViewMaterialModal() {
+    this.isViewMaterialModalOpen = false;
+  }
 
-closeViewDoctorsModal() {
-  this.isViewDoctorsModalOpen = false;
-}
-  
+  closeViewDoctorsModal() {
+    this.isViewDoctorsModalOpen = false;
+  }
 
   onPageChange(page: number) {
     this.CurrentPage = page;
-    
   }
 
-
-  ///chart
-  // النوع لازم يبقى ChartType مش ثابت "line"
-  // public lineChartType: ChartType = 'line';
-
-  // // البيانات
-  // public lineChartData: ChartConfiguration['data'] = {
-  //   labels: [
-  //   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  //   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-  // ],
-  //   datasets: [
-  //     {
-  //       data: [1000, 10, 1420, 100, 1750, 1900, 200, 2100, 180, 1000, 10, 1500],
-  //       label: 'Revenue',
-  //       borderColor: this.getCssVariableValue('--bg-brown-medium'),
-  //       backgroundColor: (context:any) => {
-  //       const chart = context.chart;
-  //       const { ctx, chartArea } = chart;
-
-  //       if (!chartArea) {
-  //         return '#7d6e59'; // fallback لو chartArea مش متاح لسه
-  //       }
-
-  //       // نعمل Gradient عمودي
-  //       const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-
-  //       gradient.addColorStop(0, 'rgba(125, 110, 89, 0.35)'); // لون بني غامق عند الخط
-  //       gradient.addColorStop(1, 'rgba(125, 110, 89, 0)');    // شفاف تحت
-
-  //       return gradient;
-  //       },
-  //       fill: true,
-  //       tension: 0.4,
-  //       pointBackgroundColor: this.getCssVariableValue('--bg-brown-medium'),
-  //       pointBorderWidth: 0,
-  //       pointRadius: 0
-  //     }
-  //   ]
-  // };
-
-  // // الإعدادات
-  // public lineChartOptions: ChartOptions = {
-  //   responsive: true,
-  // maintainAspectRatio: false, // يخلي الرسم ياخد 100% width & height
-  // plugins: {
-  //   legend: { display: false }
-  // },
-  // scales: {
-  //   x: {
-  //     grid: { display: false },
-  //     ticks: {
-  //       autoSkip: false,     // يخلي كل label يظهر
-  //       maxRotation: 0,      // يمنع لف النصوص
-  //       minRotation: 0
-  //     }
-  //   },
-  //   y: {
-  //     beginAtZero: true
-  //   }
-  // }
-  // };
-
-  public lineChartType: ChartType = 'line';
-
-// البيانات
-public lineChartData: ChartConfiguration['data'] = {
-  labels: [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-  ],
-  datasets: [
-    {
-      data: [1000, 10, 1420, 100, 1750, 1900, 200, 2100, 180, 1000, 10, 1500],
-      label: 'Revenue',
-      borderColor: this.getCssVariableValue('--bg-brown-medium'),
-      backgroundColor: (context:any) => {
-        const chart = context.chart;
-        const { ctx, chartArea } = chart;
-
-        if (!chartArea) {
-          return '#7d6e59'; // fallback لو chartArea مش متاح لسه
-        }
-
-        // Gradient عمودي تحت الخط
-        const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-        gradient.addColorStop(0, 'rgba(125, 110, 89, 0.35)'); // بني شفاف عند الخط
-        gradient.addColorStop(1, 'rgba(125, 110, 89, 0)');    // يختفي تحت
-        return gradient;
+  public lineChartData = {
+    labels: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ],
+    datasets: [
+      {
+        label: 'Revenue',
+        data: [1000, 10, 1420, 100, 1750, 1900, 200, 2100, 180, 1000, 10, 1500],
+        fill: true,
+        borderColor: 'rgba(125, 110, 89, 1)',
+        backgroundColor: 'rgba(125, 110, 89, 0.35)',
+        tension: 0.4,
+        pointBackgroundColor: 'rgba(125, 110, 89, 1)',
+        pointBorderWidth: 0,
+        pointRadius: 0,
       },
-      fill: true,
-      tension: 0.4, // يخلي الخط منحني Smooth
-      pointBackgroundColor: this.getCssVariableValue('--bg-brown-medium'),
-      pointBorderWidth: 0,
-      pointRadius: 0
-    }
-  ]
-};
+    ],
+  };
 
-// الإعدادات
-public lineChartOptions: ChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: { display: false } // نخفي التسمية "Revenue" فوق
-  },
-  scales: {
-    x: {
-      grid: { display: false, }, // نخفي خطوط X
-      ticks: {
-        autoSkip: false,
-        maxRotation: 0,
-        minRotation: 0
-      }
+  public lineChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { autoSkip: false, maxRotation: 0, minRotation: 0 },
+      },
+      y: {
+        beginAtZero: true,
+        grid: { display: false },
+        ticks: { display: false },
+      },
     },
-    y: {
-      beginAtZero: true,
-      grid: { display: false, }, // نخفي خطوط Y
-      ticks: { display: false } // ممكن تخفي الأرقام كمان لو مش عايزاها
-    }
-  }
-};
-
+  };
 
   getCssVariableValue(varName: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(varName)
+      .trim();
   }
 
-
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+    Chart.register(...registerables);
+  }
 
   ngOnInit() {
     this.clinicId = this.route.parent?.snapshot.paramMap.get('id');
@@ -204,14 +126,22 @@ public lineChartOptions: ChartOptions = {
   }
 
   changeRange(range: string) {
-  this.selectedRange = range;
-  if (range === 'Daily') {
-    this.totalRevenue = '3,500 SAR';
-  } else if (range === 'Weekly') {
-    this.totalRevenue = '22,000 SAR';
-  } else {
-    this.totalRevenue = '85,000 SAR';
+    this.selectedRange = range;
+    if (range === 'Daily') {
+      this.totalRevenue = '3,500 SAR';
+    } else if (range === 'Weekly') {
+      this.totalRevenue = '22,000 SAR';
+    } else {
+      this.totalRevenue = '85,000 SAR';
+    }
   }
-}
 
+  ngAfterViewInit() {
+    // Create the chart after the view is initialized
+    new Chart('lineChart', {
+      type: 'line', // Chart type: 'line' in this case
+      data: this.lineChartData,
+      options: this.lineChartOptions,
+    });
+  }
 }

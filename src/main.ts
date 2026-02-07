@@ -9,12 +9,11 @@ import {
 } from '@angular/common/http';
 import { routes } from './app/app.routes';
 
-import { importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import {
   provideTanStackQuery,
   QueryClient,
@@ -28,6 +27,10 @@ import { environment } from './environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
+
+function authInitializer(auth: AuthService) {
+  return () => auth.checkAuthOnStartup();
 }
 
 const queryClient = new QueryClient({
@@ -53,6 +56,12 @@ persistQueryClient({
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: authInitializer,
+      deps: [AuthService],
+      multi: true
+    },
     // ✅ Single provideHttpClient with BOTH interceptors
     provideHttpClient(
       withFetch(),
@@ -69,7 +78,6 @@ bootstrapApplication(AppComponent, {
       }),
     ),
     provideAnimationsAsync(),
-    provideCharts(withDefaultRegisterables()),
     provideTanStackQuery(queryClient),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideMessaging(() => getMessaging()),

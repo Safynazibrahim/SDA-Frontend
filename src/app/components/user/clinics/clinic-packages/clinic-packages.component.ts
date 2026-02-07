@@ -9,6 +9,7 @@ import { injectQuery } from '@tanstack/angular-query-experimental';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClinicService } from '../clinic.service';
 import { PaginationComponent } from '../../../shared/pagination/pagination.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-clinic-packages',
@@ -21,6 +22,7 @@ import { PaginationComponent } from '../../../shared/pagination/pagination.compo
     MatFormFieldModule,
     MatSelectModule,
     PaginationComponent,
+    FormsModule
   ],
   templateUrl: './clinic-packages.component.html',
   styleUrls: ['./clinic-packages.component.scss'],
@@ -120,4 +122,5 @@ export class ClinicPackagesComponent {
     if (feature.type === 'none') return 'PRO';
     return feature.type;
   }
+
 }

@@ -71,11 +71,70 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'doctor/:id',
+        loadComponent: () =>
+          import(
+            './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/doctor-details/doctor-details.component'
+          ).then((m) => m.DoctorDetailsComponent),
+      },
+      {
         path: 'profile',
         loadComponent: () =>
           import('./components/user/profile/profile.component').then(
             (m) => m.ProfileComponent
           ),
+      },
+      {
+        path: 'labs',
+        children: [
+          // Main system (tabs parent)
+          {
+            path: 'system',
+            loadComponent: () =>
+              import(
+                './components/user/laboratory/labs-system/labs-system.component'
+              ).then((m) => m.LabsSystemComponent),
+            children: [
+              { path: '', redirectTo: 'laboratory', pathMatch: 'full' },
+              {
+                path: 'laboratory',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/laboratory/laboratory.component'
+                  ).then((m) => m.LaboratoryComponent),
+              },
+              {
+                path: 'requests',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/requests/requests.component'
+                  ).then((m) => m.RequestsComponent),
+              },
+              {
+                path: 'orders',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/orders/orders.component'
+                  ).then((m) => m.OrdersComponent),
+              },
+              {
+                path: 'expenses',
+                loadComponent: () =>
+                  import(
+                    './components/user/laboratory/labs-system/tabs/expences/expences.component'
+                  ).then((m) => m.ExpencesComponent),
+              },
+            ],
+          },
+          // Lab Details
+          {
+            path: 'lab-details/:labId',
+            loadComponent: () =>
+              import(
+                './components/user/laboratory/labs-system/tabs/laboratory/lab-details/lab-details.component'
+              ).then((m) => m.LabDetailsComponent),
+          },
+        ],
       },
       {
         path: 'patients',
@@ -205,12 +264,31 @@ export const routes: Routes = [
                 './components/user/clinics/operator-packages/operator-packages.component'
               ).then((m) => m.OperatorPackagesComponent),
           },
+          // {
+          //   path: 'clinicPackage',
+          //   loadComponent: () =>
+          //     import(
+          //       './components/user/clinics/clinic-packages/clinic-packages.component'
+          //     ).then((m) => m.ClinicPackagesComponent),
+          // },
           {
             path: 'clinicPackage',
-            loadComponent: () =>
-              import(
-                './components/user/clinics/clinic-packages/clinic-packages.component'
-              ).then((m) => m.ClinicPackagesComponent),
+            children: [
+              {
+                path: '',
+                loadComponent: () =>
+                  import(
+                    './components/user/clinics/clinic-packages/clinic-packages.component'
+                  ).then((m) => m.ClinicPackagesComponent),
+              },
+              {
+                path: 'customize',
+                loadComponent: () =>
+                  import(
+                    './components/user/clinics/customize-clinic-package/customize-clinic-package.component'
+                  ).then((m) => m.CustomizeClinicPackageComponent),
+              },
+            ],
           },
           {
             path: ':id',
@@ -270,6 +348,19 @@ export const routes: Routes = [
                   ).then((m) => m.AssignedCasesComponent),
                 canActivate: [FeatureGuard],
                 data: { feature: 'assigned_cases' },
+              },
+              {
+                path: 'management',
+                children: [
+                  {
+                    path: 'schedule',
+                    loadComponent: () =>
+                      import(
+                        './components/user/clinics/clinic-home/clinic-home-sections/clinic-management/clinic-doctors/clinic-doctors.component'
+                      ).then((m) => m.ClinicDoctorsComponent),
+                  },
+
+                ],
               },
             ],
           },
@@ -332,12 +423,11 @@ export const routes: Routes = [
       {
         path: 'notifications',
         loadComponent: () =>
-          import('./components/user/notifications/notifications.component').then(
-            (m) => m.NotificationsComponent
-          ),
+          import(
+            './components/user/notifications/notifications.component'
+          ).then((m) => m.NotificationsComponent),
       },
     ],
   },
-
   { path: '**', redirectTo: 'home' },
 ];

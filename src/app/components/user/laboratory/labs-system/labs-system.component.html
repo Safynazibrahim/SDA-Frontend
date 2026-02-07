@@ -1,0 +1,32 @@
+<div class="container px-3">
+  <div class="row d-flex align-items-center my-5">
+    <div class="col-12 main-title d-flex align-items-center">
+      <h3 class="main-title">{{ "Laboratory" | translate }}</h3>
+      <span>
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </span>
+        <h3 style="color: var(--text-gray-head-table); display: inline-block">
+          {{ currentTitle | translate }}
+        </h3>
+    </div>
+  </div>
+
+  <div class="tabbar" role="tablist" aria-label="Patient sections">
+    <a
+      *ngFor="let t of tabs"
+      [routerLink]="t.link"
+      routerLinkActive="active"
+      #rla="routerLinkActive"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="tab"
+      role="tab"
+      [attr.aria-selected]="rla.isActive ? 'true' : 'false'"
+    >
+      {{ t.label | translate }}
+    </a>
+  </div>
+
+  <div class="my-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

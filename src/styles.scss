@@ -70,6 +70,7 @@ $SDA-theme: mat.define-light-theme(
   --bg-light-gray: #ebebeb;
   --bg-gray: #ebebeb;
   --brown-dark: #85775f;
+  --bg-brown-dark-two:#8E7E66;
   /* Brown gradient section backgrounds */
   --bg-brown-light: #d4c4a8; /* Light brown from your design */
   --bg-brown-medium: #b19e7f; /* Medium brown */
@@ -112,7 +113,7 @@ $SDA-theme: mat.define-light-theme(
   --border-light: #e8e3dd; /* Light borders */
   --border-medium: #d4c4a8; /* Medium borders */
   --border-dark: #b19e7f; /* Dark borders */
-
+  --cardComplete: #08d7082b;
   /* Interactive elements */
   --hover-bg: #f0ede8; /* Hover background */
   --hover-border: #c7b59f; /* Hover border */
@@ -159,11 +160,13 @@ $SDA-theme: mat.define-light-theme(
   --text-light-gray-placeholder: #999999;
   --number-pagination: #999;
   --text-gray-sidebar: #bfbfbf;
+  --cardComplete: #ffffff;
   /* Brown sections in dark mode */
   --brown-dark: #9d8a6f;
   --bg-brown-light: #4a3f32; /* Dark brown equivalent */
   --bg-brown-medium: #d1b894; /* Medium dark brown */
   --bg-brown-dark: #8e7e66; /* Darkest brown */
+  --bg-brown-dark-two: #A79376;
   --bg-brown-gradient: linear-gradient(180deg, #d1b894 0%, #6b5e4c 100%);
   --bg-sec-brown-gradient: linear-gradient(90deg, #d1b894 0%, #6b5e4c 100%);
   /* Text Colors for dark mode */
@@ -453,7 +456,7 @@ label.required::after {
 
 .form-input {
   width: 100%;
-  padding: 16px 20px;
+  padding: 14px 18px;
   border: 2px solid var(--border-form-field);
   border-radius: 12px;
   font-size: 16px;
@@ -574,6 +577,22 @@ label.required::after {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+
+////// form-select
+.select {
+  width: 100%;
+  padding: 14px 0px;
+  border: 2px solid var(--border-form-field);
+  border-radius: 12px;
+  color: var(--text-gray);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+.select:focus {
+  outline: none !important;
+}
+
 ///////dropdown
 .dropdown-toggle:focus {
   border: none !important;
@@ -637,7 +656,7 @@ input[type="radio"]:checked::after {
 ////// responsive on mobile
 @media (max-width: 767.98px) {
   .signin-button {
-    padding: 4px 8px;
+    padding: 8px;
     font-size: 12px;
     border-radius: 8px;
   }

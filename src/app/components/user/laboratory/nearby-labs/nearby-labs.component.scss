@@ -1,0 +1,65 @@
+.title {
+  color: #565656;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+// design of notification-cards
+.lab-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.lab-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-gray-head-table);
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.lab-location {
+  margin: 4px 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-gray);
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--text-light-gray);
+  margin-top: 16px;
+}
+
+/////// responsive on tablets
+@media (min-width: 768px) and (max-width: 1024px) {
+  .title {
+    font-size: 20px;
+  }
+  .lab-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+////// responsive on mobile
+@media (max-width: 767.98px) {
+  .title {
+    font-size: 18px;
+  }
+  .lab-name,
+  .lab-location {
+    font-size: 0.9rem;
+  }
+  .lab-img {
+    width: 40px;
+    height: 40px;
+  }
+}

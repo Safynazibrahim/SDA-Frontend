@@ -5,40 +5,54 @@
       <li (click)="toggleSidebar()">
         <mat-icon>menu</mat-icon>
       </li>
-      <li routerLink="home" routerLinkActive="active">
-        <mat-icon matTooltip="{{ 'HOME' | translate }}" >home</mat-icon>
+      <li routerLink="home" routerLinkActive="active" queryParamsHandling="merge">
+        <mat-icon matTooltip="{{ 'HOME' | translate }}">home</mat-icon>
         <span *ngIf="!isClosed">{{ "HOME" | translate }}</span>
       </li>
-      <li routerLink="appointments" routerLinkActive="active">
+      <li routerLink="appointments" routerLinkActive="active" queryParamsHandling="merge">
         <mat-icon matTooltip="{{ 'appointments' | translate }}">event</mat-icon>
         <span *ngIf="!isClosed">{{ "appointments" | translate }}</span>
       </li>
-      <li routerLink="packages" routerLinkActive="active">
+      <li routerLink="packages" routerLinkActive="active" queryParamsHandling="merge">
         <mat-icon matTooltip="{{ 'packages' | translate }}">category</mat-icon>
         <span *ngIf="!isClosed">{{ "packages" | translate }}</span>
       </li>
-      <li routerLink="inventory" routerLinkActive="active">
+      <li routerLink="inventory" routerLinkActive="active" queryParamsHandling="merge">
         <mat-icon matTooltip="{{ 'inventory' | translate }}">inventory</mat-icon>
         <span *ngIf="!isClosed">{{ "inventory" | translate }}</span>
       </li>
 
-      <li
-  routerLink="assigned-cases"
-  routerLinkActive="active"
-  [class.disabled-feature]="!featureService.hasFeature('assigned_cases')"
->
-  <mat-icon matTooltip="{{ 'assigned_cases' | translate }}">person</mat-icon>
-  <span *ngIf="!isClosed">{{ "assigned_cases" | translate }}</span>
+      <li routerLink="assigned-cases" routerLinkActive="active" queryParamsHandling="merge"
+        [class.disabled-feature]="!featureService.hasFeature('assigned_cases')">
+        <mat-icon matTooltip="{{ 'assigned_cases' | translate }}">person</mat-icon>
+        <span *ngIf="!isClosed">{{ "assigned_cases" | translate }}</span>
+        <span *ngIf="!featureService.hasFeature('assigned_cases')" class="pro-badge">
+          <mat-icon>lock</mat-icon> pro
+        </span>
+      </li>
+      <li routerLink="management/schedule" routerLinkActive="active" queryParamsHandling="merge">
+        <mat-icon matTooltip="{{'Management' | translate}}">manage_accounts</mat-icon>
+        <span *ngIf="!isClosed">{{"Schedule Management" | translate}}</span>
+      </li>
+      <!-- <li (click)="toggleManagement()">
+        <mat-icon matTooltip="Management">manage_accounts</mat-icon>
+        <span *ngIf="!isClosed">{{"Management" | translate}}</span>
+        <mat-icon class="arrow" *ngIf="!isClosed">
+          {{ managementOpen ? "expand_less" : "expand_more" }}
+        </mat-icon>
+      </li>
 
-  <!-- ✅ Badge PRO في الزاوية -->
-  <span
-    *ngIf="!featureService.hasFeature('assigned_cases')"
-    class="pro-badge"
-  >
-    <mat-icon>lock</mat-icon> pro
-  </span>
-</li>
+      <ul class="submenu" *ngIf="managementOpen && !isClosed">
+         <li routerLink="management/schedule" routerLinkActive="active" queryParamsHandling="merge">
+          <mat-icon>schedule</mat-icon>
+          <span>Schedule</span>
+        </li> 
 
+        <li routerLink="management/clinic-doctors" routerLinkActive="active" queryParamsHandling="merge">
+          <mat-icon>groups</mat-icon>
+          <span>{{'Doctors' | translate}}</span>
+        </li>
+      </ul> -->
 
       <li (click)="backToClinics()">
         <mat-icon>logout</mat-icon>

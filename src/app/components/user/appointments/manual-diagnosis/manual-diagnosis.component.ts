@@ -41,11 +41,11 @@ export class ManualDiagnosisComponent implements OnInit{
   diagnosisName = '';
   treatmentPlan = '';
   instructionBetweenVisits = '';
-  treatmentProgress = 50;
+  treatmentProgress = 0;
   progressOffset: string = '';
   isDropdownOpen = false;
   openIndex: number | null = null;
-  selectedMedication = '';
+  selectedMedication = ''; 
   clinicId: string | null = null;
   availableSlots: any = {}; 
 hasSlots: boolean = false; 
@@ -113,7 +113,7 @@ appointmentDate:any
 
 
   ngOnInit() {
-    this.calculateProgress();
+    this.onProgressChange(this.treatmentProgress);
     this.fromPage = this.route.snapshot.queryParamMap.get('from');
     this.appointmentDate = this.route.snapshot.queryParamMap.get('date');
 
@@ -121,44 +121,109 @@ appointmentDate:any
     if (this.fromPage === 'appointments') this.appointmentId = id;
     else if (this.fromPage === 'patient-profile') this.patientId = id;
 
-   
+    
     this.clinicId = this.startCaseState.getClinicId();
     this.caseId = this.assignCaseState.getCaseData()?.caseId || null;
+    this.loadCaseFromApi();
   }
-  sendManualDiagnosis() {
-    const startCaseData = this.startCaseState.getStartCaseData();
-    if (!startCaseData) {
-      this.snackBar.open(' Missing start case data', 'Close', {
-        duration: 3000,
-      });
-      return;
-    }
+  onProgressChange(value: number) {
+  if (value < 0) value = 0;
+  if (value > 100) value = 100;
 
-    const payload = {
-      chiefComplaint: startCaseData.chiefComplaint,
-      clinicalInvestigation: startCaseData.clinicalInvestigation,
-      diagnosis: this.diagnosisName,
-      treatmentPlan: this.treatmentPlan,
-      instructionsBetweenVisits: this.instructionBetweenVisits,
-      medications: this.medications.filter(
-        (m) => m.dosage || m.frequency || m.duration
-      ),
-    };
-    if(this.caseId== null){
-      this.caseId = this.appointmentId
-    }
-
-    this._AppointmentsService.startCase(payload,this.caseId).subscribe({
-      next: (res) => {
-          this.openNextVisitModal();
-      },
-      error: (err) => {
-        this.snackBar.open(err.message, 'Close', {
-          duration: 3000,
-        });
-      },
+  this.treatmentProgress = value;
+  this.calculateProgress();
+}
+loadCaseFromApi() {
+  this._AppointmentsService.getCaseById(this.appointmentId)
+    .subscribe(res => {
+      this.onProgressChange(res.progress);
+      this.diagnosisName=res.diagnosis;
+      this.treatmentPlan=res.treatmentPlan;
+      this.instructionBetweenVisits=res.instructionsBetweenVisits;
     });
+}
+ sendManualDiagnosis() {
+  const startCaseData = this.startCaseState.getStartCaseData();
+
+  if (!startCaseData) {
+    this.snackBar.open('Missing start case data', 'Close', { duration: 3000 });
+    return;
   }
+
+  const formData = new FormData();
+
+  // ===============================
+  // 🟢 Images
+  // ===============================
+  if (startCaseData.images?.length) {
+  startCaseData.images.forEach((file: File) => {
+    formData.append('images', file); // ✅ بدون []
+  });
+}
+
+
+  // ===============================
+  // 🟢 Primitive fields
+  // ===============================
+  formData.append('diagnosis', this.diagnosisName);
+  formData.append('treatmentPlan', this.treatmentPlan);
+  formData.append(
+    'instructionsBetweenVisits',
+    this.instructionBetweenVisits
+  );
+  formData.append('progress', String(this.treatmentProgress));
+
+  // ===============================
+  // 🟢 Complex objects (JSON)
+  // ===============================
+  formData.append(
+    'chiefComplaint',
+    JSON.stringify(startCaseData.chiefComplaint)
+  );
+
+  formData.append(
+    'extraoralExamination',
+    JSON.stringify(startCaseData.extraoralExamination)
+  );
+
+  formData.append(
+    'periodontalExamination',
+    JSON.stringify(startCaseData.periodontalExamination)
+  );
+
+  formData.append(
+    'dentalOcclusion',
+    JSON.stringify(startCaseData.dentalOcclusion)
+  );
+
+  formData.append(
+    'diagnosisRisk',
+    JSON.stringify(startCaseData.diagnosisRisk)
+  );
+
+  // ===============================
+  // 🟢 Medications
+  // ===============================
+  const meds = this.medications
+    .filter(m => m.dosage || m.frequency || m.duration)
+    .map(m => ({
+      name: m.name,
+      dosage: Number(m.dosage),
+      frequency: Number(m.frequency),
+      duration: Number(m.duration),
+    }));
+
+  formData.append('medications', JSON.stringify(meds));
+
+  const caseId = this.caseId ?? this.appointmentId;
+
+  this._AppointmentsService.startCase(formData, caseId).subscribe({
+    next: () => this.openNextVisitModal(),
+    error: err =>
+      this.snackBar.open(err.message || 'Error', 'Close', { duration: 3000 }),
+  });
+}
+
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
@@ -239,10 +304,12 @@ castToDate(value: any): Date | null {
     });
     return;
   }
-
+  console.log(this.appointmentId);
+  
+  const caseId = this.caseId ?? this.appointmentId;
   const payload = {
     clinicId: this.clinicId,
-    caseId: this.caseId,
+    caseId: caseId,
     date: this.selectedDate,
     startTime: this.selectedSlot.startTime,
   };
@@ -273,9 +340,10 @@ selectSlot(slot: any, dateKey: unknown) {
   this.selectedSlot = slot;
   this.selectedDate = String(dateKey);
   this.appointmentDate=this.selectedDate
+  const caseId = this.caseId ?? this.appointmentId;
   const payload = {
     clinicId: this.clinicId,
-    caseId: this.caseId,
+    caseId: caseId,
     date: this.selectedDate,
     startTime: this.selectedSlot.startTime,
   };
@@ -303,6 +371,28 @@ isSelectedSlot(slot: any, dateKey: unknown): boolean {
     this.selectedSlot === slot &&
     this.selectedDate === String(dateKey)
   );
+}
+editStatusCase(){
+  const payload = {
+    status: 'completed'
+  };
+  const caseId = this.caseId ?? this.appointmentId;
+  this._AppointmentsService.editCase(caseId,payload).subscribe({
+    next: (res) => {
+      this.closeNextVisitModal();
+       this.startCaseState.clearStartCaseData();
+      this.startCaseState.clearClinicId();
+      this.assignCaseState.clearCase();
+        this.router.navigate(['/dashboard/appointments'],{
+          queryParams: {date: this.appointmentDate}
+        });
+    },
+    error: (err) => {
+      this.snackBar.open(err.message, 'Close', {
+        duration: 3000,
+      });
+    },
+  });
 }
   // ngOnDestroy() {
   //   this.startCaseState.clearStartCaseData();

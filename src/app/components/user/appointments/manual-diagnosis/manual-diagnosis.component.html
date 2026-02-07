@@ -89,6 +89,14 @@
       <div class="progress-text">{{ treatmentProgress }}%</div>
     </div>
     <p class="progress-label">{{ "Treatment Progress" | translate }}</p>
+     <input
+  type="range"
+  min="0"
+  max="100"
+  [(ngModel)]="treatmentProgress"
+  (input)="onProgressChange($any($event.target).value)"
+/>
+
   </div>
   <div class="row mt-2">
     <div class="col-md-6 mb-3">
@@ -269,7 +277,7 @@
     <!-- Buttons -->
     <div class="next-visit-btns mt-3 mb-3">
   <button class="btn cancel-btn" (click)="closeNextVisitModal()">{{"Cancel" | translate}}</button>
-  <button class="btn brown-btn" (click)="completeNextVisit()">{{"Complete" | translate}}</button>
+  <button class="btn brown-btn" (click)="editStatusCase()">{{"Complete" | translate}}</button>
   <button class="btn main-btn" (click)="showAvailableSlots()">{{"Show Slots" | translate}}</button>
 </div>
 
