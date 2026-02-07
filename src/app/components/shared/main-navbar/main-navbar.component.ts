@@ -5,6 +5,7 @@ import { PLATFORM_ID } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { Theme, ThemeService } from '../../core/services/theme.service';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NotificationStateService } from '../../core/services/notification-state.service';
 
 @Component({
   selector: 'app-main-navbar',
@@ -17,6 +18,7 @@ export class MainNavbarComponent implements OnInit {
   theme$: Observable<Theme>;
 
   constructor(
+    public notificationState: NotificationStateService,
     public translate: TranslateService,
     private themeService: ThemeService,
     private router: Router,

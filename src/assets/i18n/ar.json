@@ -596,5 +596,8 @@
   "Feature": "ميزة",
   "Features": "ميزات",
   "Selected": "مختارة",
-  "sender" : "مرسل من"
+  "sender" : "مرسل من",
+  "Mark_As_Read" : "تمييز كمقروء",
+  "Logout" : "تسجيل الخروج",
+  "No_Notifications": "لا يوجد إشعارات حتى الآن"
 }

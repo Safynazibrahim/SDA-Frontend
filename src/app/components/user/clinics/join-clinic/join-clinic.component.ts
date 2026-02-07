@@ -181,7 +181,7 @@ export class JoinClinicComponent implements OnInit {
       const payload = { type: role };
       this.clinicService.joinClinic(clinicId, payload).subscribe(
         (res) => {
-          this.SnackBar.open(res.message, 'Close', { duration: 3000 });
+          this.SnackBar.open('Join Clinic Sent Successfully', 'Close', { duration: 3000 });
         },
         (error) => {
           console.log(error);

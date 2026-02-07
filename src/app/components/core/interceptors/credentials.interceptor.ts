@@ -52,3 +52,8 @@ export const credentialsInterceptor: HttpInterceptorFn = (req, next) => {
     })
   );
 };
+
+export const resetAuthInterceptorState = () => {
+  isRefreshing = false;
+  refreshCompleted$.next();
+};

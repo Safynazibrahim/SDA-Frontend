@@ -1,86 +1,116 @@
-  .bg-body-tertiary {
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 1000;
-    height: 107px;
-    background: var(--bg-primary) !important;
-    box-shadow: var(--shadow-md);
-    border-bottom: 1px solid var(--border-light);
+.bg-body-tertiary {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  height: 107px;
+  background: var(--bg-primary) !important;
+  box-shadow: var(--shadow-md);
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+  padding: 10px 45px;
+  font-family: "IBM Plex Sans";
+  .itemsLinks {
+    padding: 0px 30px;
+  }
+  li a {
+    font-size: 24px;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 48px;
+    color: var(--text-gray-home-about);
+  }
+  .active {
+    font-weight: bold;
+    color: var(--bg-brown-medium);
+    border-bottom: 3px solid var(--bg-brown-medium);
+  }
+  .nav-link svg,
+  .lang-color {
+    color: #b19e7f;
+  }
+  // .right-section-nav {
+  //   padding: 0px 10px;
+  // }
+  .sun-icon,
+  .moon-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+  }
+  .sun-icon {
+    animation: rotate 20s linear infinite;
+    color: var(--bg-brown-medium);
+  }
+  .moon-icon {
+    animation: pulse 2s ease-in-out infinite;
+    color: var(--bg-brown-medium);
+  }
+  .signInBtn {
+    background: var(--bg-primary);
+    padding: 0px 43px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--text-secondary);
     transition: all 0.3s ease;
-    padding: 10px 45px;
-    font-family: "IBM Plex Sans";
-    .itemsLinks {
-      padding: 0px 30px;
-    }
-    li a {
-      font-size: 24px;
-      cursor: pointer;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 48px;
-      color: var(--text-gray-home-about);
-    }
-    .active {
-      font-weight: bold;
-      color: var(--bg-brown-medium);
-      border-bottom: 3px solid var(--bg-brown-medium);
-    }
-    .nav-link svg , .lang-color{
-      color: #B19E7F;
-    }
-    // .right-section-nav {
-    //   padding: 0px 10px;
-    // }
-    .sun-icon,
-    .moon-icon {
-      width: 24px;
-      height: 24px;
-      position: relative;
-    }
-    .sun-icon {
-      animation: rotate 20s linear infinite;
-      color: var(--bg-brown-medium);
-    }
-    .moon-icon {
-      animation: pulse 2s ease-in-out infinite;
-      color: var(--bg-brown-medium);
-    }
-    .signInBtn {
-      background: var(--bg-primary);
-      padding: 0px 43px;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      color: var(--text-secondary);
-      transition: all 0.3s ease;
-      position: relative;
+    position: relative;
 
-      &::before {
-        content: "";
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
-        border-radius: 6px;
-        background: var(--bg-brown-gradient);
-        z-index: -1;
-        transition: background 0.3s ease;
-      }
-    }
-
-    .JoinUsBtn {
-      padding: 2px 20px;
-      color: var(--text-on-brown);
-      border-radius: 8px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 6px;
       background: var(--bg-brown-gradient);
-      border: 1px solid transparent;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      z-index: -1;
+      transition: background 0.3s ease;
     }
   }
-  @media (max-width: 992px) {
+
+  .JoinUsBtn {
+    padding: 2px 20px;
+    color: var(--text-on-brown);
+    border-radius: 8px;
+    background: var(--bg-brown-gradient);
+    border: 1px solid transparent;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+}
+.notification-icon {
+  position: relative;
+  padding: 0;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* 🔴 badge صغير وناعم */
+.notification-badge {
+  position: absolute;
+  top: 0px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #dc3545; // bootstrap danger
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px #fff; // outline أبيض شيك
+}
+
+@media (max-width: 992px) {
   .navbar-collapse {
     background: var(--bg-primary);
     border-top: 1px solid var(--border-light);
@@ -135,38 +165,39 @@
   }
 
   .navbar-toggler-icon {
-    filter: invert(40%) sepia(15%) saturate(500%) hue-rotate(10deg) brightness(90%);
+    filter: invert(40%) sepia(15%) saturate(500%) hue-rotate(10deg)
+      brightness(90%);
   }
-  .dropdown{
-        padding-left: 30px;
-        .dropdown-item{
-          padding-left: 60px;
-        }
-      }
+  .dropdown {
+    padding-left: 30px;
+    .dropdown-item {
+      padding-left: 60px;
+    }
+  }
 }
 
-  @media (max-width: 576px) {
-    .bg-body-tertiary {
-      height: fit-content !important;
-      padding: 0px !important;
+@media (max-width: 576px) {
+  .bg-body-tertiary {
+    height: fit-content !important;
+    padding: 0px !important;
+  }
+  @media (max-width: 780px) {
+    .dropdown {
+      padding-left: 30px;
+      .dropdown-item {
+        padding-left: 60px;
+      }
     }
-    @media (max-width: 780px){
-      .dropdown{
-        padding-left: 30px;
-        .dropdown-item{
-          padding-left: 60px;
-        }
-      }
-      .responsive{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: row;
-      }
+    .responsive {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
     }
   }
-  
-  /* ✅ إصلاح الاتجاه في العربي */
+}
+
+/* ✅ إصلاح الاتجاه في العربي */
 html[dir="rtl"] {
   .navbar-collapse {
     text-align: right !important;

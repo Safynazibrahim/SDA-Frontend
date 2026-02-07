@@ -103,9 +103,9 @@
 .sidebar-body {
   flex: 1 1 auto;
   overflow-y: auto;
-  display: block;       
+  display: block;
   padding-right: 6px;
-  scrollbar-width: thin; 
+  scrollbar-width: thin;
   scrollbar-color: var(--bg-brown-medium) transparent; /* Firefox */
   .card {
     background-color: var(--bg-white-secondary);
@@ -122,12 +122,12 @@
     }
   }
   .notes {
-    h3{
+    h3 {
       font-size: 1.4rem;
       font-weight: 600;
       color: var(--text-gray-head-table);
     }
-    p{
+    p {
       font-size: 1.2rem;
       font-weight: 400;
       color: var(--text-gray-home-about);
@@ -141,8 +141,8 @@
   .details-btn.reject {
     width: 20%;
     background: #fff !important;
-    border: 1px solid #EB4335;
-    color: #EB4335;
+    border: 1px solid #eb4335;
+    color: #eb4335;
   }
   .details-btn.refer {
     width: 60%;
@@ -160,6 +160,45 @@
   }
 }
 
+.notification-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-icon {
+    color: #9aa0a6; // نفس لون الجرس في navbar
+    font-size: 24px;
+  }
+}
+.notification-icon-circle.unread mat-icon {
+  color: var(--bg-brown-dark); // نفس لون الجرس في navbar
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-main {
+  flex: 1;
+}
+
+.mark-read {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.empty-notifications {
+  color: #9e9e9e;
+  font-size: 26px;
+}
+
 /////// responsive on tablets
 @media (min-width: 768px) and (max-width: 1024px) {
   .doctor-img {
@@ -172,6 +211,28 @@
     height: calc(100vh - 107px);
     border-left: none;
   }
+  .header {
+    flex-direction: row; // يفضلوا في نفس السطر
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .notification-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1; // ياخد كل المساحة
+  }
+
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mark-read {
+    margin-left: auto; // 👈 أهم سطر
+    align-self: flex-start;
+  }
 }
 
 ////// responsive on mobile
@@ -181,13 +242,32 @@
     align-items: center;
   }
 
+  .header {
+    flex-direction: row; // يفضلوا في نفس السطر
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .notification-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1; // ياخد كل المساحة
+  }
+
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mark-read {
+    margin-left: auto; // 👈 أهم سطر
+    align-self: flex-start;
+  }
+
   .doctor-name,
   .doctor-message {
     font-size: 0.9rem;
-  }
-  .doctor-img {
-    width: 40px;
-    height: 40px;
   }
   .visit-date {
     margin: 0px;
@@ -195,7 +275,11 @@
   }
 
   .notification-date {
-    font-size: 0.9rem;
+    font-size: 0.6rem;
+  }
+
+  .empty-notifications {
+    font-size: 16px;
   }
 
   .details-btn {
@@ -213,7 +297,7 @@
   }
   .sidebar-footer {
     display: flex;
-    gap: 10px;          
+    gap: 10px;
     width: 100%;
   }
 }

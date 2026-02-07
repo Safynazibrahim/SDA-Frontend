@@ -4,7 +4,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router, RouterLink } from '@angular/router';
@@ -26,10 +31,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     RouterLink,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-
   showPassword = false;
   loginForm!: FormGroup;
 
@@ -37,7 +41,7 @@ export class LoginComponent implements OnInit {
     private _AuthService: AuthService,
     private fb: FormBuilder,
     private _MatSnackBar: MatSnackBar,
-    private _Router: Router
+    private _Router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -48,10 +52,10 @@ export class LoginComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/)
-        ]
+          Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
+        ],
       ],
-       rememberMe: [false]
+      rememberMe: [false],
     });
   }
 
@@ -59,32 +63,29 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
- submitForm() {
-  if (this.loginForm.invalid) return;
+  submitForm() {
+    if (this.loginForm.invalid) return;
 
-  const loginData = {
-    email: this.loginForm.get('email')?.value,
-    password: this.loginForm.get('password')?.value,
-  };
+    const loginData = {
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('password')?.value,
+    };
 
-  this._AuthService.login(loginData).subscribe({
-  next: () => {
-    this._AuthService.setAuthStatus(true); 
-    this._MatSnackBar.open('Logged in successfully', 'Close', {
-      duration: 3000,
-      panelClass: ['snackbar-success']
-    });
-    this._Router.navigate(['/dashboard']);
-  },
-  error: (err: any) => {
-    this._MatSnackBar.open(err.error.message || 'Login failed', 'Close', {
-      duration: 3000,
-      panelClass: ['snackbar-error']
+    this._AuthService.login(loginData).subscribe({
+      next: () => {
+        this._AuthService.setAuthStatus(true);
+        this._MatSnackBar.open('Logged in successfully', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-success'],
+        });
+        this._Router.navigate(['/dashboard']);
+      },
+      error: (err: any) => {
+        this._MatSnackBar.open(err.error.message || 'Login failed', 'Close', {
+          duration: 3000,
+          panelClass: ['snackbar-error'],
+        });
+      },
     });
   }
-});
-
-}
-
-
 }

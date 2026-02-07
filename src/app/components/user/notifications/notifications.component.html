@@ -1,4 +1,4 @@
-<div class="container my-3">
+<div class="container my-3 pb-2">
   <div class="main-title d-flex align-items-center gap-2">
     <h3>
       {{ "HOME" | translate }}
@@ -10,35 +10,68 @@
       {{ "Notifications" | translate }}
     </h2>
   </div>
-  <div class="my-3 mx-4" *ngFor="let item of [1, 2]">
-    <div class="d-flex flex-column gap-2 justify-content-between">
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-2">
-          <img src="../../../../../assets/media/medi.png" class="doctor-img" />
-          <div>
-            <h3 class="doctor-name">{{ "doctorName" }}</h3>
-            <p class="doctor-message">{{ "message" }}</p>
+  <div class="my-5 mx-4">
+    <div
+      *ngIf="notifications.length === 0"
+      class="empty-notifications d-flex flex-column align-items-center my-5"
+    >
+      <mat-icon class="empty-icon">notifications_off</mat-icon>
+      <p class="empty-text">
+        {{ "No_Notifications" | translate }}
+      </p>
+    </div>
+
+    <div *ngFor="let notification of notifications">
+      <div class="d-flex flex-column gap-2 justify-content-between">
+        <div class="header d-flex align-items-center">
+          <div class="notification-main d-flex align-items-center gap-2">
+            <div
+              [class.unread]="!notification.isRead"
+              class="notification-icon-circle"
+            >
+              <mat-icon>notifications</mat-icon>
+            </div>
+            <div class="text-wrapper">
+              <h3 class="doctor-name">{{ notification.subject }}</h3>
+              <p class="doctor-message">{{ notification.message }}</p>
+            </div>
+          </div>
+          <div
+            *ngIf="!notification.isRead"
+            class="mark-read d-flex align-items-center gap-1"
+            (click)="markAsRead(notification)"
+          >
+            <mat-icon style="color: #198f51">check</mat-icon>
+            <span class="notification-date">{{
+              "Mark_As_Read" | translate
+            }}</span>
           </div>
         </div>
-        <div>
-          <span class="notification-date">18/12/2025</span>
+        <div class="d-flex align-items-center mx-5">
+          <p class="visit-date">
+            <mat-icon>calendar_month</mat-icon>
+            {{ "Created Date" | translate }} : <span>12/12/2026</span>
+          </p>
         </div>
-      </div>
-      <div class="d-flex align-items-center mx-5">
-        <p class="visit-date">
-          <mat-icon>calendar_month</mat-icon>
-          {{ "date_visit" | translate }} : <span>12/12/2026</span>
-        </p>
-      </div>
-      <div class="d-flex mx-5" (click)="openDetails()">
+        <!-- <div class="d-flex mx-5" (click)="openDetails()">
         <button class="details-btn">
           {{ "view_details" | translate }}
         </button>
+      </div> -->
       </div>
+      <div class="divider"></div>
     </div>
-
-    <div class="divider"></div>
+    <div class="my-5" *ngIf="notifications">
+      <app-pagination
+        [totalItems]="total"
+        [pageSize]="limit()"
+        [currentPage]="CurrentPage()"
+        (pageChange)="onPageChange($event)"
+      >
+      </app-pagination>
+    </div>
   </div>
+
   <div class="appointment-details-sidebar" *ngIf="sideBar">
     <div
       class="sidebar-header d-flex justify-content-between align-items-center"
@@ -67,8 +100,7 @@
           <p class="doctor-message">{{ "message" }}</p>
         </div>
       </div>
-      <div
-        class="card col-12 my-2">
+      <div class="card col-12 my-2">
         <div class="d-flex align-items-center justify-content-start my-1">
           <mat-icon>calendar_today</mat-icon>
           <span>12/12/2024</span>
@@ -76,29 +108,43 @@
         <div class="my-1">
           <p>
             {{ "diagnoses" | translate }}:
-            <span class="fw-bold">Start root Start root Start root Start root Start root</span>
+            <span class="fw-bold"
+              >Start root Start root Start root Start root Start root</span
+            >
           </p>
         </div>
       </div>
       <div class="notes">
-        <h3>
-            Notes
-        </h3>
+        <h3>Notes</h3>
         <p>
-             3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery3 days for recovery
+          3 days for recovery3 days for recovery3 days for recovery3 days for
+          recovery3 days for recovery3 days for recovery3 days for recovery3
+          days for recovery3 days for recovery3 days for recovery3 days for
+          recovery3 days for recovery3 days for recovery3 days for recovery3
+          days for recovery3 days for recovery3 days for recovery3 days for
+          recovery3 days for recovery3 days for recovery3 days for recovery3
+          days for recovery3 days for recovery3 days for recovery3 days for
+          recovery3 days for recovery3 days for recovery3 days for recovery3
+          days for recovery3 days for recovery3 days for recovery3 days for
+          recovery3 days for recovery3 days for recovery3 days for recovery3
+          days for recovery3 days for recovery3 days for recovery3 days for
+          recovery3 days for recovery3 days for recovery3 days for recovery3
+          days for recovery3 days for recovery
         </p>
       </div>
     </div>
-    <div class="sidebar-footer my-3 d-flex align-items-center justify-content-between">
-        <button class="details-btn save">
-          {{ "accept" | translate }}
-        </button>
-        <button class="details-btn cancel">
-          {{ "reject" | translate }}
-        </button>
-        <button class="details-btn refer">
-          {{ "refer_another_doc" | translate }}
-        </button>
+    <div
+      class="sidebar-footer my-3 d-flex align-items-center justify-content-between"
+    >
+      <button class="details-btn save">
+        {{ "accept" | translate }}
+      </button>
+      <button class="details-btn cancel">
+        {{ "reject" | translate }}
+      </button>
+      <button class="details-btn refer">
+        {{ "refer_another_doc" | translate }}
+      </button>
     </div>
   </div>
 </div>
