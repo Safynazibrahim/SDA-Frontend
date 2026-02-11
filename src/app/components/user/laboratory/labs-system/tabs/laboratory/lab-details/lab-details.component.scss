@@ -118,12 +118,13 @@
   border: 1px solid var(--bg-brown-dark);
   border-radius: 6px;
   background: var(--bg-white);
-  color: var(--text-primary);
+  color: var(--text-gray-head-table);
   cursor: pointer;
 }
 .segment-card.active {
   border: 2px solid var(--bg-brown-dark);
   background: var(--bg-form-field);
+  color: #000;
 }
 
 .details-btn {
