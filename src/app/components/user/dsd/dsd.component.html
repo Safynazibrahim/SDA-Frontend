@@ -1,0 +1,442 @@
+<div class="container">
+  <!-- Title -->
+  <div class="main-title text-center mt-2">
+    <h3 class="main-title">{{ "DSD" | translate }}</h3>
+  </div>
+
+  <!-- Notes -->
+  <div>
+    <h4 class="note">{{ "Notes" | translate }}</h4>
+    <div class="note-card">
+      <ul>
+        <li>{{ "face-close" | translate }}</li>
+        <li>{{ "lightin-good" | translate }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Cards Grid ── -->
+  <div class="row align-items-stretch">
+    <!-- Loop over all 6 profile cards -->
+    <!-- Card 0: Lateral Profile -->
+    <div
+      class="card-container my-3 d-flex gap-3 flex-column justify-content-between col-12 col-sm-6 col-lg-4"
+    >
+      <h4>{{ "lateral-profile" | translate }}</h4>
+
+      <!-- Media wrapper: avatar / video / image stacked -->
+      <div class="card-profile">
+        <!-- Placeholder shown when idle -->
+        <img
+          *ngIf="profiles[0].mode === 'idle'"
+          src="../../../../assets/media/lateral.jpg"
+          alt="Lateral Profile"
+          class="placeholder-img"
+        />
+
+        <!-- VIDEO: shown when camera is on -->
+        <video
+          #video0
+          *ngIf="profiles[0].mode === 'camera'"
+          autoplay
+          muted
+          playsinline
+          class="media-el"
+        ></video>
+
+        <!-- IMAGE: shown after upload -->
+        <img
+          #img0
+          *ngIf="profiles[0].mode === 'image'"
+          [src]="profiles[0].imageUrl"
+          alt="Lateral Profile"
+          class="media-el"
+          crossorigin="anonymous"
+        />
+
+        <!-- CANVAS: always on top when not idle -->
+        <canvas
+          #canvas0
+          *ngIf="profiles[0].mode !== 'idle'"
+          class="canvas-overlay"
+        ></canvas>
+
+        <!-- Processing spinner -->
+        <div *ngIf="profiles[0].processing" class="processing-overlay">
+          <span>⏳</span>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between gap-2">
+        <button class="signin-button" (click)="onDeviceImage(0)">
+          {{ "device-image" | translate }}
+        </button>
+        <button class="signin-button" (click)="onLiveCamera(0)">
+          {{
+            profiles[0].mode === "camera"
+              ? ("stop-camera" | translate)
+              : ("live-camera" | translate)
+          }}
+        </button>
+      </div>
+
+      <!-- Reset button — only shown when something is active -->
+      <button
+        *ngIf="profiles[0].mode !== 'idle'"
+        class="reset-btn"
+        (click)="resetCard(0)"
+      >
+        ↺ {{ "reset" | translate }}
+      </button>
+
+      <!-- Hidden file input -->
+      <input
+        #file0
+        type="file"
+        accept="image/*"
+        class="d-none"
+        (change)="onFileSelected($event, 0)"
+      />
+
+      <p>{{ "lateral-profile-desc" | translate }}</p>
+    </div>
+
+    <!-- Card 1: Facial Profile -->
+    <div
+      class="card-container my-3 d-flex gap-3 flex-column justify-content-between col-12 col-sm-6 col-lg-4"
+    >
+      <h4>{{ "facial-profile" | translate }}</h4>
+      <div class="card-profile">
+        <img
+          *ngIf="profiles[1].mode === 'idle'"
+          src="../../../../assets/media/facial.jpg"
+          alt="Facial Profile"
+          class="placeholder-img"
+        />
+        <video
+          #video1
+          *ngIf="profiles[1].mode === 'camera'"
+          autoplay
+          muted
+          playsinline
+          class="media-el"
+        ></video>
+        <img
+          #img1
+          *ngIf="profiles[1].mode === 'image'"
+          [src]="profiles[1].imageUrl"
+          alt="Facial Profile"
+          class="media-el"
+          crossorigin="anonymous"
+        />
+        <canvas
+          #canvas1
+          *ngIf="profiles[1].mode !== 'idle'"
+          class="canvas-overlay"
+        ></canvas>
+        <div *ngIf="profiles[1].processing" class="processing-overlay">
+          <span>⏳</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between gap-2">
+        <button class="signin-button" (click)="onDeviceImage(1)">
+          {{ "device-image" | translate }}
+        </button>
+        <button class="signin-button" (click)="onLiveCamera(1)">
+          {{
+            profiles[1].mode === "camera"
+              ? ("stop-camera" | translate)
+              : ("live-camera" | translate)
+          }}
+        </button>
+      </div>
+      <button
+        *ngIf="profiles[1].mode !== 'idle'"
+        class="reset-btn"
+        (click)="resetCard(1)"
+      >
+        ↺ {{ "reset" | translate }}
+      </button>
+      <input
+        #file1
+        type="file"
+        accept="image/*"
+        class="d-none"
+        (change)="onFileSelected($event, 1)"
+      />
+      <p>{{ "facial-profile-desc" | translate }}</p>
+    </div>
+
+    <!-- Card 2: Smile Profile -->
+    <div
+      class="card-container my-3 d-flex gap-3 flex-column justify-content-between col-12 col-sm-6 col-lg-4"
+    >
+      <h4>{{ "smile-profile" | translate }}</h4>
+      <div class="card-profile">
+        <img
+          *ngIf="profiles[2].mode === 'idle'"
+          src="../../../../assets/media/smile.jpg"
+          alt="Smile Profile"
+          class="placeholder-img"
+        />
+        <video
+          #video2
+          *ngIf="profiles[2].mode === 'camera'"
+          autoplay
+          muted
+          playsinline
+          class="media-el"
+        ></video>
+        <img
+          #img2
+          *ngIf="profiles[2].mode === 'image'"
+          [src]="profiles[2].imageUrl"
+          alt="Smile Profile"
+          class="media-el"
+          crossorigin="anonymous"
+        />
+        <canvas
+          #canvas2
+          *ngIf="profiles[2].mode !== 'idle'"
+          class="canvas-overlay"
+        ></canvas>
+        <div *ngIf="profiles[2].processing" class="processing-overlay">
+          <span>⏳</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between gap-2">
+        <button class="signin-button" (click)="onDeviceImage(2)">
+          {{ "device-image" | translate }}
+        </button>
+        <button class="signin-button" (click)="onLiveCamera(2)">
+          {{
+            profiles[2].mode === "camera"
+              ? ("stop-camera" | translate)
+              : ("live-camera" | translate)
+          }}
+        </button>
+      </div>
+      <button
+        *ngIf="profiles[2].mode !== 'idle'"
+        class="reset-btn"
+        (click)="resetCard(2)"
+      >
+        ↺ {{ "reset" | translate }}
+      </button>
+      <input
+        #file2
+        type="file"
+        accept="image/*"
+        class="d-none"
+        (change)="onFileSelected($event, 2)"
+      />
+      <p>{{ "smile-profile-desc" | translate }}</p>
+    </div>
+
+    <!-- Card 3: Lateral Occlusion -->
+    <div
+      class="card-container my-3 d-flex gap-3 flex-column justify-content-between col-12 col-sm-6 col-lg-4"
+    >
+      <h4>{{ "lateral-occlusion" | translate }}</h4>
+      <div class="card-profile">
+        <img
+          *ngIf="profiles[3].mode === 'idle'"
+          src="../../../../assets/media/lateral-occlusion.jpg"
+          alt="Lateral Occlusion"
+          class="placeholder-img"
+        />
+        <video
+          #video3
+          *ngIf="profiles[3].mode === 'camera'"
+          autoplay
+          muted
+          playsinline
+          class="media-el"
+        ></video>
+        <img
+          #img3
+          *ngIf="profiles[3].mode === 'image'"
+          [src]="profiles[3].imageUrl"
+          alt="Lateral Occlusion"
+          class="media-el"
+          crossorigin="anonymous"
+        />
+        <canvas
+          #canvas3
+          *ngIf="profiles[3].mode !== 'idle'"
+          class="canvas-overlay"
+        ></canvas>
+        <div *ngIf="profiles[3].processing" class="processing-overlay">
+          <span>⏳</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between gap-2">
+        <button class="signin-button" (click)="onDeviceImage(3)">
+          {{ "device-image" | translate }}
+        </button>
+        <button class="signin-button" (click)="onLiveCamera(3)">
+          {{
+            profiles[3].mode === "camera"
+              ? ("stop-camera" | translate)
+              : ("live-camera" | translate)
+          }}
+        </button>
+      </div>
+      <button
+        *ngIf="profiles[3].mode !== 'idle'"
+        class="reset-btn"
+        (click)="resetCard(3)"
+      >
+        ↺ {{ "reset" | translate }}
+      </button>
+      <input
+        #file3
+        type="file"
+        accept="image/*"
+        class="d-none"
+        (change)="onFileSelected($event, 3)"
+      />
+      <p>{{ "lateral-occlusion-desc" | translate }}</p>
+    </div>
+
+    <!-- Card 4: Intraoral -->
+    <div
+      class="card-container my-3 d-flex gap-3 flex-column justify-content-between col-12 col-sm-6 col-lg-4"
+    >
+      <h4>{{ "intraoral" | translate }}</h4>
+      <div class="card-profile">
+        <img
+          *ngIf="profiles[4].mode === 'idle'"
+          src="../../../../assets/media/intraoral.jpg"
+          alt="Intraoral"
+          class="placeholder-img"
+        />
+        <video
+          #video4
+          *ngIf="profiles[4].mode === 'camera'"
+          autoplay
+          muted
+          playsinline
+          class="media-el"
+        ></video>
+        <img
+          #img4
+          *ngIf="profiles[4].mode === 'image'"
+          [src]="profiles[4].imageUrl"
+          alt="Intraoral"
+          class="media-el"
+          crossorigin="anonymous"
+        />
+        <canvas
+          #canvas4
+          *ngIf="profiles[4].mode !== 'idle'"
+          class="canvas-overlay"
+        ></canvas>
+        <div *ngIf="profiles[4].processing" class="processing-overlay">
+          <span>⏳</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between gap-2">
+        <button class="signin-button" (click)="onDeviceImage(4)">
+          {{ "device-image" | translate }}
+        </button>
+        <button class="signin-button" (click)="onLiveCamera(4)">
+          {{
+            profiles[4].mode === "camera"
+              ? ("stop-camera" | translate)
+              : ("live-camera" | translate)
+          }}
+        </button>
+      </div>
+      <button
+        *ngIf="profiles[4].mode !== 'idle'"
+        class="reset-btn"
+        (click)="resetCard(4)"
+      >
+        ↺ {{ "reset" | translate }}
+      </button>
+      <input
+        #file4
+        type="file"
+        accept="image/*"
+        class="d-none"
+        (change)="onFileSelected($event, 4)"
+      />
+      <p>{{ "intraoral-desc" | translate }}</p>
+    </div>
+
+    <!-- Card 5: Segmentation -->
+    <div
+      class="card-container my-3 d-flex gap-3 flex-column justify-content-between col-12 col-sm-6 col-lg-4"
+    >
+      <h4>{{ "segmentation" | translate }}</h4>
+      <div class="card-profile">
+        <img
+          *ngIf="profiles[5].mode === 'idle'"
+          src="../../../../assets/media/segmentation.jpg"
+          alt="Segmentation"
+          class="placeholder-img"
+        />
+        <video
+          #video5
+          *ngIf="profiles[5].mode === 'camera'"
+          autoplay
+          muted
+          playsinline
+          class="media-el"
+        ></video>
+        <img
+          #img5
+          *ngIf="profiles[5].mode === 'image'"
+          [src]="profiles[5].imageUrl"
+          alt="Segmentation"
+          class="media-el"
+          crossorigin="anonymous"
+        />
+        <canvas
+          #canvas5
+          *ngIf="profiles[5].mode !== 'idle'"
+          class="canvas-overlay"
+        ></canvas>
+        <div *ngIf="profiles[5].processing" class="processing-overlay">
+          <span>⏳</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between gap-2">
+        <button class="signin-button" (click)="onDeviceImage(5)">
+          {{ "device-image" | translate }}
+        </button>
+        <button class="signin-button" (click)="onLiveCamera(5)">
+          {{
+            profiles[5].mode === "camera"
+              ? ("stop-camera" | translate)
+              : ("live-camera" | translate)
+          }}
+        </button>
+      </div>
+      <button
+        *ngIf="profiles[5].mode !== 'idle'"
+        class="reset-btn"
+        (click)="resetCard(5)"
+      >
+        ↺ {{ "reset" | translate }}
+      </button>
+      <input
+        #file5
+        type="file"
+        accept="image/*"
+        class="d-none"
+        (change)="onFileSelected($event, 5)"
+      />
+      <p>{{ "segmentation-desc" | translate }}</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="main-title text-center mt-2">
+    <h3 class="main-title">{{ "start-magic" | translate }}</h3>
+  </div>
+  <app-smile-designer></app-smile-designer>
+</div>

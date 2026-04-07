@@ -588,5 +588,52 @@
   "sender": "Sender",
   "Mark_As_Read": "Mark As Read",
   "Logout": "Logout",
-  "No_Notifications": "You have no notifications yet"
+  "No_Notifications": "You have no notifications yet",
+  "dsd": "DSD",
+  "DSD": "Dental smile design",
+  "face-close": "The face is close and the frame is appropriate.",
+  "lightin-good": "And the lighting remains good.",
+  "lateral-profile": "Lateral Profile",
+  "lateral-profile-desc": "Side profile photo of the patient's face (right or left side). This image is used to evaluate the facial profile and the relationship between the nose, lips, and chin in relation to the occlusal plane.",
+
+  "facial-profile": "Facial Profile",
+  "facial-profile-desc": "A frontal facial photograph showing the full face. This image is used to evaluate facial symmetry and the relationship between facial landmarks and dental midline.",
+
+  "smile-profile": "Smile Profile",
+  "smile-profile-desc": "A close-up image of the nose, lips, and teeth during a natural smile. This image is used to analyze smile aesthetics, tooth display, and gingival proportions.",
+
+  "lateral-occlusion": "Lateral Occlusion",
+  "lateral-occlusion-desc": "A side view photograph of the patient smiling. This image is used to evaluate occlusal plane orientation and canine position from the lateral perspective.",
+
+  "intraoral": "Intraoral",
+  "intraoral-desc": "An intraoral photograph taken using cheek retractors to expose the teeth and gums from the side. This image is used to analyze tooth alignment, dental midline, and incisal relationships.",
+
+  "segmentation": "Segmentation",
+  "segmentation-desc": "A close-up image of the teeth where the AI automatically detects and outlines each visible tooth. This image is used to analyze tooth dimensions, spacing, and symmetry.",
+
+  "device-image": "Device Image",
+  "live-camera": "Live Camera",
+  "start-magic": "Start Magic",
+  "back": "Back",
+  "loading-model": "Loading Model",
+  "before-after": "Before / After",
+  "before": "Before",
+  "after": "After",
+  "switch-to-toggle": "Switch to Toggle",
+  "switch-to-slider": "Switch to Slider",
+  "show-before": "← Show Before",
+  "show-after": "Show After →",
+  "upload-before-hint": "Tap to upload before photo",
+  "generate-hint": "Generate AI image to see comparison",
+  "treatment-options": "Treatment Options",
+  "missing-tooth": "Missing Tooth",
+  "teeth-straightening": "Teeth Straightening",
+  "gum-treatment": "Gum Treatment",
+  "lip-fix": "Lip Fix",
+  "orthodontics": "Orthodontics",
+  "full-dentures": "Full Dentures",
+  "whitening": "Whitening",
+  "remove-visible-caries": "Remove Visible Caries",
+  "generate-ai": "Generate After with AI ✨",
+  "generating": "Generating..."
 }

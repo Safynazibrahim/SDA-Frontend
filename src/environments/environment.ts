@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://backend-staging-47c6.up.railway.app/api', // your local backend during development
+  geminiApiKey: 'AIzaSyA8rn4b-qj9FWYbK3FqKkwYVrsjAGSjZR0',
   firebaseConfig: {
     apiKey: 'AIzaSyDMWzVkMlmgNft4pKNvCpuC_y383M21mRk',
     authDomain: 'one-ai-5f96b.firebaseapp.com',

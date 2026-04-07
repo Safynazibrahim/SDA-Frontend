@@ -1,0 +1,211 @@
+<div class="smile-designer">
+  <!-- ══ HEADER ══ -->
+  <div class="sd-header">
+    <h3 class="sd-title">{{ "before-after" | translate }}</h3>
+    <button class="switch-btn" (click)="switchMode()" *ngIf="afterUrl">
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M7 16V4m0 0L3 8m4-4l4 4" />
+        <path d="M17 8v12m0 0l4-4m-4 4l-4-4" />
+      </svg>
+      {{
+        viewMode === "slider"
+          ? ("switch-to-toggle" | translate)
+          : ("switch-to-slider" | translate)
+      }}
+    </button>
+  </div>
+
+  <!-- ══ TWO BOXES — always visible, 50/50, 40vh height ══ -->
+  <div class="boxes-row">
+    <!-- Before box -->
+    <div class="image-box" (click)="triggerBeforeUpload()">
+      <img *ngIf="beforeUrl" [src]="beforeUrl" class="box-img" alt="Before" />
+      <div *ngIf="!beforeUrl" class="box-placeholder">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.2"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <polyline points="21 15 16 10 5 21" />
+        </svg>
+        <span>{{ "before" | translate }}</span>
+      </div>
+      <span class="box-label before-label" *ngIf="beforeUrl">{{
+        "before" | translate
+      }}</span>
+      <button
+        class="box-remove"
+        *ngIf="beforeUrl"
+        (click)="removeBefore($event)"
+      >
+        ×
+      </button>
+    </div>
+
+    <!-- After box -->
+    <div class="image-box after-box">
+      <img *ngIf="afterUrl" [src]="afterUrl" class="box-img" alt="After" />
+      <div *ngIf="!afterUrl" class="box-placeholder">
+        <svg
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.2"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <polyline points="21 15 16 10 5 21" />
+        </svg>
+        <span>{{ "after" | translate }}</span>
+      </div>
+      <span class="box-label after-label" *ngIf="afterUrl">{{
+        "after" | translate
+      }}</span>
+      <span class="ai-badge" *ngIf="afterUrl">✦ AI</span>
+    </div>
+  </div>
+  <input
+    #beforeInput
+    type="file"
+    accept="image/*"
+    class="d-none"
+    (change)="onBeforeSelected($event)"
+  />
+
+  <hr class="sd-divider" />
+
+  <!-- ══ TREATMENT OPTIONS ══ -->
+  <div class="treatments-section">
+    <h4 class="treatments-title">{{ "treatment-options" | translate }}</h4>
+    <div class="chips-wrapper">
+      <button
+        *ngFor="let t of treatments"
+        class="chip"
+        [class.chip-selected]="selectedTreatments.includes(t)"
+        (click)="toggleTreatment(t)"
+      >
+        {{ t | translate }}
+        <svg
+          *ngIf="selectedTreatments.includes(t)"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ SLIDER / TOGGLE — only visible after AI generates ══ -->
+  <ng-container *ngIf="afterUrl">
+    <hr class="sd-divider" />
+    <!-- SLIDER MODE -->
+    <div
+      class="slider-container"
+      *ngIf="viewMode === 'slider'"
+      (mousedown)="startDrag($event)"
+      (touchstart)="startDragTouch($event)"
+      #sliderContainer
+    >
+      <img [src]="beforeUrl" class="base-img" alt="Before" />
+
+      <img
+        [src]="afterUrl"
+        class="overlay-img"
+        alt="After"
+        [style.clip-path]="'inset(0 0 0 ' + sliderPos + '%)'"
+      />
+
+      <div class="divider-line" [style.left.%]="sliderPos">
+        <div class="divider-handle">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <path d="M7 16V4m0 0L3 8m4-4l4 4" />
+            <path d="M17 8v12m0 0l4-4m-4 4l-4-4" />
+          </svg>
+        </div>
+      </div>
+
+      <span class="img-label label-before">{{ "before" | translate }}</span>
+      <span class="img-label label-after">{{ "after" | translate }}</span>
+    </div>
+
+    <!-- TOGGLE MODE -->
+    <div *ngIf="viewMode === 'toggle'">
+      <div class="toggle-display">
+        <img
+          [src]="showingAfter ? afterUrl : beforeUrl"
+          class="toggle-img"
+          alt="photo"
+        />
+        <span
+          class="img-label"
+          [class.label-after]="showingAfter"
+          [class.label-before]="!showingAfter"
+        >
+          {{ showingAfter ? ("after" | translate) : ("before" | translate) }}
+        </span>
+      </div>
+
+      <button
+        class="toggle-switch-btn"
+        [class.btn-show-after]="!showingAfter"
+        [class.btn-show-before]="showingAfter"
+        (click)="toggleImage()"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+        {{
+          showingAfter
+            ? ("show-before" | translate)
+            : ("show-after" | translate)
+        }}
+      </button>
+    </div>
+  </ng-container>
+
+  <!-- ══ GENERATE BUTTON ══ -->
+  <button
+    class="generate-btn"
+    (click)="onGenerate()"
+    [disabled]="generating || !beforeUrl || selectedTreatments.length === 0"
+  >
+    <span *ngIf="!generating">✦ {{ "generate-ai" | translate }}</span>
+    <span *ngIf="generating" class="generating-text">
+      <span class="dot-loader"></span>
+      {{ "generating" | translate }}
+    </span>
+  </button>
+</div>
