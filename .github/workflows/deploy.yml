@@ -19,28 +19,36 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install envsubst
-        run: sudo apt-get install -y gettext-base
-
-      - name: Inject secrets
+      - name: Inject secrets safely
         run: |
-          python3 -c "
-          import re, os
-          files = ['src/environments/environment.ts', 'src/environments/environment.prod.ts']
+          python3 - <<EOF
+          import os
+
+          files = [
+            'src/environments/environment.ts',
+            'src/environments/environment.prod.ts'
+          ]
+
           replacements = {
-            '\$GEMINI_API_KEY': os.environ['GEMINI_API_KEY'],
-            '\$FIREBASE_API_KEY': os.environ['FIREBASE_API_KEY'],
-            '\$FIREBASE_APP_ID': os.environ['FIREBASE_APP_ID'],
-            '\$FIREBASE_MEASUREMENT': os.environ['FIREBASE_MEASUREMENT'],
-            '\$VAPID_KEY': os.environ['VAPID_KEY'],
+            "__GEMINI_API_KEY__": os.environ.get("GEMINI_API_KEY", "").strip(),
+            "__FIREBASE_API_KEY__": os.environ.get("FIREBASE_API_KEY", "").strip(),
+            "__FIREBASE_APP_ID__": os.environ.get("FIREBASE_APP_ID", "").strip(),
+            "__FIREBASE_MEASUREMENT__": os.environ.get("FIREBASE_MEASUREMENT", "").strip(),
+            "__VAPID_KEY__": os.environ.get("VAPID_KEY", "").strip(),
           }
-          for f in files:
-            content = open(f).read()
-            for k, v in replacements.items():
-              content = content.replace(k, v)
-            open(f, 'w').write(content)
-          print('Done!')
-          "
+
+          for file in files:
+            with open(file, "r") as f:
+              content = f.read()
+
+            for key, value in replacements.items():
+              content = content.replace(key, value)
+
+            with open(file, "w") as f:
+              f.write(content)
+
+          print("Secrets injected successfully!")
+          EOF
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
