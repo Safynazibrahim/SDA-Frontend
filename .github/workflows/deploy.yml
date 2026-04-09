@@ -19,16 +19,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install envsubst
+        run: sudo apt-get install -y gettext-base
+
       - name: Inject secrets
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-          FIREBASE_MEASUREMENT: ${{ secrets.FIREBASE_MEASUREMENT }}
-          VAPID_KEY: ${{ secrets.VAPID_KEY }}
         run: |
-          envsubst < src/environments/environment.ts > tmp.ts && mv tmp.ts src/environments/environment.ts
-          envsubst < src/environments/environment.prod.ts > tmp.ts && mv tmp.ts src/environments/environment.prod.ts
+          sed -i "s|PLACEHOLDER_GEMINI|${{ secrets.GEMINI_API_KEY }}|g" src/environments/environment.ts
+          sed -i "s|PLACEHOLDER_GEMINI|${{ secrets.GEMINI_API_KEY }}|g" src/environments/environment.prod.ts
+          sed -i "s|PLACEHOLDER_FIREBASE_API_KEY|${{ secrets.FIREBASE_API_KEY }}|g" src/environments/environment.ts
+          sed -i "s|PLACEHOLDER_FIREBASE_API_KEY|${{ secrets.FIREBASE_API_KEY }}|g" src/environments/environment.prod.ts
+          sed -i "s|PLACEHOLDER_FIREBASE_APP_ID|${{ secrets.FIREBASE_APP_ID }}|g" src/environments/environment.ts
+          sed -i "s|PLACEHOLDER_FIREBASE_APP_ID|${{ secrets.FIREBASE_APP_ID }}|g" src/environments/environment.prod.ts
+          sed -i "s|PLACEHOLDER_MEASUREMENT|${{ secrets.FIREBASE_MEASUREMENT }}|g" src/environments/environment.ts
+          sed -i "s|PLACEHOLDER_MEASUREMENT|${{ secrets.FIREBASE_MEASUREMENT }}|g" src/environments/environment.prod.ts
+          sed -i "s|PLACEHOLDER_VAPID|${{ secrets.VAPID_KEY }}|g" src/environments/environment.ts
+          sed -i "s|PLACEHOLDER_VAPID|${{ secrets.VAPID_KEY }}|g" src/environments/environment.prod.ts
 
       - name: Build Angular
         run: npm run build
@@ -39,5 +44,5 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./dist/sda/browser
-          vercel-args: '--prod'
+          vercel-args: '--prod --prebuilt'
+          working-directory: ./
