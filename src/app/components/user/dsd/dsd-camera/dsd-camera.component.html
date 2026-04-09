@@ -1,0 +1,18 @@
+<div class="camera-wrapper">
+  <!-- Small black header — guide text centered, back button on left -->
+  <div class="d-flex align-items-center justify-content-between p-3">
+    <button class="signin-button w-auto" (click)="goBack()">
+      ← {{"back" | translate}}
+    </button>
+    <div class="main-title">
+      <h3 class="main-title">{{ profileId }}</h3>
+    </div>
+    <p class="guide-text-header">{{ guideText }}</p>
+  </div>
+
+  <!-- Viewfinder — no capture button -->
+  <div class="viewfinder" *ngIf="!isCaptured">
+    <video #videoEl autoplay muted playsinline class="camera-video"></video>
+    <canvas #canvasEl class="canvas-overlay"></canvas>
+  </div>
+</div>

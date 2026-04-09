@@ -1,0 +1,166 @@
+<div class="dental-analysis">
+  <!-- ══ THREE UPLOAD BOXES ══ -->
+  <div class="views-row">
+    <!-- Left Side View — Optional -->
+    <div class="view-box" (click)="triggerUpload('left')">
+      <div class="view-label-row">
+        <span class="view-title">{{ "left-side-view" | translate }}</span>
+        <span class="badge badge-optional">{{ "optional" | translate }}</span>
+      </div>
+
+      <div class="upload-area">
+        <img
+          *ngIf="images.left"
+          [src]="images.left"
+          class="uploaded-img"
+          alt="Left"
+        />
+        <div *ngIf="!images.left" class="upload-placeholder">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.2"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+          </svg>
+          <span>{{ "tap-to-upload" | translate }}</span>
+        </div>
+        <button
+          *ngIf="images.left"
+          class="remove-btn"
+          (click)="removeImage('left', $event)"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+    <input
+      #leftInput
+      type="file"
+      accept="image/*"
+      class="d-none"
+      (change)="onFileSelected($event, 'left')"
+    />
+
+    <!-- Front View — Required -->
+    <div class="view-box" (click)="triggerUpload('front')">
+      <div class="view-label-row">
+        <span class="view-title">{{ "front-view" | translate }}</span>
+        <span class="badge badge-required">{{ "required" | translate }}</span>
+      </div>
+
+      <div class="upload-area upload-area--required">
+        <img
+          *ngIf="images.front"
+          [src]="images.front"
+          class="uploaded-img"
+          alt="Front"
+        />
+        <div *ngIf="!images.front" class="upload-placeholder">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.2"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+          </svg>
+          <span>{{ "tap-to-upload" | translate }}</span>
+        </div>
+        <button
+          *ngIf="images.front"
+          class="remove-btn"
+          (click)="removeImage('front', $event)"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+    <input
+      #frontInput
+      type="file"
+      accept="image/*"
+      class="d-none"
+      (change)="onFileSelected($event, 'front')"
+    />
+
+    <!-- Right Side View — Optional -->
+    <div class="view-box" (click)="triggerUpload('right')">
+      <div class="view-label-row">
+        <span class="view-title">{{ "right-side-view" | translate }}</span>
+        <span class="badge badge-optional">{{ "optional" | translate }}</span>
+      </div>
+
+      <div class="upload-area">
+        <img
+          *ngIf="images.right"
+          [src]="images.right"
+          class="uploaded-img"
+          alt="Right"
+        />
+        <div *ngIf="!images.right" class="upload-placeholder">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.2"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <line x1="12" y1="8" x2="12" y2="16" />
+            <line x1="8" y1="12" x2="16" y2="12" />
+          </svg>
+          <span>{{ "tap-to-upload" | translate }}</span>
+        </div>
+        <button
+          *ngIf="images.right"
+          class="remove-btn"
+          (click)="removeImage('right', $event)"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+    <input
+      #rightInput
+      type="file"
+      accept="image/*"
+      class="d-none"
+      (change)="onFileSelected($event, 'right')"
+    />
+  </div>
+
+  <!-- ══ ANALYZE BUTTON ══ -->
+  <button
+    class="analyze-btn"
+    (click)="onAnalyze()"
+    [disabled]="analyzing || !images.front"
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+    <span *ngIf="!analyzing">{{ "analyze-teeth" | translate }}</span>
+    <span *ngIf="analyzing" class="analyzing-text">
+      <span class="dot-loader"></span>
+      {{ "analyzing" | translate }}
+    </span>
+  </button>
+</div>

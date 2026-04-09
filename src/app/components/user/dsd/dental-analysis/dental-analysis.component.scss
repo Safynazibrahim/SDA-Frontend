@@ -1,0 +1,178 @@
+.dental-analysis {
+  padding: 16px 0 32px;
+}
+
+/* ══ THREE BOXES ROW ══ */
+.views-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  width: 100%;
+
+  /* Mobile — each box on its own line */
+  @media (max-width: 1050px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* ── Each view box ── */
+.view-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+
+  &:hover .upload-area {
+    border-color: var(--bg-brown-dark, #8b6914);
+  }
+}
+
+/* ── Label row ── */
+.view-label-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-gray-head-table);
+}
+
+/* ── Badges ── */
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.badge-optional {
+  background: rgba(0,0,0,0.08);
+  color: var(--text-gray-home-about);
+}
+
+.badge-required {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* ── Upload area ── */
+.upload-area {
+  position: relative;
+  height: 25vh;
+  min-height: 160px;
+  border-radius: 12px;
+  border: 2px dashed var(--bg-brown-medium);
+  background: rgba(0,0,0,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: border-color 0.2s;
+
+  /* Mobile height */
+  @media (max-width: 767.98px) {
+    height: 45vw;
+    min-height: 140px;
+  }
+}
+
+.upload-area--required {
+  border-style: solid;
+  border-color: var(--bg-brown-medium);
+}
+
+/* ── Placeholder content ── */
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-gray-home-about);
+
+  span {
+    font-size: 13px;
+    font-weight: 400;
+  }
+}
+
+/* ── Uploaded image ── */
+.uploaded-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Remove button ── */
+.remove-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  z-index: 5;
+}
+
+/* ══ ANALYZE BUTTON ══ */
+.analyze-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-brown-gradient);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.analyzing-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dot-loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
