@@ -1,6 +1,6 @@
 {
-  "buildCommand": null,
+  "buildCommand": "echo skip",
   "outputDirectory": "dist/sda",
-  "installCommand": null,
+  "installCommand": "echo skip",
   "framework": null
 }
