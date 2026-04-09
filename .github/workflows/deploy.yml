@@ -19,16 +19,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Inject secrets
+      - name: Inject secrets safely
         run: |
           python3 - <<EOF
           import os
-
           files = [
             'src/environments/environment.ts',
             'src/environments/environment.prod.ts'
           ]
-
           replacements = {
             "__GEMINI_API_KEY__": os.environ.get("GEMINI_API_KEY", "").strip(),
             "__FIREBASE_API_KEY__": os.environ.get("FIREBASE_API_KEY", "").strip(),
@@ -36,16 +34,14 @@ jobs:
             "__FIREBASE_MEASUREMENT__": os.environ.get("FIREBASE_MEASUREMENT", "").strip(),
             "__VAPID_KEY__": os.environ.get("VAPID_KEY", "").strip(),
           }
-
           for file in files:
             with open(file, "r") as f:
               content = f.read()
-
             for key, value in replacements.items():
               content = content.replace(key, value)
-
             with open(file, "w") as f:
               f.write(content)
+          print("Done!")
           EOF
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -57,11 +53,12 @@ jobs:
       - name: Build Angular
         run: npm run build
 
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
       - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./dist/sda
-          vercel-args: '--prod'
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+        working-directory: ./dist/sda
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
