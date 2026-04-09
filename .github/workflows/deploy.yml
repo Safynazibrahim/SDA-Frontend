@@ -23,15 +23,30 @@ jobs:
         run: sudo apt-get install -y gettext-base
 
       - name: Inject secrets
+        run: |
+          python3 -c "
+          import re, os
+          files = ['src/environments/environment.ts', 'src/environments/environment.prod.ts']
+          replacements = {
+            '\$GEMINI_API_KEY': os.environ['GEMINI_API_KEY'],
+            '\$FIREBASE_API_KEY': os.environ['FIREBASE_API_KEY'],
+            '\$FIREBASE_APP_ID': os.environ['FIREBASE_APP_ID'],
+            '\$FIREBASE_MEASUREMENT': os.environ['FIREBASE_MEASUREMENT'],
+            '\$VAPID_KEY': os.environ['VAPID_KEY'],
+          }
+          for f in files:
+            content = open(f).read()
+            for k, v in replacements.items():
+              content = content.replace(k, v)
+            open(f, 'w').write(content)
+          print('Done!')
+          "
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT: ${{ secrets.FIREBASE_MEASUREMENT }}
           VAPID_KEY: ${{ secrets.VAPID_KEY }}
-        run: |
-          envsubst < src/environments/environment.ts > tmp.ts && mv tmp.ts src/environments/environment.ts
-          envsubst < src/environments/environment.prod.ts > tmp.ts && mv tmp.ts src/environments/environment.prod.ts
 
       - name: Build Angular
         run: npm run build
