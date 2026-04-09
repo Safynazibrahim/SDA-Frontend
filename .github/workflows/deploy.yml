@@ -20,17 +20,15 @@ jobs:
         run: npm install
 
       - name: Inject secrets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_MEASUREMENT: ${{ secrets.FIREBASE_MEASUREMENT }}
+          VAPID_KEY: ${{ secrets.VAPID_KEY }}
         run: |
-          sed -i "s|PLACEHOLDER_GEMINI|${{ secrets.GEMINI_API_KEY }}|g" src/environments/environment.ts
-          sed -i "s|PLACEHOLDER_GEMINI|${{ secrets.GEMINI_API_KEY }}|g" src/environments/environment.prod.ts
-          sed -i "s/PLACEHOLDER_FIREBASE_API_KEY/${{ secrets.FIREBASE_API_KEY }}/g" src/environments/environment.ts
-          sed -i "s/PLACEHOLDER_FIREBASE_API_KEY/${{ secrets.FIREBASE_API_KEY }}/g" src/environments/environment.prod.ts
-          sed -i "s/PLACEHOLDER_FIREBASE_APP_ID/${{ secrets.FIREBASE_APP_ID }}/g" src/environments/environment.ts
-          sed -i "s/PLACEHOLDER_FIREBASE_APP_ID/${{ secrets.FIREBASE_APP_ID }}/g" src/environments/environment.prod.ts
-          sed -i "s/PLACEHOLDER_MEASUREMENT/${{ secrets.FIREBASE_MEASUREMENT }}/g" src/environments/environment.ts
-          sed -i "s/PLACEHOLDER_MEASUREMENT/${{ secrets.FIREBASE_MEASUREMENT }}/g" src/environments/environment.prod.ts
-          sed -i "s/PLACEHOLDER_VAPID/${{ secrets.VAPID_KEY }}/g" src/environments/environment.ts
-          sed -i "s/PLACEHOLDER_VAPID/${{ secrets.VAPID_KEY }}/g" src/environments/environment.prod.ts
+          envsubst < src/environments/environment.ts > tmp.ts && mv tmp.ts src/environments/environment.ts
+          envsubst < src/environments/environment.prod.ts > tmp.ts && mv tmp.ts src/environments/environment.prod.ts
 
       - name: Build Angular
         run: npm run build
