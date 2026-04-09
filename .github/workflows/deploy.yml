@@ -21,8 +21,8 @@ jobs:
 
       - name: Inject secrets
         run: |
-          sed -i "s/PLACEHOLDER_GEMINI/${{ secrets.GEMINI_API_KEY }}/g" src/environments/environment.ts
-          sed -i "s/PLACEHOLDER_GEMINI/${{ secrets.GEMINI_API_KEY }}/g" src/environments/environment.prod.ts
+          sed -i "s|PLACEHOLDER_GEMINI|${{ secrets.GEMINI_API_KEY }}|g" src/environments/environment.ts
+          sed -i "s|PLACEHOLDER_GEMINI|${{ secrets.GEMINI_API_KEY }}|g" src/environments/environment.prod.ts
           sed -i "s/PLACEHOLDER_FIREBASE_API_KEY/${{ secrets.FIREBASE_API_KEY }}/g" src/environments/environment.ts
           sed -i "s/PLACEHOLDER_FIREBASE_API_KEY/${{ secrets.FIREBASE_API_KEY }}/g" src/environments/environment.prod.ts
           sed -i "s/PLACEHOLDER_FIREBASE_APP_ID/${{ secrets.FIREBASE_APP_ID }}/g" src/environments/environment.ts
