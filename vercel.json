@@ -1,6 +1,6 @@
 {
   "buildCommand": "echo skip",
-  "outputDirectory": "dist/sda",
+  "outputDirectory": "dist/sda/browser",
   "installCommand": "echo skip",
   "framework": null
 }
